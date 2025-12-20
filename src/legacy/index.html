@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Association IES — демо стиля</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <!-- Header (синий как в буклете, но приглушенный) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Association IES">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Association IES</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#about">О нас</a>
+        <a href="#help">Чем помогаем</a>
+        <a href="#actions">Наши действия</a>
+        <a href="#how">Как обратиться</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="header-cta">
+        <a class="btn btn--pill btn--yellow" href="#how">получить помощь</a>
+        <a class="btn btn--pill btn--outline-white" href="#contacts">связаться</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO (фиолетовый как в буклете, но матовый) -->
+    <section class="section section--purple slant slant--to-blue" style="--next: var(--purple);">
+      <div class="container hero-grid">
+        <div class="card card--glass hero-left">
+          <div class="chips">
+            <span class="chip">Страсбург • Франция</span>
+            <span class="chip">Локально</span>
+            <span class="chip">Опыт и экспертиза</span>
+          </div>
+
+          <h1 class="h1">
+            Наша цель — помочь людям<br>
+            адаптироваться во Франции
+          </h1>
+
+          <p class="lead">
+            Документы, работа, обучение и поддержка в Страсбурге — подскажем понятный следующий шаг
+            и поможем пройти процесс без лишней бюрократии.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn--pill btn--yellow" href="#how">получить помощь</a>
+            <a class="btn btn--pill btn--mint" href="#how">как обратиться</a>
+            <a class="btn btn--pill btn--outline" href="#contacts">контакты</a>
+          </div>
+
+          <div class="pill-row" aria-label="ключевые слова">
+            <span class="pill">интеграция</span>
+            <span class="pill">образование</span>
+            <span class="pill">синергия</span>
+          </div>
+        </div>
+
+        <aside class="card card--yellow hero-right">
+          <div class="tag-row">
+            <span class="tag tag--blue">+200 проектов</span>
+            <span class="tag tag--blue">с 2019</span>
+          </div>
+
+          <h3 class="h3">быстрые контакты</h3>
+
+          <div class="info-stack">
+            <div class="info">
+              <div class="info-k">Телефон</div>
+              <div class="info-v">+33 6 32 66 07 38</div>
+            </div>
+            <div class="info">
+              <div class="info-k">Instagram</div>
+              <div class="info-v">@ies_info</div>
+            </div>
+            <div class="info">
+              <div class="info-k">Контакт</div>
+              <div class="info-v">Akhmed Susuev</div>
+            </div>
+          </div>
+
+          <!-- Буклетный акцент: три ключевых слова крупно (как на макете клиента) -->
+          <div class="hero-slogan" aria-label="ключевые слова">
+            интеграция<br>
+            образование<br>
+            синергия
+          </div>
+
+          <div class="mini-actions">
+            <a class="btn btn--pill btn--blue" href="#contacts">написать</a>
+            <a class="btn btn--pill btn--outline-blue" href="#help">направления</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT (фиолетовый блок, карточки должны читаться) -->
+    <section id="about" class="section section--purple slant slant--to-pink" style="--next: var(--pink);">
+      <div class="container">
+        <div class="section-head section-head--on-dark">
+          <h2 class="h2">о нас</h2>
+          <p class="muted-on-dark">
+            Коротко и по делу: кто вы, чем занимаетесь и почему вам можно доверять.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card--glass accent-left">
+            <h3 class="h3">наша цель</h3>
+            <p class="p">
+              Мы помогаем людям адаптироваться во Франции: разобраться с документами,
+              учёбой, работой и поддержкой в повседневных вопросах.
+            </p>
+            <ul class="list">
+              <li>Понятно объясняем шаги и помогаем с процессом</li>
+              <li>Работаем локально (Страсбург)</li>
+              <li>Стараемся делать всё максимально человечески</li>
+            </ul>
+          </div>
+
+          <div class="card card--glass accent-left">
+            <h3 class="h3">как мы работаем</h3>
+            <ul class="list">
+              <li>Вы связываетесь с нами удобным способом</li>
+              <li>Коротко описываете ситуацию</li>
+              <li>Мы подсказываем следующий шаг (консультация/встреча/сопровождение)</li>
+            </ul>
+            <p class="note">
+              Точные условия (по записи/бесплатно/время работы) добавим после подтверждения.
+            </p>
+
+            <div class="focus">
+              <div class="focus-title">главный фокус</div>
+              <div class="focus-text">
+                Помощь беженцам и новым прибывшим — документы, работа, обучение и поддержка.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HELP (розовый как в буклете, карточки “бумажные”) -->
+    <section id="help" class="section section--pink slant slant--to-blue" style="--next: var(--pink-2);">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2 h2--blue">чем мы помогаем</h2>
+          <p class="muted">
+            Основные направления. Тексты можно заменить на точные формулировки клиента.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card card--paper accent-left accent--blue">
+            <header class="card-top">
+              <h3 class="h3 h3--blue">административные вопросы</h3>
+              <span class="tag tag--red">поддержка</span>
+            </header>
+            <p class="p">
+              Документы, обращения, помощь в разборе шагов и сопровождение (уточним список).
+            </p>
+          </article>
+
+          <article class="card card--paper accent-left accent--blue">
+            <header class="card-top">
+              <h3 class="h3 h3--blue">образование и мероприятия</h3>
+              <span class="tag tag--red">в течение года</span>
+            </header>
+            <p class="p">
+              Встречи, объяснение системы, полезные мероприятия и поддержка семей.
+            </p>
+          </article>
+
+          <article class="card card--paper accent-left accent--blue">
+            <header class="card-top">
+              <h3 class="h3 h3--blue">поиск работы</h3>
+              <span class="tag tag--red">помощь</span>
+            </header>
+            <p class="p">
+              Резюме, мотивационные письма, советы по шагам и подготовке (уточним формат).
+            </p>
+          </article>
+
+          <article class="card card--paper accent-left accent--blue">
+            <header class="card-top">
+              <h3 class="h3 h3--blue">уроки языка</h3>
+              <span class="tag tag--red">для детей</span>
+            </header>
+            <p class="p">
+              Возраст, группы, место и расписание добавим после уточнения.
+            </p>
+          </article>
+
+          <article class="card card--paper accent-left accent--blue">
+            <header class="card-top">
+              <h3 class="h3 h3--blue">межкультурные встречи</h3>
+              <span class="tag tag--red">общение</span>
+            </header>
+            <p class="p">
+              Тёплые встречи, знакомство культур и поддержка.
+            </p>
+          </article>
+
+          <article class="card card--paper accent-left accent--blue">
+            <header class="card-top">
+              <h3 class="h3 h3--blue">сад в Страсбурге</h3>
+              <span class="tag tag--red">проект</span>
+            </header>
+            <p class="p">
+              Овощи, яблочный сок и участие в проекте сада (условия уточним).
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIONS (как в буклете “NOS ACTIONS”: программы + частота/условия) -->
+    <section id="actions" class="section section--pink-2 slant slant--to-blue" style="--next: var(--blue);">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2 h2--blue">наши действия</h2>
+          <p class="muted">
+            Программы и активности, которые развивают навыки, создают связь и помогают людям интегрироваться.
+          </p>
+        </div>
+
+        <div class="actions-layout">
+          <div class="actions-cards" aria-label="программы и направления">
+            <article class="card card--paper accent-left accent--blue action-card">
+              <header class="action-head">
+                <h3 class="h3 h3--blue">сад и совместные мастер‑классы</h3>
+                <span class="badge badge--red">в течение года</span>
+              </header>
+              <p class="p">
+                Общий сад, занятия на природе и тёплые встречи для детей и взрослых (условия уточним).
+              </p>
+            </article>
+
+            <article class="card card--paper accent-left accent--blue action-card">
+              <header class="action-head">
+                <h3 class="h3 h3--blue">административные консультации</h3>
+                <span class="badge badge--red">по записи</span>
+              </header>
+              <p class="p">
+                Поддержка по документам и маршрутам: что делать дальше, куда обращаться, какие шаги нужны.
+              </p>
+            </article>
+
+            <article class="card card--paper accent-left accent--blue action-card">
+              <header class="action-head">
+                <h3 class="h3 h3--blue">сопровождение к работе</h3>
+                <span class="badge badge--red">по записи</span>
+              </header>
+              <p class="p">
+                Резюме, мотивационные письма, подготовка к собеседованию и помощь с планом действий.
+              </p>
+            </article>
+
+            <article class="card card--paper accent-left accent--blue action-card">
+              <header class="action-head">
+                <h3 class="h3 h3--blue">языковые занятия</h3>
+                <span class="badge badge--red">1 раз в неделю</span>
+              </header>
+              <p class="p">
+                Группы и формат уточним: цель — поддержать обучение и уверенность в повседневном общении.
+              </p>
+            </article>
+
+            <article class="card card--paper accent-left accent--blue action-card">
+              <header class="action-head">
+                <h3 class="h3 h3--blue">спорт и поддержка подростков</h3>
+                <span class="badge badge--red">регулярно</span>
+              </header>
+              <p class="p">
+                Активности для укрепления здоровья, дисциплины и социализации (расписание уточним).
+              </p>
+            </article>
+
+            <article class="card card--paper accent-left accent--blue action-card">
+              <header class="action-head">
+                <h3 class="h3 h3--blue">культурные встречи и выезды</h3>
+                <span class="badge badge--red">в течение года</span>
+              </header>
+              <p class="p">
+                Мероприятия, экскурсии и встречи для знакомства с городом и местными сообществами.
+              </p>
+            </article>
+          </div>
+
+          <aside class="actions-side" aria-label="почему это работает">
+            <div class="card card--paper actions-strength">
+              <h3 class="h3 h3--blue">что делает IES сильнее</h3>
+              <ul class="bullet-list">
+                <li>Человеческий подход и работа “на земле”, рядом с реальными потребностями</li>
+                <li>Активная сеть волонтёров и экспертов</li>
+                <li>Партнёрства с местными центрами и организациями</li>
+                <li>Сильная вовлечённость в районы и сообщества</li>
+              </ul>
+            </div>
+
+            <div class="quote-card" role="note" aria-label="цитата">
+              <p class="quote-card__text">
+                “Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.”
+              </p>
+              <p class="quote-card__sign">Association IES</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW (синий как на буклете, карточки “стекло”, но читабельнее) -->
+    <section id="how" class="section section--blue slant slant--to-yellow" style="--next: var(--yellow);">
+      <div class="container">
+        <div class="section-head section-head--on-dark">
+          <h2 class="h2">как обратиться за помощью</h2>
+          <p class="muted-on-dark">Главный блок на сайте: коротко, понятно, без лишней бюрократии.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card card--glass accent-left">
+            <div class="step">
+              <span class="step-num">1</span>
+              <h3 class="h3">свяжитесь с нами</h3>
+            </div>
+            <p class="p p--on-dark">
+              Телефон / WhatsApp / Instagram / форма на сайте — выберите как удобно.
+            </p>
+          </article>
+
+          <article class="card card--glass accent-left">
+            <div class="step">
+              <span class="step-num">2</span>
+              <h3 class="h3">опишите ситуацию</h3>
+            </div>
+            <p class="p p--on-dark">
+              Коротко: что случилось и какая помощь нужна. Мы уточним детали.
+            </p>
+          </article>
+
+          <article class="card card--glass accent-left">
+            <div class="step">
+              <span class="step-num">3</span>
+              <h3 class="h3">получите следующий шаг</h3>
+            </div>
+            <p class="p p--on-dark">
+              Консультация, встреча или сопровождение — подскажем, что делать дальше.
+            </p>
+          </article>
+
+          <article class="card card--glass accent-left">
+            <div class="step">
+              <span class="step-ico">!</span>
+              <h3 class="h3">важно</h3>
+            </div>
+            <p class="p p--on-dark">
+              Точные условия (по записи/бесплатно/время работы) добавим после подтверждения.
+            </p>
+          </article>
+        </div>
+
+        <div class="quote card card--glass">
+          <p class="quote-text">
+            “Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.”
+          </p>
+          <p class="quote-sign">Akhmed Susuev</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTS (жёлтый как в буклете, без QR) -->
+    <section id="contacts" class="section section--yellow">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2 h2--blue">контакты</h2>
+          <p class="muted">
+            Сделаем так, чтобы человеку было проще связаться с вами в один клик.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card--paper">
+            <div class="btn-row">
+              <a class="btn btn--pill btn--blue" href="#">позвонить</a>
+              <a class="btn btn--pill btn--purple" href="#">instagram</a>
+              <a class="btn btn--pill btn--outline-blue" href="#how">как обратиться</a>
+            </div>
+
+            <div class="contact-box">
+              <div><b>Телефон:</b> +33 6 32 66 07 38</div>
+              <div><b>Instagram:</b> @ies_info</div>
+              <div><b>Адрес / часы:</b> Уточним после ответа (можно добавить район/адрес и время приёма).</div>
+            </div>
+          </div>
+
+          <form class="card card--paper form">
+            <h3 class="h3 h3--blue">написать сообщение</h3>
+
+            <div class="form-grid">
+              <label class="field">
+                <span>Имя</span>
+                <input type="text" placeholder="Ваше имя">
+              </label>
+
+              <label class="field">
+                <span>Телефон или email</span>
+                <input type="text" placeholder="+33... или email">
+              </label>
+
+              <label class="field field--full">
+                <span>Сообщение</span>
+                <textarea rows="5" placeholder="Коротко опишите ваш вопрос..."></textarea>
+              </label>
+            </div>
+
+            <button class="btn btn--pill btn--blue" type="button">отправить (demo)</button>
+
+            <p class="fineprint">
+              *Это демо-форма: сейчас просто показывает сообщение об “успешной отправке”.
+              Позже подключим отправку (email / WhatsApp / сервер).
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© 2025 Association IES</div>
+        <div class="footer-links">
+          <a href="#">Mentions légales (позже)</a>
+          <a href="#">Confidentialité (позже)</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // demo submit
+    document.querySelector('.form button')?.addEventListener('click', () => {
+      alert('Демо: сообщение “отправлено”.');
+    });
+  </script>
+</body>
+</html>
