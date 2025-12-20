@@ -576,6 +576,40 @@
     border-color: rgba(15,82,166,.55);
     box-shadow: 0 0 0 4px rgba(15,82,166,.12);
   }
+
+  /* Быстрая форма в Hero: тёплый фон и читаемый текст без “прыжка” полей при фокусе. */
+  .quickForm label{
+    color: #111827;
+  }
+  .quickForm .field span{
+    color: rgba(17,24,39,.78);
+    opacity: 1;
+  }
+  .quickForm input,
+  .quickForm textarea{
+    background: #FFF1D6;
+    color: #111827;
+    border: 2px solid rgba(0,0,0,0.12);
+    box-sizing: border-box;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .quickForm input:focus,
+  .quickForm textarea:focus{
+    border-width: 2px;
+    border-color: rgba(0,0,0,0.35);
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.10);
+  }
+  .quickForm input::placeholder,
+  .quickForm textarea::placeholder{
+    color: rgba(17,24,39,.55);
+  }
+  .quickForm input[aria-invalid="true"],
+  .quickForm textarea[aria-invalid="true"]{
+    border-color: rgba(185, 28, 28, 0.55);
+    box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.10);
+  }
   
   .fineprint{
     margin-top: 10px;

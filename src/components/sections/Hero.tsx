@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { QuickContactForm } from "@/components/contact/QuickContactForm";
 import { Container } from "@/components/ui/Container";
 
 type HeroProps = {
@@ -85,30 +86,18 @@ export function Hero({ locale }: HeroProps) {
               <span className="tag tag--blue">2019</span>
             </div>
 
-            <h3 className="h3">{locale === "fr" ? "Contacts rapides" : "быстрые контакты"}</h3>
+            {/* Эта форма позволяет быстро открыть письмо в почте без телефона и личных имён. */}
+            <QuickContactForm locale={locale} />
 
-            <div className="info-stack">
-              <div className="info">
-                <div className="info-k">{locale === "fr" ? "Téléphone" : "Телефон"}</div>
-                <div className="info-v">+33 6 32 66 07 38</div>
-              </div>
+            <div className="info-stack" style={{ marginTop: 12 }}>
               <div className="info">
                 <div className="info-k">Instagram</div>
-                <div className="info-v">@ies_info</div>
+                <div className="info-v">
+                  <a href="https://instagram.com/ies_info" target="_blank" rel="noreferrer">
+                    @ies_info
+                  </a>
+                </div>
               </div>
-              <div className="info">
-                <div className="info-k">{locale === "fr" ? "Contact" : "Контакт"}</div>
-                <div className="info-v">Akhmed Susuev</div>
-              </div>
-            </div>
-
-            <div className="mini-actions">
-              <a className="btn btn--pill btn--blue" href="mailto:contact@associationies.fr">
-                {locale === "fr" ? "Écrire" : "написать"}
-              </a>
-              <Link className="btn btn--pill btn--outline-blue" href={`/${locale}/actions`}>
-                {locale === "fr" ? "Directions" : "направления"}
-              </Link>
             </div>
           </aside>
         </div>
