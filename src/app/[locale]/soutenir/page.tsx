@@ -59,7 +59,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   return (
     <main>
       {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка, и ведём на контакты. */}
-      <section className="section section--yellow">
+      <section className="section section--yellow section-seam-bottom seam-to-pink">
         <Container>
           <div className="section-head">
             <h1 className="h2 h2--blue">{text.heroTitle}</h1>
@@ -69,7 +69,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
       </section>
 
       {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-      <section className="section section--pink">
+      <section className="section section--pink section-seam-bottom seam-to-purple">
         <Container>
           <div className="section-head">
             <h2 className="h2 h2--blue">{text.donateTitle}</h2>
