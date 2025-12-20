@@ -35,6 +35,16 @@ a {
   text-decoration: none;
 }
 
+/* Аккуратное закрепление шапки при прокрутке (без перекрытия контента). */
+/* Этот селектор специально сделан более “сильным”, чтобы не конфликтовать с legacy-стилями. */
+.site-header.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 8px 22px rgba(11, 27, 51, 0.08);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
