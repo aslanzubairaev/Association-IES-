@@ -49,3 +49,5 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
 }
 
 
+
+
