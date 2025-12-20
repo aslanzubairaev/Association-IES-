@@ -253,3 +253,10 @@ a {
     color-scheme: dark;
   }
 }
+
+/* На узких экранах поля формы должны идти в один столбец, чтобы всё было читабельно. */
+@media (max-width: 520px) {
+  .quickForm .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

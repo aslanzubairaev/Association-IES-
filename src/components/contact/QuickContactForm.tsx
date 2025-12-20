@@ -9,13 +9,15 @@ import { useMemo, useState, type FormEvent } from "react";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
+  // Где используется форма: в Hero (компактный блок) или на отдельной странице контактов.
+  variant?: "hero" | "page";
 };
 
 const EMAIL_TO = "contact@associationies.fr";
 const SUBJECT = "Demande via le site IES";
 
 // Эта форма открывает почтовый клиент через mailto, поэтому отправка работает без сервера.
-export function QuickContactForm({ locale }: QuickContactFormProps) {
+export function QuickContactForm({ locale, variant = "hero" }: QuickContactFormProps) {
   // Эти тексты меняются в зависимости от выбранного языка.
   const texts = useMemo(() => {
     if (locale === "fr") {
@@ -24,9 +26,10 @@ export function QuickContactForm({ locale }: QuickContactFormProps) {
         namePlaceholder: "Votre nom",
         emailPlaceholder: "Votre e-mail",
         messagePlaceholder: "Votre message",
-        button: "Envoyer",
+        button: variant === "page" ? "Envoyer un message" : "Envoyer",
         hint: "Nous répondrons par e-mail. Accueil sur rendez-vous.",
         required: "Champ requis",
+        draftOpened: "Le brouillon est prêt. Cliquez sur Envoyer dans votre messagerie.",
       };
     }
 
@@ -35,11 +38,12 @@ export function QuickContactForm({ locale }: QuickContactFormProps) {
       namePlaceholder: "Ваше имя",
       emailPlaceholder: "Ваш e-mail",
       messagePlaceholder: "Сообщение",
-      button: "Отправить",
+      button: variant === "page" ? "Отправить сообщение" : "Отправить",
       hint: "Ответим по e-mail. Приём — по записи.",
       required: "Обязательное поле",
+      draftOpened: "Черновик письма открыт. Нажмите Отправить в почте.",
     };
-  }, [locale]);
+  }, [locale, variant]);
 
   // Эти значения нужны, чтобы собрать текст письма и показать подсказки при ошибках.
   const [name, setName] = useState("");
@@ -80,7 +84,8 @@ export function QuickContactForm({ locale }: QuickContactFormProps) {
 
   return (
     <form className="form quickForm" onSubmit={handleSubmit}>
-      <h3 className="h3">{texts.title}</h3>
+      {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
+      {variant === "hero" ? <h3 className="h3">{texts.title}</h3> : null}
 
       <div className="form-grid">
         <label className="field">
@@ -124,10 +129,11 @@ export function QuickContactForm({ locale }: QuickContactFormProps) {
         {texts.button}
       </button>
 
-      <p className="fineprint">{texts.hint}</p>
+      {/* Подсказка под формой: в Hero оставляем, а на странице /contact она уже есть в тексте страницы. */}
+      {variant === "hero" ? <p className="fineprint">{texts.hint}</p> : null}
 
       {draftOpened ? (
-        <p className="fineprint">Черновик письма открыт. Нажмите Отправить в почте.</p>
+        <p className="fineprint">{texts.draftOpened}</p>
       ) : null}
     </form>
   );

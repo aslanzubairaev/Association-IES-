@@ -15,6 +15,12 @@ const slantYellowStyle = { "--next": "var(--yellow)" } as CSSProperties;
 
 // Основная разметка лендинга 1-в-1 с legacy/index.html (body).
 export function LegacyLanding() {
+  // Общий e-mail ассоциации: используем его вместо персональных телефонов и имён.
+  const email = "contact@associationies.fr";
+  const mailto = `mailto:${email}`;
+  // Ссылка на страницу контактов для текущего языка: на /ru/legacy и /fr/legacy это будет /ru/contact и /fr/contact.
+  const contactPageHref = "../contact";
+
   return (
     <>
       <header className="site-header">
@@ -29,14 +35,14 @@ export function LegacyLanding() {
             <a href="#help">Чем помогаем</a>
             <a href="#actions">Наши действия</a>
             <a href="#how">Как обратиться</a>
-            <a href="#contacts">Контакты</a>
+            <a href={contactPageHref}>Контакты</a>
           </nav>
 
           <div className="header-cta">
             <a className="btn btn--pill btn--yellow" href="#how">
               получить помощь
             </a>
-            <a className="btn btn--pill btn--outline-white" href="#contacts">
+            <a className="btn btn--pill btn--outline-white" href={contactPageHref}>
               связаться
             </a>
           </div>
@@ -75,7 +81,7 @@ export function LegacyLanding() {
                 <a className="btn btn--pill btn--mint" href="#how">
                   как обратиться
                 </a>
-                <a className="btn btn--pill btn--outline" href="#contacts">
+                <a className="btn btn--pill btn--outline" href={contactPageHref}>
                   контакты
                 </a>
               </div>
@@ -97,16 +103,14 @@ export function LegacyLanding() {
 
               <div className="info-stack">
                 <div className="info">
-                  <div className="info-k">Телефон</div>
-                  <div className="info-v">+33 6 32 66 07 38</div>
+                  <div className="info-k">E-mail</div>
+                  <div className="info-v">
+                    <a href={mailto}>{email}</a>
+                  </div>
                 </div>
                 <div className="info">
                   <div className="info-k">Instagram</div>
                   <div className="info-v">@ies_info</div>
-                </div>
-                <div className="info">
-                  <div className="info-k">Контакт</div>
-                  <div className="info-v">Akhmed Susuev</div>
                 </div>
               </div>
 
@@ -119,7 +123,7 @@ export function LegacyLanding() {
               </div>
 
               <div className="mini-actions">
-                <a className="btn btn--pill btn--blue" href="#contacts">
+                <a className="btn btn--pill btn--blue" href={contactPageHref}>
                   написать
                 </a>
                 <a className="btn btn--pill btn--outline-blue" href="#help">
@@ -437,7 +441,7 @@ export function LegacyLanding() {
                 “Наша миссия — открыть пути. Помочь каждому найти своё место, здесь
                 и сейчас.”
               </p>
-              <p className="quote-sign">Akhmed Susuev</p>
+              <p className="quote-sign">Association IES</p>
             </div>
           </div>
         </section>
@@ -455,10 +459,10 @@ export function LegacyLanding() {
             <div className="grid-2">
               <div className="card card--paper">
                 <div className="btn-row">
-                  <a className="btn btn--pill btn--blue" href="#">
-                    позвонить
+                  <a className="btn btn--pill btn--blue" href={contactPageHref}>
+                    написать
                   </a>
-                  <a className="btn btn--pill btn--purple" href="#">
+                  <a className="btn btn--pill btn--purple" href="https://instagram.com/ies_info" target="_blank" rel="noreferrer">
                     instagram
                   </a>
                   <a className="btn btn--pill btn--outline-blue" href="#how">
@@ -468,7 +472,7 @@ export function LegacyLanding() {
 
                 <div className="contact-box">
                   <div>
-                    <b>Телефон:</b> +33 6 32 66 07 38
+                    <b>E-mail:</b> <a href={mailto}>{email}</a>
                   </div>
                   <div>
                     <b>Instagram:</b> @ies_info
