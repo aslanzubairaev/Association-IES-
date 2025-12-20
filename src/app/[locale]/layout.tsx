@@ -15,8 +15,10 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // Язык, который пришёл из адреса страницы.
   const locale = params.locale;
 
+  // Если язык неизвестен — показываем страницу “не найдено”.
   if (locale !== "ru" && locale !== "fr") {
     notFound();
   }
@@ -24,8 +26,10 @@ export default function LocaleLayout({
   return (
     <div>
       <div id="top" aria-hidden="true" />
+      {/* Верхняя шапка, которая остаётся видимой при прокрутке. */}
       <Header locale={locale} />
-      {children}
+      {/* Отступ под шапку, чтобы содержимое страницы не уходило под неё. */}
+      <div className="locale-content">{children}</div>
     </div>
   );
 }

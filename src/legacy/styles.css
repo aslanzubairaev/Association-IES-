@@ -47,9 +47,11 @@
   
   /* HEADER */
   .site-header{
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 50;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
     background: var(--blue);
     border-bottom: 1px solid rgba(255,255,255,.18);
   }

@@ -5,8 +5,8 @@
 */
 
 import type { Metadata } from "next";
-import "./globals.css";
 import "../legacy/styles.css";
+import "./globals.css";
 
 // Информация, которую браузер и поисковики видят как название и описание сайта.
 export const metadata: Metadata = {
