@@ -1,29 +1,87 @@
 /* 
  Этот файл содержит карточку направления (действия) для страницы “Actions / Действия”.
- Она показывает название, кому подходит, что даёт, когда/где и кнопку “Записаться”.
+ Он показывает два варианта карточек: обычную карточку направления и инфо‑карточку.
+ Обычная карточка показывает: название, кому подходит, что даёт, формат/частоту, “когда/где” и кнопку записи.
+ Инфо‑карточка показывает короткий список “Важно знать / À savoir” без дублирования CTA.
  Человек может быстро понять смысл направления и перейти на страницу контактов.
 */
 
 import Link from "next/link";
 
-type ActionCardProps = {
-  locale: "ru" | "fr";
+type ActionCardDirectionProps = {
+  variant?: "direction";
   title: string;
+  forWhoLabel: string;
   forWho: string;
+  benefitLabel: string;
   benefit: string;
-  whenWhere: string;
+  frequencyLabel: string;
+  frequency: string;
+  whenWhereLabel: string;
+  whenWhereText: string;
+  ctaLabel: string;
+  href: string;
 };
 
-// Карточка направления: одинаковая структура, чтобы каталог читался быстро.
-export function ActionCard({ locale, title, forWho, benefit, whenWhere }: ActionCardProps) {
-  const forWhoLabel = locale === "fr" ? "Pour qui" : "Для кого";
-  const benefitLabel = locale === "fr" ? "Ce que ça apporte" : "Что даёт";
-  const whenWhereLabel = locale === "fr" ? "Quand / où" : "Когда / где";
+type ActionCardInfoProps = {
+  variant: "info";
+  title: string;
+  items: string[];
+  // Ссылка на контакты можно показывать только если это действительно нужно (без лишних CTA).
+  ctaLabel?: string;
+  href?: string;
+};
 
-  const ctaLabel = locale === "fr" ? "S’inscrire" : "Записаться";
+type ActionCardProps = ActionCardDirectionProps | ActionCardInfoProps;
+
+// Карточка направления: один и тот же формат для всех пунктов, чтобы сравнивать было легко.
+export function ActionCard(props: ActionCardProps) {
+  // Инфо‑карточка: список коротких пунктов без повторов “Для кого/Что даёт…”. 
+  if (props.variant === "info") {
+    const { title, items, ctaLabel, href } = props;
+
+    return (
+      <article className="card card--paper accent-left accent--blue actions-card" style={{ display: "flex", flexDirection: "column" }}>
+        {/* Заголовок инфо‑карточки: помогает быстро понять, что это “правила участия”. */}
+        <h3 className="h3 h3--blue">{title}</h3>
+
+        {/* Короткий список: без адресов/расписаний и без личных контактов. */}
+        <ul className="list" style={{ marginTop: 10 }}>
+          {items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+
+        {/* Ссылка на контакты: опционально, чтобы не плодить CTA. */}
+        {ctaLabel && href ? (
+          <div style={{ marginTop: "auto", paddingTop: 14 }}>
+            <Link className="btn btn--pill btn--outline-blue" href={href}>
+              {ctaLabel}
+            </Link>
+          </div>
+        ) : (
+          <div style={{ marginTop: "auto" }} />
+        )}
+      </article>
+    );
+  }
+
+  const {
+    title,
+    forWhoLabel,
+    forWho,
+    benefitLabel,
+    benefit,
+    frequencyLabel,
+    frequency,
+    whenWhereLabel,
+    whenWhereText,
+    ctaLabel,
+    href,
+  } = props;
 
   return (
-    <article className="card card--paper accent-left accent--blue">
+    <article className="card card--paper accent-left accent--blue actions-card" style={{ display: "flex", flexDirection: "column" }}>
       {/* Название направления: главный ориентир в карточке. */}
       <h3 className="h3 h3--blue">{title}</h3>
 
@@ -37,14 +95,19 @@ export function ActionCard({ locale, title, forWho, benefit, whenWhere }: Action
         <b>{benefitLabel}:</b> {benefit}
       </p>
 
-      {/* “Когда/где”: если данных нет — показываем “Уточняется / À préciser”. */}
+      {/* “Формат/частота”: помогает понять, регулярное ли это направление или событийное. */}
       <p className="p" style={{ marginTop: 10 }}>
-        <b>{whenWhereLabel}:</b> {whenWhere}
+        <b>{frequencyLabel}:</b> {frequency}
+      </p>
+
+      {/* “Когда/где”: на этой странице всегда без общего адреса/графика — уточняется при записи. */}
+      <p className="actions-card-meta" style={{ marginTop: 10 }}>
+        <span className="actions-card-meta-label">{whenWhereLabel}</span> {whenWhereText}
       </p>
 
       {/* Кнопка записи: ведёт на страницу контактов, без телефонов и личных контактов. */}
-      <div style={{ marginTop: 14 }}>
-        <Link className="btn btn--pill btn--outline-blue" href={`/${locale}/contact`}>
+      <div style={{ marginTop: "auto", paddingTop: 14 }}>
+        <Link className="btn btn--pill btn--outline-blue" href={href}>
           {ctaLabel}
         </Link>
       </div>

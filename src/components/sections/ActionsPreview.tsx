@@ -16,8 +16,8 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
   const title = locale === "fr" ? "Actions (aperçu)" : "наши действия (кратко)";
   const subtitle =
     locale === "fr"
-      ? "Un résumé des programmes. La page détaillée sera enrichie ensuite."
-      : "Короткий обзор программ. Подробности добавим позже на отдельной странице.";
+      ? "Un aperçu des programmes et activités de l’association."
+      : "Короткий обзор программ и активностей ассоциации.";
 
   const items =
     locale === "fr"

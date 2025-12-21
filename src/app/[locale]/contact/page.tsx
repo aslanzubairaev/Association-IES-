@@ -7,6 +7,7 @@
 import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/contact/QuickContactForm";
 import { ContactEmailBox } from "@/components/contact/ContactEmailBox";
+import { actionsCopy, getActionsTopicParam } from "@/content/actions";
 
 export default function ContactPage({
   params,
@@ -28,15 +29,33 @@ export default function ContactPage({
     "not-sure": { ru: "Не знаете куда? (ориентация)", fr: "Vous ne savez pas où ? (orientation)" },
   };
 
+  // Этот словарь нужен для “Действия / Actions”: тема должна выглядеть как “Действия — <направление>”.
+  const actionTopicLabels: Record<string, { ru: string; fr: string }> = Object.fromEntries(
+    actionsCopy.ru.items.map((ruItem) => {
+      const frItem = actionsCopy.fr.items.find((x) => x.slug === ruItem.slug);
+      const topic = getActionsTopicParam(ruItem.slug);
+      return [
+        topic,
+        {
+          ru: `Действия — ${ruItem.title}`,
+          fr: `Actions — ${frItem?.title ?? ruItem.title}`,
+        },
+      ];
+    }),
+  );
+
   // Если тема пришла из другой страницы, добавляем её в начало текста — так человеку проще написать.
   const rawTopic = searchParams?.topic;
   const topicLabel = rawTopic ? topicLabels[rawTopic] : null;
+  const actionTopicLabel = rawTopic ? actionTopicLabels[rawTopic] : null;
   const prefillMessage =
-    topicLabel && rawTopic
-      ? `${locale === "fr" ? "Sujet" : "Тема"}: ${locale === "fr" ? topicLabel.fr : topicLabel.ru}\n\n`
-      : rawTopic
-        ? `${locale === "fr" ? "Sujet" : "Тема"}: ${rawTopic}\n\n`
-        : undefined;
+    actionTopicLabel && rawTopic
+      ? `${locale === "fr" ? "Sujet" : "Тема"}: ${locale === "fr" ? actionTopicLabel.fr : actionTopicLabel.ru}\n\n`
+      : topicLabel && rawTopic
+        ? `${locale === "fr" ? "Sujet" : "Тема"}: ${locale === "fr" ? topicLabel.fr : topicLabel.ru}\n\n`
+        : rawTopic
+          ? `${locale === "fr" ? "Sujet" : "Тема"}: ${rawTopic}\n\n`
+          : undefined;
 
   // Тексты страницы меняются в зависимости от языка.
   const pageTitle = locale === "fr" ? "Contact" : "Контакты";

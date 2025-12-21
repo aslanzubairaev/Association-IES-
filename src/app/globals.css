@@ -248,6 +248,53 @@ a {
   background: var(--canvas, var(--background));
 }
 
+/* Карточки на странице “Actions / Действия”: ровная сетка 3×3 на десктопе. */
+.actions-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Планшет: 2 колонки. */
+@media (max-width: 980px) {
+  .actions-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Мобильные: 1 колонка. */
+@media (max-width: 520px) {
+  .actions-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Карточки растягиваем по высоте строки, чтобы сетка смотрелась ровно. */
+.actions-cards-grid > * {
+  height: 100%;
+}
+
+/* Отступ от акцентной синей полоски в карточках Actions: чтобы текст не “лип” к полоске. */
+.actions-card.accent-left {
+  padding-left: 38px; /* 22px базовый отступ + ~16px воздуха от полоски */
+}
+
+/* Строка “Когда/где” в карточках Actions: читаемая, но второстепенная (не прозрачная). */
+.actions-card-meta {
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(11, 27, 51, 0.78);
+}
+
+.actions-card-meta-label {
+  font-weight: 900;
+  color: rgba(11, 27, 51, 0.86);
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  font-size: 12px;
+}
+
 /* Плавные переходы между цветными секциями: тонкая “лента” градиента внизу секции. */
 .section-seam-bottom {
   position: relative;
