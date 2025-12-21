@@ -78,13 +78,13 @@ export default function ContactPage({
         ];
 
   return (
-    <main className="section section--yellow">
+    <main className="section section--purple">
       <Container>
         <div className="section-head">
-          <h1 className="h2 h2--blue">
+          <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
             {pageTitle}
           </h1>
-          <p className="muted">
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
             {pageLead}
           </p>
         </div>

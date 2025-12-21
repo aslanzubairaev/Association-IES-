@@ -1,4 +1,4 @@
-/* Этот файл содержит блок “Как это работает / Comment ça marche” и показывает 3 шага, что происходит после сообщения. */
+/* Этот файл содержит блок “Как это работает / Comment ça marche” и показывает 3 шага после сообщения. */
 
 import { Container } from "@/components/ui/Container";
 import { aideCopy } from "@/content/aide";
@@ -13,11 +13,15 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
   const copy = aideCopy[locale].howItWorks;
 
   return (
-    <section className="section section--pink" id="how">
+    <section className="section section--purple" id="how">
       <Container>
         <div className="section-head">
-          <h2 className="h2 h2--blue">{copy.title}</h2>
-          <p className="muted">{copy.subtitle}</p>
+          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.title}
+          </h2>
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            {copy.subtitle}
+          </p>
         </div>
 
         {/* Список шагов: карточки одинакового размера, на мобильном складываются в 1 колонку. */}

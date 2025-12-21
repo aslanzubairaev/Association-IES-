@@ -13,10 +13,12 @@ export function AideImportant({ locale }: AideImportantProps) {
   const copy = aideCopy[locale].important;
 
   return (
-    <section className="section section--pink-2" id="important">
+    <section className="section section--purple" id="important">
       <Container>
         <div className="section-head">
-          <h2 className="h2 h2--blue">{copy.title}</h2>
+          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.title}
+          </h2>
         </div>
 
         {/* Список ожиданий: короткие пункты, без длинных абзацев. */}

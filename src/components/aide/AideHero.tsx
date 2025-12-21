@@ -13,11 +13,13 @@ export function AideHero({ locale }: AideHeroProps) {
   const copy = aideCopy[locale].hero;
 
   return (
-    <section className="section section--purple section-seam-bottom seam-to-pink">
+    <section className="section section--purple">
       <Container>
         {/* Заголовок и подзаголовок: человек должен сразу понять смысл страницы. */}
         <div className="section-head">
-          <h1 className="h2 h2--blue">{copy.title}</h1>
+          <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.title}
+          </h1>
           {/* Подзаголовок на тёмном фоне делаем светлее, чтобы он читался уверенно. */}
           <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
             {copy.line1}

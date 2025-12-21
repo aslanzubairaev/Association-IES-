@@ -1,8 +1,4 @@
-/* 
- Этот файл задаёт страницу “Soutenir / Поддержать”.
- Он объясняет, как можно поддержать ассоциацию (донат/взнос/волонтёрство).
- Он помогает выбрать способ поддержки: открыть внешнюю ссылку или написать нам через страницу контактов.
-*/
+/* Этот файл задаёт страницу “Soutenir / Поддержать” и показывает способы поддержки (донат/взнос/волонтёрство). */
 
 import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
@@ -70,9 +66,9 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   const volunteerHref = `/${locale}/contacts?topic=volunteer`;
 
   return (
-    <main>
+    <main className="page--purple">
       {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка. */}
-      <section className="section section--purple section-seam-bottom seam-to-pink">
+      <section className="section section--purple">
         <Container>
           <div className="section-head">
             <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
@@ -86,11 +82,15 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
       </section>
 
       {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-      <section className="section section--pink">
+      <section className="section section--purple">
         <Container>
           <div className="section-head">
-            <h2 className="h2 h2--blue">{text.donateTitle}</h2>
-            <p className="muted">{text.donateLead}</p>
+            <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+              {text.donateTitle}
+            </h2>
+            <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+              {text.donateLead}
+            </p>
           </div>
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
@@ -137,10 +137,12 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
       </section>
 
       {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
-      <section className="section section--yellow support-soft-yellow">
+      <section className="section section--purple">
         <Container>
           <div className="section-head">
-            <h2 className="h2 h2--blue">{text.volunteerTitle}</h2>
+            <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+              {text.volunteerTitle}
+            </h2>
           </div>
 
           <div className="grid-2">

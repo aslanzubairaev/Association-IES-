@@ -13,11 +13,15 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
   const copy = aideCopy[locale].beforeYouWrite;
 
   return (
-    <section className="section section--pink" id="before">
+    <section className="section section--purple" id="before">
       <Container>
         <div className="section-head">
-          <h2 className="h2 h2--blue">{copy.title}</h2>
-          <p className="muted">{copy.subtitle}</p>
+          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.title}
+          </h2>
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            {copy.subtitle}
+          </p>
         </div>
 
         {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}

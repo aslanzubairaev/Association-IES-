@@ -14,11 +14,15 @@ export function AideTopics({ locale }: AideTopicsProps) {
   const copy = aideCopy[locale].topics;
 
   return (
-    <section className="section section--pink-2" id="topics">
+    <section className="section section--purple" id="topics">
       <Container>
         <div className="section-head">
-          <h2 className="h2 h2--blue">{copy.title}</h2>
-          <p className="muted">{copy.subtitle}</p>
+          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.title}
+          </h2>
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            {copy.subtitle}
+          </p>
         </div>
 
         {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}

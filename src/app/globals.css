@@ -36,6 +36,19 @@ a {
   text-decoration: none;
 }
 
+/* Единый фиолетовый фон для целой страницы: нужен, чтобы секции не “полосили” на стыках. */
+.page--purple {
+  background: radial-gradient(900px 420px at 15% 15%, rgba(255, 255, 255, 0.1), transparent 60%),
+    radial-gradient(800px 380px at 85% 40%, rgba(0, 0, 0, 0.18), transparent 55%),
+    linear-gradient(135deg, var(--purple), var(--purple-2));
+  color: #fff;
+}
+
+/* Внутри страницы с общим фоном секции остаются как “контейнеры” с отступами, без отдельного фона. */
+.page--purple .section--purple {
+  background: transparent;
+}
+
 /* Шапка всегда видима при прокрутке: фиксируем её к окну браузера (без sticky). */
 /* Этот селектор специально сделан более “сильным”, чтобы иметь приоритет над legacy-стилями. */
 .site-header.siteHeader {

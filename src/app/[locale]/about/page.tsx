@@ -1,8 +1,4 @@
-/* 
- Этот файл задаёт страницу “À propos / О нас”.
- Он показывает текст “кто мы”, наши цели, сильные стороны IES и блок с кнопками для связи и поддержки.
- Человек может быстро понять смысл ассоциации “как по флаеру” и перейти на контакты или страницу поддержки.
-*/
+/* Этот файл задаёт страницу “À propos / О нас” и показывает кто мы, цели, сильные стороны и ссылки для связи/поддержки. */
 
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
@@ -90,13 +86,13 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
       : ["Участвовать в мероприятиях", "Стать волонтёром", "Поддержать наши проекты"];
 
   return (
-    <main className="section section--pink">
+    <main className="section section--purple">
       <Container>
         <div className="section-head">
-          <h1 className="h2 h2--blue">
+          <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
             {title}
           </h1>
-          <p className="muted">
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
             {heroLine1}
             <br />
             {heroLine2}

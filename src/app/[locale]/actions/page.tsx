@@ -1,8 +1,4 @@
-/* 
- Этот файл задаёт страницу “Actions / Действия” в формате каталога направлений.
- Он показывает короткое вступление и сетку карточек с направлениями (для RU и FR).
- Человек может выбрать подходящее направление и перейти на страницу контактов для записи.
-*/
+/* Этот файл задаёт страницу “Actions / Действия” и показывает каталог направлений с карточками (RU/FR). */
 
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
@@ -16,13 +12,17 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
   const copy = actionsCopy[locale];
 
   return (
-    <main className="section section--pink-2">
+    <main className="section section--purple">
       <Container>
         {/* HERO: объясняем, что это за направления, и даём короткую подсказку, что делать дальше. */}
         <div className="section-head">
-          <h1 className="h2 h2--blue">{copy.hero.title}</h1>
-          <p className="muted">{copy.hero.lead}</p>
-          <p className="p" style={{ marginTop: 10 }}>
+          <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.hero.title}
+          </h1>
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            {copy.hero.lead}
+          </p>
+          <p className="p" style={{ marginTop: 10, color: "rgba(255,255,255,.92)" }}>
             {copy.hero.hint}
           </p>
         </div>
@@ -33,8 +33,12 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
           className="section-head"
           style={{ marginTop: 18, scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
         >
-          <h2 className="h2 h2--blue">{copy.directions.title}</h2>
-          <p className="muted">{copy.directions.subtitle}</p>
+          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.directions.title}
+          </h2>
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            {copy.directions.subtitle}
+          </p>
         </div>
 
         <div
