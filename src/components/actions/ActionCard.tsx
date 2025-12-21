@@ -45,10 +45,12 @@ export function ActionCard(props: ActionCardProps) {
         {/* Заголовок инфо‑карточки: помогает быстро понять, что это “правила участия”. */}
         <h3 className="h3 h3--blue">{title}</h3>
 
-        {/* Короткий список: без адресов/расписаний и без личных контактов. */}
+        {/* Список пунктов: делаем небольшой отступ между строками, чтобы текст читался легче. */}
         <ul className="list" style={{ marginTop: 10 }}>
-          {items.map((item) => (
-            <li key={item}>{item}</li>
+          {items.map((item, idx) => (
+            <li key={item} style={{ marginTop: idx === 0 ? 0 : 10 }}>
+              {item}
+            </li>
           ))}
         </ul>
 

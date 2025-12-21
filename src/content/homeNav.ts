@@ -11,7 +11,7 @@ export const homeNavCards: HomeNavCard[] = [
     id: "aide",
     title: { fr: "Aide", ru: "Помощь" },
     description: {
-      fr: "Comprendre les démarches et le prochain pas.",
+      fr: "Comprendre les démarches et avancer.",
       ru: "Разобраться с шагами и получить поддержку.",
     },
     path: "/aide",

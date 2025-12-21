@@ -17,7 +17,7 @@ export function QuickNav({ locale }: QuickNavProps) {
   const title = locale === "fr" ? "De quoi avez-vous besoin ?" : "Что вам нужно?";
   const subtitle =
     locale === "fr"
-      ? "Choisissez un thème pour aller directement au bon endroit."
+      ? "Choisissez un thème — on vous dirige vers la bonne page."
       : "Выберите тему — мы отправим вас в нужный раздел.";
 
   return (
@@ -48,7 +48,7 @@ export function QuickNav({ locale }: QuickNavProps) {
 
                 <div style={{ marginTop: 12 }}>
                   <Link className="btn btn--pill btn--outline-blue" href={href}>
-                    {locale === "fr" ? "Aller" : "перейти"}
+                    {locale === "fr" ? "Aller" : "Перейти"}
                   </Link>
                 </div>
               </article>

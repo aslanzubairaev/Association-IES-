@@ -47,31 +47,30 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
     hero: {
       title: "ЧЕМ ПОМОГАЕМ",
       line1: "Бесплатная административная помощь для новоприбывших и семей.",
-      line2:
-        "Напишите через форму — сообщение придёт на наш e-mail. Мы ответим по e-mail и предложим запись, если нужна встреча.",
+      line2: "Напишите через форму — мы ответим по e-mail. Если нужна встреча, предложим запись.",
       badge: "Бесплатно • По записи • Ответ по e-mail",
     },
     howItWorks: {
       title: "Как это работает",
-      subtitle: "Коротко и по делу — чтобы вы понимали, что будет дальше.",
+      subtitle: "Понятно и по шагам — чтобы вы знали, что будет дальше.",
       steps: [
         {
           title: "ШАГ 1 — ВЫ ОТПРАВЛЯЕТЕ ЗАПРОС",
-          text: "Форма на сайте (она приходит к нам на e-mail). Если есть — приложите фото/сканы писем и документов.",
+          text: "Заполните форму на сайте — сообщение приходит нам на e-mail. Если есть, приложите фото/сканы писем и документов.",
         },
         {
           title: "Шаг 2 — Уточняем детали и предлагаем запись",
-          text: "Задаём 2–3 вопроса и предлагаем вариант. Место и время зависят от проекта — согласуем по e-mail.",
+          text: "Задаём 2–3 вопроса и предлагаем следующий шаг. Место и время зависят от проекта — подтвердим по e-mail.",
         },
         {
-          title: "Шаг 3 — Разбираем ситуацию и даём шаги",
-          text: "По переписке или на встрече объясняем, что делать дальше: куда подать, что приложить, как ответить, какие сроки учитывать.",
+          title: "ШАГ 3 — РАЗБИРАЕМ СИТУАЦИЮ И ДАЁМ ПЛАН",
+          text: "По e-mail или на встрече объясняем, что делать: куда подать, что приложить, как ответить и какие сроки учесть.",
         },
       ],
     },
     topics: {
       title: "Частые темы",
-      subtitle: "Выберите тему — так нам проще быстро понять запрос.",
+      subtitle: "Выберите тему — так мы быстрее поймём запрос.",
       preparePrefix: "Что подготовить:",
       chooseLabel: "Выбрать тему",
       items: [
@@ -79,12 +78,12 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
           topicParam: "prefecture-vnz",
           title: "Префектура / ВНЖ",
           examples: ["Список документов", "Запись/загрузка документов", "Письма из префектуры", "Сроки и что делать дальше"],
-          prepareLine: "письма/уведомления, документы, номера dossier (если есть)",
+          prepareLine: "письма/уведомления, документы, номер досье (если есть)",
         },
         {
           topicParam: "caf",
           title: "CAF (пособия, письма, личный кабинет)",
-          examples: ["Создать/войти в аккаунт", "Письмо “document manquant”", "Отправить документы", "Понять статус заявки"],
+          examples: ["Создать/войти в аккаунт", "Письмо «document manquant»", "Отправить документы", "Понять статус заявки"],
           prepareLine: "номер allocataire (если есть), письма CAF, список отправленных документов",
         },
         {
@@ -108,14 +107,19 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         {
           topicParam: "not-sure",
           title: "Не знаете куда?",
-          examples: ["Опишите ситуацию простыми словами", "Покажите письмо, которое пугает", "Скажете, что уже пробовали", "Мы подскажем направление"],
+          examples: [
+            "Опишите ситуацию простыми словами",
+            "Покажите письмо, которое вас тревожит",
+            "Скажете, что уже пробовали",
+            "Мы подскажем направление",
+          ],
           prepareLine: "1–2 предложения о ситуации + фото/скан письма (если есть)",
         },
       ],
     },
     beforeYouWrite: {
       title: "Перед тем как написать",
-      subtitle: "Если есть — добавьте это в сообщение. Так мы быстрее сориентируемся.",
+      subtitle: "Если можете — добавьте это в сообщение. Так мы быстрее поможем.",
       items: [
         "Имя и фамилия",
         "Язык, на котором удобно общаться",
@@ -130,27 +134,27 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
     important: {
       title: "Важно знать",
       items: [
-        "Мы отвечаем по e-mail и работаем по предварительной записи.",
-        "Место и время зависят от проекта — уточняем при записи.",
-        "Мы объясняем шаги и помогаем разобраться в письмах/процедурах, но не заменяем администрацию и не даём юридических гарантий.",
+        "Отвечаем по e-mail. Встречи — только по предварительной записи.",
+        "Место и время зависят от проекта — сообщим при записи.",
+        "Мы помогаем понять письма и шаги, но не заменяем администрацию и не оказываем юридические услуги.",
       ],
     },
   },
   fr: {
     hero: {
-      title: "AIDE / CE QUE NOUS FAISONS",
+      title: "AIDE — CE QUE NOUS FAISONS",
       line1: "Aide administrative gratuite pour les nouveaux arrivants et les familles.",
       line2:
-        "Écrivez via le formulaire : votre message arrive sur notre e-mail. Nous vous répondrons par e-mail et proposerons un rendez-vous si nécessaire.",
+        "Écrivez via le formulaire — nous recevons votre message par e-mail. Nous répondons par e-mail et, si besoin, proposons un rendez-vous.",
       badge: "Gratuit • Sur rendez-vous • Réponse par e-mail",
     },
     howItWorks: {
       title: "Comment ça marche",
-      subtitle: "Concret, simple, sans blabla — pour savoir à quoi vous attendre.",
+      subtitle: "Clair et simple — pour savoir à quoi vous attendre.",
       steps: [
         {
           title: "ÉTAPE 1 — VOUS ENVOYEZ VOTRE DEMANDE",
-          text: "Formulaire du site (il arrive sur notre e-mail). Joignez si possible des photos/scans de courriers et documents.",
+          text: "Remplissez le formulaire — nous recevons votre message par e-mail. Joignez, si possible, des photos/scans de courriers et de documents.",
         },
         {
           title: "Étape 2 — Nous précisons et proposons un rendez-vous",
@@ -158,20 +162,25 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         },
         {
           title: "Étape 3 — On clarifie la situation et les étapes",
-          text: "Par e-mail ou lors d’un rendez-vous, nous expliquons quoi faire : où déposer, quoi joindre, comment répondre, quels délais suivre.",
+          text: "Par e-mail ou lors d’un rendez-vous, nous clarifions quoi faire : où déposer, quoi joindre, comment répondre, quels délais respecter.",
         },
       ],
     },
     topics: {
       title: "Sujets fréquents",
-      subtitle: "Choisissez un sujet — ça nous aide à traiter votre demande plus vite.",
+      subtitle: "Choisissez un sujet — cela nous aide à traiter votre demande plus vite.",
       preparePrefix: "À préparer :",
       chooseLabel: "Choisir ce sujet",
       items: [
         {
           topicParam: "prefecture-vnz",
           title: "Préfecture / titre de séjour",
-          examples: ["Liste des pièces", "Prise de rendez‑vous / dépôt en ligne", "Courriers de la préfecture", "Délais et prochaines étapes"],
+          examples: [
+            "Liste des documents à fournir",
+            "Prise de rendez‑vous / dépôt en ligne",
+            "Courriers de la préfecture",
+            "Délais et prochaines étapes",
+          ],
           prepareLine: "courriers, documents, numéros de dossier (si vous en avez)",
         },
         {
@@ -225,7 +234,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       items: [
         "Nous répondons par e-mail et travaillons sur rendez-vous.",
         "Le lieu et l’horaire dépendent du projet — précisés lors de la prise de rendez-vous.",
-        "Nous expliquons les démarches et aidons à comprendre les courriers/procédures, mais nous ne remplaçons pas l’administration et ne fournissons pas de garanties juridiques.",
+        "Nous aidons à comprendre les courriers et les démarches, mais nous ne remplaçons pas l’administration et nous ne pouvons pas garantir l’issue d’une procédure.",
       ],
     },
   },

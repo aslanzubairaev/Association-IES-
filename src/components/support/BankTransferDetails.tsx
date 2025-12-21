@@ -93,8 +93,8 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         ) : (
           <div style={{ marginTop: 10, fontSize: 12, opacity: 0.8 }}>
             {locale === "fr"
-              ? "Cliquez pour copier (IBAN + BIC)."
-              : "Нажмите, чтобы скопировать (IBAN + BIC)."}
+              ? "Cliquez pour copier l’IBAN ou le BIC."
+              : "Нажмите, чтобы скопировать IBAN или BIC."}
           </div>
         )}
       </div>

@@ -54,27 +54,27 @@ export default function ContactPage({
           : undefined;
 
   // Тексты страницы меняются в зависимости от языка.
-  const pageTitle = locale === "fr" ? "Contact" : "Контакты";
+  const pageTitle = locale === "fr" ? "CONTACT" : "КОНТАКТЫ";
   const pageLead =
     locale === "fr"
-      ? "Vous pouvez nous écrire via le formulaire ou par e-mail. Nous répondons par e-mail. Accueil sur rendez-vous."
-      : "Можно написать через форму или на e-mail. Ответим по e-mail. Приём/встречи — по записи.";
-  const whenTitle = locale === "fr" ? "Quand écrire ?" : "Когда писать?";
+      ? "Écrivez via le formulaire ou par e-mail — réponse par e-mail. Rendez-vous uniquement sur inscription."
+      : "Напишите через форму или на e-mail — ответим по e-mail. Приём/встречи — только по записи.";
+  const whenTitle = locale === "fr" ? "QUAND ÉCRIRE ?" : "КОГДА ПИСАТЬ?";
   const whenItems =
     locale === "fr"
       ? [
           "Préfecture / titre de séjour",
           "CAF / CPAM / France Travail",
           "Logement / école / santé",
-          "CV / recherche d’emploi / orientation",
-          "Questions sur nos actions",
+          "CV / emploi / orientation",
+          "Questions sur nos actions et projets",
         ]
       : [
           "Префектура / ВНЖ",
           "CAF / CPAM / France Travail",
           "Жильё / школа / здоровье",
           "CV / работа / ориентация",
-          "Вопросы по проектам ассоциации",
+          "Вопросы по проектам и мероприятиям ассоциации",
         ];
 
   return (

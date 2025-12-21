@@ -15,6 +15,10 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
   const copyLabel = locale === "fr" ? "Copier l’e-mail" : "Скопировать e-mail";
   const copiedLabel = locale === "fr" ? "Copié" : "Скопировано";
   const failedLabel = locale === "fr" ? "Impossible de copier automatiquement" : "Не удалось скопировать автоматически";
+  const helperText =
+    locale === "fr"
+      ? "Idéalement, décrivez la situation en 2–3 phrases et joignez une photo/scan du courrier (si possible)."
+      : "Лучше писать с кратким описанием ситуации и приложить фото/скан письма (если есть).";
 
   // Действие по кнопке: копируем e-mail в буфер, чтобы его можно было вставить в любую почту.
   async function handleCopy() {
@@ -59,6 +63,11 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
           {status}
         </div>
       ) : null}
+
+      {/* Небольшая подсказка: помогает написать письмо так, чтобы мы быстрее разобрались. */}
+      <div className="fineprint" style={{ marginTop: 10, opacity: 0.85 }}>
+        {helperText}
+      </div>
     </div>
   );
 }

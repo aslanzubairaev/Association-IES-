@@ -19,17 +19,18 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     locale === "fr"
       ? {
           title: "Écrire à l’association",
-          nameLabel: "Nom",
-          emailLabel: "E-mail",
-          messageLabel: "Message",
-          namePlaceholder: "Votre nom",
+          nameLabel: "NOM ET PRÉNOM *",
+          emailLabel: "E-MAIL *",
+          messageLabel: "MESSAGE *",
+          namePlaceholder: "Votre nom et prénom",
           emailPlaceholder: "Votre e-mail",
-          messagePlaceholder: "Votre message",
-          button: variant === "page" ? "Envoyer un message" : "Envoyer",
-          hint: "Nous répondrons par e-mail. Accueil sur rendez-vous.",
+          messagePlaceholder: "Décrivez votre situation (bref). Si vous avez des délais/courriers, précisez ou joignez-les.",
+          button: variant === "page" ? "Envoyer le message" : "Envoyer",
+          hint: "Réponse par e-mail. Rendez-vous / accueil sur inscription.",
           required: "Champ obligatoire",
-          invalidEmail: "Entrez un e-mail valide",
-          openingGmail: "Ouverture de Gmail dans un nouvel onglet…",
+          invalidEmail: "Adresse e-mail invalide.",
+          openingGmail: "Message envoyé. Nous vous répondrons par e-mail.",
+          sendFailed: "Envoi impossible. Réessayez ou écrivez à contact@associationies.fr",
           copyLetter: "Copier le texte du message",
           copied: "Copié",
           copyFailed: "Impossible de copier automatiquement",
@@ -37,17 +38,19 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
         }
       : {
           title: "Написать в ассоциацию",
-          nameLabel: "Имя",
-          emailLabel: "E-mail",
-          messageLabel: "Сообщение",
+          nameLabel: "ИМЯ *",
+          emailLabel: "E-MAIL *",
+          messageLabel: "СООБЩЕНИЕ *",
           namePlaceholder: "Ваше имя",
           emailPlaceholder: "Ваш e-mail",
-          messagePlaceholder: "Сообщение",
+          messagePlaceholder:
+            "Опишите ситуацию (кратко). Если есть сроки или письмо — напишите об этом или приложите.",
           button: variant === "page" ? "Отправить сообщение" : "Отправить",
-          hint: "Ответим по e-mail. Приём — по записи.",
+          hint: "Ответим по e-mail. Приём/встречи — по записи.",
           required: "Обязательное поле",
-          invalidEmail: "Введите корректный e-mail",
-          openingGmail: "Открываем Gmail в новой вкладке…",
+          invalidEmail: "Укажите корректный e-mail.",
+          openingGmail: "Сообщение отправлено. Мы ответим по e-mail.",
+          sendFailed: "Не удалось отправить. Попробуйте ещё раз или напишите на contact@associationies.fr",
           copyLetter: "Скопировать текст письма",
           copied: "Скопировано",
           copyFailed: "Не удалось скопировать автоматически",
@@ -116,9 +119,8 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
         `&su=${encodeURIComponent(subject)}` +
         `&body=${encodeURIComponent(body)}`;
 
-      window.open(gmailComposeHref, "_blank", "noopener,noreferrer");
-
-      setStatusText(texts.openingGmail);
+      const opened = window.open(gmailComposeHref, "_blank", "noopener,noreferrer");
+      setStatusText(opened ? texts.openingGmail : texts.sendFailed);
       setShowFollowUps(true);
 
       if (hideStatusTimerId) window.clearTimeout(hideStatusTimerId);
