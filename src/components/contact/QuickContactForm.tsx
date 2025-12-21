@@ -11,13 +11,15 @@ type QuickContactFormProps = {
   locale: "ru" | "fr";
   // Где используется форма: в Hero (компактный блок) или на отдельной странице контактов.
   variant?: "hero" | "page";
+  // Текст, который можно заранее подставить в сообщение (например, когда тема выбрана на другой странице).
+  prefillMessage?: string;
 };
 
 const EMAIL_TO = "contact@associationies.fr";
 const SUBJECT = "Demande via le site IES";
 
 // Эта форма открывает почтовый клиент через mailto, поэтому отправка работает без сервера.
-export function QuickContactForm({ locale, variant = "hero" }: QuickContactFormProps) {
+export function QuickContactForm({ locale, variant = "hero", prefillMessage }: QuickContactFormProps) {
   // Эти тексты меняются в зависимости от выбранного языка.
   const texts = useMemo(() => {
     if (locale === "fr") {
@@ -48,7 +50,8 @@ export function QuickContactForm({ locale, variant = "hero" }: QuickContactFormP
   // Эти значения нужны, чтобы собрать текст письма и показать подсказки при ошибках.
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  // Сообщение можно заранее заполнить (например, строкой “Тема: CAF …”), чтобы человеку было проще начать.
+  const [message, setMessage] = useState(() => prefillMessage ?? "");
   const [touched, setTouched] = useState<{ name: boolean; email: boolean; message: boolean }>({
     name: false,
     email: false,

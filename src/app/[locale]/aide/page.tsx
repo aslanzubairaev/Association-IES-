@@ -7,6 +7,8 @@
 import { AideHero } from "@/components/aide/AideHero";
 import { AideHowItWorks } from "@/components/aide/AideHowItWorks";
 import { AideTopics } from "@/components/aide/AideTopics";
+import { AideBeforeYouWrite } from "@/components/aide/AideBeforeYouWrite";
+import { AideImportant } from "@/components/aide/AideImportant";
 import { AideFinalCta } from "@/components/aide/AideFinalCta";
 
 export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -22,6 +24,12 @@ export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }
 
       {/* “С чем помогаем”: темы в карточках, чтобы быстро найти нужное. */}
       <AideTopics locale={locale} />
+
+      {/* “Перед тем как написать”: чеклист, который помогает подготовить сообщение. */}
+      <AideBeforeYouWrite locale={locale} />
+
+      {/* “Важно знать”: задаёт ожидания (ответ по e-mail, запись, без “единых адресов/графиков”). */}
+      <AideImportant locale={locale} />
 
       {/* Финальный призыв: закрепляет следующий шаг — написать нам. */}
       <AideFinalCta locale={locale} />
