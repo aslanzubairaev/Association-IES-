@@ -1,13 +1,12 @@
 /* 
  Этот файл задаёт страницу “Soutenir / Поддержать”.
  Он объясняет, как можно поддержать ассоциацию (донат/взнос/волонтёрство).
- Он помогает выбрать способ поддержки и при необходимости ведёт на страницу контактов для уточнения деталей.
+ Он помогает выбрать способ поддержки: открыть внешнюю ссылку или написать нам через страницу контактов.
 */
 
 import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
-import Link from "next/link";
 
 export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
@@ -18,58 +17,76 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
       ? {
           heroTitle: "Soutenir l’association",
           heroLead:
-            "Votre soutien nous aide à organiser des actions et des rencontres. Nous vous guidons pour choisir le bon moyen.",
-          donateTitle: "Dons",
+            "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets de soutien. Choisissez le format qui vous convient : don, cotisation ou bénévolat.",
+          donateTitle: "Don / cotisation",
           donateLead:
-            "Choisissez un moyen de soutien. Les liens HelloAsso et CotizUp sont à préciser — en cas de doute, écrivez-nous.",
+            "Les liens HelloAsso et CotizUp peuvent changer — pour recevoir le lien actuel, écrivez-nous.",
+          ctaWriteUs: "NOUS ÉCRIRE",
           helloAssoTitle: "HelloAsso",
-          helloAssoText: "Don en ligne via HelloAsso (lien à préciser)",
+          helloAssoText: "Don en ligne via HelloAsso (lien sur demande).",
           cotizUpTitle: "CotizUp",
-          cotizUpText: "Cotisation / soutien via CotizUp (lien à préciser)",
+          cotizUpText: "Cotisation / soutien via CotizUp (lien sur demande).",
           bankTitle: "Virement bancaire",
-          bankText: "Virement bancaire (La Banque Postale)",
-          linkToConfirm: "Lien à préciser",
-          transparency: "Si vous avez besoin d’un reçu/justificatif, écrivez-nous.",
+          bankText: "IBAN + BIC (La Banque Postale)",
+          importantTitle: "À savoir",
+          importantText: "Si vous avez besoin d’un justificatif — écrivez-nous.",
           volunteerTitle: "Devenir bénévole",
           volunteerText:
-            "Si vous souhaitez aider (événements, traduction, accueil, organisation), écrivez-nous.",
-          volunteerCta: "Je veux aider",
+            "Si vous souhaitez aider lors des activités, pour la traduction ou l’organisation — écrivez-nous.",
+          volunteerCta: "JE VEUX AIDER",
+          howToHelpTitle: "Comment aider",
+          howToHelpItems: [
+            "Aide lors des rencontres",
+            "Traduction et textes",
+            "Organisation et logistique",
+            "Photo/vidéo et médias",
+          ],
         }
       : {
           heroTitle: "Поддержать ассоциацию",
           heroLead:
-            "Ваш вклад помогает нам проводить встречи и проекты поддержки. Мы подскажем подходящий способ.",
-          donateTitle: "Донат / Взносы",
+            "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ — донат, взнос или волонтёрство.",
+          donateTitle: "Донат / взносы",
           donateLead:
-            "Выберите способ поддержки. Ссылки HelloAsso и CotizUp уточняются — если есть вопросы, напишите нам.",
+            "Ссылки HelloAsso и CotizUp могут обновляться — если нужна актуальная ссылка, напишите нам.",
+          ctaWriteUs: "НАПИСАТЬ НАМ",
           helloAssoTitle: "HelloAsso",
-          helloAssoText: "Онлайн-пожертвование через HelloAsso (ссылка уточняется)",
+          helloAssoText: "Онлайн-пожертвование через HelloAsso (ссылка по запросу).",
           cotizUpTitle: "CotizUp",
-          cotizUpText: "Взнос/поддержка через CotizUp (ссылка уточняется)",
+          cotizUpText: "Взнос/поддержка через CotizUp (ссылка по запросу).",
           bankTitle: "Банковский перевод",
-          bankText: "Банковский перевод (La Banque Postale)",
-          linkToConfirm: "Ссылка уточняется",
-          transparency: "Если вам нужен чек/подтверждение — напишите нам.",
+          bankText: "IBAN + BIC (La Banque Postale)",
+          importantTitle: "Важно знать",
+          importantText: "Если вам нужен чек/подтверждение — напишите нам.",
           volunteerTitle: "Стать волонтёром",
-          volunteerText:
-            "Если вы хотите помочь с мероприятиями, переводом, встречами или организацией — напишите нам.",
-          volunteerCta: "Хочу помочь",
+          volunteerText: "Если вы хотите помочь со встречами, переводом или организацией — напишите нам.",
+          volunteerCta: "ХОЧУ ПОМОЧЬ",
+          howToHelpTitle: "Как можно помочь",
+          howToHelpItems: ["Помощь на встречах", "Перевод и тексты", "Организация и логистика", "Фото/видео и медиа"],
         };
+
+  const helloAssoHref = `/${locale}/contacts?topic=donation_helloasso`;
+  const cotizUpHref = `/${locale}/contacts?topic=donation_cotizup`;
+  const volunteerHref = `/${locale}/contacts?topic=volunteer`;
 
   return (
     <main>
-      {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка, и ведём на контакты. */}
-      <section className="section section--yellow section-seam-bottom seam-to-pink">
+      {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка. */}
+      <section className="section section--purple section-seam-bottom seam-to-pink">
         <Container>
           <div className="section-head">
-            <h1 className="h2 h2--blue">{text.heroTitle}</h1>
-            <p className="muted">{text.heroLead}</p>
+            <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+              {text.heroTitle}
+            </h1>
+            <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+              {text.heroLead}
+            </p>
           </div>
         </Container>
       </section>
 
       {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-      <section className="section section--pink section-seam-bottom seam-to-purple">
+      <section className="section section--pink">
         <Container>
           <div className="section-head">
             <h2 className="h2 h2--blue">{text.donateTitle}</h2>
@@ -77,19 +94,19 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
           </div>
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
-          <div className="cards-grid">
+          <div className="actions-cards-grid">
             <SupportCard
               title={text.helloAssoTitle}
               text={text.helloAssoText}
-              ctaLabel={text.linkToConfirm}
-              ctaHref={`/${locale}/contact`}
+              ctaLabel={text.ctaWriteUs}
+              ctaHref={helloAssoHref}
               className="support-card support-card--pink"
             />
             <SupportCard
               title={text.cotizUpTitle}
               text={text.cotizUpText}
-              ctaLabel={text.linkToConfirm}
-              ctaHref={`/${locale}/contact`}
+              ctaLabel={text.ctaWriteUs}
+              ctaHref={cotizUpHref}
               className="support-card support-card--pink"
             />
             <SupportCard
@@ -106,38 +123,42 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             </SupportCard>
           </div>
 
-          {/* Прозрачность: короткая строка о подтверждении/чеке. */}
-          <p className="muted" style={{ marginTop: 12 }}>
-            {text.transparency}
-          </p>
+          {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
+          <article
+            className="card card--paper accent-left accent--blue"
+            style={{ marginTop: 16 }}
+          >
+            <h3 className="h3 h3--blue">{text.importantTitle}</h3>
+            <p className="p" style={{ marginTop: 10 }}>
+              {text.importantText}
+            </p>
+          </article>
         </Container>
       </section>
 
       {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
-      <section className="section section--purple">
+      <section className="section section--yellow support-soft-yellow">
         <Container>
-          <div className="grid-2">
-            <div className="card card--paper support-panel support-panel--purple">
-              <h2 className="h2 h2--blue">{text.volunteerTitle}</h2>
-              <p className="p" style={{ marginTop: 10 }}>
-                {text.volunteerText}
-              </p>
-              <div style={{ marginTop: 14 }}>
-                <Link className="btn btn--pill btn--mint volunteer-cta" href={`/${locale}/contact`}>
-                  {text.volunteerCta}
-                </Link>
-              </div>
-            </div>
+          <div className="section-head">
+            <h2 className="h2 h2--blue">{text.volunteerTitle}</h2>
+          </div>
 
-            {/* Дополнительное место под будущие примеры задач/проектов: пока оставляем нейтральным. */}
-            <div className="card card--paper support-panel support-panel--purple">
-              <h3 className="h3 h3--blue">{locale === "fr" ? "Comment aider" : "Как можно помочь"}</h3>
+          <div className="grid-2">
+            <SupportCard
+              title={text.volunteerTitle}
+              text={text.volunteerText}
+              ctaLabel={text.volunteerCta}
+              ctaHref={volunteerHref}
+              className="support-card"
+            />
+
+            <SupportCard title={text.howToHelpTitle} className="support-card">
               <ul className="list" style={{ marginTop: 10 }}>
-                <li>{locale === "fr" ? "Accueil lors des rencontres" : "Помощь на встречах"}</li>
-                <li>{locale === "fr" ? "Traduction et rédaction" : "Перевод и тексты"}</li>
-                <li>{locale === "fr" ? "Organisation et logistique" : "Организация и логистика"}</li>
+                {text.howToHelpItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
-            </div>
+            </SupportCard>
           </div>
         </Container>
       </section>
