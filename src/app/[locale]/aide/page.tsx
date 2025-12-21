@@ -1,49 +1,30 @@
 /* 
  Этот файл задаёт страницу “Aide / Помощь”.
- Он показывает заголовок и несколько простых блоков-заглушек для будущего контента.
- Здесь можно будет заменить заглушки на реальные тексты, формы и изображения.
+ Он показывает короткое и понятное объяснение, как получить помощь, и с чем мы помогаем.
+ Человек может прочитать шаги, выбрать тему и перейти на страницу контактов, чтобы описать ситуацию.
 */
 
-import { Container } from "@/components/ui/Container";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { AideHero } from "@/components/aide/AideHero";
+import { AideHowItWorks } from "@/components/aide/AideHowItWorks";
+import { AideTopics } from "@/components/aide/AideTopics";
+import { AideFinalCta } from "@/components/aide/AideFinalCta";
 
 export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
 
   return (
-    <main className="section section--pink">
-      <Container>
-        <div className="section-head">
-          <h1 className="h2 h2--blue">
-            {locale === "fr" ? "Aide" : "Помощь"}
-          </h1>
-          <p className="muted">
-            {locale === "fr"
-              ? "Page en construction. Le contenu sera ajouté progressivement."
-              : "Страница в разработке. Контент будет добавляться постепенно."}
-          </p>
-        </div>
+    <main>
+      {/* Верхний блок: объясняет, что делать, и ведёт на контакты. */}
+      <AideHero locale={locale} />
 
-        <div className="grid-2">
-          <div className="card card--paper">
-            <h2 className="h3 h3--blue">
-              {locale === "fr" ? "Étapes" : "Шаги"}
-            </h2>
-            <p className="p" style={{ marginTop: 10 }}>
-              {locale === "fr"
-                ? "Ici, nous mettrons une explication simple du processus."
-                : "Здесь будет простое объяснение процесса."}
-            </p>
-          </div>
+      {/* “Как это работает”: 3 шага без лишней бюрократии. */}
+      <AideHowItWorks locale={locale} />
 
-          <div className="card card--paper">
-            <MediaPlaceholder
-              title={locale === "fr" ? "Photo / vidéo (à venir)" : "Фото / видео (будет позже)"}
-              height={240}
-            />
-          </div>
-        </div>
-      </Container>
+      {/* “С чем помогаем”: темы в карточках, чтобы быстро найти нужное. */}
+      <AideTopics locale={locale} />
+
+      {/* Финальный призыв: закрепляет следующий шаг — написать нам. */}
+      <AideFinalCta locale={locale} />
     </main>
   );
 }

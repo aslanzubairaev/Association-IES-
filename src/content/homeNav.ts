@@ -47,8 +47,8 @@ export const homeNavCards: HomeNavCard[] = [
     id: "contact",
     title: { fr: "Contact", ru: "Контакты" },
     description: {
-      fr: "Écrire ou appeler rapidement.",
-      ru: "Быстро написать или позвонить.",
+      fr: "Écrire via le formulaire ou par e-mail.",
+      ru: "Написать через форму или по e-mail.",
     },
     path: "/contact",
   },

@@ -248,8 +248,138 @@ a {
   background: var(--canvas, var(--background));
 }
 
+/* Плавные переходы между цветными секциями: тонкая “лента” градиента внизу секции. */
+.section-seam-bottom {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-seam-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 28px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--seam-from, transparent), var(--seam-to, transparent));
+}
+
+/* Цвет “откуда”: берём его из текущей секции. */
+.section--yellow.section-seam-bottom {
+  --seam-from: var(--yellow);
+}
+
+.section--pink.section-seam-bottom {
+  --seam-from: var(--pink);
+}
+
+/* Цвет “куда”: задаём его отдельным классом в разметке. */
+.seam-to-pink {
+  --seam-to: var(--pink);
+}
+
+.seam-to-purple {
+  --seam-to: var(--purple);
+}
+
+/* Карточки на странице “Поддержать / Soutenir”: делаем фон не “стерильно белым”, а мягко тонированным под секцию. */
+.support-card.support-card--pink.card--paper {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(244, 200, 209, 0.38) 100%
+  );
+}
+
+/* Карточки в фиолетовой секции “Волонтёрство”: лёгкий лавандовый тон, чтобы сочеталось с фоном. */
+.support-panel.support-panel--purple.card--paper {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(106, 65, 200, 0.10) 100%
+  );
+}
+
+/* Наводка курсора: небольшая “живость”, без резких анимаций. */
+@media (prefers-reduced-motion: no-preference) {
+  .support-card.support-card--pink.card--paper {
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .support-card.support-card--pink.card--paper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 60px rgba(11, 27, 51, 0.16);
+  }
+
+  .support-panel.support-panel--purple.card--paper {
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .support-panel.support-panel--purple.card--paper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 60px rgba(11, 27, 51, 0.16);
+  }
+}
+
+/* Кнопка волонтёрства: мягкая анимация, чтобы было понятно, что это кликабельный элемент. */
+.btn.volunteer-cta {
+  position: relative;
+  box-shadow: 0 10px 24px rgba(11, 27, 51, 0.18);
+}
+
+.btn.volunteer-cta:active {
+  transform: translateY(0);
+}
+
+.btn.volunteer-cta:focus-visible {
+  outline: none;
+  box-shadow: 0 10px 24px rgba(11, 27, 51, 0.18), 0 0 0 4px rgba(240, 212, 107, 0.55);
+}
+
+/* Реквизиты в банковской карточке: делаем “бумагу” чуть темнее, чтобы данные читались лучше. */
+.bank-transfer-box.contact-box {
+  background: rgba(240, 212, 107, 0.22);
+  border-color: rgba(11, 27, 51, 0.16);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn.volunteer-cta {
+    transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+    animation: volunteerCtaPulse 2.2s ease-in-out infinite;
+  }
+
+  .btn.volunteer-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(11, 27, 51, 0.22);
+    filter: brightness(1.02);
+  }
+
+  .btn.volunteer-cta:active {
+    transform: translateY(-1px);
+    filter: brightness(0.99);
+  }
+
+  @keyframes volunteerCtaPulse {
+    0%,
+    100% {
+      box-shadow: 0 10px 24px rgba(11, 27, 51, 0.18);
+    }
+    50% {
+      box-shadow: 0 12px 28px rgba(11, 27, 51, 0.22), 0 0 0 0 rgba(70, 185, 151, 0);
+    }
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+/* На узких экранах поля формы должны идти в один столбец, чтобы всё было читабельно. */
+@media (max-width: 520px) {
+  .quickForm .form-grid {
+    grid-template-columns: 1fr;
   }
 }
