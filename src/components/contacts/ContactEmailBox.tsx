@@ -1,9 +1,4 @@
-/* 
- Этот файл содержит небольшой блок с e-mail ассоциации для страницы контактов.
- Он показывает кликабельный адрес и кнопку “Скопировать”, чтобы человек мог быстро написать даже если mailto не открывается.
- Человек может нажать на e-mail (открыть почту) или скопировать адрес в буфер обмена.
-*/
-
+/* Этот файл показывает блок с e-mail на странице контактов и кнопку “Скопировать e-mail”. */
 "use client";
 
 import { useState } from "react";
@@ -13,18 +8,13 @@ type ContactEmailBoxProps = {
   email: string;
 };
 
-// Этот блок делает e-mail заметным и даёт запасной вариант: “скопировать”, если mailto не срабатывает.
+// Этот блок делает e-mail заметным и даёт удобную кнопку, чтобы скопировать адрес в буфер обмена.
 export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
   const [status, setStatus] = useState<string | null>(null);
 
   const copyLabel = locale === "fr" ? "Copier l’e-mail" : "Скопировать e-mail";
   const copiedLabel = locale === "fr" ? "Copié" : "Скопировано";
   const failedLabel = locale === "fr" ? "Impossible de copier automatiquement" : "Не удалось скопировать автоматически";
-  const subject = "Demande via le site IES";
-  const body =
-    locale === "fr"
-      ? "Nom: \nEmail: \nMessage:\n"
-      : "Имя: \nE-mail: \nСообщение:\n";
 
   // Действие по кнопке: копируем e-mail в буфер, чтобы его можно было вставить в любую почту.
   async function handleCopy() {
@@ -38,20 +28,13 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
     }
   }
 
-  // Ссылка mailto: сразу открывает черновик с темой и заготовкой текста (если почта настроена на устройстве).
-  const mailto =
-    `mailto:${email}` +
-    `?subject=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`;
-
   return (
     <div className="contact-box" style={{ marginBottom: 16, color: "rgba(11,27,51,.92)" }}>
-      {/* Строка с e-mail: делаем контрастным и точно кликабельным. */}
+      {/* Строка с e-mail: делаем контрастным, но не открываем mailto, чтобы не появлялось системное окно. */}
       <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
         <div>
           <b>E-mail:</b>{" "}
-          <a
-            href={mailto}
+          <span
             style={{
               color: "var(--blue)",
               textDecoration: "underline",
@@ -61,10 +44,10 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
             }}
           >
             {email}
-          </a>
+          </span>
         </div>
 
-        {/* Запасной вариант: если mailto не открывается, можно просто скопировать адрес. */}
+        {/* Запасной вариант: можно просто скопировать адрес и вставить его в любую почту. */}
         <button type="button" className="btn btn--pill btn--outline-blue" onClick={handleCopy}>
           {copyLabel}
         </button>

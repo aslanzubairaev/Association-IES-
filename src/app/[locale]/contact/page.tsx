@@ -1,12 +1,8 @@
-/* 
- Этот файл задаёт страницу “Contact / Контакты”.
- Он показывает понятные способы связаться с ассоциацией: форму и общий e-mail.
- Человек может написать сообщение через форму (она откроет письмо в почте) или нажать на e-mail.
-*/
+/* Этот файл задаёт страницу “Контакты / Contact” и показывает, как быстро связаться с ассоциацией (форма + e-mail). */
 
 import { Container } from "@/components/ui/Container";
-import { QuickContactForm } from "@/components/contact/QuickContactForm";
-import { ContactEmailBox } from "@/components/contact/ContactEmailBox";
+import { QuickContactForm } from "@/components/contacts/QuickContactForm";
+import { ContactEmailBox } from "@/components/contacts/ContactEmailBox";
 import { actionsCopy, getActionsTopicParam } from "@/content/actions";
 
 export default function ContactPage({
@@ -61,20 +57,20 @@ export default function ContactPage({
   const pageTitle = locale === "fr" ? "Contact" : "Контакты";
   const pageLead =
     locale === "fr"
-      ? "Écrivez-nous via le formulaire ou par e-mail. Réponse par e-mail. Accueil sur rendez-vous."
-      : "Напишите нам через форму или по email. Ответим по email. Приём — по записи.";
+      ? "Vous pouvez nous écrire via le formulaire ou par e-mail. Nous répondons par e-mail. Accueil sur rendez-vous."
+      : "Можно написать через форму или на e-mail. Ответим по e-mail. Приём/встречи — по записи.";
   const whenTitle = locale === "fr" ? "Quand écrire ?" : "Когда писать?";
   const whenItems =
     locale === "fr"
       ? [
-          "Démarches / préfecture",
+          "Préfecture / titre de séjour",
           "CAF / CPAM / France Travail",
           "Logement / école / santé",
           "CV / recherche d’emploi / orientation",
           "Questions sur nos actions",
         ]
       : [
-          "Документы / префектура",
+          "Префектура / ВНЖ",
           "CAF / CPAM / France Travail",
           "Жильё / школа / здоровье",
           "CV / работа / ориентация",

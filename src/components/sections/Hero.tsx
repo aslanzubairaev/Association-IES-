@@ -1,12 +1,8 @@
-/* 
- Этот файл содержит верхний блок главной страницы.
- Он показывает крупный заголовок, короткое описание и основные кнопки для перехода.
- Здесь можно поменять тексты и ссылки, не трогая общий стиль страницы.
-*/
+/* Этот файл показывает верхний блок главной страницы: заголовок, описание, кнопки и компактную форму связи. */
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { QuickContactForm } from "@/components/contact/QuickContactForm";
+import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { Container } from "@/components/ui/Container";
 
 type HeroProps = {
