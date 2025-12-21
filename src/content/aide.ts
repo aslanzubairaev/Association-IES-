@@ -18,7 +18,6 @@ type AideCopy = {
     line1: string;
     line2: string;
     badge: string;
-    cta: string;
   };
   howItWorks: {
     title: string;
@@ -41,36 +40,32 @@ type AideCopy = {
     title: string;
     items: string[];
   };
-  finalCta: {
-    text: string;
-    button: string;
-  };
 };
 
 export const aideCopy: Record<AideLocale, AideCopy> = {
   ru: {
     hero: {
-      title: "Чем помогаем",
-      line1: "Бесплатная помощь по административным вопросам для новоприбывших и семей.",
-      line2: "Пишите через форму на сайте или на e‑mail — ответим по e‑mail и предложим запись.",
+      title: "ЧЕМ ПОМОГАЕМ",
+      line1: "Бесплатная административная помощь для новоприбывших и семей.",
+      line2:
+        "Напишите через форму — сообщение придёт на наш e-mail. Мы ответим по e-mail и предложим запись, если нужна встреча.",
       badge: "Бесплатно • По записи • Ответ по e-mail",
-      cta: "Написать",
     },
     howItWorks: {
       title: "Как это работает",
       subtitle: "Коротко и по делу — чтобы вы понимали, что будет дальше.",
       steps: [
         {
-          title: "Вы пишете",
-          text: "Форма на сайте или e‑mail. Приложите фото/сканы писем и документов, если они есть.",
+          title: "ШАГ 1 — ВЫ ОТПРАВЛЯЕТЕ ЗАПРОС",
+          text: "Форма на сайте (она приходит к нам на e-mail). Если есть — приложите фото/сканы писем и документов.",
         },
         {
-          title: "Мы уточняем и предлагаем запись",
-          text: "Задаём 2–3 вопроса и предлагаем вариант. Место/время зависят от проекта — уточняем при записи.",
+          title: "Шаг 2 — Уточняем детали и предлагаем запись",
+          text: "Задаём 2–3 вопроса и предлагаем вариант. Место и время зависят от проекта — согласуем по e-mail.",
         },
         {
-          title: "Разбираем ситуацию",
-          text: "На встрече или по переписке объясняем шаги и что делать дальше: куда подавать, что приложить, как ответить.",
+          title: "Шаг 3 — Разбираем ситуацию и даём шаги",
+          text: "По переписке или на встрече объясняем, что делать дальше: куда подать, что приложить, как ответить, какие сроки учитывать.",
         },
       ],
     },
@@ -94,7 +89,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         },
         {
           topicParam: "cpam",
-          title: "CPAM / здоровье (письма, Carte Vitale)",
+          title: "CPAM / здоровье (письма, CARTE VITALE)",
           examples: ["Открыть права (droits)", "Письма/запрос документов", "Carte Vitale / attestation", "Куда обратиться по ситуации"],
           prepareLine: "письма CPAM, документы, номер sécurité sociale (если есть)",
         },
@@ -138,37 +133,32 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         "Мы отвечаем по e-mail и работаем по предварительной записи.",
         "Место и время зависят от проекта — уточняем при записи.",
         "Мы объясняем шаги и помогаем разобраться в письмах/процедурах, но не заменяем администрацию и не даём юридических гарантий.",
-        "Личные телефоны/WhatsApp руководителей не публикуются.",
       ],
-    },
-    finalCta: {
-      text: "Не уверены, с чего начать? Напишите — поможем разложить по шагам.",
-      button: "Написать",
     },
   },
   fr: {
     hero: {
-      title: "Aide",
-      line1: "Aide administrative gratuite pour les personnes récemment arrivées, les familles et les jeunes.",
-      line2: "Écrivez via le formulaire du site ou par e‑mail — réponse par e‑mail et rendez‑vous sur demande.",
+      title: "AIDE / CE QUE NOUS FAISONS",
+      line1: "Aide administrative gratuite pour les nouveaux arrivants et les familles.",
+      line2:
+        "Écrivez via le formulaire : votre message arrive sur notre e-mail. Nous vous répondrons par e-mail et proposerons un rendez-vous si nécessaire.",
       badge: "Gratuit • Sur rendez-vous • Réponse par e-mail",
-      cta: "Écrire",
     },
     howItWorks: {
       title: "Comment ça marche",
       subtitle: "Concret, simple, sans blabla — pour savoir à quoi vous attendre.",
       steps: [
         {
-          title: "Vous écrivez",
-          text: "Formulaire du site ou e‑mail. Ajoutez des photos/scans de vos courriers et documents si possible.",
+          title: "ÉTAPE 1 — VOUS ENVOYEZ VOTRE DEMANDE",
+          text: "Formulaire du site (il arrive sur notre e-mail). Joignez si possible des photos/scans de courriers et documents.",
         },
         {
-          title: "On précise et on propose un rendez‑vous",
-          text: "On vous pose 2–3 questions et on propose un créneau. Le lieu/l’horaire dépendent du projet — précisés lors de la prise de rendez‑vous.",
+          title: "Étape 2 — Nous précisons et proposons un rendez-vous",
+          text: "Nous posons 2–3 questions et proposons la suite. Le lieu et l’horaire dépendent du projet — confirmation par e-mail.",
         },
         {
-          title: "On vous guide",
-          text: "En rendez‑vous ou par échange e‑mail, on explique les étapes: où déposer, quoi joindre, comment répondre aux courriers.",
+          title: "Étape 3 — On clarifie la situation et les étapes",
+          text: "Par e-mail ou lors d’un rendez-vous, nous expliquons quoi faire : où déposer, quoi joindre, comment répondre, quels délais suivre.",
         },
       ],
     },
@@ -192,9 +182,9 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         },
         {
           topicParam: "cpam",
-          title: "CPAM / santé (courriers, Carte Vitale)",
+          title: "CPAM / Santé (courriers, Carte Vitale)",
           examples: ["Ouvrir les droits", "Courriers / demande de pièces", "Carte Vitale / attestation", "À qui s’adresser selon la situation"],
-          prepareLine: "courriers CPAM, documents, numéro de sécurité sociale (si vous en avez)",
+          prepareLine: "courriers CPAM, documents, numéro de sécurité sociale (si possible)",
         },
         {
           topicParam: "france-travail",
@@ -233,15 +223,10 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
     important: {
       title: "À savoir",
       items: [
-        "Réponse par e‑mail et accompagnement sur rendez‑vous.",
-        "Le lieu et l’horaire dépendent du projet — précisés lors de la prise de rendez‑vous.",
-        "On explique les étapes et on aide à comprendre les courriers/procédures, sans se substituer à l’administration et sans garanties juridiques.",
-        "Nous ne publions pas de numéros personnels / WhatsApp de responsables.",
+        "Nous répondons par e-mail et travaillons sur rendez-vous.",
+        "Le lieu et l’horaire dépendent du projet — précisés lors de la prise de rendez-vous.",
+        "Nous expliquons les démarches et aidons à comprendre les courriers/procédures, mais nous ne remplaçons pas l’administration et ne fournissons pas de garanties juridiques.",
       ],
-    },
-    finalCta: {
-      text: "Vous hésitez par où commencer ? Écrivez‑nous — on vous aide à clarifier les étapes.",
-      button: "Écrire",
     },
   },
 };

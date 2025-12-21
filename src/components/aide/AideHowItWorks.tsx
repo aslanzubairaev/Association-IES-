@@ -1,8 +1,4 @@
-/* 
- Этот файл содержит блок “Comment ça marche / Как это работает” для страницы помощи.
- Он показывает 3 простых шага: написать нам, уточнить детали, получить сопровождение.
- Человек читает шаги и понимает, чего ожидать, затем может перейти к контактам.
-*/
+/* Этот файл содержит блок “Как это работает / Comment ça marche” и показывает 3 шага, что происходит после сообщения. */
 
 import { Container } from "@/components/ui/Container";
 import { aideCopy } from "@/content/aide";
@@ -28,16 +24,10 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
         <div className="cards-grid" aria-label={copy.title}>
           {copy.steps.map((step, idx) => (
             <article key={step.title} className="card card--paper accent-left accent--blue">
-              {/* Заголовок карточки: номер шага, чтобы читать сверху вниз было проще. */}
-              <header className="card-top">
-                <h3 className="h3 h3--blue">{locale === "fr" ? `Étape ${idx + 1}` : `Шаг ${idx + 1}`}</h3>
-                <span className="tag tag--red">{idx + 1}</span>
-              </header>
+              {/* Заголовок карточки: “Шаг 1/2/3 …” или “Étape 1/2/3 …”, без дополнительных значков. */}
+              <h3 className="h3 h3--blue">{step.title}</h3>
 
-              {/* Сначала короткий заголовок шага, затем 1–2 предложения: что именно происходит. */}
-              <p className="p" style={{ fontWeight: 900, marginBottom: 8 }}>
-                {step.title}
-              </p>
+              {/* 1–3 предложения: что именно происходит на этом шаге. */}
               <p className="p">{step.text}</p>
             </article>
           ))}

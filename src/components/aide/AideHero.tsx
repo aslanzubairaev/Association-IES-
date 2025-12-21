@@ -1,10 +1,5 @@
-/* 
- Этот файл содержит верхний блок страницы “Aide / Помощь”.
- Он показывает заголовок, короткое объяснение, важную строку про ответ по e-mail и приём по записи.
- Человек может нажать кнопку и перейти на страницу контактов, чтобы описать ситуацию.
-*/
+/* Этот файл содержит верхний блок страницы “Aide / Чем помогаем” и объясняет, как написать нам (форма = письмо на e-mail). */
 
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { aideCopy } from "@/content/aide";
 
@@ -33,13 +28,6 @@ export function AideHero({ locale }: AideHeroProps) {
           <p className="fineprint" style={{ opacity: 0.9, color: "rgba(255,255,255,.88)" }}>
             {copy.badge}
           </p>
-
-          {/* Главная кнопка: всегда ведёт на страницу контактов выбранного языка. */}
-          <div className="btn-row" style={{ marginTop: 10, marginBottom: 0 }}>
-            <Link className="btn btn--pill btn--yellow" href={`/${locale}/contacts`}>
-              {copy.cta}
-            </Link>
-          </div>
         </div>
       </Container>
     </section>
