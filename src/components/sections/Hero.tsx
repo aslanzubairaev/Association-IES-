@@ -10,7 +10,7 @@ type HeroProps = {
   locale: "ru" | "fr";
 };
 
-const slantPurpleStyle = { "--next": "var(--purple)" } as CSSProperties;
+const slantPurpleStyle = { "--next": "linear-gradient(180deg, #F1EDFF 0%, #EEE9FF 100%)" } as CSSProperties;
 
 // Верхний блок: тексты и кнопки зависят от выбранного языка.
 export function Hero({ locale }: HeroProps) {
@@ -28,7 +28,7 @@ export function Hero({ locale }: HeroProps) {
   const ctaSecondary = locale === "fr" ? "Nos actions" : "Наши действия";
 
   return (
-    <section className="section section--purple slant" style={slantPurpleStyle}>
+    <section className="section section--purple slant hero-section" style={slantPurpleStyle}>
       <Container>
         <div className="hero-grid">
           <div className="card card--glass hero-left hero-left--mobile-plain">
@@ -50,7 +50,7 @@ export function Hero({ locale }: HeroProps) {
               <Link className="btn btn--pill btn--yellow" href={`/${locale}/aide`}>
                 {ctaPrimary}
               </Link>
-              <Link className="btn btn--pill btn--mint" href={`/${locale}/actions`}>
+              <Link className="btn btn--pill btn--outline-white" href={`/${locale}/actions`}>
                 {ctaSecondary}
               </Link>
             </div>
@@ -70,11 +70,6 @@ export function Hero({ locale }: HeroProps) {
           </div>
 
           <aside className="card card--yellow hero-right">
-            <div className="tag-row">
-              <span className="tag tag--blue">+200</span>
-              <span className="tag tag--blue">2019</span>
-            </div>
-
             {/* Эта форма позволяет быстро открыть письмо в почте без телефона и личных имён. */}
             <QuickContactForm locale={locale} />
 

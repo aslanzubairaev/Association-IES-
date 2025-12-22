@@ -126,6 +126,35 @@
   
   .section--pink{ background: var(--pink); }
   .section--pink-2{ background: var(--pink-2); }
+  .section--soft{
+    background: linear-gradient(180deg, #F1EDFF 0%, #EEE9FF 100%);
+    /* Секция “Что вам нужно?” должна начинаться сразу после Hero, без отдельной фиолетовой полосы. */
+    margin-top: -90px;
+    padding-top: calc(72px + 90px);
+    /* Верх секции делаем с диагональю: слева ниже, справа выше (как на макете). */
+    clip-path: polygon(0 22px, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* “Что вам нужно?”: мягкая лавандовая “дымка”, чтобы фон не выглядел белым и был как на Hero-палитре. */
+  .section--soft::before{
+    content: "";
+    position: absolute;
+    inset: -140px -140px -140px -140px;
+    background:
+      linear-gradient(180deg, rgba(106, 65, 200, 0.18) 0%, rgba(241, 237, 255, 0.00) 55%),
+      radial-gradient(720px 520px at 18% 45%, rgba(106, 65, 200, 0.18), transparent 62%),
+      radial-gradient(760px 560px at 82% 55%, rgba(106, 65, 200, 0.14), transparent 66%),
+      radial-gradient(900px 680px at 50% 115%, rgba(11, 27, 51, 0.06), transparent 70%);
+    filter: blur(18px);
+    opacity: 0.95;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section--soft > *{
+    position: relative;
+    z-index: 1;
+  }
   .section--blue{
     background: linear-gradient(135deg, var(--blue), var(--blue-2));
     color: #fff;
@@ -649,5 +678,11 @@
   @media (max-width: 520px){
     .header-cta{ display: none; }
     .section{ padding: 56px 0; }
+    /* На мобильных убираем “пояс” под Hero более аккуратно, чтобы не было лишнего слоя. */
+    .section.section--soft{
+      margin-top: -70px;
+      padding-top: calc(56px + 70px);
+      clip-path: polygon(0 18px, 100% 0, 100% 100%, 0 100%);
+    }
   }
   
