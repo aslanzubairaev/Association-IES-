@@ -283,6 +283,117 @@ a {
   }
 }
 
+/* HERO на главной: на мобильных убираем “карточку-рамку”, но оставляем весь текст и кнопки. */
+@media (max-width: 520px) {
+  .hero-left.hero-left--mobile-plain {
+    padding: 0;
+  }
+
+  .hero-left.hero-left--mobile-plain.card--glass {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+}
+
+/* HERO на главной: аккуратные отступы и выравнивание только внутри левого блока. */
+.hero-left {
+  text-align: center;
+}
+
+.hero-left .hero-lead {
+  margin-top: 24px;
+  line-height: 1.65;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-left .hero-actions {
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.hero-left .hero-pillRow {
+  justify-content: center;
+}
+
+/* HERO на главной: на мобильных делаем кнопки и пилюли компактнее и в одну строку. */
+@media (max-width: 520px) {
+  .hero-left .hero-actions {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .hero-left .hero-actions .btn {
+    padding: 10px 12px;
+    font-size: 11px;
+    white-space: nowrap;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .hero-left .hero-pillRow {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .hero-left .hero-pillRow .pill {
+    padding: 6px 10px;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+}
+
+/* Быстрая форма в Hero: небольшая подсказка под заголовком и выравнивание кнопки по центру. */
+.quickForm-helper {
+  margin: 8px 0 12px;
+  opacity: 0.78;
+}
+
+.quickForm-submitRow--hero {
+  display: flex;
+  justify-content: center;
+}
+
+/* Instagram-блок: делаем “дороже” (иконка + два текста, без подчёркивания ссылки). */
+.instagramBadge-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none !important;
+}
+
+.instagramBadge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 82, 166, 0.10);
+  border: 1px solid rgba(11, 27, 51, 0.10);
+  color: rgba(11, 27, 51, 0.88);
+  flex: 0 0 auto;
+}
+
+.instagramBadge-text {
+  display: grid;
+  gap: 2px;
+}
+
+.instagramBadge-label {
+  font-size: 12px;
+  opacity: 0.78;
+  font-weight: 700;
+}
+
+.instagramBadge-handle {
+  font-weight: 900;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
 /* Карточки растягиваем по высоте строки, чтобы сетка смотрелась ровно. */
 .actions-cards-grid > * {
   height: 100%;

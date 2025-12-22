@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { QuickContactForm } from "@/components/contacts/QuickContactForm";
+import { InstagramBadge } from "@/components/social/InstagramBadge";
 import { Container } from "@/components/ui/Container";
 
 type HeroProps = {
@@ -15,8 +16,8 @@ const slantPurpleStyle = { "--next": "var(--purple)" } as CSSProperties;
 export function Hero({ locale }: HeroProps) {
   const title =
     locale === "fr"
-      ? "Notre objectif — aider chacun\nà s’adapter en France"
-      : "Наша цель — помочь людям\nадаптироваться во Франции";
+      ? "Nous aidons les personnes\nà s’intégrer à Strasbourg"
+      : "Помогаем людям\nадаптироваться в Страсбурге";
 
   const lead =
     locale === "fr"
@@ -25,21 +26,13 @@ export function Hero({ locale }: HeroProps) {
 
   const ctaPrimary = locale === "fr" ? "Demander de l’aide" : "Получить помощь";
   const ctaSecondary = locale === "fr" ? "Nos actions" : "Наши действия";
-  const ctaTertiary = locale === "fr" ? "Contact" : "Контакты";
 
   return (
     <section className="section section--purple slant" style={slantPurpleStyle}>
       <Container>
         <div className="hero-grid">
-          <div className="card card--glass hero-left">
-            <div className="chips">
-              <span className="chip">Strasbourg • France</span>
-              <span className="chip">{locale === "fr" ? "Local" : "Локально"}</span>
-              <span className="chip">
-                {locale === "fr" ? "Expérience & expertise" : "Опыт и экспертиза"}
-              </span>
-            </div>
-
+          <div className="card card--glass hero-left hero-left--mobile-plain">
+            {/* Крупный заголовок: кратко объясняет, что ассоциация помогает адаптироваться именно в Страсбурге. */}
             <h1 className="h1">
               {title.split("\n").map((line, idx) => (
                 <span key={idx}>
@@ -49,21 +42,21 @@ export function Hero({ locale }: HeroProps) {
               ))}
             </h1>
 
-            <p className="lead">{lead}</p>
+            {/* Описание: уточняет, какие темы мы закрываем и что человек получит дальше. */}
+            <p className="lead hero-lead">{lead}</p>
 
-            <div className="actions">
+            {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
+            <div className="actions hero-actions">
               <Link className="btn btn--pill btn--yellow" href={`/${locale}/aide`}>
                 {ctaPrimary}
               </Link>
               <Link className="btn btn--pill btn--mint" href={`/${locale}/actions`}>
                 {ctaSecondary}
               </Link>
-              <Link className="btn btn--pill btn--outline" href={`/${locale}/contact`}>
-                {ctaTertiary}
-              </Link>
             </div>
 
-            <div className="pill-row" aria-label="ключевые слова">
+            {/* Ключевые слова: помогают быстро понять, про что наши направления (без кликов). */}
+            <div className="pill-row hero-pillRow" aria-label="ключевые слова">
               <span className="pill">
                 {locale === "fr" ? "Intégration" : "Интеграция"}
               </span>
@@ -85,15 +78,9 @@ export function Hero({ locale }: HeroProps) {
             {/* Эта форма позволяет быстро открыть письмо в почте без телефона и личных имён. */}
             <QuickContactForm locale={locale} />
 
+            {/* Ссылка на Instagram: быстрый канал связи и новости ассоциации. */}
             <div className="info-stack" style={{ marginTop: 12 }}>
-              <div className="info">
-                <div className="info-k">Instagram</div>
-                <div className="info-v">
-                  <a href="https://instagram.com/ies_info" target="_blank" rel="noreferrer">
-                    @ies_info
-                  </a>
-                </div>
-              </div>
+              <InstagramBadge href="https://instagram.com/ies_info" handle="@ies_info" />
             </div>
           </aside>
         </div>

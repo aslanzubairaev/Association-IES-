@@ -19,6 +19,8 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     locale === "fr"
       ? {
           title: "Écrire à l’association",
+          helper:
+            "Avant de nous écrire, faites défiler vers le bas et choisissez la rubrique qui vous correspond — nous pourrons vous aider plus vite.",
           nameLabel: "NOM ET PRÉNOM *",
           emailLabel: "E-MAIL *",
           messageLabel: "MESSAGE *",
@@ -38,6 +40,8 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
         }
       : {
           title: "Написать в ассоциацию",
+          helper:
+            "Перед тем как написать, пролистайте ниже и выберите нужный раздел — так мы быстрее поможем.",
           nameLabel: "ИМЯ *",
           emailLabel: "E-MAIL *",
           messageLabel: "СООБЩЕНИЕ *",
@@ -177,6 +181,9 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
       {variant === "hero" ? <h3 className="h3">{texts.title}</h3> : null}
 
+      {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
+      {variant === "hero" ? <p className="fineprint quickForm-helper">{texts.helper}</p> : null}
+
       <div className="form-grid">
         <label className="field">
           <span>{texts.nameLabel}</span>
@@ -226,9 +233,12 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
         </label>
       </div>
 
-      <button className="btn btn--pill btn--blue" type="submit">
-        {texts.button}
-      </button>
+      {/* Кнопка отправки: по нажатию проверяем поля и открываем письмо в почте (в зависимости от варианта формы). */}
+      <div className={variant === "hero" ? "quickForm-submitRow quickForm-submitRow--hero" : "quickForm-submitRow"}>
+        <button className="btn btn--pill btn--blue" type="submit">
+          {texts.button}
+        </button>
+      </div>
 
       {/* Подсказка под формой: в Hero оставляем, а на странице /contact она уже есть в тексте страницы. */}
       {variant === "hero" ? <p className="fineprint">{texts.hint}</p> : null}
