@@ -303,15 +303,34 @@ a {
 }
 
 .hero-left .hero-lead {
-  margin-top: 24px;
+  margin-top: 34px;
   line-height: 1.65;
   margin-left: auto;
   margin-right: auto;
+  max-width: 38rem;
 }
 
 .hero-left .hero-actions {
   justify-content: center;
   margin-top: 32px;
+}
+
+.hero-left .hero-actions .btn.btn--outline-white:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-left .hero-actions .btn.btn--outline-white:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
+}
+
+.hero-right .quickForm .field > span {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .hero-left .hero-pillRow {
@@ -323,6 +342,10 @@ a {
   .hero-left .hero-actions {
     flex-wrap: nowrap;
     gap: 10px;
+  }
+
+  .hero-left .hero-lead {
+    margin-top: 26px;
   }
 
   .hero-left .hero-actions .btn {
