@@ -13,19 +13,19 @@ type ActionsPreviewProps = {
 
 // Короткий обзор действий: небольшой список и переход на подробную страницу.
 export function ActionsPreview({ locale }: ActionsPreviewProps) {
-  const title = locale === "fr" ? "Actions (aperçu)" : "наши действия (кратко)";
+  const title = locale === "fr" ? "Nos actions (en bref)" : "Наши действия (кратко)";
   const subtitle =
     locale === "fr"
-      ? "Un résumé des programmes. La page détaillée sera enrichie ensuite."
-      : "Короткий обзор программ. Подробности добавим позже на отдельной странице.";
+      ? "Un aperçu rapide de nos programmes et activités."
+      : "Короткий обзор программ и активностей ассоциации.";
 
   const items =
     locale === "fr"
       ? [
           "Consultations administratives",
           "Accompagnement vers l’emploi",
-          "Cours de langue",
-          "Rencontres et sorties culturelles",
+          "Ateliers de langue",
+          "Rencontres et sorties",
         ]
       : [
           "Административные консультации",
@@ -53,16 +53,16 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
 
           <div className="card card--paper card--highlight">
             <h3 className="h3 h3--blue">
-              {locale === "fr" ? "Tout voir" : "посмотреть все"}
+              {locale === "fr" ? "Voir tout" : "Посмотреть все"}
             </h3>
             <p className="p" style={{ marginTop: 10 }}>
               {locale === "fr"
-                ? "Découvrez la page avec les programmes et les formats."
+                ? "Ouvrez la page avec les programmes et les formats."
                 : "Откройте страницу с программами и форматами."}
             </p>
             <div style={{ marginTop: 14 }}>
               <Link className="btn btn--pill btn--blue" href={`/${locale}/actions`}>
-                {locale === "fr" ? "Aller aux actions" : "перейти к действиям"}
+                {locale === "fr" ? "Aller aux actions" : "Перейти к действиям"}
               </Link>
             </div>
           </div>

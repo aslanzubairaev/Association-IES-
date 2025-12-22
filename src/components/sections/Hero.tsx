@@ -1,12 +1,8 @@
-/* 
- Этот файл содержит верхний блок главной страницы.
- Он показывает крупный заголовок, короткое описание и основные кнопки для перехода.
- Здесь можно поменять тексты и ссылки, не трогая общий стиль страницы.
-*/
+/* Этот файл показывает верхний блок главной страницы: заголовок, описание, кнопки и компактную форму связи. */
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { QuickContactForm } from "@/components/contact/QuickContactForm";
+import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { Container } from "@/components/ui/Container";
 
 type HeroProps = {
@@ -19,17 +15,17 @@ const slantPurpleStyle = { "--next": "var(--purple)" } as CSSProperties;
 export function Hero({ locale }: HeroProps) {
   const title =
     locale === "fr"
-      ? "Notre objectif — aider les personnes\nà s’intégrer en France"
+      ? "Notre objectif — aider chacun\nà s’adapter en France"
       : "Наша цель — помочь людям\nадаптироваться во Франции";
 
   const lead =
     locale === "fr"
-      ? "Documents, emploi, études et soutien à Strasbourg — un prochain pas clair, sans bureaucratie inutile."
+      ? "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement."
       : "Документы, работа, обучение и поддержка в Страсбурге — подскажем понятный следующий шаг без лишней бюрократии.";
 
   const ctaPrimary = locale === "fr" ? "Demander de l’aide" : "Получить помощь";
   const ctaSecondary = locale === "fr" ? "Nos actions" : "Наши действия";
-  const ctaTertiary = locale === "fr" ? "Contacts" : "Контакты";
+  const ctaTertiary = locale === "fr" ? "Contact" : "Контакты";
 
   return (
     <section className="section section--purple slant" style={slantPurpleStyle}>
@@ -40,7 +36,7 @@ export function Hero({ locale }: HeroProps) {
               <span className="chip">Strasbourg • France</span>
               <span className="chip">{locale === "fr" ? "Local" : "Локально"}</span>
               <span className="chip">
-                {locale === "fr" ? "Expérience" : "Опыт и экспертиза"}
+                {locale === "fr" ? "Expérience & expertise" : "Опыт и экспертиза"}
               </span>
             </div>
 
@@ -69,13 +65,13 @@ export function Hero({ locale }: HeroProps) {
 
             <div className="pill-row" aria-label="ключевые слова">
               <span className="pill">
-                {locale === "fr" ? "Intégration" : "интеграция"}
+                {locale === "fr" ? "Intégration" : "Интеграция"}
               </span>
               <span className="pill">
-                {locale === "fr" ? "Éducation" : "образование"}
+                {locale === "fr" ? "Éducation" : "Образование"}
               </span>
               <span className="pill">
-                {locale === "fr" ? "Synergie" : "синергия"}
+                {locale === "fr" ? "Synergie" : "Синергия"}
               </span>
             </div>
           </div>

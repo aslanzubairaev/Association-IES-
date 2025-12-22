@@ -1,10 +1,7 @@
-/* 
- Этот файл содержит блок “Comment ça marche / Как это работает” для страницы помощи.
- Он показывает 3 простых шага: написать нам, уточнить детали, получить сопровождение.
- Человек читает шаги и понимает, чего ожидать, затем может перейти к контактам.
-*/
+/* Этот файл содержит блок “Как это работает / Comment ça marche” и показывает 3 шага после сообщения. */
 
 import { Container } from "@/components/ui/Container";
+import { aideCopy } from "@/content/aide";
 
 type AideHowItWorksProps = {
   locale: "ru" | "fr";
@@ -12,46 +9,30 @@ type AideHowItWorksProps = {
 
 // Блок из трёх шагов: коротко и без обещаний “магии” — только понятный процесс.
 export function AideHowItWorks({ locale }: AideHowItWorksProps) {
-  const title = locale === "fr" ? "Comment ça marche" : "Как это работает";
-  const subtitle =
-    locale === "fr"
-      ? "Trois étapes simples, pour que vous sachiez à quoi vous attendre."
-      : "Три простых шага, чтобы было понятно, как всё происходит.";
-
-  // Данные блока: список шагов для выбранного языка (одинаковая структура).
-  const steps =
-    locale === "fr"
-      ? [
-          "Vous nous écrivez (formulaire / e-mail)",
-          "Nous précisons les détails et proposons un créneau",
-          "Nous vous accompagnons dans les démarches",
-        ]
-      : [
-          "Вы пишете нам (форма / e-mail)",
-          "Уточняем детали и предлагаем время",
-          "Помогаем разобраться в шагах и документах",
-        ];
+  // Тексты для блока “Как это работает”: шаги и подписи для RU/FR лежат в одном месте.
+  const copy = aideCopy[locale].howItWorks;
 
   return (
-    <section className="section section--pink" id="how">
+    <section className="section section--purple" id="how">
       <Container>
         <div className="section-head">
-          <h2 className="h2 h2--blue">{title}</h2>
-          <p className="muted">{subtitle}</p>
+          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            {copy.title}
+          </h2>
+          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            {copy.subtitle}
+          </p>
         </div>
 
         {/* Список шагов: карточки одинакового размера, на мобильном складываются в 1 колонку. */}
-        <div className="cards-grid" aria-label={title}>
-          {steps.map((text, idx) => (
-            <article key={text} className="card card--paper accent-left accent--blue">
-              {/* Заголовок карточки: номер шага, чтобы читать сверху вниз было проще. */}
-              <header className="card-top">
-                <h3 className="h3 h3--blue">{locale === "fr" ? `Étape ${idx + 1}` : `Шаг ${idx + 1}`}</h3>
-                <span className="tag tag--red">{idx + 1}</span>
-              </header>
+        <div className="cards-grid" aria-label={copy.title}>
+          {copy.steps.map((step, idx) => (
+            <article key={step.title} className="card card--paper accent-left accent--blue">
+              {/* Заголовок карточки: “Шаг 1/2/3 …” или “Étape 1/2/3 …”, без дополнительных значков. */}
+              <h3 className="h3 h3--blue">{step.title}</h3>
 
-              {/* Текст шага: одна строка, без лишних деталей и обещаний. */}
-              <p className="p">{text}</p>
+              {/* 1–3 предложения: что именно происходит на этом шаге. */}
+              <p className="p">{step.text}</p>
             </article>
           ))}
         </div>

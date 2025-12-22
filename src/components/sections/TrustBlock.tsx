@@ -15,25 +15,25 @@ const slantPinkStyle = { "--next": "var(--pink-2)" } as CSSProperties;
 
 // Блок доверия: простой список тезисов, двуязычный.
 export function TrustBlock({ locale }: TrustBlockProps) {
-  const title = locale === "fr" ? "Confiance" : "доверие";
+  const title = locale === "fr" ? "Confiance" : "Доверие";
   const subtitle =
     locale === "fr"
-      ? "Des repères simples et un accompagnement humain."
+      ? "Des étapes claires et un soutien humain."
       : "Понятные шаги и человеческая поддержка.";
 
   const points =
     locale === "fr"
       ? [
-          "Un prochain pas clair, sans jargon.",
-          "Présence locale à Strasbourg.",
-          "Soutien sur les documents, l’emploi et l’éducation.",
-          "Réseau de bénévoles et partenaires.",
+          "Une prochaine étape claire, sans jargon",
+          "Une action locale à Strasbourg",
+          "Un appui pour démarches, emploi et apprentissage",
+          "Un réseau de bénévoles et partenaires",
         ]
       : [
-          "Понятный следующий шаг без сложных слов.",
-          "Локальная работа в Страсбурге.",
-          "Поддержка по документам, работе и обучению.",
-          "Сеть волонтёров и партнёров.",
+          "Понятный следующий шаг без сложных слов",
+          "Локальная работа в Страсбурге",
+          "Поддержка по документам, работе и обучению",
+          "Сеть волонтёров и партнёров",
         ];
 
   return (
@@ -58,9 +58,9 @@ export function TrustBlock({ locale }: TrustBlockProps) {
             <p className="quote-card__text">
               {locale === "fr"
                 ? "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »"
-                : "“Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.”"}
+                : "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»"}
             </p>
-            <p className="quote-card__sign">Association IES</p>
+            <p className="quote-card__sign">ASSOCIATION IES</p>
           </div>
         </div>
       </Container>

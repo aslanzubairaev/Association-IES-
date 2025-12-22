@@ -7,6 +7,7 @@
 "use client";
 
 import { useState } from "react";
+import { CopyToClipboardButton } from "@/components/ui/CopyToClipboardButton";
 
 type BankTransferDetailsProps = {
   locale: "ru" | "fr";
@@ -18,10 +19,12 @@ type BankTransferDetailsProps = {
 export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsProps) {
   const [status, setStatus] = useState<string | null>(null);
 
-  const copyAllLabel = locale === "fr" ? "Copier les coordonnées" : "Скопировать реквизиты";
+  const copyAllLabel = locale === "fr" ? "Copier (IBAN + BIC)" : "Скопировать (IBAN + BIC)";
   const copyIbanLabel = locale === "fr" ? "Copier l’IBAN" : "Скопировать IBAN";
   const copyBicLabel = locale === "fr" ? "Copier le BIC" : "Скопировать BIC";
   const copiedLabel = locale === "fr" ? "Copié" : "Скопировано";
+  const copiedIbanStatus = locale === "fr" ? "Copié : IBAN" : "Скопировано: IBAN";
+  const copiedBicStatus = locale === "fr" ? "Copié : BIC" : "Скопировано: BIC";
   const copyFailedLabel =
     locale === "fr" ? "Impossible de copier automatiquement" : "Не удалось скопировать автоматически";
 
@@ -40,16 +43,6 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
   // Действие по нажатию на сам блок: копируем IBAN и BIC вместе одной строкой.
   function copyAll() {
     copyToClipboard(`IBAN: ${iban}\nBIC: ${bic}`, `${copiedLabel}: ${copyAllLabel}`);
-  }
-
-  // Действие: копируем только IBAN.
-  function copyIban() {
-    copyToClipboard(iban, `${copiedLabel}: IBAN`);
-  }
-
-  // Действие: копируем только BIC.
-  function copyBic() {
-    copyToClipboard(bic, `${copiedLabel}: BIC`);
   }
 
   return (
@@ -74,7 +67,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         }}
       >
         <div style={{ fontWeight: 800, marginBottom: 8 }}>
-          {locale === "fr" ? "Coordonnées bancaires" : "Банковские реквизиты"}
+          {locale === "fr" ? "Coordonnées bancaires" : "Реквизиты"}
         </div>
 
         <div style={{ lineHeight: 1.6 }}>
@@ -100,20 +93,29 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         ) : (
           <div style={{ marginTop: 10, fontSize: 12, opacity: 0.8 }}>
             {locale === "fr"
-              ? "Cliquez pour copier (IBAN + BIC)"
-              : "Нажмите, чтобы скопировать (IBAN + BIC)"}
+              ? "Cliquez pour copier l’IBAN ou le BIC."
+              : "Нажмите, чтобы скопировать IBAN или BIC."}
           </div>
         )}
       </div>
 
-      {/* Кнопки копирования: чтобы скопировать ровно одну строку (IBAN или BIC). */}
-      <div className="btn-row" style={{ marginTop: 12 }}>
-        <button type="button" className="btn btn--pill btn--outline-blue" onClick={copyIban}>
-          {copyIbanLabel}
-        </button>
-        <button type="button" className="btn btn--pill btn--outline-blue" onClick={copyBic}>
-          {copyBicLabel}
-        </button>
+      {/* Кнопки копирования: делаем две компактные кнопки рядом, чтобы быстро скопировать IBAN или BIC. */}
+      <div
+        className="btn-row"
+        style={{ marginTop: 12, justifyContent: "center", alignItems: "flex-start", flexWrap: "nowrap" }}
+      >
+        <CopyToClipboardButton
+          value={iban}
+          label={copyIbanLabel}
+          copiedLabel={copiedIbanStatus}
+          className="btn btn--pill btn--outline-blue btn--sm"
+        />
+        <CopyToClipboardButton
+          value={bic}
+          label={copyBicLabel}
+          copiedLabel={copiedBicStatus}
+          className="btn btn--pill btn--outline-blue btn--sm"
+        />
       </div>
     </div>
   );

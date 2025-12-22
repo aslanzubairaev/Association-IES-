@@ -233,6 +233,8 @@
   
   /* Акцентная полоска слева (как в буклете) */
   .accent-left{ position: relative; }
+  /* Отступ слева: чтобы текст и кнопки не “липли” к синей полоске. */
+  .card.accent-left{ padding-left: 38px; }
   .accent-left::before{
     content:"";
     position: absolute;
