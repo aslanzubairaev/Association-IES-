@@ -7,7 +7,8 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useId, useState } from "react";
 import { Container } from "@/components/ui/Container";
 
 type HeaderProps = {
@@ -16,6 +17,8 @@ type HeaderProps = {
 
 // Шапка сайта: общая для всех страниц выбранного языка.
 export function Header({ locale }: HeaderProps) {
+  const pathname = usePathname();
+
   // Уникальный идентификатор для мобильного меню, чтобы кнопка могла быть связана с меню.
   const mobileMenuId = useId();
 
@@ -47,6 +50,34 @@ export function Header({ locale }: HeaderProps) {
           contact: "Контакты",
         };
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      const previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = previousOverflow;
+      };
+    }
+    return undefined;
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+      if (isLangMenuOpen) {
+        setIsLangMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobileMenuOpen, isLangMenuOpen]);
+
   // Действие по нажатию на “бургер”: открыть или закрыть мобильное меню.
   function toggleMobileMenu() {
     setIsMobileMenuOpen((current) => !current);
@@ -72,11 +103,36 @@ export function Header({ locale }: HeaderProps) {
 
           {/* Меню для больших экранов: на мобильных оно скрыто, вместо него показывается бургер. */}
           <nav className="nav header-nav-desktop" aria-label="Меню сайта">
-            <Link href={`/${locale}/about`}>{labels.about}</Link>
-            <Link href={`/${locale}/aide`}>{labels.aide}</Link>
-            <Link href={`/${locale}/actions`}>{labels.actions}</Link>
-            <Link href={`/${locale}/soutenir`}>{labels.soutenir}</Link>
-            <Link href={`/${locale}/contact`}>{labels.contact}</Link>
+            <Link
+              href={`/${locale}/about`}
+              aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
+            >
+              {labels.about}
+            </Link>
+            <Link
+              href={`/${locale}/aide`}
+              aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}
+            >
+              {labels.aide}
+            </Link>
+            <Link
+              href={`/${locale}/actions`}
+              aria-current={isActive(`/${locale}/actions`) ? "page" : undefined}
+            >
+              {labels.actions}
+            </Link>
+            <Link
+              href={`/${locale}/soutenir`}
+              aria-current={isActive(`/${locale}/soutenir`) ? "page" : undefined}
+            >
+              {labels.soutenir}
+            </Link>
+            <Link
+              href={`/${locale}/contact`}
+              aria-current={isActive(`/${locale}/contact`) ? "page" : undefined}
+            >
+              {labels.contact}
+            </Link>
           </nav>
 
           {/* Переключатель языка для больших экранов: одна кнопка с выпадающим меню. */}
@@ -203,36 +259,42 @@ export function Header({ locale }: HeaderProps) {
             </div>
 
             <nav className="mobile-menu-links" aria-label={locale === "fr" ? "Navigation" : "Навигация"}>
-              <Link href={`/${locale}/about`} onClick={closeMobileMenu}>
+              <Link
+                href={`/${locale}/about`}
+                aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
+                onClick={closeMobileMenu}
+              >
                 {labels.about}
               </Link>
-              <Link href={`/${locale}/aide`} onClick={closeMobileMenu}>
+              <Link
+                href={`/${locale}/aide`}
+                aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}
+                onClick={closeMobileMenu}
+              >
                 {labels.aide}
               </Link>
-              <Link href={`/${locale}/actions`} onClick={closeMobileMenu}>
+              <Link
+                href={`/${locale}/actions`}
+                aria-current={isActive(`/${locale}/actions`) ? "page" : undefined}
+                onClick={closeMobileMenu}
+              >
                 {labels.actions}
               </Link>
-              <Link href={`/${locale}/soutenir`} onClick={closeMobileMenu}>
+              <Link
+                href={`/${locale}/soutenir`}
+                aria-current={isActive(`/${locale}/soutenir`) ? "page" : undefined}
+                onClick={closeMobileMenu}
+              >
                 {labels.soutenir}
               </Link>
-              <Link href={`/${locale}/contact`} onClick={closeMobileMenu}>
+              <Link
+                href={`/${locale}/contact`}
+                aria-current={isActive(`/${locale}/contact`) ? "page" : undefined}
+                onClick={closeMobileMenu}
+              >
                 {labels.contact}
               </Link>
             </nav>
-
-            <div className="mobile-menu-footer">
-              <div className="mobile-menu-footer-label">
-                {locale === "fr" ? "Langue" : "Язык"}
-              </div>
-              <div className="mobile-menu-lang">
-                <Link href="/fr" onClick={closeMobileMenu} aria-current={locale === "fr" ? "page" : undefined}>
-                  FR
-                </Link>
-                <Link href="/ru" onClick={closeMobileMenu} aria-current={locale === "ru" ? "page" : undefined}>
-                  RU
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       ) : null}
