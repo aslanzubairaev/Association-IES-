@@ -6,7 +6,6 @@
 */
 
 import { ActionsPreview } from "@/components/sections/ActionsPreview";
-import { AboutIntro } from "@/components/sections/AboutIntro";
 import { Footer } from "@/components/sections/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { QuickNav } from "@/components/sections/QuickNav";
@@ -18,14 +17,14 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
 
   return (
     <main>
-      <Hero locale={locale} />
-      <AboutIntro locale={locale} />
-      <QuickNav locale={locale} />
-      <TrustBlock locale={locale} />
-      <ActionsPreview locale={locale} />
+      <div className="bg-hero-canvas">
+        <Hero locale={locale} />
+        <QuickNav locale={locale} />
+        <TrustBlock locale={locale} />
+        <ActionsPreview locale={locale} />
+      </div>
       <Footer locale={locale} />
     </main>
   );
 }
-
 

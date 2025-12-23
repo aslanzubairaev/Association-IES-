@@ -8,8 +8,17 @@ export type HomeNavCard = {
 
 export const homeNavCards: HomeNavCard[] = [
   {
+    id: "about",
+    title: { fr: "À propos", ru: "О нас" },
+    description: {
+      fr: "Qui nous sommes et comment nous travaillons.",
+      ru: "Кто мы и как мы работаем.",
+    },
+    path: "/about",
+  },
+  {
     id: "aide",
-    title: { fr: "Aide", ru: "Помощь" },
+    title: { fr: "Aide", ru: "Чем помогаем" },
     description: {
       fr: "Comprendre les démarches et avancer.",
       ru: "Разобраться с шагами и получить поддержку.",
@@ -33,15 +42,6 @@ export const homeNavCards: HomeNavCard[] = [
       ru: "Волонтёрство, пожертвования и партнёрства.",
     },
     path: "/soutenir",
-  },
-  {
-    id: "about",
-    title: { fr: "À propos", ru: "О нас" },
-    description: {
-      fr: "Qui nous sommes et comment nous travaillons.",
-      ru: "Кто мы и как мы работаем.",
-    },
-    path: "/about",
   },
   {
     id: "contact",

@@ -1,13 +1,75 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 
+   Design tokens сайта.
+   Эти переменные задают единый спокойный набор цветов: синий + фиолетовый + золото и нейтрали.
+   Их используют фон страницы, кнопки, карточки и границы, чтобы не было “радуги”.
+  */
+  --color-primary: #0f52a6;
+  --color-primary-dark: #0b3e86;
+  --color-secondary: #5b36b8;
+  --color-secondary-dark: #4a2ba6;
+  --color-accent: #e6cd6a;
+
+  --color-bg: #f6f4ff;
+  --color-surface: #ffffff;
+  --color-border: #d6d9f0;
+
+  --color-text: #0b1b33;
+  --color-muted: #4b5563;
+
+  --hero-indigo: var(--color-primary-dark);
+  --hero-violet: var(--color-secondary);
+  --hero-yellow: #f7cf4a;
+
+  --section-bg-start: var(--blue-2);
+  --section-bg-end: var(--purple-2);
+  --section-gradient: radial-gradient(900px 420px at 15% 15%, rgba(255, 255, 255, 0.1), transparent 60%),
+    radial-gradient(800px 380px at 85% 40%, rgba(0, 0, 0, 0.18), transparent 55%),
+    linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
+  --section-heroish-vignette-opacity: 0;
+
+  --card-bg: rgba(255, 255, 255, 0.96);
+  --card-bg-tint: rgba(255, 255, 255, 0.96);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 20px 50px rgba(9, 12, 35, 0.18);
+  --card-text: #0d0d33;
+
+  --accent-yellow: var(--hero-yellow);
+  --accent-yellow-border: #d9b946;
+  --accent-yellow-glow: rgba(247, 207, 74, 0.25);
+  --accent-blue: #1e48cc;
+  --wave-offwhite: #f4f2ff;
+
   --site-header-height: 72px;
+
+  /* Совместимость со старыми переменными (legacy-стили используют их в классах). */
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+  --canvas: var(--color-bg);
+  --paper: var(--color-surface);
+  --ink: var(--color-text);
+
+  --blue: var(--color-primary);
+  --blue-2: var(--color-primary-dark);
+  --purple: var(--color-secondary);
+  --purple-2: var(--color-secondary-dark);
+  --yellow: var(--color-accent);
+
+  /* Розовый/мята/красный больше не используются как отдельные цвета: сводим к палитре. */
+  --pink: var(--color-bg);
+  --pink-2: var(--color-bg);
+  --mint: var(--color-accent);
+  --red: var(--color-secondary-dark);
+
+  /* “Тёплая бумага” для полей ввода на акцентной панели: только золото, без новых оттенков. */
+  --paper-warm: rgba(230, 205, 106, 0.28);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Сайт задуман как светлый: не переключаем палитру в тёмную тему автоматически. */
+    --background: var(--color-bg);
+    --foreground: var(--color-text);
   }
 }
 
@@ -18,9 +80,9 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -57,7 +119,7 @@ a {
   left: 0;
   z-index: 1000;
   width: 100%;
-  background: var(--blue, #0f52a6);
+  background: var(--color-primary);
   box-shadow: 0 8px 22px rgba(11, 27, 51, 0.08);
   height: calc(var(--site-header-height) + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
@@ -258,7 +320,7 @@ a {
 /* Контент страниц /ru и /fr: всегда начинается ниже фиксированной шапки. */
 .locale-content {
   padding-top: calc(var(--site-header-height) + env(safe-area-inset-top));
-  background: var(--canvas, var(--background));
+  background: var(--color-bg);
 }
 
 /* Карточки на странице “Actions / Действия”: ровная сетка 3×3 на десктопе. */
@@ -267,6 +329,64 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
+}
+
+/* “Что вам нужно?” на главной: отдельная сетка, чтобы 5 карточек выглядели как 3 + 2 (нижний ряд по центру). */
+.quickNav-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Главная страница: мягкая стыковка секций без “двойного воздуха” на границах. */
+.hero-section + .section--soft {
+  padding-top: 64px;
+}
+
+.section--soft + .trust-block {
+  padding-top: 72px;
+}
+
+.trust-block + .section--pink-2 {
+  /* После “Доверие” заголовок следующей секции должен появляться быстрее (без “пустого экрана”). */
+  padding-top: 48px;
+}
+
+/* “Что вам нужно?”: чуть меньше воздуха снизу, чтобы следующий блок начинался быстрее. */
+.section--soft {
+  padding-bottom: 72px;
+}
+
+/* “Доверие”: уменьшаем нижний отступ, чтобы не было большого провала перед следующей секцией. */
+.trust-block {
+  padding-bottom: 48px;
+}
+
+@media (min-width: 640px) {
+  .quickNav-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .quickNav-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .quickNav-card {
+    grid-column: span 2;
+    height: 100%;
+  }
+
+  /* Центрируем нижний ряд из 2 карточек (когда всего 5). */
+  .quickNav-grid .quickNav-card:nth-child(4) {
+    grid-column: 2 / span 2;
+  }
+
+  .quickNav-grid .quickNav-card:nth-child(5) {
+    grid-column: 4 / span 2;
+  }
 }
 
 /* Планшет: 2 колонки. */
@@ -281,6 +401,165 @@ a {
   .actions-cards-grid {
     grid-template-columns: 1fr;
   }
+
+  .hero-section + .section--soft {
+    padding-top: 48px;
+  }
+
+  .section--soft + .trust-block {
+    padding-top: 56px;
+  }
+
+  .trust-block + .section--pink-2 {
+    padding-top: 40px;
+  }
+
+  .section--soft {
+    padding-bottom: 56px;
+  }
+
+  .trust-block {
+    padding-bottom: 40px;
+  }
+}
+
+/* HERO на главной: на мобильных убираем “карточку-рамку”, но оставляем весь текст и кнопки. */
+@media (max-width: 520px) {
+  .hero-left.hero-left--mobile-plain {
+    padding: 0;
+  }
+
+  .hero-left.hero-left--mobile-plain.card--glass {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+}
+
+/* HERO на главной: аккуратные отступы и выравнивание только внутри левого блока. */
+.hero-left {
+  text-align: center;
+}
+
+.hero-left .hero-lead {
+  margin-top: 34px;
+  line-height: 1.65;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 38rem;
+}
+
+.hero-left .hero-actions {
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.hero-left .hero-actions .btn.btn--outline-white:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-left .hero-actions .btn.btn--outline-white:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
+}
+
+.hero-right .quickForm .field > span {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* HERO: убираем диагональный декоративный слой снизу, чтобы не было фиолетового “пояса” между секциями. */
+.hero-section.slant::after {
+  content: none;
+}
+
+.hero-left .hero-pillRow {
+  justify-content: center;
+}
+
+/* HERO на главной: на мобильных делаем кнопки и пилюли компактнее и в одну строку. */
+@media (max-width: 520px) {
+  .hero-left .hero-actions {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .hero-left .hero-lead {
+    margin-top: 26px;
+  }
+
+  .hero-left .hero-actions .btn {
+    padding: 10px 12px;
+    font-size: 11px;
+    white-space: nowrap;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .hero-left .hero-pillRow {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .hero-left .hero-pillRow .pill {
+    padding: 6px 10px;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+}
+
+/* Быстрая форма в Hero: небольшая подсказка под заголовком и выравнивание кнопки по центру. */
+.quickForm-helper {
+  margin: 8px 0 12px;
+  opacity: 0.78;
+}
+
+.quickForm-submitRow--hero {
+  display: flex;
+  justify-content: center;
+}
+
+/* Instagram-блок: делаем “дороже” (иконка + два текста, без подчёркивания ссылки). */
+.instagramBadge-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none !important;
+}
+
+.instagramBadge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 82, 166, 0.10);
+  border: 1px solid rgba(11, 27, 51, 0.10);
+  color: rgba(11, 27, 51, 0.88);
+  flex: 0 0 auto;
+}
+
+.instagramBadge-text {
+  display: grid;
+  gap: 2px;
+}
+
+.instagramBadge-label {
+  font-size: 12px;
+  opacity: 0.78;
+  font-weight: 700;
+}
+
+.instagramBadge-handle {
+  font-weight: 900;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  letter-spacing: 0.01em;
 }
 
 /* Карточки растягиваем по высоте строки, чтобы сетка смотрелась ровно. */
@@ -328,12 +607,12 @@ a {
 }
 
 .section--pink.section-seam-bottom {
-  --seam-from: var(--pink);
+  --seam-from: var(--color-bg);
 }
 
 /* Цвет “куда”: задаём его отдельным классом в разметке. */
 .seam-to-pink {
-  --seam-to: var(--pink);
+  --seam-to: var(--color-bg);
 }
 
 .seam-to-purple {
@@ -342,11 +621,7 @@ a {
 
 /* Карточки на странице “Поддержать / Soutenir”: делаем фон не “стерильно белым”, а мягко тонированным под секцию. */
 .support-card.support-card--pink.card--paper {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(244, 200, 209, 0.38) 100%
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(91, 54, 184, 0.10) 100%);
 }
 
 /* Карточки в фиолетовой секции “Волонтёрство”: лёгкий лавандовый тон, чтобы сочеталось с фоном. */
@@ -362,8 +637,8 @@ a {
 .section.support-soft-yellow {
   background: linear-gradient(
     180deg,
-    rgba(240, 212, 107, 0.24) 0%,
-    rgba(240, 212, 107, 0.12) 55%,
+    rgba(230, 205, 106, 0.24) 0%,
+    rgba(230, 205, 106, 0.12) 55%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -393,7 +668,7 @@ a {
 
 /* Реквизиты в банковской карточке: делаем “бумагу” чуть темнее, чтобы данные читались лучше. */
 .bank-transfer-box.contact-box {
-  background: rgba(240, 212, 107, 0.22);
+  background: rgba(230, 205, 106, 0.22);
   border-color: rgba(11, 27, 51, 0.16);
 }
 

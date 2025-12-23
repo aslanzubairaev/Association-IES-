@@ -21,28 +21,23 @@ export function QuickNav({ locale }: QuickNavProps) {
       : "Выберите тему — мы отправим вас в нужный раздел.";
 
   return (
-    <section className="section section--pink">
+    <section className="section section--soft">
       <Container>
         <div className="section-head">
           <h2 className="h2 h2--blue">{title}</h2>
           <p className="muted">{subtitle}</p>
         </div>
 
-        <div className="cards-grid" aria-label={title}>
+        <div className="cards-grid quickNav-grid" aria-label={title}>
           {homeNavCards.map((card) => {
             const href = `/${locale}${card.path}`;
 
             return (
               <article
                 key={card.id}
-                className="card card--paper accent-left accent--blue"
+                className="card card--paper accent-left accent--blue quickNav-card"
               >
-                <header className="card-top">
-                  <h3 className="h3 h3--blue">{card.title[locale]}</h3>
-                  <span className="tag tag--red">
-                    {locale === "fr" ? "Ouvrir" : "открыть"}
-                  </span>
-                </header>
+                <h3 className="h3 h3--blue">{card.title[locale]}</h3>
 
                 <p className="p">{card.description[locale]}</p>
 
