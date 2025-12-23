@@ -20,11 +20,11 @@
     --paper-warm: rgba(230, 205, 106, 0.28);
     --ink: var(--color-text);
   
-    --radius: 22px;
+    --radius: var(--radius-card);
     --radius-sm: 16px;
   
     --border: 2px;
-    --shadow: 0 18px 50px rgba(11, 27, 51, .12);
+    --shadow: var(--shadow-soft);
     --bg-hero-canvas: radial-gradient(900px 420px at 15% 15%, rgba(255,255,255,.10), transparent 60%),
                       radial-gradient(800px 380px at 85% 40%, rgba(0,0,0,.18), transparent 55%),
                       linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
@@ -265,19 +265,21 @@
   
   .lead{
     font-size: 16px;
-    line-height: 1.55;
-    color: rgba(255,255,255,.92);
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-weight: 500;
     max-width: 62ch;
   }
   
-  .muted{ color: rgba(11, 27, 51, .72); }
-  .muted-on-dark{ color: rgba(255,255,255,.80); }
+  .muted{ color: rgba(11, 27, 51, .72); font-weight: 500; }
+  .muted-on-dark{ color: var(--text-muted); font-weight: 500; }
   
   .p{
-    line-height: 1.55;
+    line-height: 1.6;
     color: rgba(11, 27, 51, .86);
+    font-weight: 500;
   }
-  .p--on-dark{ color: rgba(255,255,255,.86); }
+  .p--on-dark{ color: var(--text-muted); }
   
   .note{
     margin-top: 12px;
@@ -287,8 +289,8 @@
   
   /* CARDS */
   .card{
-    border-radius: var(--radius);
-    padding: 22px;
+    border-radius: var(--radius-card);
+    padding: var(--card-padding);
   }
   
   .card--paper{
@@ -352,26 +354,25 @@
 
   .section--soft .section-head .h2--blue,
   .section--pink-2 .section-head .h2--blue{
-    color: rgba(255, 255, 255, 0.96);
+    color: var(--text-primary);
+  }
+
+  .section--soft .h3--blue,
+  .section--pink-2 .h3--blue{
+    color: var(--text-primary);
   }
 
   .section--soft .muted,
   .section--pink-2 .muted{
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--text-muted);
+    font-weight: 500;
   }
 
   .section--soft .bullet-list li,
-  .section--pink-2 .bullet-list li,
-  .section--soft .card--paper .p,
-  .section--pink-2 .card--paper .p,
-  .section--pink-2 .card--highlight .p{
-    color: var(--card-text);
-  }
-
-  .section--soft .card--paper .list,
-  .section--pink-2 .card--paper .list,
-  .section--pink-2 .card--highlight .list{
-    color: var(--card-text);
+  .section--pink-2 .bullet-list li{
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.6;
   }
 
   /* --- Text contrast only for needs + actions-short cards --- */
@@ -379,7 +380,7 @@
   .needs-block .link-card,
   .actions-short-block .card,
   .actions-short-block .link-card{
-    color: #e9ebff;
+    color: var(--text-primary);
   }
 
   .needs-block .card h3,
@@ -388,7 +389,7 @@
   .needs-block .link-card .h3,
   .actions-short-block .card h3,
   .actions-short-block .link-card h3{
-    color: #f3f5ff;
+    color: var(--text-primary);
     font-weight: 700;
   }
 
@@ -400,15 +401,16 @@
   .actions-short-block .card li,
   .actions-short-block .link-card p,
   .actions-short-block .link-card li{
-    color: #dcdff7;
-    font-weight: 400;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.6;
   }
 
   .needs-block .card .muted,
   .needs-block .link-card .muted,
   .actions-short-block .card .muted,
   .actions-short-block .link-card .muted{
-    color: #b9bcef;
+    color: var(--text-muted);
   }
 
   .needs-block .btn,
@@ -441,9 +443,9 @@
 
   .needs-block .card p,
   .needs-block .link-card p{
-    color: rgba(255,255,255,0.85);
-    font-weight: 400;
-    line-height: 1.55;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.6;
   }
 
   .needs-block .btn{
@@ -459,7 +461,7 @@
   }
 
   .actions-short-block .card-list{
-    color: rgba(255,255,255,0.95);
+    color: var(--text-primary);
     letter-spacing: 0.2px;
   }
 
@@ -472,18 +474,20 @@
   }
 
   .actions-short-block .card-summary{
-    background: rgba(255,255,255,0.08);
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-soft);
   }
 
   .actions-short-block .card-summary .h3,
   .actions-short-block .card-summary h3{
-    color: #f3f5ff;
+    color: var(--text-primary);
     font-weight: 700;
   }
 
   .actions-short-block .card-summary .p,
   .actions-short-block .card-summary p{
-    color: rgba(255,255,255,0.85);
+    color: var(--text-muted);
   }
 
   .actions-short-block .card-summary .btn:hover{
@@ -806,7 +810,9 @@
   .list{
     margin-top: 12px;
     padding-left: 18px;
-    color: rgba(255,255,255,.88);
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-weight: 500;
   }
   .card--paper .list{ color: rgba(11,27,51,.84); }
   
@@ -940,16 +946,18 @@
   .site-footer{
     background: var(--blue);
     color: rgba(255,255,255,.88);
-    padding: 18px 0;
+    padding: 26px 0;
+    font-size: 14px;
   }
   .footer-inner{
     display: flex;
     justify-content: space-between;
     gap: 14px;
     flex-wrap: wrap;
+    align-items: center;
   }
-  .footer-links{ display: flex; gap: 16px; flex-wrap: wrap; }
-  .footer-links a{ color: rgba(255,255,255,.85); }
+  .footer-links{ display: flex; gap: 16px; flex-wrap: wrap; font-weight: 600; }
+  .footer-links a{ color: rgba(255,255,255,.88); }
   
   /* RESPONSIVE */
   @media (max-width: 980px){

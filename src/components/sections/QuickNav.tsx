@@ -4,8 +4,9 @@
  Здесь можно поменять список карточек и их тексты через файл с данными, не трогая верстку.
 */
 
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card/Card";
+import { Button } from "@/components/ui/Button/Button";
 import { homeNavCards } from "@/content/homeNav";
 
 type QuickNavProps = {
@@ -33,20 +34,17 @@ export function QuickNav({ locale }: QuickNavProps) {
             const href = `/${locale}${card.path}`;
 
             return (
-              <article
-                key={card.id}
-                className="card card--paper accent-left accent--blue quickNav-card"
-              >
+              <Card key={card.id} as="article" className="accent-left accent--blue quickNav-card">
                 <h3 className="h3 h3--blue">{card.title[locale]}</h3>
 
                 <p className="p">{card.description[locale]}</p>
 
                 <div style={{ marginTop: 12 }}>
-                  <Link className="btn btn--pill btn--outline-blue" href={href}>
+                  <Button variant="secondary" href={href}>
                     {locale === "fr" ? "Aller" : "Перейти"}
-                  </Link>
+                  </Button>
                 </div>
-              </article>
+              </Card>
             );
           })}
         </div>
