@@ -22,6 +22,11 @@ export function Header({ locale }: HeaderProps) {
   // Флаг, который хранит: открыто ли мобильное меню прямо сейчас.
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Флаг, который хранит: открыт ли переключатель языка на десктопе.
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const langMenuDesktopId = useId();
+  const langMenuMobileId = useId();
+
   // Язык, на который можно быстро переключиться одной кнопкой.
   const otherLocale = locale === "ru" ? "fr" : "ru";
 
@@ -52,6 +57,10 @@ export function Header({ locale }: HeaderProps) {
     setIsMobileMenuOpen(false);
   }
 
+  function toggleLangMenu() {
+    setIsLangMenuOpen((current) => !current);
+  }
+
   return (
     <header className="site-header siteHeader">
       <Container>
@@ -70,22 +79,42 @@ export function Header({ locale }: HeaderProps) {
             <Link href={`/${locale}/contact`}>{labels.contact}</Link>
           </nav>
 
-          {/* Переключатель языка для больших экранов. */}
-          <div className="header-cta header-cta-desktop" aria-label="Переключатель языка">
-            <Link
-              className="btn btn--pill btn--outline-white"
-              href="/fr"
-              aria-current={locale === "fr" ? "page" : undefined}
+          {/* Переключатель языка для больших экранов: одна кнопка с выпадающим меню. */}
+          <div className="header-cta header-cta-desktop header-lang" aria-label="Переключатель языка">
+            <button
+              type="button"
+              className="btn btn--pill btn--outline-white lang-toggle"
+              aria-expanded={isLangMenuOpen}
+              aria-controls={langMenuDesktopId}
+              onClick={toggleLangMenu}
             >
-              FR
-            </Link>
-            <Link
-              className="btn btn--pill btn--outline-white"
-              href="/ru"
-              aria-current={locale === "ru" ? "page" : undefined}
-            >
-              RU
-            </Link>
+              {locale.toUpperCase()}
+            </button>
+
+            {isLangMenuOpen ? (
+              <div className="lang-menu" id={langMenuDesktopId} role="menu">
+                <Link
+                  className="lang-menu-item"
+                  href="/fr"
+                  role="menuitem"
+                  aria-current={locale === "fr" ? "page" : undefined}
+                  onClick={() => setIsLangMenuOpen(false)}
+                >
+                  <span className="lang-menu-code">FR</span>
+                  <span className="lang-menu-name">Français</span>
+                </Link>
+                <Link
+                  className="lang-menu-item"
+                  href="/ru"
+                  role="menuitem"
+                  aria-current={locale === "ru" ? "page" : undefined}
+                  onClick={() => setIsLangMenuOpen(false)}
+                >
+                  <span className="lang-menu-code">RU</span>
+                  <span className="lang-menu-name">Русский</span>
+                </Link>
+              </div>
+            ) : null}
           </div>
 
           {/* Блок управления для мобильных: бургер и переключатель языка. */}
@@ -107,15 +136,45 @@ export function Header({ locale }: HeaderProps) {
             </button>
 
             {/* Быстрая кнопка смены языка рядом с бургером. */}
-            <Link
-              className="lang-pill lang-pill--active"
-              href={`/${otherLocale}`}
-              aria-label={
-                locale === "fr" ? "Passer en russe" : "Переключиться на французский"
-              }
-            >
-              {otherLocale.toUpperCase()}
-            </Link>
+            <div className="header-lang" aria-label="Переключатель языка">
+              <button
+                type="button"
+                className="lang-pill lang-pill--active lang-toggle"
+                aria-expanded={isLangMenuOpen}
+                aria-controls={langMenuMobileId}
+                onClick={toggleLangMenu}
+                aria-label={
+                  locale === "fr" ? "Changer de langue" : "Переключить язык"
+                }
+              >
+                {locale.toUpperCase()}
+              </button>
+
+              {isLangMenuOpen ? (
+                <div className="lang-menu" id={langMenuMobileId} role="menu">
+                  <Link
+                    className="lang-menu-item"
+                    href="/fr"
+                    role="menuitem"
+                    aria-current={locale === "fr" ? "page" : undefined}
+                    onClick={() => setIsLangMenuOpen(false)}
+                  >
+                    <span className="lang-menu-code">FR</span>
+                    <span className="lang-menu-name">Français</span>
+                  </Link>
+                  <Link
+                    className="lang-menu-item"
+                    href="/ru"
+                    role="menuitem"
+                    aria-current={locale === "ru" ? "page" : undefined}
+                    onClick={() => setIsLangMenuOpen(false)}
+                  >
+                    <span className="lang-menu-code">RU</span>
+                    <span className="lang-menu-name">Русский</span>
+                  </Link>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </Container>
@@ -180,5 +239,3 @@ export function Header({ locale }: HeaderProps) {
     </header>
   );
 }
-
-

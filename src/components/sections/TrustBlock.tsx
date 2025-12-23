@@ -47,7 +47,7 @@ export function TrustBlock({ locale }: TrustBlockProps) {
         </div>
 
         <div className="grid-2">
-          <Card className="accent-left">
+          <Card className="accent-left" hoverable={false}>
             <h3 className="h3">{locale === "fr" ? "Ce que vous obtenez" : "что вы получаете"}</h3>
             <ul className="list">
               {points.map((p) => (

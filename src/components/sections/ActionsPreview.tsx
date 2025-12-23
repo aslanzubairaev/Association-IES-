@@ -44,7 +44,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
         </div>
 
         <div className="grid-2">
-          <Card className="card-list">
+          <Card className="card-list" hoverable={false}>
             <ul className="bullet-list">
               {items.map((it) => (
                 <li key={it}>{it}</li>
@@ -52,7 +52,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
             </ul>
           </Card>
 
-          <Card className="card-summary">
+          <Card className="card-summary" hoverable={false}>
             <h3 className="h3 h3--blue">
               {locale === "fr" ? "Voir tout" : "Посмотреть все"}
             </h3>

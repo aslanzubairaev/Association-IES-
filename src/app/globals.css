@@ -250,6 +250,71 @@ a {
   border-color: rgba(255, 255, 255, 0.32);
 }
 
+/* Десктопный переключатель языка в виде одной кнопки с меню. */
+.header-lang {
+  position: relative;
+}
+
+.header-lang .lang-toggle {
+  min-width: 56px;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.header-lang .lang-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: grid;
+  padding: 8px 6px;
+  min-width: 210px;
+  border-radius: 16px;
+  border: 1px solid rgba(178, 150, 255, 0.16);
+  background: linear-gradient(180deg, #1a0f2f 0%, #120a24 100%);
+  box-shadow: 0 18px 46px rgba(16, 6, 36, 0.55);
+  z-index: 10;
+}
+
+.header-lang .lang-menu-item {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  height: 42px;
+  border-radius: 12px;
+  padding: 0 12px;
+  gap: 6px;
+  font-family: "Fira Sans", Montserrat, Inter, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: rgba(233, 227, 255, 0.9);
+  text-transform: none;
+  background: transparent;
+}
+
+.header-lang .lang-menu-item[aria-current="page"] {
+  background: rgba(124, 92, 255, 0.28);
+  color: #d7c8ff;
+}
+
+.header-lang .lang-menu-item:hover {
+  text-decoration: none;
+  background: rgba(124, 92, 255, 0.2);
+  color: #e6ddff;
+}
+
+.header-lang .lang-menu-code {
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.header-lang .lang-menu-name {
+  font-weight: 600;
+  color: inherit;
+}
+
 /* Мобильное меню: затемнение + панель, которая открывается под фиксированной шапкой. */
 .mobile-menu-overlay {
   position: fixed;
