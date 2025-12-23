@@ -21,7 +21,7 @@ export function QuickNav({ locale }: QuickNavProps) {
       : "Выберите тему — мы отправим вас в нужный раздел.";
 
   return (
-    <section className="section section--soft">
+    <section className="section section--soft needs-block">
       <Container>
         <div className="section-head">
           <h2 className="h2 h2--blue">{title}</h2>

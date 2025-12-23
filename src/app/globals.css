@@ -444,7 +444,9 @@ a {
 
 .hero-left .hero-lead {
   margin-top: 34px;
-  line-height: 1.65;
+  line-height: 1.6;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
   margin-left: auto;
   margin-right: auto;
   max-width: 38rem;

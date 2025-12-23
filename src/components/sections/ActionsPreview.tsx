@@ -35,7 +35,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
         ];
 
   return (
-    <section className="section section--pink-2">
+    <section className="section section--pink-2 actions-short-block">
       <Container>
         <div className="section-head">
           <h2 className="h2 h2--blue">{title}</h2>
@@ -43,7 +43,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
         </div>
 
         <div className="grid-2">
-          <div className="card card--paper">
+          <div className="card card--paper card-list">
             <ul className="bullet-list">
               {items.map((it) => (
                 <li key={it}>{it}</li>
@@ -51,7 +51,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
             </ul>
           </div>
 
-          <div className="card card--paper card--highlight">
+          <div className="card card--paper card--highlight card-summary">
             <h3 className="h3 h3--blue">
               {locale === "fr" ? "Voir tout" : "Посмотреть все"}
             </h3>
