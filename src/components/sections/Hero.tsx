@@ -10,7 +10,8 @@ type HeroProps = {
   locale: "ru" | "fr";
 };
 
-const slantPurpleStyle = { "--next": "linear-gradient(180deg, #F1EDFF 0%, #EEE9FF 100%)" } as CSSProperties;
+// Переход секции вниз: уводим фиолетовый Hero в общий светлый фон сайта без “третьего” фона.
+const slantPurpleStyle = { "--next": "var(--color-bg)" } as CSSProperties;
 
 // Верхний блок: тексты и кнопки зависят от выбранного языка.
 export function Hero({ locale }: HeroProps) {

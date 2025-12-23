@@ -11,7 +11,8 @@ type TrustBlockProps = {
   locale: "ru" | "fr";
 };
 
-const slantPinkStyle = { "--next": "var(--pink-2)" } as CSSProperties;
+// Переход секции вниз: выводим фиолетовый блок в общий фон сайта, без розовых оттенков.
+const slantPinkStyle = { "--next": "var(--color-bg)" } as CSSProperties;
 
 // Блок доверия: простой список тезисов, двуязычный.
 export function TrustBlock({ locale }: TrustBlockProps) {
