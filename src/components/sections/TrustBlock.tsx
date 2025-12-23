@@ -37,7 +37,7 @@ export function TrustBlock({ locale }: TrustBlockProps) {
         ];
 
   return (
-    <section className="section section--purple slant" style={slantPinkStyle}>
+    <section className="section section--purple slant trust-block" style={slantPinkStyle}>
       <Container>
         <div className="section-head section-head--on-dark">
           <h2 className="h2">{title}</h2>

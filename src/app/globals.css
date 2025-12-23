@@ -276,6 +276,11 @@ a {
   gap: 16px;
 }
 
+/* “Доверие” на главной: добавляем верхний отступ, чтобы секция не “прилипала” к предыдущей. */
+.trust-block {
+  padding-top: 88px;
+}
+
 @media (min-width: 640px) {
   .quickNav-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -314,6 +319,11 @@ a {
 @media (max-width: 520px) {
   .actions-cards-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* “Доверие” на главной: на мобильных тоже даём заметный старт секции. */
+  .trust-block {
+    padding-top: 72px;
   }
 }
 
