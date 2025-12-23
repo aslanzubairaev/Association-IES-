@@ -17,13 +17,14 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
 
   return (
     <main>
-      <Hero locale={locale} />
-      <QuickNav locale={locale} />
-      <TrustBlock locale={locale} />
-      <ActionsPreview locale={locale} />
+      <div className="bg-hero-canvas">
+        <Hero locale={locale} />
+        <QuickNav locale={locale} />
+        <TrustBlock locale={locale} />
+        <ActionsPreview locale={locale} />
+      </div>
       <Footer locale={locale} />
     </main>
   );
 }
-
 

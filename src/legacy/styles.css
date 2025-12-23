@@ -25,6 +25,9 @@
   
     --border: 2px;
     --shadow: 0 18px 50px rgba(11, 27, 51, .12);
+    --bg-hero-canvas: radial-gradient(900px 420px at 15% 15%, rgba(255,255,255,.10), transparent 60%),
+                      radial-gradient(800px 380px at 85% 40%, rgba(0,0,0,.18), transparent 55%),
+                      linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
   
     /* Вертикальный ритм секций: один стандарт на весь сайт. */
     --space-section-y: 88px;
@@ -126,6 +129,10 @@
     padding: var(--space-section-y) 0;
     overflow: hidden;
   }
+
+  .bg-hero-canvas{
+    background: var(--bg-hero-canvas);
+  }
   
   .section--purple{
     background: radial-gradient(900px 420px at 15% 15%, rgba(255,255,255,.10), transparent 60%),
@@ -136,30 +143,71 @@
   }
   
   .section--pink{ background: var(--pink); }
-  .section--pink-2{ background: var(--pink-2); }
+  .section--pink-2{ background: var(--section-gradient); }
   .section--soft{
-    background: var(--color-bg);
+    background: var(--section-gradient);
     margin-top: 0;
     clip-path: none;
   }
 
-  /* “Что вам нужно?”: мягкая лавандовая “дымка”, чтобы фон не выглядел белым и был как на Hero-палитре. */
-  .section--soft::before{
+  /* “Что вам нужно?”: мягкая “heroish” дымка, но очень лёгкая. */
+  .section--soft::before,
+  .section--pink-2::before{
     content: "";
     position: absolute;
     /* Важно: не даём слою “залезать” на следующую секцию, чтобы не появлялась цветная полоса на стыке. */
     inset: 0;
-    background:
-      linear-gradient(180deg, rgba(91, 54, 184, 0.16) 0%, rgba(246, 244, 255, 0.00) 58%),
-      radial-gradient(720px 520px at 18% 45%, rgba(91, 54, 184, 0.16), transparent 62%),
-      radial-gradient(760px 560px at 82% 55%, rgba(91, 54, 184, 0.12), transparent 66%);
+    background: none;
     /* Без сильного размытия — иначе на границе секций появляется “стык/лента”. */
-    opacity: 0.92;
+    opacity: var(--section-heroish-vignette-opacity);
     pointer-events: none;
     z-index: 0;
   }
 
-  .section--soft > *{
+  .bg-hero-canvas .section--soft,
+  .bg-hero-canvas .section--pink-2,
+  .bg-hero-canvas .section--purple.trust-block,
+  .bg-hero-canvas .hero-section.section--purple{
+    background: transparent;
+  }
+
+  .bg-hero-canvas .section--soft::before,
+  .bg-hero-canvas .section--pink-2::before,
+  .bg-hero-canvas .section--soft::after,
+  .bg-hero-canvas .section--pink-2::after,
+  .bg-hero-canvas .trust-block::before,
+  .bg-hero-canvas .trust-block::after,
+  .trust-block.slant::after{
+    content: none !important;
+    display: none !important;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    filter: none;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  section.trust-block.slant::before,
+  section.trust-block.slant::after{
+    content: none !important;
+    display: none !important;
+  }
+
+  .bg-hero-canvas .section--pink-2{
+    border-top: none;
+    box-shadow: none;
+    position: relative;
+    z-index: 1;
+  }
+
+
+  .section--soft > *,
+  .section--pink-2 > *{
     position: relative;
     z-index: 1;
   }
@@ -259,6 +307,53 @@
     border: var(--border) solid rgba(255,255,255,.18);
     box-shadow: 0 24px 70px rgba(0,0,0,.22);
     backdrop-filter: blur(10px);
+  }
+
+  .section--soft .card--paper,
+  .section--pink-2 .card--paper{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    color: var(--card-text);
+  }
+
+  .section--pink-2 .card--highlight{
+    background: var(--card-bg);
+    border: 2px solid var(--accent-yellow-border);
+    box-shadow: var(--card-shadow);
+  }
+
+  .section--soft .btn--outline-blue:hover,
+  .section--soft .btn--outline-blue:focus-visible,
+  .section--pink-2 .btn--outline-blue:hover,
+  .section--pink-2 .btn--outline-blue:focus-visible{
+    border-color: var(--accent-yellow-border);
+    box-shadow: 0 0 0 3px var(--accent-yellow-glow);
+  }
+
+  .section--pink-2 .btn--blue{
+    background: var(--accent-blue);
+  }
+
+  .section--pink-2 .btn--blue:hover{
+    box-shadow: 0 0 0 4px var(--accent-yellow-glow);
+  }
+
+  .section--soft .section-head .h2--blue,
+  .section--pink-2 .section-head .h2--blue{
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .section--soft .muted,
+  .section--pink-2 .muted{
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .section--soft .bullet-list li,
+  .section--pink-2 .bullet-list li,
+  .section--soft .card--paper .p,
+  .section--pink-2 .card--paper .p{
+    color: var(--card-text);
   }
   
   .card--yellow{
@@ -513,6 +608,10 @@
     position: relative;
     overflow: hidden;
     clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+  }
+
+  .trust-block .quote-card{
+    clip-path: none;
   }
 
   .quote-card__text{
