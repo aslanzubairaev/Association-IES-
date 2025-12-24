@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideTopicsProps = {
   locale: "ru" | "fr";
@@ -14,7 +14,11 @@ export function AideTopics({ locale }: AideTopicsProps) {
   const copy = aideCopy[locale].topics;
 
   return (
-    <section className="section section--purple" id="topics">
+    <section
+      className="section section--purple"
+      id="topics"
+      style={{ paddingTop: 56, scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
+    >
       <Container>
         <div className="section-head">
           <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
@@ -26,29 +30,29 @@ export function AideTopics({ locale }: AideTopicsProps) {
         </div>
 
         {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}
-        <div className="cards-grid" aria-label={copy.title}>
+        <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
           {copy.items.map((topic) => (
-            <article key={topic.topicParam} className="card card--paper accent-left accent--blue">
+            <article
+              key={topic.topicParam}
+              className="card card--paper aide-card aide-card--topic accent-left accent--blue"
+            >
               {/* Заголовок карточки: название темы, чтобы быстро “сканировать” взглядом. */}
               <h3 className="h3 h3--blue">{topic.title}</h3>
 
               {/* Короткие примеры: помогают человеку понять “это про меня?” за 3–5 секунд. */}
-              <ul className="list" style={{ marginTop: 10 }}>
+              <ul className="list">
                 {topic.examples.map((example) => (
                   <li key={example}>{example}</li>
                 ))}
               </ul>
 
               {/* Одна практичная строка: что приложить к сообщению. */}
-              <p
-                className="fineprint"
-                style={{ marginTop: 12, opacity: 0.85, color: "rgba(11,27,51,.76)", fontWeight: 800 }}
-              >
+              <p className="fineprint aide-fineprint">
                 {copy.preparePrefix} {topic.prepareLine}
               </p>
 
               {/* Кнопка: сразу ведёт в контакты с выбранной темой. */}
-              <div style={{ marginTop: 12 }}>
+              <div className="aide-cta">
                 <Link className="btn btn--pill btn--blue" href={`/${locale}/contacts?topic=${topic.topicParam}`}>
                   {copy.chooseLabel}
                 </Link>

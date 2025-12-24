@@ -3,10 +3,11 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 46px;
+  min-height: 40px;
+  height: 40px;
   padding: 0 18px;
   border-radius: var(--radius-btn);
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
   font-family: Montserrat, Inter, system-ui, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -20,7 +21,7 @@
 
 .button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--focus-ring);
+  box-shadow: 0 0 0 3px var(--btn-focus-ring);
 }
 
 .button:active {
@@ -46,6 +47,7 @@
 
 .secondary:hover {
   background: var(--btn-secondary-bg-hover);
+  border-color: rgba(255, 255, 255, 0.4);
   box-shadow: 0 10px 24px rgba(7, 12, 40, 0.2);
 }
 

@@ -1,7 +1,7 @@
 /* Этот файл содержит верхний блок страницы “Aide / Чем помогаем” и объясняет, как написать нам (форма = письмо на e-mail). */
 
 import { Container } from "@/components/ui/Container";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideHeroProps = {
   locale: "ru" | "fr";
@@ -13,7 +13,7 @@ export function AideHero({ locale }: AideHeroProps) {
   const copy = aideCopy[locale].hero;
 
   return (
-    <section className="section section--purple">
+    <section className="section section--purple" style={{ paddingBottom: 56 }}>
       <Container>
         {/* Заголовок и подзаголовок: человек должен сразу понять смысл страницы. */}
         <div className="section-head">

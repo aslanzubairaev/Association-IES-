@@ -7,6 +7,7 @@
 import type { CSSProperties } from "react";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
+import { trustBlockCopy } from "@/content/actions";
 
 type TrustBlockProps = {
   locale: "ru" | "fr";
@@ -17,52 +18,31 @@ const slantPinkStyle = { "--next": "var(--blue-2)" } as CSSProperties;
 
 // Блок доверия: простой список тезисов, двуязычный.
 export function TrustBlock({ locale }: TrustBlockProps) {
-  const title = locale === "fr" ? "Confiance" : "Доверие";
-  const subtitle =
-    locale === "fr"
-      ? "Des étapes claires et un soutien humain."
-      : "Понятные шаги и человеческая поддержка.";
-
-  const points =
-    locale === "fr"
-      ? [
-          "Une prochaine étape claire, sans jargon",
-          "Une action locale à Strasbourg",
-          "Un appui pour démarches, emploi et apprentissage",
-          "Un réseau de bénévoles et partenaires",
-        ]
-      : [
-          "Понятный следующий шаг без сложных слов",
-          "Локальная работа в Страсбурге",
-          "Поддержка по документам, работе и обучению",
-          "Сеть волонтёров и партнёров",
-        ];
+  const copy = trustBlockCopy[locale];
 
   return (
     <section className="section section--purple trust-block" style={slantPinkStyle}>
       <Container>
         <div className="section-head section-head--on-dark">
-          <h2 className="h2">{title}</h2>
-          <p className="muted-on-dark">{subtitle}</p>
+          <h2 className="h2">{copy.title}</h2>
+          <p className="muted-on-dark">{copy.subtitle}</p>
         </div>
 
         <div className="grid-2">
           <Card className="accent-left" hoverable={false}>
-            <h3 className="h3">{locale === "fr" ? "Ce que vous obtenez" : "что вы получаете"}</h3>
+            <h3 className="h3">{copy.benefitsTitle}</h3>
             <ul className="list">
-              {points.map((p) => (
+              {copy.points.map((p) => (
                 <li key={p}>{p}</li>
               ))}
             </ul>
           </Card>
 
-          <Card className="quote-card" surface={false} role="note" aria-label="цитата">
+          <Card className="quote-card" surface={false} role="note" aria-label={copy.quoteAriaLabel}>
             <p className="quote-card__text">
-              {locale === "fr"
-                ? "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »"
-                : "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»"}
+              {copy.quoteText}
             </p>
-            <p className="quote-card__sign">ASSOCIATION IES</p>
+            <p className="quote-card__sign">{copy.quoteSignature}</p>
           </Card>
         </div>
       </Container>

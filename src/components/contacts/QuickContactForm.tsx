@@ -3,6 +3,7 @@
 
 import { useState, type FormEvent, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button/Button";
+import { quickContactFormCopy } from "@/content/actions";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
@@ -16,51 +17,8 @@ const EMAIL_TO = "contact@associationies.fr";
 
 // Эта форма работает без сервера: она проверяет поля и подготавливает текст письма для копирования.
 export function QuickContactForm({ locale, variant = "hero", prefillMessage }: QuickContactFormProps) {
-  const texts =
-    locale === "fr"
-      ? {
-          title: "Écrire à l’association",
-          helper:
-            "Avant de nous écrire, faites défiler vers le bas et choisissez la rubrique qui vous correspond — nous pourrons vous aider plus vite.",
-          nameLabel: "NOM ET PRÉNOM *",
-          emailLabel: "E-MAIL *",
-          messageLabel: "MESSAGE *",
-          namePlaceholder: "Votre nom et prénom",
-          emailPlaceholder: "Votre e-mail",
-          messagePlaceholder: "Décrivez votre situation (bref). Si vous avez des délais/courriers, précisez-les.",
-          button: variant === "page" ? "Envoyer le message" : "Envoyer",
-          hint: "Réponse par e-mail. Rendez-vous / accueil sur inscription.",
-          required: "Champ obligatoire",
-          invalidEmail: "Adresse e-mail invalide.",
-          openingGmail: "Message envoyé. Nous vous répondrons par e-mail.",
-          sendFailed: "Envoi impossible. Réessayez ou écrivez à contact@associationies.fr",
-          copyLetter: "Copier le texte du message",
-          copied: "Copié",
-          copyFailed: "Impossible de copier automatiquement",
-          openOutlook: "Ouvrir Outlook Web",
-        }
-      : {
-          title: "Написать в ассоциацию",
-          helper:
-            "Перед тем как написать, пролистайте ниже и выберите нужный раздел — так мы быстрее поможем.",
-          nameLabel: "ИМЯ *",
-          emailLabel: "E-MAIL *",
-          messageLabel: "СООБЩЕНИЕ *",
-          namePlaceholder: "Ваше имя",
-          emailPlaceholder: "Ваш e-mail",
-          messagePlaceholder:
-            "Опишите ситуацию (кратко). Если есть сроки или письмо — укажите это в тексте.",
-          button: variant === "page" ? "Отправить сообщение" : "Отправить",
-          hint: "Ответим по e-mail. Приём/встречи — по записи.",
-          required: "Обязательное поле",
-          invalidEmail: "Укажите корректный e-mail.",
-          openingGmail: "Сообщение отправлено. Мы ответим по e-mail.",
-          sendFailed: "Не удалось отправить. Попробуйте ещё раз или напишите на contact@associationies.fr",
-          copyLetter: "Скопировать текст письма",
-          copied: "Скопировано",
-          copyFailed: "Не удалось скопировать автоматически",
-          openOutlook: "Открыть Outlook Web",
-        };
+  const copy = quickContactFormCopy[locale];
+  const buttonLabel = copy.buttonLabel[variant];
 
   // Эти значения нужны, чтобы собрать текст письма и показать подсказки при ошибках.
   const [name, setName] = useState("");
@@ -100,18 +58,12 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     if (nameIsEmpty || emailIsEmpty || messageIsEmpty) return;
     if (!emailLooksValid) return;
 
-    const bodyLabels =
-      locale === "fr"
-        ? { name: "Nom", email: "E-mail", message: "Message" }
-        : { name: "Имя", email: "E-mail", message: "Сообщение" };
-
     const body =
-      `${bodyLabels.name}: ${name}\n` +
-      `${bodyLabels.email}: ${email}\n\n` +
-      `${bodyLabels.message}:\n${message}\n`;
+      `${copy.bodyLabels.name}: ${name}\n` +
+      `${copy.bodyLabels.email}: ${email}\n\n` +
+      `${copy.bodyLabels.message}:\n${message}\n`;
 
-    const subject =
-      locale === "fr" ? "Message depuis le site Association IES" : "Сообщение с сайта Association IES";
+    const subject = copy.subject;
 
     setPreparedBody(body);
     setPreparedSubject(subject);
@@ -125,7 +77,7 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
         `&body=${encodeURIComponent(body)}`;
 
       const opened = window.open(gmailComposeHref, "_blank", "noopener,noreferrer");
-      setStatusText(opened ? texts.openingGmail : texts.sendFailed);
+      setStatusText(opened ? copy.openingGmail : copy.sendFailed);
       setShowFollowUps(true);
 
       if (hideStatusTimerId) window.clearTimeout(hideStatusTimerId);
@@ -155,10 +107,10 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     try {
       const letterText = `To: ${EMAIL_TO}\nSubject: ${preparedSubject}\n\n${preparedBody}`;
       await navigator.clipboard.writeText(letterText);
-      setCopyStatus(texts.copied);
+      setCopyStatus(copy.copied);
       window.setTimeout(() => setCopyStatus(null), 1600);
     } catch {
-      setCopyStatus(texts.copyFailed);
+      setCopyStatus(copy.copyFailed);
       window.setTimeout(() => setCopyStatus(null), 2200);
     }
   }
@@ -180,69 +132,69 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
   return (
     <form className="form quickForm" onSubmit={handleSubmit} noValidate>
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
-      {variant === "hero" ? <h3 className="h3">{texts.title}</h3> : null}
+      {variant === "hero" ? <h3 className="h3">{copy.title}</h3> : null}
 
       {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
-      {variant === "hero" ? <p className="fineprint quickForm-helper">{texts.helper}</p> : null}
+      {variant === "hero" ? <p className="fineprint quickForm-helper">{copy.helper}</p> : null}
 
       <div className="form-grid">
         <label className="field">
-          <span>{texts.nameLabel}</span>
+          <span>{copy.nameLabel}</span>
           <input
             type="text"
-            placeholder={texts.namePlaceholder}
+            placeholder={copy.namePlaceholder}
             value={name}
             onChange={(e) => setName(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
             aria-invalid={showNameError ? true : undefined}
           />
           <div className="fineprint" style={errorTextStyle} aria-live="polite">
-            {showNameError ? texts.required : "\u00A0"}
+            {showNameError ? copy.required : "\u00A0"}
           </div>
         </label>
 
         <label className="field">
-          <span>{texts.emailLabel}</span>
+          <span>{copy.emailLabel}</span>
           <input
             type="text"
             inputMode="email"
             autoComplete="email"
-            placeholder={texts.emailPlaceholder}
+            placeholder={copy.emailPlaceholder}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
             aria-invalid={showEmailRequiredError || showEmailInvalidError ? true : undefined}
           />
           <div className="fineprint" style={errorTextStyle} aria-live="polite">
-            {showEmailRequiredError ? texts.required : showEmailInvalidError ? texts.invalidEmail : "\u00A0"}
+            {showEmailRequiredError ? copy.required : showEmailInvalidError ? copy.invalidEmail : "\u00A0"}
           </div>
         </label>
 
         <label className="field field--full">
-          <span>{texts.messageLabel}</span>
+          <span>{copy.messageLabel}</span>
           <textarea
             rows={5}
-            placeholder={texts.messagePlaceholder}
+            placeholder={copy.messagePlaceholder}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, message: true }))}
             aria-invalid={showMessageError ? true : undefined}
           />
           <div className="fineprint" style={errorTextStyle} aria-live="polite">
-            {showMessageError ? texts.required : "\u00A0"}
+            {showMessageError ? copy.required : "\u00A0"}
           </div>
         </label>
       </div>
 
       {/* Кнопка отправки: по нажатию проверяем поля и открываем письмо в почте (в зависимости от варианта формы). */}
       <div className={variant === "hero" ? "quickForm-submitRow quickForm-submitRow--hero" : "quickForm-submitRow"}>
-        <Button variant="primary" type="submit">
-          {texts.button}
+        <Button variant="primary" type="submit" className="contact-cta-button">
+          {buttonLabel}
         </Button>
       </div>
 
       {/* Подсказка под формой: в Hero оставляем, а на странице /contact она уже есть в тексте страницы. */}
-      {variant === "hero" ? <p className="fineprint">{texts.hint}</p> : null}
+      {variant === "hero" ? <p className="fineprint">{copy.hint}</p> : null}
 
       {/* На странице контактов показываем маленький статус и компактные запасные варианты после отправки. */}
       {variant === "page" ? (
@@ -256,10 +208,10 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
           {showFollowUps && preparedBody && preparedSubject ? (
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 8, alignItems: "center" }}>
               <a className="btn btn--pill btn--outline-blue btn--sm" href={outlookComposeHref} target="_blank" rel="noreferrer">
-                {texts.openOutlook}
+                {copy.openOutlook}
               </a>
               <button type="button" className="btn btn--pill btn--outline-blue btn--sm" onClick={handleCopyLetter}>
-                {texts.copyLetter}
+                {copy.copyLetter}
               </button>
               {copyStatus ? (
                 <span className="fineprint" style={{ opacity: 0.85 }}>

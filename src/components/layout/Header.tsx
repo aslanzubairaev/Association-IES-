@@ -10,6 +10,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Container } from "@/components/ui/Container";
+import { headerCopy } from "@/content/actions";
 
 type HeaderProps = {
   locale: "ru" | "fr";
@@ -31,22 +32,7 @@ export function Header({ locale }: HeaderProps) {
   const langMenuMobileId = useId();
   const [currentHash, setCurrentHash] = useState("");
 
-  const labels =
-    locale === "fr"
-      ? {
-          about: "À propos",
-          aide: "Aide",
-          actions: "Actions",
-          soutenir: "Soutenir",
-          contact: "Contact",
-        }
-      : {
-          about: "О нас",
-          aide: "Чем помогаем",
-          actions: "Действия",
-          soutenir: "Поддержать",
-          contact: "Контакты",
-        };
+  const copy = headerCopy[locale];
 
   const searchParams = useSearchParams();
 
@@ -116,47 +102,47 @@ export function Header({ locale }: HeaderProps) {
     <header className="site-header siteHeader">
       <Container>
         <div className="header-inner">
-          <a className="brand" href={`/${locale}#top`} aria-label="Association IES">
+          <a className="brand" href={`/${locale}#top`} aria-label={copy.brandLabel}>
             <span className="brand-mark" aria-hidden="true" />
-            <span className="brand-name">Association IES</span>
+            <span className="brand-name">{copy.brandName}</span>
           </a>
 
           {/* Меню для больших экранов: на мобильных оно скрыто, вместо него показывается бургер. */}
-          <nav className="nav header-nav-desktop" aria-label="Меню сайта">
+          <nav className="nav header-nav-desktop" aria-label={copy.navAriaLabel}>
             <Link
               href={`/${locale}/about`}
               aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
             >
-              {labels.about}
+              {copy.navLabels.about}
             </Link>
             <Link
               href={`/${locale}/aide`}
               aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}
             >
-              {labels.aide}
+              {copy.navLabels.aide}
             </Link>
             <Link
               href={`/${locale}/actions`}
               aria-current={isActive(`/${locale}/actions`) ? "page" : undefined}
             >
-              {labels.actions}
+              {copy.navLabels.actions}
             </Link>
             <Link
               href={`/${locale}/soutenir`}
               aria-current={isActive(`/${locale}/soutenir`) ? "page" : undefined}
             >
-              {labels.soutenir}
+              {copy.navLabels.soutenir}
             </Link>
             <Link
               href={`/${locale}/contact`}
               aria-current={isActive(`/${locale}/contact`) ? "page" : undefined}
             >
-              {labels.contact}
+              {copy.navLabels.contact}
             </Link>
           </nav>
 
           {/* Переключатель языка для больших экранов: одна кнопка с выпадающим меню. */}
-          <div className="header-cta header-cta-desktop header-lang" aria-label="Переключатель языка">
+          <div className="header-cta header-cta-desktop header-lang" aria-label={copy.langSwitcherAriaLabel}>
             <button
               type="button"
               className="btn btn--pill btn--outline-white lang-toggle"
@@ -169,39 +155,31 @@ export function Header({ locale }: HeaderProps) {
 
             {isLangMenuOpen ? (
               <div className="lang-menu" id={langMenuDesktopId} role="menu">
-                <Link
-                  className="lang-menu-item"
-                  href={resolveLocalePath("fr")}
-                  role="menuitem"
-                  aria-current={locale === "fr" ? "page" : undefined}
-                  scroll={false}
-                  onClick={() => setIsLangMenuOpen(false)}
-                >
-                  <span className="lang-menu-code">FR</span>
-                  <span className="lang-menu-name">Français</span>
-                </Link>
-                <Link
-                  className="lang-menu-item"
-                  href={resolveLocalePath("ru")}
-                  role="menuitem"
-                  aria-current={locale === "ru" ? "page" : undefined}
-                  scroll={false}
-                  onClick={() => setIsLangMenuOpen(false)}
-                >
-                  <span className="lang-menu-code">RU</span>
-                  <span className="lang-menu-name">Русский</span>
-                </Link>
+                {copy.langMenuItems.map((item) => (
+                  <Link
+                    key={item.locale}
+                    className="lang-menu-item"
+                    href={resolveLocalePath(item.locale)}
+                    role="menuitem"
+                    aria-current={locale === item.locale ? "page" : undefined}
+                    scroll={false}
+                    onClick={() => setIsLangMenuOpen(false)}
+                  >
+                    <span className="lang-menu-code">{item.code}</span>
+                    <span className="lang-menu-name">{item.name}</span>
+                  </Link>
+                ))}
               </div>
             ) : null}
           </div>
 
           {/* Блок управления для мобильных: бургер и переключатель языка. */}
-          <div className="header-mobile-controls" aria-label="Меню и язык для мобильной версии">
+          <div className="header-mobile-controls" aria-label={copy.mobileControlsAriaLabel}>
             {/* Кнопка “бургер”: открывает и закрывает список страниц. */}
             <button
               type="button"
               className="burger-button"
-              aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
+              aria-label={isMobileMenuOpen ? copy.burgerCloseLabel : copy.burgerOpenLabel}
               aria-expanded={isMobileMenuOpen}
               aria-controls={mobileMenuId}
               onClick={toggleMobileMenu}
@@ -214,44 +192,34 @@ export function Header({ locale }: HeaderProps) {
             </button>
 
             {/* Быстрая кнопка смены языка рядом с бургером. */}
-            <div className="header-lang" aria-label="Переключатель языка">
+            <div className="header-lang" aria-label={copy.langSwitcherAriaLabel}>
               <button
                 type="button"
                 className="lang-pill lang-pill--active lang-toggle"
                 aria-expanded={isLangMenuOpen}
                 aria-controls={langMenuMobileId}
                 onClick={toggleLangMenu}
-                aria-label={
-                  locale === "fr" ? "Changer de langue" : "Переключить язык"
-                }
+                aria-label={copy.langToggleAriaLabel}
               >
                 {locale.toUpperCase()}
               </button>
 
               {isLangMenuOpen ? (
                 <div className="lang-menu" id={langMenuMobileId} role="menu">
-                  <Link
-                    className="lang-menu-item"
-                    href={resolveLocalePath("fr")}
-                    role="menuitem"
-                    aria-current={locale === "fr" ? "page" : undefined}
-                    scroll={false}
-                    onClick={() => setIsLangMenuOpen(false)}
-                  >
-                    <span className="lang-menu-code">FR</span>
-                    <span className="lang-menu-name">Français</span>
-                  </Link>
-                  <Link
-                    className="lang-menu-item"
-                    href={resolveLocalePath("ru")}
-                    role="menuitem"
-                    aria-current={locale === "ru" ? "page" : undefined}
-                    scroll={false}
-                    onClick={() => setIsLangMenuOpen(false)}
-                  >
-                    <span className="lang-menu-code">RU</span>
-                    <span className="lang-menu-name">Русский</span>
-                  </Link>
+                  {copy.langMenuItems.map((item) => (
+                    <Link
+                      key={item.locale}
+                      className="lang-menu-item"
+                      href={resolveLocalePath(item.locale)}
+                      role="menuitem"
+                      aria-current={locale === item.locale ? "page" : undefined}
+                      scroll={false}
+                      onClick={() => setIsLangMenuOpen(false)}
+                    >
+                      <span className="lang-menu-code">{item.code}</span>
+                      <span className="lang-menu-name">{item.name}</span>
+                    </Link>
+                  ))}
                 </div>
               ) : null}
             </div>
@@ -271,52 +239,52 @@ export function Header({ locale }: HeaderProps) {
         >
           <div className="mobile-menu-panel" id={mobileMenuId} role="dialog" aria-modal="true">
             <div className="mobile-menu-head">
-              <div className="mobile-menu-title">{locale === "fr" ? "Menu" : "Меню"}</div>
+              <div className="mobile-menu-title">{copy.mobileMenuTitle}</div>
               <button
                 type="button"
                 className="mobile-menu-close"
-                aria-label={locale === "fr" ? "Fermer" : "Закрыть"}
+                aria-label={copy.mobileMenuCloseLabel}
                 onClick={closeMobileMenu}
               >
                 ×
               </button>
             </div>
 
-            <nav className="mobile-menu-links" aria-label={locale === "fr" ? "Navigation" : "Навигация"}>
+            <nav className="mobile-menu-links" aria-label={copy.mobileNavAriaLabel}>
               <Link
                 href={`/${locale}/about`}
                 aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
                 onClick={closeMobileMenu}
               >
-                {labels.about}
+                {copy.navLabels.about}
               </Link>
               <Link
                 href={`/${locale}/aide`}
                 aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}
                 onClick={closeMobileMenu}
               >
-                {labels.aide}
+                {copy.navLabels.aide}
               </Link>
               <Link
                 href={`/${locale}/actions`}
                 aria-current={isActive(`/${locale}/actions`) ? "page" : undefined}
                 onClick={closeMobileMenu}
               >
-                {labels.actions}
+                {copy.navLabels.actions}
               </Link>
               <Link
                 href={`/${locale}/soutenir`}
                 aria-current={isActive(`/${locale}/soutenir`) ? "page" : undefined}
                 onClick={closeMobileMenu}
               >
-                {labels.soutenir}
+                {copy.navLabels.soutenir}
               </Link>
               <Link
                 href={`/${locale}/contact`}
                 aria-current={isActive(`/${locale}/contact`) ? "page" : undefined}
                 onClick={closeMobileMenu}
               >
-                {labels.contact}
+                {copy.navLabels.contact}
               </Link>
             </nav>
           </div>

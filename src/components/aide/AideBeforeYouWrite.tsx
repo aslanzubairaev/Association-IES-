@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Перед тем как написать / Avant d’écrire” и показывает чек-лист, что добавить в сообщение. */
 
 import { Container } from "@/components/ui/Container";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideBeforeYouWriteProps = {
   locale: "ru" | "fr";
@@ -25,8 +25,8 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
         </div>
 
         {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}
-        <div className="card card--paper">
-          <ul className="list" style={{ marginTop: 0 }}>
+        <div className="card card--paper aide-card aide-card--wide">
+          <ul className="list">
             {copy.items.map((item) => (
               <li key={item}>{item}</li>
             ))}

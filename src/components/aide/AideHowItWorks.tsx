@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Как это работает / Comment ça marche” и показывает 3 шага после сообщения. */
 
 import { Container } from "@/components/ui/Container";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideHowItWorksProps = {
   locale: "ru" | "fr";
@@ -25,9 +25,9 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
         </div>
 
         {/* Список шагов: карточки одинакового размера, на мобильном складываются в 1 колонку. */}
-        <div className="cards-grid" aria-label={copy.title}>
+        <div className="cards-grid aide-steps-grid" aria-label={copy.title}>
           {copy.steps.map((step, idx) => (
-            <article key={step.title} className="card card--paper accent-left accent--blue">
+            <article key={step.title} className="card card--paper aide-card aide-card--step accent-left accent--blue">
               {/* Заголовок карточки: “Шаг 1/2/3 …” или “Étape 1/2/3 …”, без дополнительных значков. */}
               <h3 className="h3 h3--blue">{step.title}</h3>
 

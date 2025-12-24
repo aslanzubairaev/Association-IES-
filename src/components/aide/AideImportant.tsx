@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Важно знать / À savoir” и показывает 3 пункта ожиданий про ответ по e-mail и запись. */
 
 import { Container } from "@/components/ui/Container";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideImportantProps = {
   locale: "ru" | "fr";
@@ -22,8 +22,8 @@ export function AideImportant({ locale }: AideImportantProps) {
         </div>
 
         {/* Список ожиданий: короткие пункты, без длинных абзацев. */}
-        <div className="card card--paper">
-          <ul className="list" style={{ marginTop: 0 }}>
+        <div className="card card--paper aide-card aide-card--wide">
+          <ul className="list">
             {copy.items.map((item) => (
               <li key={item}>{item}</li>
             ))}

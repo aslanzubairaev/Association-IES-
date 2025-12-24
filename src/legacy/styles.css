@@ -375,42 +375,51 @@
     line-height: 1.6;
   }
 
-  /* --- Text contrast only for needs + actions-short cards --- */
+  /* --- Text contrast only for needs + trust + actions-short cards --- */
   .needs-block .card,
   .needs-block .link-card,
+  .trust-block .card,
   .actions-short-block .card,
   .actions-short-block .link-card{
-    color: var(--text-primary);
+    color: var(--card-body-color);
   }
 
   .needs-block .card h3,
   .needs-block .card .h3,
   .needs-block .link-card h3,
   .needs-block .link-card .h3,
+  .trust-block .card h3,
+  .trust-block .card .h3,
   .actions-short-block .card h3,
   .actions-short-block .link-card h3{
-    color: var(--text-primary);
+    color: var(--card-title-color);
     font-weight: 700;
+    text-shadow: var(--card-text-shadow);
   }
 
   .needs-block .card p,
   .needs-block .card li,
   .needs-block .link-card p,
   .needs-block .link-card li,
+  .trust-block .card p,
+  .trust-block .card li,
   .actions-short-block .card p,
   .actions-short-block .card li,
   .actions-short-block .link-card p,
   .actions-short-block .link-card li{
-    color: var(--text-muted);
+    color: var(--card-body-color);
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1.55;
+    text-shadow: var(--card-text-shadow);
   }
 
   .needs-block .card .muted,
   .needs-block .link-card .muted,
+  .trust-block .card .muted,
   .actions-short-block .card .muted,
   .actions-short-block .link-card .muted{
-    color: var(--text-muted);
+    color: var(--card-muted-color);
+    text-shadow: var(--card-text-shadow);
   }
 
   .needs-block .btn,
@@ -434,18 +443,9 @@
   .needs-block .card .h3,
   .needs-block .link-card h3,
   .needs-block .link-card .h3{
-    color: #f3f5ff;
-    font-weight: 700;
     text-transform: none;
     letter-spacing: 0.2px;
     font-size: 20px;
-  }
-
-  .needs-block .card p,
-  .needs-block .link-card p{
-    color: var(--text-muted);
-    font-weight: 500;
-    line-height: 1.6;
   }
 
   .needs-block .btn{
@@ -461,12 +461,16 @@
   }
 
   .actions-short-block .card-list{
-    color: var(--text-primary);
+    color: var(--card-body-color);
     letter-spacing: 0.2px;
   }
 
   .actions-short-block .card-list .bullet-list li{
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 10px 0;
+    text-shadow: var(--card-text-shadow);
   }
 
   .actions-short-block .card-list .bullet-list li::before{
@@ -481,13 +485,15 @@
 
   .actions-short-block .card-summary .h3,
   .actions-short-block .card-summary h3{
-    color: var(--text-primary);
+    color: var(--card-title-color);
     font-weight: 700;
+    text-shadow: var(--card-text-shadow);
   }
 
   .actions-short-block .card-summary .p,
   .actions-short-block .card-summary p{
-    color: var(--text-muted);
+    color: var(--card-body-color);
+    text-shadow: var(--card-text-shadow);
   }
 
   .actions-short-block .card-summary .btn:hover{
@@ -756,7 +762,8 @@
     margin: 0;
     font-size: 16px;
     line-height: 1.6;
-    color: rgba(255,255,255,0.95);
+    color: var(--card-body-color);
+    text-shadow: var(--card-text-shadow);
   }
 
   .quote-card__sign{
@@ -766,7 +773,8 @@
     letter-spacing: .02em;
     text-transform: uppercase;
     font-size: 12px;
-    color: rgba(255,255,255,0.9);
+    color: var(--card-muted-color);
+    text-shadow: var(--card-text-shadow);
   }
 
   
@@ -815,6 +823,16 @@
     font-weight: 500;
   }
   .card--paper .list{ color: rgba(11,27,51,.84); }
+
+  .trust-block .list{
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .trust-block .list li{
+    margin: 10px 0;
+    line-height: 1.6;
+  }
   
   .focus{
     margin-top: 14px;

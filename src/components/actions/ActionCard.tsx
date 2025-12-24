@@ -41,14 +41,14 @@ export function ActionCard(props: ActionCardProps) {
     const { title, items, ctaLabel, href } = props;
 
     return (
-      <article className="card card--paper accent-left accent--blue actions-card" style={{ display: "flex", flexDirection: "column" }}>
+      <article className="card card--paper accent-left accent--blue actions-card actions-card--stack">
         {/* Заголовок инфо‑карточки: помогает быстро понять, что это “правила участия”. */}
         <h3 className="h3 h3--blue">{title}</h3>
 
         {/* Список пунктов: делаем небольшой отступ между строками, чтобы текст читался легче. */}
-        <ul className="list" style={{ marginTop: 10 }}>
-          {items.map((item, idx) => (
-            <li key={item} style={{ marginTop: idx === 0 ? 0 : 10 }}>
+        <ul className="list actions-card-list">
+          {items.map((item) => (
+            <li key={item}>
               {item}
             </li>
           ))}
@@ -56,13 +56,13 @@ export function ActionCard(props: ActionCardProps) {
 
         {/* Ссылка на контакты: опционально, чтобы не плодить CTA. */}
         {ctaLabel && href ? (
-          <div style={{ marginTop: "auto", paddingTop: 14 }}>
-            <Link className="btn btn--pill btn--outline-blue" href={href}>
+          <div className="actions-card-cta">
+            <Link className="btn btn--pill actions-card-button" href={href}>
               {ctaLabel}
             </Link>
           </div>
         ) : (
-          <div style={{ marginTop: "auto" }} />
+          <div className="actions-card-cta" />
         )}
       </article>
     );
@@ -83,33 +83,36 @@ export function ActionCard(props: ActionCardProps) {
   } = props;
 
   return (
-    <article className="card card--paper accent-left accent--blue actions-card" style={{ display: "flex", flexDirection: "column" }}>
+    <article className="card card--paper accent-left accent--blue actions-card actions-card--stack">
       {/* Название направления: главный ориентир в карточке. */}
       <h3 className="h3 h3--blue">{title}</h3>
 
       {/* “Для кого”: одна строка, чтобы быстро оценить, подходит ли это направление. */}
-      <p className="p" style={{ marginTop: 10 }}>
-        <b>{forWhoLabel}:</b> {forWho}
+      <p className="p actions-card-row">
+        <span className="actions-card-label">{forWhoLabel}:</span>{" "}
+        <span className="actions-card-value">{forWho}</span>
       </p>
 
       {/* “Что даёт”: одна строка, без обещаний — только нейтральное описание результата. */}
-      <p className="p" style={{ marginTop: 10 }}>
-        <b>{benefitLabel}:</b> {benefit}
+      <p className="p actions-card-row">
+        <span className="actions-card-label">{benefitLabel}:</span>{" "}
+        <span className="actions-card-value">{benefit}</span>
       </p>
 
       {/* “Формат/частота”: помогает понять, регулярное ли это направление или событийное. */}
-      <p className="p" style={{ marginTop: 10 }}>
-        <b>{frequencyLabel}:</b> {frequency}
+      <p className="p actions-card-row">
+        <span className="actions-card-label">{frequencyLabel}:</span>{" "}
+        <span className="actions-card-value">{frequency}</span>
       </p>
 
       {/* “Когда/где”: на этой странице всегда без общего адреса/графика — уточняется при записи. */}
-      <p className="actions-card-meta" style={{ marginTop: 10 }}>
+      <p className="actions-card-meta">
         <span className="actions-card-meta-label">{whenWhereLabel}</span> {whenWhereText}
       </p>
 
       {/* Кнопка записи: ведёт на страницу контактов, без телефонов и личных контактов. */}
-      <div style={{ marginTop: "auto", paddingTop: 14 }}>
-        <Link className="btn btn--pill btn--outline-blue" href={href}>
+      <div className="actions-card-cta">
+        <Link className="btn btn--pill actions-card-button" href={href}>
           {ctaLabel}
         </Link>
       </div>
