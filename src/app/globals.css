@@ -1097,6 +1097,7 @@ a {
   margin-top: auto;
   padding-top: 12px;
   display: flex;
+  justify-content: center;
 }
 
 .aide-page .aide-cta .btn {
