@@ -10,7 +10,7 @@ export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }
   const locale = params.locale;
 
   return (
-    <main className="page--purple">
+    <main className="page--purple aide-page">
       {/* Верхний блок: объясняет, чем мы помогаем и как написать нам (форма = письмо на e-mail). */}
       <AideHero locale={locale} />
 

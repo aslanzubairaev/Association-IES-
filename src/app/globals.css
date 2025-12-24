@@ -932,6 +932,118 @@ a {
   color: rgba(255, 255, 255, 0.82) !important;
 }
 
+.aide-page .aide-card {
+  padding: 30px;
+}
+
+.aide-page .aide-card .h3,
+.aide-page .aide-card .h3--blue {
+  color: var(--card-title-color);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aide-page .aide-card .p {
+  margin: 10px 0 0;
+  color: var(--card-body-color);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aide-page .aide-card .list {
+  margin-top: 12px;
+  color: var(--card-body-color);
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aide-page .aide-card .list li {
+  margin: 10px 0;
+  color: var(--card-body-color);
+  text-shadow: var(--card-text-shadow);
+}
+
+.aide-page .aide-card .list li::marker {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.aide-page .aide-card .fineprint,
+.aide-page .aide-card .aide-fineprint {
+  margin-top: 12px;
+  color: var(--card-muted-color) !important;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.55;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aide-topics-grid,
+.aide-steps-grid {
+  align-items: stretch;
+}
+
+.aide-topics-grid > * {
+  height: 100%;
+}
+
+.aide-page .aide-card--topic {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.aide-page .aide-cta {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+}
+
+.aide-page .aide-cta .btn {
+  height: 44px;
+  min-height: 44px;
+  padding: 0 22px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.aide-page .aide-cta .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
+}
+
+.aide-page .aide-cta .btn:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
+}
+
+.aide-page .aide-card--wide {
+  padding: 34px;
+}
+
+.aide-page .aide-card--wide .list {
+  margin-top: 0;
+  line-height: 1.65;
+}
+
+.aide-page .aide-card--wide .list li {
+  margin: 12px 0;
+  line-height: 1.65;
+}
+
+@media (max-width: 520px) {
+  .aide-page .aide-cta {
+    width: 100%;
+  }
+
+  .aide-page .aide-cta .btn {
+    width: 100%;
+  }
+}
+
 /* Левая карточка на странице “Контакты”: такой же фон, как у quickNav. */
 .contact-card.card--paper {
   background: var(--surface);

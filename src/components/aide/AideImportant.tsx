@@ -22,8 +22,8 @@ export function AideImportant({ locale }: AideImportantProps) {
         </div>
 
         {/* Список ожиданий: короткие пункты, без длинных абзацев. */}
-        <div className="card card--paper aide-card">
-          <ul className="list" style={{ marginTop: 0 }}>
+        <div className="card card--paper aide-card aide-card--wide">
+          <ul className="list">
             {copy.items.map((item) => (
               <li key={item}>{item}</li>
             ))}

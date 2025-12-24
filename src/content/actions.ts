@@ -449,7 +449,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       title: "Частые темы",
       subtitle: "Выберите тему — так мы быстрее поймём запрос.",
       preparePrefix: "Что подготовить:",
-      chooseLabel: "Выбрать тему",
+      chooseLabel: "ЗАПИСАТЬСЯ",
       items: [
         {
           topicParam: "prefecture-vnz",
@@ -548,7 +548,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       title: "Thèmes fréquents",
       subtitle: "Choisissez un thème — nous comprendrons plus vite votre demande.",
       preparePrefix: "À préparer :",
-      chooseLabel: "Choisir le thème",
+      chooseLabel: "S’INSCRIRE",
       items: [
         {
           topicParam: "prefecture-vnz",
