@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { ContactEmailBox } from "@/components/contacts/ContactEmailBox";
 import { contactCopy, contactTopicLabels, getActionTopicLabels } from "@/content/actions";
+import styles from "./page.module.css";
 
 export default function ContactPage({
   params,
@@ -40,6 +41,10 @@ export default function ContactPage({
   const pageLead = contactCopy[locale].pageLead;
   const whenTitle = contactCopy[locale].whenTitle;
   const whenItems = contactCopy[locale].whenItems;
+  const helperTextRu =
+    "Пожалуйста, опишите ситуацию подробно — с датами, шагами и тем, что уже сделано. Так мы ответим быстрее.";
+  const helperTextFr =
+    "Merci de décrire la situation en détail — avec dates, étapes et ce qui a déjà été fait. Cela nous aide à répondre plus vite.";
 
   return (
     <main className="section section--purple">
@@ -70,6 +75,7 @@ export default function ContactPage({
           <div className="card card--paper contact-card contact-card--yellow">
             {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
             <div style={{ maxWidth: 720, margin: "0 auto" }}>
+              <p className={styles.formNote}>{locale === "ru" ? helperTextRu : helperTextFr}</p>
               <QuickContactForm locale={locale} variant="page" prefillMessage={prefillMessage} />
             </div>
           </div>

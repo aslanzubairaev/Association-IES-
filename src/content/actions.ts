@@ -1051,7 +1051,7 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
     messageLabel: "MESSAGE *",
     namePlaceholder: "Votre nom et prénom",
     emailPlaceholder: "Votre e-mail",
-    messagePlaceholder: "Décrivez votre situation (bref). Si vous avez des délais/courriers, précisez-les.",
+    messagePlaceholder: "Décrivez votre situation (en détail). Si vous avez des délais/courriers, précisez-les.",
     buttonLabel: { hero: "Envoyer", page: "Envoyer le message" },
     hint: "Réponse par e-mail. Rendez-vous / accueil sur inscription.",
     required: "Champ obligatoire",
@@ -1073,7 +1073,7 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
     messageLabel: "СООБЩЕНИЕ *",
     namePlaceholder: "Ваше имя",
     emailPlaceholder: "Ваш e-mail",
-    messagePlaceholder: "Опишите ситуацию (кратко). Если есть сроки или письмо — укажите это в тексте.",
+    messagePlaceholder: "Опишите ситуацию (подробно). Если есть сроки или письмо — укажите это в тексте.",
     buttonLabel: { hero: "Отправить", page: "Отправить сообщение" },
     hint: "Ответим по e-mail. Приём/встречи — по записи.",
     required: "Обязательное поле",
@@ -1103,15 +1103,14 @@ export const contactEmailBoxCopy: Record<ActionsLocale, ContactEmailBoxCopy> = {
     copyLabel: "Copier l’e-mail",
     copiedLabel: "Copié",
     failedLabel: "Impossible de copier automatiquement",
-    helperText:
-      "Idéalement, décrivez la situation en 2–3 phrases et joignez une photo/scan du courrier (si possible).",
+    helperText: "",
   },
   ru: {
     emailLabel: "E-mail",
     copyLabel: "Скопировать e-mail",
     copiedLabel: "Скопировано",
     failedLabel: "Не удалось скопировать автоматически",
-    helperText: "Лучше писать с кратким описанием ситуации и приложить фото/скан письма (если есть).",
+    helperText: "",
   },
 };
 
