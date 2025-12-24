@@ -59,7 +59,7 @@ export default function ContactPage({
         </div>
 
         <div className="grid-2 contact-grid">
-          <div className="card card--paper contact-card accent-left accent--blue">
+          <div className="card card--paper contact-card contact-card--info accent-left accent--blue">
             {/* Общий e-mail ассоциации: без личных телефонов и персональных контактов. */}
             <ContactEmailBox locale={locale} email={email} />
 
@@ -72,7 +72,7 @@ export default function ContactPage({
             </ul>
           </div>
 
-          <div className="card card--paper contact-card contact-card--yellow">
+          <div className="card card--paper contact-card contact-card--yellow contact-card--form">
             {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
             <div className="contact-form-wrap">
               <p className={styles.formNote}>{locale === "ru" ? helperTextRu : helperTextFr}</p>

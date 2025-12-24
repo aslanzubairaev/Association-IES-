@@ -1241,6 +1241,16 @@ a {
   padding: 30px;
 }
 
+@media (max-width: 520px) {
+  .contact-page .contact-card--form {
+    order: 1;
+  }
+
+  .contact-page .contact-card--info {
+    order: 2;
+  }
+}
+
 .contact-page .contact-form-wrap {
   max-width: 720px;
   margin: 0 auto;
