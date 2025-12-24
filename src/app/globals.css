@@ -208,6 +208,7 @@ a {
     align-items: center;
     gap: 12px;
   }
+
 }
 
 /* Кнопка “бургер”: три аккуратные линии. */
@@ -632,6 +633,18 @@ a {
   margin-top: 32px;
 }
 
+.hero-left .hero-actions .hero-button {
+  text-decoration: none;
+}
+
+.hero-left .hero-actions .hero-button:hover {
+  transform: translateY(-2px);
+}
+
+.hero-left .hero-actions .hero-button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
 .hero-left .hero-actions .btn.btn--outline-white:hover {
   background: rgba(255, 255, 255, 0.10);
   border-color: rgba(255, 255, 255, 0.45);
@@ -673,8 +686,12 @@ a {
     gap: 10px;
   }
 
+  .hero-section .h1 {
+    margin-top: 0;
+  }
+
   .hero-left .hero-lead {
-    margin-top: 26px;
+    margin-top: 37px;
   }
 
   .hero-left .hero-actions .hero-button {
@@ -723,10 +740,27 @@ a {
   border-radius: 12px;
   display: grid;
   place-items: center;
-  background: rgba(15, 82, 166, 0.10);
-  border: 1px solid rgba(11, 27, 51, 0.10);
-  color: rgba(11, 27, 51, 0.88);
+  background: radial-gradient(circle at 30% 30%, #feda75 0%, #fa7e1e 35%, #d62976 65%, #962fbf 82%, #4f5bd5 100%);
+  border: 1px solid rgba(11, 27, 51, 0.12);
+  color: #ffffff;
   flex: 0 0 auto;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.instagramBadge-link:hover .instagramBadge-icon,
+.instagramBadge-link:focus-visible .instagramBadge-icon {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 22px rgba(16, 24, 40, 0.18);
+}
+
+.instagramBadge-link:active .instagramBadge-icon {
+  transform: translateY(1px) scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .instagramBadge-icon {
+    transition: none;
+  }
 }
 
 .instagramBadge-text {
@@ -843,6 +877,8 @@ a {
 .actions-page .actions-card-button {
   height: 44px;
   min-height: 44px;
+  width: 100%;
+  max-width: 260px;
   padding: 0 22px;
   border-radius: 999px;
   font-weight: 800;
@@ -850,6 +886,7 @@ a {
   background: rgba(15, 82, 166, 0.38);
   border: 1.5px solid rgba(255, 255, 255, 0.26);
   color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 10px 20px rgba(7, 12, 40, 0.22);
 }
 
 .actions-page .actions-card-button:hover {
@@ -996,11 +1033,17 @@ a {
   letter-spacing: 0.02em;
   flex: 1 1 0;
   justify-content: center;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .about-page .about-cta .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
+}
+
+.about-page .about-cta .btn:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .about-page .about-cta .btn:focus-visible {
@@ -1087,6 +1130,10 @@ a {
   height: 100%;
 }
 
+.aide-topics-section {
+  padding-top: 56px;
+}
+
 .aide-page .aide-card--topic {
   display: flex;
   flex-direction: column;
@@ -1097,19 +1144,30 @@ a {
   margin-top: auto;
   padding-top: 12px;
   display: flex;
+  justify-content: center;
 }
 
 .aide-page .aide-cta .btn {
-  height: 44px;
-  min-height: 44px;
-  padding: 0 22px;
+  padding: 12px 18px;
   font-weight: 800;
   letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .aide-page .aide-cta .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
+}
+
+.aide-page .aide-cta .btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+@media (max-width: 520px) {
+  .aide-topics-section {
+    padding-top: 32px;
+  }
 }
 
 .aide-page .aide-cta .btn:focus-visible {
@@ -1184,6 +1242,16 @@ a {
   padding: 30px;
 }
 
+@media (max-width: 520px) {
+  .contact-page .contact-card--form {
+    order: 1;
+  }
+
+  .contact-page .contact-card--info {
+    order: 2;
+  }
+}
+
 .contact-page .contact-form-wrap {
   max-width: 720px;
   margin: 0 auto;
@@ -1243,6 +1311,8 @@ a {
   background: var(--btn-primary-bg);
   border: 1.5px solid var(--btn-primary-border);
   color: var(--btn-primary-text);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
 }
 
 .contact-page .contact-cta-button:hover {
@@ -1250,6 +1320,10 @@ a {
   border-color: var(--btn-primary-border);
   box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
   transform: translateY(-2px);
+}
+
+.contact-page .contact-cta-button:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .contact-page .contact-cta-button:focus-visible {
@@ -1369,6 +1443,8 @@ a {
 .support-page .support-cta-button {
   height: 44px;
   min-height: 44px;
+  width: 100%;
+  max-width: 260px;
   padding: 0 22px;
   border-radius: 999px;
   font-weight: 800;
@@ -1403,6 +1479,12 @@ a {
 
 .support-page .support-important {
   margin-top: 16px;
+}
+
+@media (max-width: 520px) {
+  .support-donate-section {
+    padding-top: 32px;
+  }
 }
 
 /* Карточки в фиолетовой секции “Волонтёрство”: лёгкий лавандовый тон, чтобы сочеталось с фоном. */
@@ -1507,7 +1589,8 @@ a {
 
 .support-page .bank-transfer-actions {
   margin-top: 12px;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
   align-items: flex-start;
   flex-wrap: nowrap;
 }
@@ -1520,11 +1603,13 @@ a {
 
 @media (max-width: 520px) {
   .support-page .bank-transfer-actions {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    gap: 10px;
   }
 
   .support-page .bank-transfer-actions .support-cta-button {
-    width: 100%;
+    width: auto;
+    flex: 1 1 0;
   }
 }
 

@@ -8,7 +8,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { headerCopy } from "@/content/actions";
 
@@ -30,6 +30,8 @@ export function Header({ locale }: HeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const langMenuDesktopId = useId();
   const langMenuMobileId = useId();
+  const langDesktopRef = useRef<HTMLDivElement | null>(null);
+  const langMobileRef = useRef<HTMLDivElement | null>(null);
   const [currentHash, setCurrentHash] = useState("");
 
   const copy = headerCopy[locale];
@@ -84,9 +86,41 @@ export function Header({ locale }: HeaderProps) {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  useEffect(() => {
+    if (!isLangMenuOpen) {
+      return undefined;
+    }
+
+    function handlePointerDown(event: MouseEvent | TouchEvent) {
+      const target = event.target as Node | null;
+      if (!target) {
+        return;
+      }
+
+      if (langDesktopRef.current?.contains(target) || langMobileRef.current?.contains(target)) {
+        return;
+      }
+
+      setIsLangMenuOpen(false);
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
+  }, [isLangMenuOpen]);
+
   // Действие по нажатию на “бургер”: открыть или закрыть мобильное меню.
   function toggleMobileMenu() {
-    setIsMobileMenuOpen((current) => !current);
+    setIsMobileMenuOpen((current) => {
+      const next = !current;
+      if (next) {
+        setIsLangMenuOpen(false);
+      }
+      return next;
+    });
   }
 
   // Действие по нажатию на затемнение вокруг меню: закрыть меню.
@@ -95,11 +129,21 @@ export function Header({ locale }: HeaderProps) {
   }
 
   function toggleLangMenu() {
-    setIsLangMenuOpen((current) => !current);
+    setIsLangMenuOpen((current) => {
+      const next = !current;
+      if (next) {
+        setIsMobileMenuOpen(false);
+      }
+      return next;
+    });
   }
 
   return (
-    <header className="site-header siteHeader">
+    <header
+      className="site-header siteHeader"
+      data-mobile-menu-open={isMobileMenuOpen ? "true" : "false"}
+      data-lang-menu-open={isLangMenuOpen ? "true" : "false"}
+    >
       <Container>
         <div className="header-inner">
           <a className="brand" href={`/${locale}#top`} aria-label={copy.brandLabel}>
@@ -142,7 +186,11 @@ export function Header({ locale }: HeaderProps) {
           </nav>
 
           {/* Переключатель языка для больших экранов: одна кнопка с выпадающим меню. */}
-          <div className="header-cta header-cta-desktop header-lang" aria-label={copy.langSwitcherAriaLabel}>
+          <div
+            className="header-cta header-cta-desktop header-lang"
+            aria-label={copy.langSwitcherAriaLabel}
+            ref={langDesktopRef}
+          >
             <button
               type="button"
               className="btn btn--pill btn--outline-white lang-toggle"
@@ -192,7 +240,7 @@ export function Header({ locale }: HeaderProps) {
             </button>
 
             {/* Быстрая кнопка смены языка рядом с бургером. */}
-            <div className="header-lang" aria-label={copy.langSwitcherAriaLabel}>
+            <div className="header-lang" aria-label={copy.langSwitcherAriaLabel} ref={langMobileRef}>
               <button
                 type="button"
                 className="lang-pill lang-pill--active lang-toggle"

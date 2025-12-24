@@ -42,7 +42,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
             <p className="p" style={{ marginTop: 10 }}>
               {copy.cardParagraphs[1]}
             </p>
-            <div style={{ marginTop: 14 }}>
+            <div className="actions-short-cta" style={{ marginTop: 14 }}>
               <Button variant="primary" href={`/${locale}/actions`}>
                 {copy.ctaLabel}
               </Button>
