@@ -19,6 +19,15 @@
     color 180ms ease;
 }
 
+.button:hover,
+.button:focus-visible {
+  text-decoration: none;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
 .button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px var(--btn-focus-ring);
