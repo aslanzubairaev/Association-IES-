@@ -3,64 +3,13 @@
 import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
+import { soutenirCopy } from "@/content/actions";
 
 export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
 
   // Все тексты страницы зависят от языка, который выбран в адресе (/ru или /fr).
-  const text =
-    locale === "fr"
-      ? {
-          heroTitle: "SOUTENIR L’ASSOCIATION",
-          heroLead:
-            "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets d’accompagnement. Choisissez une option : don, cotisation ou bénévolat.",
-          donateTitle: "DONS / COTISATIONS",
-          donateLead:
-            "Les liens HelloAsso et CotizUp peuvent changer — écrivez-nous via le formulaire et nous vous enverrons le lien à jour.",
-          ctaWriteUs: "Demander le lien",
-          helloAssoTitle: "HelloAsso",
-          helloAssoText: "Don en ligne via HelloAsso. Lien envoyé sur demande.",
-          cotizUpTitle: "CotizUp",
-          cotizUpText: "Cotisation / soutien via CotizUp. Lien envoyé sur demande.",
-          bankTitle: "VIREMENT BANCAIRE",
-          bankText: "IBAN + BIC (La Banque Postale)",
-          importantTitle: "À SAVOIR",
-          importantText: "Besoin d’un reçu / justificatif ? Écrivez-nous — nous vous répondrons par e-mail.",
-          volunteerTitle: "DEVENIR BÉNÉVOLE",
-          volunteerText:
-            "Vous souhaitez aider lors des rencontres, pour la traduction ou l’organisation ? Écrivez-nous via le formulaire — réponse par e-mail.",
-          volunteerCta: "JE VEUX AIDER",
-          howToHelpTitle: "COMMENT AIDER",
-          howToHelpItems: [
-            "Aide lors des rencontres",
-            "Traduction et rédaction",
-            "Organisation et logistique",
-            "Photo/vidéo et médias",
-          ],
-        }
-      : {
-          heroTitle: "ПОДДЕРЖАТЬ АССОЦИАЦИЮ",
-          heroLead:
-            "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ: донат, взнос или волонтёрство.",
-          donateTitle: "ДОНАТ / ВЗНОСЫ",
-          donateLead:
-            "Ссылки HelloAsso и CotizUp могут обновляться — напишите нам через форму, и мы пришлём актуальную.",
-          ctaWriteUs: "Запросить ссылку",
-          helloAssoTitle: "HelloAsso",
-          helloAssoText: "Онлайн-пожертвование через HelloAsso. Ссылку пришлём по запросу.",
-          cotizUpTitle: "CotizUp",
-          cotizUpText: "Взнос/поддержка через CotizUp. Ссылку пришлём по запросу.",
-          bankTitle: "БАНКОВСКИЙ ПЕРЕВОД",
-          bankText: "IBAN + BIC (La Banque Postale)",
-          importantTitle: "ВАЖНО ЗНАТЬ",
-          importantText: "Если вам нужен чек/подтверждение — напишите нам, и мы ответим по e-mail.",
-          volunteerTitle: "СТАТЬ ВОЛОНТЁРОМ",
-          volunteerText:
-            "Хотите помочь со встречами, переводом или организацией? Напишите нам через форму — мы ответим по e-mail.",
-          volunteerCta: "ХОЧУ ПОМОЧЬ",
-          howToHelpTitle: "КАК МОЖНО ПОМОЧЬ",
-          howToHelpItems: ["Помощь на встречах", "Перевод и тексты", "Организация и логистика", "Фото/видео и медиа"],
-        };
+  const text = soutenirCopy[locale];
 
   const helloAssoHref = `/${locale}/contacts?topic=donation_helloasso`;
   const cotizUpHref = `/${locale}/contacts?topic=donation_cotizup`;

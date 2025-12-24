@@ -4,6 +4,8 @@
  По клику человек может открыть профиль ассоциации в новой вкладке.
 */
 
+import { instagramBadgeCopy } from "@/content/actions";
+
 type InstagramBadgeProps = {
   href: string;
   handle: string;
@@ -46,7 +48,7 @@ export function InstagramBadge({ href, handle }: InstagramBadgeProps) {
           </svg>
         </span>
         <span className="instagramBadge-text">
-          <span className="instagramBadge-label">Instagram</span>
+          <span className="instagramBadge-label">{instagramBadgeCopy.label}</span>
           <span className="instagramBadge-handle">{handle}</span>
         </span>
       </a>

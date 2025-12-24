@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Как это работает / Comment ça marche” и показывает 3 шага после сообщения. */
 
 import { Container } from "@/components/ui/Container";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideHowItWorksProps = {
   locale: "ru" | "fr";

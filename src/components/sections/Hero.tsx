@@ -6,6 +6,7 @@ import { InstagramBadge } from "@/components/social/InstagramBadge";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
+import { heroCopy } from "@/content/actions";
 
 type HeroProps = {
   locale: "ru" | "fr";
@@ -16,18 +17,7 @@ const slantPurpleStyle = { "--next": "var(--color-bg)" } as CSSProperties;
 
 // Верхний блок: тексты и кнопки зависят от выбранного языка.
 export function Hero({ locale }: HeroProps) {
-  const title =
-    locale === "fr"
-      ? "Nous aidons les personnes\nà s’intégrer à Strasbourg"
-      : "Помогаем людям\nадаптироваться в Страсбурге";
-
-  const lead =
-    locale === "fr"
-      ? "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement."
-      : "Документы, работа, обучение и поддержка в Страсбурге — подскажем понятный следующий шаг без лишней бюрократии.";
-
-  const ctaPrimary = locale === "fr" ? "Demander de l’aide" : "Получить помощь";
-  const ctaSecondary = locale === "fr" ? "Nos actions" : "Наши действия";
+  const copy = heroCopy[locale];
 
   return (
     <section className="section section--purple slant hero-section" style={slantPurpleStyle}>
@@ -36,7 +26,7 @@ export function Hero({ locale }: HeroProps) {
           <Card className="card--glass hero-left hero-left--mobile-plain" surface={false}>
             {/* Крупный заголовок: кратко объясняет, что ассоциация помогает адаптироваться именно в Страсбурге. */}
             <h1 className="h1">
-              {title.split("\n").map((line, idx) => (
+              {copy.title.split("\n").map((line, idx) => (
                 <span key={idx}>
                   {line}
                   {idx === 0 ? <br /> : null}
@@ -45,29 +35,25 @@ export function Hero({ locale }: HeroProps) {
             </h1>
 
             {/* Описание: уточняет, какие темы мы закрываем и что человек получит дальше. */}
-            <p className="lead hero-lead">{lead}</p>
+            <p className="lead hero-lead">{copy.lead}</p>
 
             {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
             <div className="actions hero-actions">
               <Button className="hero-button" variant="accent" href={`/${locale}/aide`}>
-                {ctaPrimary}
+                {copy.ctaPrimary}
               </Button>
               <Button className="hero-button" variant="secondary" href={`/${locale}/actions`}>
-                {ctaSecondary}
+                {copy.ctaSecondary}
               </Button>
             </div>
 
             {/* Ключевые слова: помогают быстро понять, про что наши направления (без кликов). */}
-            <div className="pill-row hero-pillRow" aria-label="ключевые слова">
-              <span className="pill">
-                {locale === "fr" ? "Intégration" : "Интеграция"}
-              </span>
-              <span className="pill">
-                {locale === "fr" ? "Éducation" : "Образование"}
-              </span>
-              <span className="pill">
-                {locale === "fr" ? "Synergie" : "Синергия"}
-              </span>
+            <div className="pill-row hero-pillRow" aria-label={copy.pillsAriaLabel}>
+              {copy.pills.map((pill) => (
+                <span key={pill} className="pill">
+                  {pill}
+                </span>
+              ))}
             </div>
           </Card>
 

@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { footerCopy } from "@/content/actions";
 
 type FooterProps = {
   locale: "ru" | "fr";
@@ -13,17 +14,19 @@ type FooterProps = {
 
 // Низ сайта: минимальная версия, без сложной логики.
 export function Footer({ locale }: FooterProps) {
+  const copy = footerCopy[locale];
+
   return (
     <footer className="site-footer">
       <Container>
         <div className="footer-inner">
-          <div>© 2025 Association IES</div>
+          <div>{copy.copyright}</div>
           <div className="footer-links">
             <Link href={`/${locale}/about`}>
-              {locale === "fr" ? "À propos" : "о нас"}
+              {copy.aboutLabel}
             </Link>
             <Link href={`/${locale}/contact`}>
-              {locale === "fr" ? "Contact" : "контакты"}
+              {copy.contactLabel}
             </Link>
           </div>
         </div>

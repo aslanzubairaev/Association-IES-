@@ -7,7 +7,7 @@
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
-import { homeNavCards } from "@/content/homeNav";
+import { homeNavCards, quickNavCopy } from "@/content/actions";
 
 type QuickNavProps = {
   locale: "ru" | "fr";
@@ -15,21 +15,17 @@ type QuickNavProps = {
 
 // Карточки навигации: тексты берём из общего файла данных.
 export function QuickNav({ locale }: QuickNavProps) {
-  const title = locale === "fr" ? "De quoi avez-vous besoin ?" : "Что вам нужно?";
-  const subtitle =
-    locale === "fr"
-      ? "Choisissez un thème — on vous dirige vers la bonne page."
-      : "Выберите тему — мы отправим вас в нужный раздел.";
+  const copy = quickNavCopy[locale];
 
   return (
     <section className="section section--soft needs-block">
       <Container>
         <div className="section-head">
-          <h2 className="h2 h2--blue">{title}</h2>
-          <p className="muted">{subtitle}</p>
+          <h2 className="h2 h2--blue">{copy.title}</h2>
+          <p className="muted">{copy.subtitle}</p>
         </div>
 
-        <div className="cards-grid quickNav-grid" aria-label={title}>
+        <div className="cards-grid quickNav-grid" aria-label={copy.title}>
           {homeNavCards.map((card) => {
             const href = `/${locale}${card.path}`;
 
@@ -41,7 +37,7 @@ export function QuickNav({ locale }: QuickNavProps) {
 
                 <div style={{ marginTop: 12 }}>
                   <Button variant="secondary" href={href}>
-                    {locale === "fr" ? "Aller" : "Перейти"}
+                    {copy.ctaLabel}
                   </Button>
                 </div>
               </Card>

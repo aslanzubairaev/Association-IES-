@@ -7,12 +7,10 @@
 import type { Metadata } from "next";
 import "../legacy/styles.css";
 import "./globals.css";
+import { siteMetadata } from "@/content/actions";
 
 // Информация, которую браузер и поисковики видят как название и описание сайта.
-export const metadata: Metadata = {
-  title: "Association IES",
-  description: "Association IES",
-};
+export const metadata: Metadata = siteMetadata;
 
 // Общая оболочка для всех страниц: сюда подставляется содержимое текущей страницы.
 export default function RootLayout({

@@ -3,7 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { ContactEmailBox } from "@/components/contacts/ContactEmailBox";
-import { actionsCopy, getActionsTopicParam } from "@/content/actions";
+import { contactCopy, contactTopicLabels, getActionTopicLabels } from "@/content/actions";
 
 export default function ContactPage({
   params,
@@ -16,66 +16,30 @@ export default function ContactPage({
   const email = "contact@associationies.fr";
 
   // Этот словарь нужен, чтобы по параметру topic подставить понятную строку в начале сообщения.
-  const topicLabels: Record<string, { ru: string; fr: string }> = {
-    "prefecture-vnz": { ru: "Префектура / ВНЖ", fr: "Préfecture / titre de séjour" },
-    caf: { ru: "CAF", fr: "CAF" },
-    cpam: { ru: "CPAM / здоровье", fr: "CPAM / santé" },
-    "france-travail": { ru: "France Travail / поиск работы", fr: "France Travail / recherche d’emploi" },
-    everyday: { ru: "Жильё / школа / повседневные вопросы", fr: "Logement / école / quotidien" },
-    "not-sure": { ru: "Не знаете куда? (ориентация)", fr: "Vous ne savez pas où ? (orientation)" },
-  };
+  const topicLabels = contactTopicLabels;
 
   // Этот словарь нужен для “Действия / Actions”: тема должна выглядеть как “Действия — <направление>”.
-  const actionTopicLabels: Record<string, { ru: string; fr: string }> = Object.fromEntries(
-    actionsCopy.ru.items.map((ruItem) => {
-      const frItem = actionsCopy.fr.items.find((x) => x.slug === ruItem.slug);
-      const topic = getActionsTopicParam(ruItem.slug);
-      return [
-        topic,
-        {
-          ru: `Действия — ${ruItem.title}`,
-          fr: `Actions — ${frItem?.title ?? ruItem.title}`,
-        },
-      ];
-    }),
-  );
+  const actionTopicLabels = getActionTopicLabels();
 
   // Если тема пришла из другой страницы, добавляем её в начало текста — так человеку проще написать.
   const rawTopic = searchParams?.topic;
   const topicLabel = rawTopic ? topicLabels[rawTopic] : null;
   const actionTopicLabel = rawTopic ? actionTopicLabels[rawTopic] : null;
+  const subjectLabel = contactCopy[locale].subjectLabel;
   const prefillMessage =
     actionTopicLabel && rawTopic
-      ? `${locale === "fr" ? "Sujet" : "Тема"}: ${locale === "fr" ? actionTopicLabel.fr : actionTopicLabel.ru}\n\n`
+      ? `${subjectLabel}: ${locale === "fr" ? actionTopicLabel.fr : actionTopicLabel.ru}\n\n`
       : topicLabel && rawTopic
-        ? `${locale === "fr" ? "Sujet" : "Тема"}: ${locale === "fr" ? topicLabel.fr : topicLabel.ru}\n\n`
+        ? `${subjectLabel}: ${locale === "fr" ? topicLabel.fr : topicLabel.ru}\n\n`
         : rawTopic
-          ? `${locale === "fr" ? "Sujet" : "Тема"}: ${rawTopic}\n\n`
+          ? `${subjectLabel}: ${rawTopic}\n\n`
           : undefined;
 
   // Тексты страницы меняются в зависимости от языка.
-  const pageTitle = locale === "fr" ? "CONTACT" : "КОНТАКТЫ";
-  const pageLead =
-    locale === "fr"
-      ? "Écrivez via le formulaire ou par e-mail — réponse par e-mail. Rendez-vous uniquement sur inscription."
-      : "Напишите через форму или на e-mail — ответим по e-mail. Приём/встречи — только по записи.";
-  const whenTitle = locale === "fr" ? "QUAND ÉCRIRE ?" : "КОГДА ПИСАТЬ?";
-  const whenItems =
-    locale === "fr"
-      ? [
-          "Préfecture / titre de séjour",
-          "CAF / CPAM / France Travail",
-          "Logement / école / santé",
-          "CV / emploi / orientation",
-          "Questions sur nos actions et projets",
-        ]
-      : [
-          "Префектура / ВНЖ",
-          "CAF / CPAM / France Travail",
-          "Жильё / школа / здоровье",
-          "CV / работа / ориентация",
-          "Вопросы по проектам и мероприятиям ассоциации",
-        ];
+  const pageTitle = contactCopy[locale].pageTitle;
+  const pageLead = contactCopy[locale].pageLead;
+  const whenTitle = contactCopy[locale].whenTitle;
+  const whenItems = contactCopy[locale].whenItems;
 
   return (
     <main className="section section--purple">

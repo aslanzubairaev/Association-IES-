@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Перед тем как написать / Avant d’écrire” и показывает чек-лист, что добавить в сообщение. */
 
 import { Container } from "@/components/ui/Container";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideBeforeYouWriteProps = {
   locale: "ru" | "fr";

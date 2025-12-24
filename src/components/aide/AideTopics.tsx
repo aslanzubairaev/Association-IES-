@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
-import { aideCopy } from "@/content/aide";
+import { aideCopy } from "@/content/actions";
 
 type AideTopicsProps = {
   locale: "ru" | "fr";

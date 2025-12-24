@@ -1,9 +1,8 @@
 /* Этот файл задаёт страницу “Actions / Действия” и показывает каталог направлений с карточками (RU/FR). */
 
 import { Container } from "@/components/ui/Container";
-import Link from "next/link";
 import { ActionCard } from "@/components/actions/ActionCard";
-import { actionsCopy, getActionsTopicParam } from "@/content/actions";
+import { actionsCopy, actionsPageCopy, getActionsTopicParam } from "@/content/actions";
 
 export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
@@ -43,7 +42,7 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
 
         <div
           className="actions-cards-grid"
-          aria-label={locale === "fr" ? "Catalogue des actions" : "Каталог направлений"}
+          aria-label={actionsPageCopy[locale].catalogAriaLabel}
         >
           {copy.items.map((it) => {
             const topic = getActionsTopicParam(it.slug);
