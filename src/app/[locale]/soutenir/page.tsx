@@ -16,7 +16,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   const volunteerHref = `/${locale}/contacts?topic=volunteer`;
 
   return (
-    <main className="page--purple">
+    <main className="page--purple support-page">
       {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка. */}
       <section className="section section--purple">
         <Container>
@@ -74,12 +74,9 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
           </div>
 
           {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
-          <article
-            className="card card--paper support-card accent-left accent--blue"
-            style={{ marginTop: 16 }}
-          >
+          <article className="card card--paper support-card accent-left accent--blue support-important">
             <h3 className="h3 h3--blue">{text.importantTitle}</h3>
-            <p className="p" style={{ marginTop: 10 }}>
+            <p className="p support-text">
               {text.importantText}
             </p>
           </article>
@@ -95,7 +92,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             </h2>
           </div>
 
-          <div className="grid-2">
+          <div className="grid-2 support-volunteer-grid">
             <SupportCard
               title={text.volunteerTitle}
               text={text.volunteerText}
@@ -105,7 +102,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             />
 
             <SupportCard title={text.howToHelpTitle} className="support-card">
-              <ul className="list" style={{ marginTop: 10 }}>
+              <ul className="list support-list">
                 {text.howToHelpItems.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

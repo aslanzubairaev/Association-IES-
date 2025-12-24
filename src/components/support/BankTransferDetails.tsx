@@ -54,26 +54,21 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
           }
         }}
         aria-label={copy.copyAllLabel}
-        style={{
-          color: "rgba(11,27,51,.92)",
-          cursor: "pointer",
-          userSelect: "text",
-        }}
       >
-        <div style={{ fontWeight: 800, marginBottom: 8 }}>
+        <div className="bank-transfer-title">
           {copy.cardTitle}
         </div>
 
-        <div style={{ lineHeight: 1.6 }}>
+        <div className="bank-transfer-lines">
           <div>
-            <b>IBAN:</b>{" "}
-            <span style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace" }}>
+            <span className="bank-transfer-label">IBAN:</span>{" "}
+            <span className="bank-transfer-value bank-transfer-value--mono">
               {iban}
             </span>
           </div>
-          <div style={{ marginTop: 6 }}>
-            <b>BIC:</b>{" "}
-            <span style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace" }}>
+          <div className="bank-transfer-row">
+            <span className="bank-transfer-label">BIC:</span>{" "}
+            <span className="bank-transfer-value bank-transfer-value--mono">
               {bic}
             </span>
           </div>
@@ -81,32 +76,29 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
 
         {/* Подсказка статуса: показывает, что данные скопированы. */}
         {status ? (
-          <div style={{ marginTop: 10, fontSize: 12, opacity: 0.8 }}>
+          <div className="bank-transfer-status">
             {status}
           </div>
         ) : (
-          <div style={{ marginTop: 10, fontSize: 12, opacity: 0.8 }}>
+          <div className="bank-transfer-status">
             {copy.hint}
           </div>
         )}
       </div>
 
       {/* Кнопки копирования: делаем две компактные кнопки рядом, чтобы быстро скопировать IBAN или BIC. */}
-      <div
-        className="btn-row"
-        style={{ marginTop: 12, justifyContent: "center", alignItems: "flex-start", flexWrap: "nowrap" }}
-      >
+      <div className="btn-row bank-transfer-actions">
         <CopyToClipboardButton
           value={iban}
           label={copy.copyIbanLabel}
           copiedLabel={copy.copiedIbanStatus}
-          className="btn btn--pill btn--outline-blue btn--sm"
+          className="btn btn--pill support-cta-button support-cta-button--sm"
         />
         <CopyToClipboardButton
           value={bic}
           label={copy.copyBicLabel}
           copiedLabel={copy.copiedBicStatus}
-          className="btn btn--pill btn--outline-blue btn--sm"
+          className="btn btn--pill support-cta-button support-cta-button--sm"
         />
       </div>
     </div>

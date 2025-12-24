@@ -20,29 +20,29 @@ type SupportCardProps = {
 // Карточка поддержки: одинаковая форма помогает быстро сравнивать варианты помощи.
 export function SupportCard({ title, text, ctaLabel, ctaHref, className, children }: SupportCardProps) {
   return (
-    <article className={`card card--paper ${className ?? ""}`.trim()} style={{ display: "flex", flexDirection: "column" }}>
+    <article className={`card card--paper support-card ${className ?? ""}`.trim()}>
       {/* Заголовок: главный ориентир, чтобы сразу понять способ поддержки. */}
       <h3 className="h3 h3--blue">{title}</h3>
 
       {/* Короткое описание: объясняем смысл карточки одной фразой, без лишних деталей. */}
       {text ? (
-        <p className="p" style={{ marginTop: 10 }}>
+        <p className="p support-text">
           {text}
         </p>
       ) : null}
 
       {/* Дополнительное содержимое: сюда можно вставить реквизиты, список или другие детали. */}
-      {children ? <div style={{ marginTop: 12 }}>{children}</div> : null}
+      {children ? <div className="support-body">{children}</div> : null}
 
       {/* Кнопка: ведёт на страницу контактов, чтобы запросить актуальную ссылку или задать вопрос. */}
       {ctaLabel && ctaHref ? (
-        <div style={{ marginTop: "auto", paddingTop: 14 }}>
-          <Link className="btn btn--pill btn--outline-blue" href={ctaHref}>
+        <div className="support-cta">
+          <Link className="btn btn--pill support-cta-button" href={ctaHref}>
             {ctaLabel}
           </Link>
         </div>
       ) : (
-        <div style={{ marginTop: "auto" }} />
+        <div className="support-cta" />
       )}
     </article>
   );
