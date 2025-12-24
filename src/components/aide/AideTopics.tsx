@@ -14,7 +14,11 @@ export function AideTopics({ locale }: AideTopicsProps) {
   const copy = aideCopy[locale].topics;
 
   return (
-    <section className="section section--purple" id="topics">
+    <section
+      className="section section--purple"
+      id="topics"
+      style={{ paddingTop: 56, scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
+    >
       <Container>
         <div className="section-head">
           <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>

@@ -13,7 +13,7 @@ export function AideHero({ locale }: AideHeroProps) {
   const copy = aideCopy[locale].hero;
 
   return (
-    <section className="section section--purple">
+    <section className="section section--purple" style={{ paddingBottom: 56 }}>
       <Container>
         {/* Заголовок и подзаголовок: человек должен сразу понять смысл страницы. */}
         <div className="section-head">

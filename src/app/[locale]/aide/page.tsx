@@ -14,11 +14,11 @@ export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }
       {/* Верхний блок: объясняет, чем мы помогаем и как написать нам (форма = письмо на e-mail). */}
       <AideHero locale={locale} />
 
-      {/* “Как это работает”: 3 шага без лишней бюрократии. */}
-      <AideHowItWorks locale={locale} />
-
       {/* “С чем помогаем”: темы в карточках, чтобы быстро найти нужное. */}
       <AideTopics locale={locale} />
+
+      {/* “Как это работает”: 3 шага без лишней бюрократии. */}
+      <AideHowItWorks locale={locale} />
 
       {/* “Перед тем как написать”: чеклист, который помогает подготовить сообщение. */}
       <AideBeforeYouWrite locale={locale} />

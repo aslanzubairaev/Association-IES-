@@ -393,6 +393,7 @@ type AideCopy = {
     line1: string;
     line2: string;
     badge: string;
+    ctaScroll: string;
   };
   howItWorks: {
     title: string;
@@ -424,6 +425,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       line1: "Бесплатная административная помощь для новоприбывших и семей.",
       line2: "Напишите через форму — мы ответим по e-mail. Если нужна встреча, предложим запись.",
       badge: "Бесплатно • По записи • Ответ по e-mail",
+      ctaScroll: "Выбрать тему",
     },
     howItWorks: {
       title: "Как это работает",
@@ -522,6 +524,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       line2:
         "Écrivez via le formulaire — nous recevons votre message par e-mail. Nous répondons par e-mail et, si besoin, proposons un rendez-vous.",
       badge: "Gratuit • Sur rendez-vous • Réponse par e-mail",
+      ctaScroll: "Choisir le thème",
     },
     howItWorks: {
       title: "Comment ça marche",
