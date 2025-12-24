@@ -596,7 +596,7 @@
   
   .card-top{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 10px;
@@ -758,7 +758,7 @@
     display: grid;
     grid-template-columns: 1.25fr .85fr;
     gap: 18px;
-    align-items: start;
+    align-items: flex-start;
   }
 
   .actions-cards{
@@ -771,7 +771,7 @@
 
   .action-head{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 10px;

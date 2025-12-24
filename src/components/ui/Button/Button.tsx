@@ -27,7 +27,8 @@ export function Button({
   const classes = [styles.button, styles[variant], className].filter(Boolean).join(" ");
 
   if (href) {
-    const { type: _type, ...linkProps } = rest;
+    const linkProps = { ...rest };
+    delete (linkProps as { type?: ButtonProps["type"] }).type;
     return (
       <Link className={classes} href={href} {...linkProps}>
         {children}
