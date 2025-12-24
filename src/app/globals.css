@@ -685,8 +685,12 @@ a {
     gap: 10px;
   }
 
+  .hero-section .h1 {
+    margin-top: 0;
+  }
+
   .hero-left .hero-lead {
-    margin-top: 26px;
+    margin-top: 37px;
   }
 
   .hero-left .hero-actions .hero-button {
@@ -872,6 +876,8 @@ a {
 .actions-page .actions-card-button {
   height: 44px;
   min-height: 44px;
+  width: 100%;
+  max-width: 260px;
   padding: 0 22px;
   border-radius: 999px;
   font-weight: 800;
@@ -879,6 +885,7 @@ a {
   background: rgba(15, 82, 166, 0.38);
   border: 1.5px solid rgba(255, 255, 255, 0.26);
   color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 10px 20px rgba(7, 12, 40, 0.22);
 }
 
 .actions-page .actions-card-button:hover {
@@ -1122,6 +1129,10 @@ a {
   height: 100%;
 }
 
+.aide-topics-section {
+  padding-top: 56px;
+}
+
 .aide-page .aide-card--topic {
   display: flex;
   flex-direction: column;
@@ -1136,9 +1147,7 @@ a {
 }
 
 .aide-page .aide-cta .btn {
-  height: 44px;
-  min-height: 44px;
-  padding: 0 22px;
+  padding: 12px 18px;
   font-weight: 800;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -1152,6 +1161,12 @@ a {
 
 .aide-page .aide-cta .btn:active {
   transform: translateY(1px) scale(0.98);
+}
+
+@media (max-width: 520px) {
+  .aide-topics-section {
+    padding-top: 32px;
+  }
 }
 
 .aide-page .aide-cta .btn:focus-visible {
@@ -1417,6 +1432,8 @@ a {
 .support-page .support-cta-button {
   height: 44px;
   min-height: 44px;
+  width: 100%;
+  max-width: 260px;
   padding: 0 22px;
   border-radius: 999px;
   font-weight: 800;
@@ -1451,6 +1468,12 @@ a {
 
 .support-page .support-important {
   margin-top: 16px;
+}
+
+@media (max-width: 520px) {
+  .support-donate-section {
+    padding-top: 32px;
+  }
 }
 
 /* Карточки в фиолетовой секции “Волонтёрство”: лёгкий лавандовый тон, чтобы сочеталось с фоном. */
@@ -1555,7 +1578,8 @@ a {
 
 .support-page .bank-transfer-actions {
   margin-top: 12px;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
   align-items: flex-start;
   flex-wrap: nowrap;
 }
@@ -1568,11 +1592,13 @@ a {
 
 @media (max-width: 520px) {
   .support-page .bank-transfer-actions {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    gap: 10px;
   }
 
   .support-page .bank-transfer-actions .support-cta-button {
-    width: 100%;
+    width: auto;
+    flex: 1 1 0;
   }
 }
 

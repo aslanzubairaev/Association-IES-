@@ -15,9 +15,9 @@ export function AideTopics({ locale }: AideTopicsProps) {
 
   return (
     <section
-      className="section section--purple"
+      className="section section--purple aide-topics-section"
       id="topics"
-      style={{ paddingTop: 56, scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
+      style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
     >
       <Container>
         <div className="section-head">

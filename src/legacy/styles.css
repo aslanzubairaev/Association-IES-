@@ -1064,5 +1064,9 @@
     }
     .header-cta{ display: none; }
     .section{ padding: var(--space-section-y) 0; }
+    .actions-short-block .actions-short-cta{
+      display: flex;
+      justify-content: center;
+    }
   }
   

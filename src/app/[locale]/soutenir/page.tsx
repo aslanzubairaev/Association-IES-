@@ -18,7 +18,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   return (
     <main className="page--purple support-page">
       {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка. */}
-      <section className="section section--purple">
+      <section className="section section--purple support-donate-section">
         <Container>
           <div className="section-head">
             <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
