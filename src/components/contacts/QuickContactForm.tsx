@@ -188,7 +188,7 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
 
       {/* Кнопка отправки: по нажатию проверяем поля и открываем письмо в почте (в зависимости от варианта формы). */}
       <div className={variant === "hero" ? "quickForm-submitRow quickForm-submitRow--hero" : "quickForm-submitRow"}>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="contact-cta-button">
           {buttonLabel}
         </Button>
       </div>

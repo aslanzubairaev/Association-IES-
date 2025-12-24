@@ -47,7 +47,7 @@ export default function ContactPage({
     "Décrivez la situation de façon structurée : dates, démarches déjà faites, délais/courriers. Cela nous aide à répondre plus vite et plus précisément.";
 
   return (
-    <main className="section section--purple">
+    <main className="section section--purple contact-page">
       <Container>
         <div className="section-head">
           <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
@@ -58,14 +58,14 @@ export default function ContactPage({
           </p>
         </div>
 
-        <div className="grid-2">
+        <div className="grid-2 contact-grid">
           <div className="card card--paper contact-card accent-left accent--blue">
             {/* Общий e-mail ассоциации: без личных телефонов и персональных контактов. */}
             <ContactEmailBox locale={locale} email={email} />
 
             {/* Подсказка “когда писать”: помогает человеку понять, подходит ли вопрос. */}
             <h2 className="h3 h3--blue">{whenTitle}</h2>
-            <ul className="list" style={{ marginTop: 10 }}>
+            <ul className="list contact-list">
               {whenItems.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -74,7 +74,7 @@ export default function ContactPage({
 
           <div className="card card--paper contact-card contact-card--yellow">
             {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
-            <div style={{ maxWidth: 720, margin: "0 auto" }}>
+            <div className="contact-form-wrap">
               <p className={styles.formNote}>{locale === "ru" ? helperTextRu : helperTextFr}</p>
               <QuickContactForm locale={locale} variant="page" prefillMessage={prefillMessage} />
             </div>

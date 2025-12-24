@@ -28,39 +28,33 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
   }
 
   return (
-    <div className="contact-box" style={{ marginBottom: 16, color: "rgba(11,27,51,.92)" }}>
+    <div className="contact-box contact-email-box">
       {/* Строка с e-mail: делаем контрастным, но не открываем mailto, чтобы не появлялось системное окно. */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+      <div className="contact-email-row">
         <div>
           <b>{copy.emailLabel}:</b>{" "}
           <span
-            style={{
-              color: "var(--blue)",
-              textDecoration: "underline",
-              fontWeight: 900,
-              position: "relative",
-              zIndex: 1,
-            }}
+            className="contact-email-value"
           >
             {email}
           </span>
         </div>
 
         {/* Запасной вариант: можно просто скопировать адрес и вставить его в любую почту. */}
-        <button type="button" className="btn btn--pill btn--outline-blue" onClick={handleCopy}>
+        <button type="button" className="btn btn--pill contact-cta-button" onClick={handleCopy}>
           {copy.copyLabel}
         </button>
       </div>
 
       {/* Короткий статус: подтверждаем копирование или показываем ошибку. */}
       {status ? (
-        <div className="fineprint" style={{ marginTop: 10, opacity: 0.85 }}>
+        <div className="fineprint contact-email-status">
           {status}
         </div>
       ) : null}
 
       {/* Небольшая подсказка: помогает написать письмо так, чтобы мы быстрее разобрались. */}
-      <div className="fineprint" style={{ marginTop: 10, opacity: 0.85 }}>
+      <div className="fineprint contact-email-helper">
         {copy.helperText}
       </div>
     </div>
