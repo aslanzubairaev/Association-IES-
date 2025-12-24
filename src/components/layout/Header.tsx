@@ -114,7 +114,13 @@ export function Header({ locale }: HeaderProps) {
 
   // Действие по нажатию на “бургер”: открыть или закрыть мобильное меню.
   function toggleMobileMenu() {
-    setIsMobileMenuOpen((current) => !current);
+    setIsMobileMenuOpen((current) => {
+      const next = !current;
+      if (next) {
+        setIsLangMenuOpen(false);
+      }
+      return next;
+    });
   }
 
   // Действие по нажатию на затемнение вокруг меню: закрыть меню.
@@ -123,11 +129,21 @@ export function Header({ locale }: HeaderProps) {
   }
 
   function toggleLangMenu() {
-    setIsLangMenuOpen((current) => !current);
+    setIsLangMenuOpen((current) => {
+      const next = !current;
+      if (next) {
+        setIsMobileMenuOpen(false);
+      }
+      return next;
+    });
   }
 
   return (
-    <header className="site-header siteHeader">
+    <header
+      className="site-header siteHeader"
+      data-mobile-menu-open={isMobileMenuOpen ? "true" : "false"}
+      data-lang-menu-open={isLangMenuOpen ? "true" : "false"}
+    >
       <Container>
         <div className="header-inner">
           <a className="brand" href={`/${locale}#top`} aria-label={copy.brandLabel}>
