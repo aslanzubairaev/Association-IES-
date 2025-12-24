@@ -11,7 +11,7 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
   const copy = actionsCopy[locale];
 
   return (
-    <main className="section section--purple">
+    <main className="section section--purple actions-page">
       <Container>
         {/* HERO: объясняем, что это за направления, и даём короткую подсказку, что делать дальше. */}
         <div className="section-head">
@@ -29,8 +29,8 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
         {/* НАПРАВЛЕНИЯ: каталог карточек, чтобы за 30 секунд понять варианты. */}
         <div
           id="directions"
-          className="section-head"
-          style={{ marginTop: 18, scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
+          className="section-head actions-directions-head"
+          style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
         >
           <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
             {copy.directions.title}

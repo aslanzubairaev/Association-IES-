@@ -48,7 +48,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       title: "ДЕЙСТВИЯ",
       lead:
         "Проекты, встречи и программы ассоциации IES: образование, спорт, культура, поддержка и интеграция.\nВыберите направление — расскажем детали и подскажем, как записаться.",
-      hint: "Нажмите «Узнать детали / записаться» — мы ответим по e-mail и предложим следующий шаг.",
+      hint: "Нажмите «Записаться» — мы ответим по e-mail и предложим следующий шаг.",
       ctaScroll: "Посмотреть направления",
       ctaWrite: "Записаться / Написать",
     },
@@ -60,7 +60,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       frequencyLabel: "Формат / частота",
       whenWhereLabel: "Когда / где:",
       whenWhereText: "Уточняется при записи",
-      cta: "УЗНАТЬ ДЕТАЛИ / ЗАПИСАТЬСЯ",
+      cta: "ЗАПИСАТЬСЯ",
     },
     participate: {
       title: "Как участвовать",
@@ -160,7 +160,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       frequencyLabel: "Format / fréquence",
       whenWhereLabel: "Quand / où :",
       whenWhereText: "Précisé lors de l’inscription",
-      cta: "EN SAVOIR PLUS / S’INSCRIRE",
+      cta: "S’INSCRIRE",
     },
     participate: {
       title: "Comment participer",
