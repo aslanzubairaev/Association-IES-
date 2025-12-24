@@ -18,7 +18,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
   const ctaList = copy.ctaList;
 
   return (
-    <main className="section section--purple">
+    <main className="section section--purple about-page">
       <Container>
         <div className="section-head">
           <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
@@ -38,10 +38,10 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
           <div className="card card--paper about-card accent-left accent--blue" id="who">
             {/* Основной текст: три абзаца, как в новом копирайте. */}
             <p className="p">{copy.mainParagraphs[0]}</p>
-            <p className="p" style={{ marginTop: 10 }}>
+            <p className="p">
               {copy.mainParagraphs[1]}
             </p>
-            <p className="p" style={{ marginTop: 10 }}>
+            <p className="p">
               {copy.mainParagraphs[2]}
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
           <div className="card card--paper card--highlight about-card accent-left accent--blue">
             {/* Список целей: три пункта, чтобы человек сразу понял направления работы. */}
             <h2 className="h3 h3--blue">{copy.goalsTitle}</h2>
-            <ul className="list" style={{ marginTop: 10 }}>
+            <ul className="list">
               {copy.goals.map((goal) => (
                 <li key={goal}>{goal}</li>
               ))}
@@ -62,7 +62,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
             <div className="card card--paper about-card accent-left accent--blue">
             {/* Сильные стороны: короткий список, который объясняет, почему подход работает. */}
             <h2 className="h3 h3--blue">{copy.strengthTitle}</h2>
-            <ul className="list" style={{ marginTop: 10 }}>
+            <ul className="list">
               {copy.strengthItems.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -72,13 +72,13 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
           <div className="card card--paper card--highlight about-card accent-left accent--blue">
             {/* Призыв к действию: что можно сделать и куда нажать. */}
             <h2 className="h3 h3--blue">{ctaTitle}</h2>
-            <ul className="list" style={{ marginTop: 10 }}>
+            <ul className="list">
               {ctaList.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
 
-            <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <div className="about-cta">
               <Link className="btn btn--pill btn--blue" href={contactHref}>
                 {contactLabel}
               </Link>

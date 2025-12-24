@@ -35,7 +35,7 @@ export function QuickNav({ locale }: QuickNavProps) {
 
                 <p className="p">{card.description[locale]}</p>
 
-                <div style={{ marginTop: 12 }}>
+                <div className="quickNav-cta">
                   <Button variant="secondary" href={href}>
                     {copy.ctaLabel}
                   </Button>
