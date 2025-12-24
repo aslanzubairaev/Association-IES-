@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, type FormEvent, type CSSProperties } from "react";
+import { Button } from "@/components/ui/Button/Button";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
@@ -26,7 +27,7 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
           messageLabel: "MESSAGE *",
           namePlaceholder: "Votre nom et prénom",
           emailPlaceholder: "Votre e-mail",
-          messagePlaceholder: "Décrivez votre situation (bref). Si vous avez des délais/courriers, précisez ou joignez-les.",
+          messagePlaceholder: "Décrivez votre situation (bref). Si vous avez des délais/courriers, précisez-les.",
           button: variant === "page" ? "Envoyer le message" : "Envoyer",
           hint: "Réponse par e-mail. Rendez-vous / accueil sur inscription.",
           required: "Champ obligatoire",
@@ -48,7 +49,7 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
           namePlaceholder: "Ваше имя",
           emailPlaceholder: "Ваш e-mail",
           messagePlaceholder:
-            "Опишите ситуацию (кратко). Если есть сроки или письмо — напишите об этом или приложите.",
+            "Опишите ситуацию (кратко). Если есть сроки или письмо — укажите это в тексте.",
           button: variant === "page" ? "Отправить сообщение" : "Отправить",
           hint: "Ответим по e-mail. Приём/встречи — по записи.",
           required: "Обязательное поле",
@@ -235,9 +236,9 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
 
       {/* Кнопка отправки: по нажатию проверяем поля и открываем письмо в почте (в зависимости от варианта формы). */}
       <div className={variant === "hero" ? "quickForm-submitRow quickForm-submitRow--hero" : "quickForm-submitRow"}>
-        <button className="btn btn--pill btn--blue" type="submit">
+        <Button variant="primary" type="submit">
           {texts.button}
-        </button>
+        </Button>
       </div>
 
       {/* Подсказка под формой: в Hero оставляем, а на странице /contact она уже есть в тексте страницы. */}

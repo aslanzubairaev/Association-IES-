@@ -4,8 +4,9 @@
  Здесь можно поменять список пунктов и ссылку, не затрагивая остальную страницу.
 */
 
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card/Card";
+import { Button } from "@/components/ui/Button/Button";
 
 type ActionsPreviewProps = {
   locale: "ru" | "fr";
@@ -35,7 +36,7 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
         ];
 
   return (
-    <section className="section section--pink-2">
+    <section className="section section--pink-2 actions-short-block">
       <Container>
         <div className="section-head">
           <h2 className="h2 h2--blue">{title}</h2>
@@ -43,15 +44,15 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
         </div>
 
         <div className="grid-2">
-          <div className="card card--paper">
+          <Card className="card-list" hoverable={false}>
             <ul className="bullet-list">
               {items.map((it) => (
                 <li key={it}>{it}</li>
               ))}
             </ul>
-          </div>
+          </Card>
 
-          <div className="card card--paper card--highlight">
+          <Card className="card-summary" hoverable={false}>
             <h3 className="h3 h3--blue">
               {locale === "fr" ? "Voir tout" : "Посмотреть все"}
             </h3>
@@ -60,12 +61,17 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
                 ? "Ouvrez la page avec les programmes et les formats."
                 : "Откройте страницу с программами и форматами."}
             </p>
+            <p className="p" style={{ marginTop: 10 }}>
+              {locale === "fr"
+                ? "Vous y trouverez les formats, les horaires, l’inscription et les adresses."
+                : "Там будут форматы, расписания, регистрация и адреса по активностям."}
+            </p>
             <div style={{ marginTop: 14 }}>
-              <Link className="btn btn--pill btn--blue" href={`/${locale}/actions`}>
+              <Button variant="primary" href={`/${locale}/actions`}>
                 {locale === "fr" ? "Aller aux actions" : "Перейти к действиям"}
-              </Link>
+              </Button>
             </div>
-          </div>
+          </Card>
         </div>
       </Container>
     </section>

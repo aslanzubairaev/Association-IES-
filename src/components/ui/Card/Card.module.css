@@ -1,0 +1,23 @@
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-card);
+  color: var(--text-primary);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .surface:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.26);
+    box-shadow: 0 20px 52px rgba(7, 10, 32, 0.28);
+  }
+
+  .surface[data-hover="false"]:hover {
+    transform: none;
+    border-color: var(--surface-border);
+    box-shadow: var(--shadow-soft);
+    background: var(--surface);
+  }
+}

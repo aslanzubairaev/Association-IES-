@@ -1,10 +1,11 @@
 /* Этот файл показывает верхний блок главной страницы: заголовок, описание, кнопки и компактную форму связи. */
 
-import Link from "next/link";
 import type { CSSProperties } from "react";
 import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { InstagramBadge } from "@/components/social/InstagramBadge";
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card/Card";
+import { Button } from "@/components/ui/Button/Button";
 
 type HeroProps = {
   locale: "ru" | "fr";
@@ -32,7 +33,7 @@ export function Hero({ locale }: HeroProps) {
     <section className="section section--purple slant hero-section" style={slantPurpleStyle}>
       <Container>
         <div className="hero-grid">
-          <div className="card card--glass hero-left hero-left--mobile-plain">
+          <Card className="card--glass hero-left hero-left--mobile-plain" surface={false}>
             {/* Крупный заголовок: кратко объясняет, что ассоциация помогает адаптироваться именно в Страсбурге. */}
             <h1 className="h1">
               {title.split("\n").map((line, idx) => (
@@ -48,12 +49,12 @@ export function Hero({ locale }: HeroProps) {
 
             {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
             <div className="actions hero-actions">
-              <Link className="btn btn--pill btn--yellow" href={`/${locale}/aide`}>
+              <Button className="hero-button" variant="accent" href={`/${locale}/aide`}>
                 {ctaPrimary}
-              </Link>
-              <Link className="btn btn--pill btn--outline-white" href={`/${locale}/actions`}>
+              </Button>
+              <Button className="hero-button" variant="secondary" href={`/${locale}/actions`}>
                 {ctaSecondary}
-              </Link>
+              </Button>
             </div>
 
             {/* Ключевые слова: помогают быстро понять, про что наши направления (без кликов). */}
@@ -68,9 +69,9 @@ export function Hero({ locale }: HeroProps) {
                 {locale === "fr" ? "Synergie" : "Синергия"}
               </span>
             </div>
-          </div>
+          </Card>
 
-          <aside className="card card--yellow hero-right">
+          <Card as="aside" className="card--yellow hero-right" surface={false}>
             {/* Эта форма позволяет быстро открыть письмо в почте без телефона и личных имён. */}
             <QuickContactForm locale={locale} />
 
@@ -78,7 +79,7 @@ export function Hero({ locale }: HeroProps) {
             <div className="info-stack" style={{ marginTop: 12 }}>
               <InstagramBadge href="https://instagram.com/ies_info" handle="@ies_info" />
             </div>
-          </aside>
+          </Card>
         </div>
       </Container>
     </section>

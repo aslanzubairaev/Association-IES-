@@ -6,6 +6,7 @@
 
 import type { CSSProperties } from "react";
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card/Card";
 
 type TrustBlockProps = {
   locale: "ru" | "fr";
@@ -46,23 +47,23 @@ export function TrustBlock({ locale }: TrustBlockProps) {
         </div>
 
         <div className="grid-2">
-          <div className="card card--glass accent-left">
+          <Card className="accent-left" hoverable={false}>
             <h3 className="h3">{locale === "fr" ? "Ce que vous obtenez" : "что вы получаете"}</h3>
             <ul className="list">
               {points.map((p) => (
                 <li key={p}>{p}</li>
               ))}
             </ul>
-          </div>
+          </Card>
 
-          <div className="quote-card" role="note" aria-label="цитата">
+          <Card className="quote-card" surface={false} role="note" aria-label="цитата">
             <p className="quote-card__text">
               {locale === "fr"
                 ? "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »"
                 : "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»"}
             </p>
             <p className="quote-card__sign">ASSOCIATION IES</p>
-          </div>
+          </Card>
         </div>
       </Container>
     </section>

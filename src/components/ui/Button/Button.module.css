@@ -1,0 +1,67 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease,
+    color 180ms ease;
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
+}
+
+.primary:hover {
+  background: var(--btn-primary-bg-hover);
+  box-shadow: 0 10px 26px rgba(7, 12, 40, 0.25);
+}
+
+.secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
+}
+
+.secondary:hover {
+  background: var(--btn-secondary-bg-hover);
+  box-shadow: 0 10px 24px rgba(7, 12, 40, 0.2);
+}
+
+.accent {
+  background: var(--btn-accent-bg);
+  color: var(--btn-accent-text);
+  border-color: var(--btn-accent-border);
+}
+
+.accent:hover {
+  background: var(--btn-accent-bg-hover);
+  box-shadow: 0 12px 26px rgba(11, 27, 51, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
