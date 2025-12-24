@@ -42,9 +42,9 @@ export default function ContactPage({
   const whenTitle = contactCopy[locale].whenTitle;
   const whenItems = contactCopy[locale].whenItems;
   const helperTextRu =
-    "Пожалуйста, опишите ситуацию подробно — с датами, шагами и тем, что уже сделано. Так мы ответим быстрее.";
+    "Опишите ситуацию по пунктам: даты, что уже сделано и какие есть сроки/письма. Так мы ответим быстрее и точнее.";
   const helperTextFr =
-    "Merci de décrire la situation en détail — avec dates, étapes et ce qui a déjà été fait. Cela nous aide à répondre plus vite.";
+    "Décrivez la situation de façon structurée : dates, démarches déjà faites, délais/courriers. Cela nous aide à répondre plus vite et plus précisément.";
 
   return (
     <main className="section section--purple">
