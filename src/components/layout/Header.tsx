@@ -7,7 +7,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Container } from "@/components/ui/Container";
 
@@ -29,9 +29,7 @@ export function Header({ locale }: HeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const langMenuDesktopId = useId();
   const langMenuMobileId = useId();
-
-  // Язык, на который можно быстро переключиться одной кнопкой.
-  const otherLocale = locale === "ru" ? "fr" : "ru";
+  const [currentHash, setCurrentHash] = useState("");
 
   const labels =
     locale === "fr"
@@ -50,8 +48,20 @@ export function Header({ locale }: HeaderProps) {
           contact: "Контакты",
         };
 
+  const searchParams = useSearchParams();
+
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
+
+  function resolveLocalePath(targetLocale: "ru" | "fr") {
+    const queryString = searchParams.toString();
+    const querySuffix = queryString ? `?${queryString}` : "";
+    const basePath = pathname
+      ? pathname.replace(/^\/(ru|fr)(?=\/|$)/, `/${targetLocale}`)
+      : `/${targetLocale}`;
+    const normalizedPath = basePath === pathname ? `/${targetLocale}` : basePath;
+    return `${normalizedPath}${querySuffix}${currentHash}`;
+  }
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -77,6 +87,16 @@ export function Header({ locale }: HeaderProps) {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobileMenuOpen, isLangMenuOpen]);
+
+  useEffect(() => {
+    function handleHashChange() {
+      setCurrentHash(window.location.hash || "");
+    }
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   // Действие по нажатию на “бургер”: открыть или закрыть мобильное меню.
   function toggleMobileMenu() {
@@ -151,9 +171,10 @@ export function Header({ locale }: HeaderProps) {
               <div className="lang-menu" id={langMenuDesktopId} role="menu">
                 <Link
                   className="lang-menu-item"
-                  href="/fr"
+                  href={resolveLocalePath("fr")}
                   role="menuitem"
                   aria-current={locale === "fr" ? "page" : undefined}
+                  scroll={false}
                   onClick={() => setIsLangMenuOpen(false)}
                 >
                   <span className="lang-menu-code">FR</span>
@@ -161,9 +182,10 @@ export function Header({ locale }: HeaderProps) {
                 </Link>
                 <Link
                   className="lang-menu-item"
-                  href="/ru"
+                  href={resolveLocalePath("ru")}
                   role="menuitem"
                   aria-current={locale === "ru" ? "page" : undefined}
+                  scroll={false}
                   onClick={() => setIsLangMenuOpen(false)}
                 >
                   <span className="lang-menu-code">RU</span>
@@ -210,9 +232,10 @@ export function Header({ locale }: HeaderProps) {
                 <div className="lang-menu" id={langMenuMobileId} role="menu">
                   <Link
                     className="lang-menu-item"
-                    href="/fr"
+                    href={resolveLocalePath("fr")}
                     role="menuitem"
                     aria-current={locale === "fr" ? "page" : undefined}
+                    scroll={false}
                     onClick={() => setIsLangMenuOpen(false)}
                   >
                     <span className="lang-menu-code">FR</span>
@@ -220,9 +243,10 @@ export function Header({ locale }: HeaderProps) {
                   </Link>
                   <Link
                     className="lang-menu-item"
-                    href="/ru"
+                    href={resolveLocalePath("ru")}
                     role="menuitem"
                     aria-current={locale === "ru" ? "page" : undefined}
+                    scroll={false}
                     onClick={() => setIsLangMenuOpen(false)}
                   >
                     <span className="lang-menu-code">RU</span>
