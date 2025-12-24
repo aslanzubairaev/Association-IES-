@@ -7,12 +7,15 @@
 import { instagramBadgeCopy } from "@/content/actions";
 
 type InstagramBadgeProps = {
+  locale: "ru" | "fr";
   href: string;
   handle: string;
 };
 
 // Этот блок нужен для аккуратной ссылки на Instagram внутри карточек (например, в Hero).
-export function InstagramBadge({ href, handle }: InstagramBadgeProps) {
+export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
+  const copy = instagramBadgeCopy[locale];
+
   return (
     <div className="info instagramBadge">
       <a className="instagramBadge-link" href={href} target="_blank" rel="noreferrer">
@@ -48,7 +51,8 @@ export function InstagramBadge({ href, handle }: InstagramBadgeProps) {
           </svg>
         </span>
         <span className="instagramBadge-text">
-          <span className="instagramBadge-label">{instagramBadgeCopy.label}</span>
+          <span className="instagramBadge-label">{copy.label}</span>
+          <span className="instagramBadge-description">{copy.description}</span>
           <span className="instagramBadge-handle">{handle}</span>
         </span>
       </a>

@@ -63,7 +63,7 @@ export function Hero({ locale }: HeroProps) {
 
             {/* Ссылка на Instagram: быстрый канал связи и новости ассоциации. */}
             <div className="info-stack" style={{ marginTop: 12 }}>
-              <InstagramBadge href="https://instagram.com/ies_info" handle="@ies_info" />
+              <InstagramBadge locale={locale} href="https://instagram.com/ies_info" handle="@ies_info" />
             </div>
           </Card>
         </div>

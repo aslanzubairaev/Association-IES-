@@ -1045,16 +1045,16 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
   fr: {
     title: "Écrire à l’association",
     helper:
-      "Avant de nous écrire, faites défiler vers le bas et choisissez la rubrique qui vous correspond — nous pourrons vous aider plus vite.",
+      "Pour que nous répondions plus vite, faites défiler la page et choisissez la rubrique adaptée. Ensuite, remplissez le formulaire — nous répondrons par e-mail.",
     nameLabel: "Nom et prénom *",
-    emailLabel: "E-MAIL *",
+    emailLabel: "E-mail *",
     messageLabel: "Message *",
     namePlaceholder: "Votre nom et prénom",
     emailPlaceholder: "Votre e-mail",
     messagePlaceholder:
-      "Décrivez votre situation en détail. Si vous avez des délais/courriers, précisez-les.",
+      "Décrivez votre situation en détail. Si vous avez des délais ou un courrier, précisez-le.",
     buttonLabel: { hero: "Envoyer", page: "Envoyer" },
-    hint: "Réponse par e-mail. Rendez-vous / accueil sur inscription.",
+    hint: "Réponse par e-mail. Rendez-vous uniquement sur inscription.",
     required: "Champ requis",
     invalidEmail: "Vérifiez le format de l’e-mail",
     openingGmail: "Message envoyé. Réponse par e-mail.",
@@ -1068,16 +1068,17 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
   },
   ru: {
     title: "Написать в ассоциацию",
-    helper: "Перед тем как написать, пролистайте ниже и выберите нужный раздел — так мы быстрее поможем.",
+    helper:
+      "Чтобы мы быстрее разобрались, пролистайте ниже и выберите подходящий раздел. Затем заполните форму — ответим по e-mail.",
     nameLabel: "Имя и фамилия *",
-    emailLabel: "E-MAIL *",
+    emailLabel: "E-mail *",
     messageLabel: "Сообщение *",
     namePlaceholder: "Имя и фамилия",
     emailPlaceholder: "Ваш e-mail",
     messagePlaceholder:
       "Опишите ситуацию подробно. Если есть сроки или письмо — укажите это в тексте.",
     buttonLabel: { hero: "Отправить", page: "Отправить" },
-    hint: "Ответим по e-mail. Приём/встречи — по записи.",
+    hint: "Ответим по e-mail. Встреча — только по записи.",
     required: "Заполните поле",
     invalidEmail: "Проверьте формат e-mail",
     openingGmail: "Сообщение отправлено. Ответим по e-mail.",
@@ -1164,10 +1165,18 @@ export const actionsPageCopy: Record<ActionsLocale, ActionsPageCopy> = {
 
 type InstagramBadgeCopy = {
   label: string;
+  description: string;
 };
 
-export const instagramBadgeCopy: InstagramBadgeCopy = {
-  label: "Instagram",
+export const instagramBadgeCopy: Record<ActionsLocale, InstagramBadgeCopy> = {
+  fr: {
+    label: "Instagram",
+    description: "Actus et annonces",
+  },
+  ru: {
+    label: "Instagram",
+    description: "Новости и анонсы",
+  },
 };
 
 export const siteMetadata = {
