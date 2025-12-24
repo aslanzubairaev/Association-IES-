@@ -25,7 +25,7 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
         </div>
 
         {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}
-        <div className="card card--paper">
+        <div className="card card--paper aide-card">
           <ul className="list" style={{ marginTop: 0 }}>
             {copy.items.map((item) => (
               <li key={item}>{item}</li>

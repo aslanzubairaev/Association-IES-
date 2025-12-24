@@ -28,7 +28,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
         {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}
         <div className="cards-grid" aria-label={copy.title}>
           {copy.items.map((topic) => (
-            <article key={topic.topicParam} className="card card--paper accent-left accent--blue">
+            <article key={topic.topicParam} className="card card--paper aide-card accent-left accent--blue">
               {/* Заголовок карточки: название темы, чтобы быстро “сканировать” взглядом. */}
               <h3 className="h3 h3--blue">{topic.title}</h3>
 

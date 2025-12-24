@@ -752,6 +752,33 @@ a {
   font-size: 12px;
 }
 
+/* Карточки “Actions / Действия”: используем тот же полупрозрачный фон, что и в quickNav. */
+.actions-card.card--paper {
+  background: var(--surface);
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+}
+
+.actions-card.card--paper .h3--blue {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.actions-card.card--paper .p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.actions-card.card--paper .list {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.actions-card.card--paper .actions-card-meta {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.actions-card.card--paper .actions-card-meta-label {
+  color: rgba(255, 255, 255, 0.92);
+}
+
 /* Плавные переходы между цветными секциями: тонкая “лента” градиента внизу секции. */
 .section-seam-bottom {
   position: relative;
@@ -787,9 +814,74 @@ a {
   --seam-to: var(--purple);
 }
 
-/* Карточки на странице “Поддержать / Soutenir”: делаем фон не “стерильно белым”, а мягко тонированным под секцию. */
-.support-card.support-card--pink.card--paper {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(91, 54, 184, 0.10) 100%);
+/* Карточки на странице “О нас”: такие же полу-прозрачные поверхности, как у quickNav. */
+.about-card.card--paper {
+  background: var(--surface);
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+}
+
+.about-card.card--paper.card--highlight {
+  border-color: var(--surface-border);
+}
+
+/* Карточки на странице “Aide / Чем помогаем”: такие же цвета, как у quickNav. */
+.aide-card.card--paper {
+  background: var(--surface);
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+}
+
+.aide-card .fineprint {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* Левая карточка на странице “Контакты”: такой же фон, как у quickNav. */
+.contact-card.card--paper {
+  background: var(--surface);
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+}
+
+.contact-card.card--paper .h3--blue {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.contact-card.card--paper .p,
+.contact-card.card--paper .list,
+.contact-card.card--paper .fineprint {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.contact-card.card--paper .contact-box {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Правая карточка с формой: золотой фон как у .card--yellow. */
+.contact-card.contact-card--yellow.card--paper {
+  background: var(--yellow);
+  border: var(--border) solid rgba(11, 27, 51, 0.14);
+  box-shadow: 0 22px 60px rgba(11, 27, 51, 0.18);
+  color: var(--ink);
+}
+
+/* Карточки на странице “Поддержать / Soutenir”: такие же полу-прозрачные поверхности, как у quickNav. */
+.support-card.card--paper {
+  background: var(--surface);
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+}
+
+.support-card.card--paper .h3--blue {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.support-card.card--paper .p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.support-card.card--paper .list {
+  color: rgba(255, 255, 255, 0.84);
 }
 
 /* Карточки в фиолетовой секции “Волонтёрство”: лёгкий лавандовый тон, чтобы сочеталось с фоном. */
@@ -813,11 +905,11 @@ a {
 
 /* Наводка курсора: небольшая “живость”, без резких анимаций. */
 @media (prefers-reduced-motion: no-preference) {
-  .support-card.support-card--pink.card--paper {
+  .support-card.card--paper {
     transition: transform 160ms ease, box-shadow 160ms ease;
   }
 
-  .support-card.support-card--pink.card--paper:hover {
+  .support-card.card--paper:hover {
     transform: translateY(-2px);
     box-shadow: 0 22px 60px rgba(11, 27, 51, 0.16);
   }

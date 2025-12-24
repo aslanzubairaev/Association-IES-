@@ -75,7 +75,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
 
           {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
           <article
-            className="card card--paper accent-left accent--blue"
+            className="card card--paper support-card accent-left accent--blue"
             style={{ marginTop: 16 }}
           >
             <h3 className="h3 h3--blue">{text.importantTitle}</h3>

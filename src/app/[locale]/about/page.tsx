@@ -35,7 +35,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
 
         {/* Верхний блок: “кто мы” и “наши цели” в двух карточках рядом. */}
         <div className="grid-2">
-          <div className="card card--paper" id="who">
+          <div className="card card--paper about-card accent-left accent--blue" id="who">
             {/* Основной текст: три абзаца, как в новом копирайте. */}
             <p className="p">{copy.mainParagraphs[0]}</p>
             <p className="p" style={{ marginTop: 10 }}>
@@ -46,7 +46,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
             </p>
           </div>
 
-          <div className="card card--paper card--highlight">
+          <div className="card card--paper card--highlight about-card accent-left accent--blue">
             {/* Список целей: три пункта, чтобы человек сразу понял направления работы. */}
             <h2 className="h3 h3--blue">{copy.goalsTitle}</h2>
             <ul className="list" style={{ marginTop: 10 }}>
@@ -59,7 +59,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
 
         {/* Нижний блок: “сила IES” и понятный призыв к действию в двух карточках рядом. */}
         <div className="grid-2" style={{ marginTop: 18 }}>
-            <div className="card card--paper">
+            <div className="card card--paper about-card accent-left accent--blue">
             {/* Сильные стороны: короткий список, который объясняет, почему подход работает. */}
             <h2 className="h3 h3--blue">{copy.strengthTitle}</h2>
             <ul className="list" style={{ marginTop: 10 }}>
@@ -69,7 +69,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
             </ul>
           </div>
 
-          <div className="card card--paper card--highlight">
+          <div className="card card--paper card--highlight about-card accent-left accent--blue">
             {/* Призыв к действию: что можно сделать и куда нажать. */}
             <h2 className="h3 h3--blue">{ctaTitle}</h2>
             <ul className="list" style={{ marginTop: 10 }}>
