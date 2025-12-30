@@ -1442,14 +1442,16 @@ a {
 }
 
 .contact-page .quickForm input,
-.contact-page .quickForm textarea {
+.contact-page .quickForm textarea,
+.contact-page .quickForm select {
   border: 1.5px solid rgba(11, 27, 51, 0.18);
   padding: 12px 14px;
   font-size: 15px;
   line-height: 1.55;
 }
 
-.contact-page .quickForm input {
+.contact-page .quickForm input,
+.contact-page .quickForm select {
   height: 44px;
 }
 
@@ -1464,7 +1466,8 @@ a {
 }
 
 .contact-page .quickForm input:focus,
-.contact-page .quickForm textarea:focus {
+.contact-page .quickForm textarea:focus,
+.contact-page .quickForm select:focus {
   border-color: rgba(15, 82, 166, 0.5);
   box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.18);
 }

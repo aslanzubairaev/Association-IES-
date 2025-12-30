@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { ActionCard } from "@/components/actions/ActionCard";
-import { actionsCopy, actionsPageCopy, getActionsTopicParam } from "@/content/actions";
+import { actionsCopy, actionsPageCopy } from "@/content/actions";
 
 export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
@@ -45,7 +45,6 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
           aria-label={actionsPageCopy[locale].catalogAriaLabel}
         >
           {copy.items.map((it) => {
-            const topic = getActionsTopicParam(it.slug);
             return (
               <ActionCard
                 key={it.slug}
@@ -60,7 +59,7 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
                 whenWhereLabel={copy.directions.whenWhereLabel}
                 whenWhereText={copy.directions.whenWhereText}
                 ctaLabel={copy.directions.cta}
-                href={`/${locale}/contacts?topic=${encodeURIComponent(topic)}`}
+                href={`/${locale}/contact?topic=${encodeURIComponent(it.topicKey)}`}
               />
             );
           })}

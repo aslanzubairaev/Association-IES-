@@ -973,7 +973,7 @@
   .field span{ font-weight: 800; font-size: 12px; opacity: .8; text-transform: uppercase; letter-spacing: .02em; font-family: Montserrat, Inter, system-ui, sans-serif; }
   .field--full{ grid-column: 1 / -1; }
   
-  input, textarea{
+  input, textarea, select{
     width: 100%;
     border-radius: 14px;
     border: 1px solid rgba(15,82,166,.22);
@@ -982,7 +982,7 @@
     outline: none;
     background: var(--color-surface);
   }
-  input:focus, textarea:focus{
+  input:focus, textarea:focus, select:focus{
     border-color: rgba(15,82,166,.55);
     box-shadow: 0 0 0 4px rgba(15,82,166,.12);
   }
@@ -996,7 +996,8 @@
     opacity: 1;
   }
   .quickForm input,
-  .quickForm textarea{
+  .quickForm textarea,
+  .quickForm select{
     /* Поля на акцентной (золотой) панели: делаем их светлее и контрастнее, чтобы текст читался. */
     background: rgba(255, 255, 255, 0.82);
     color: var(--color-text);
@@ -1006,8 +1007,13 @@
     appearance: none;
     -webkit-appearance: none;
   }
+  .quickForm select{
+    appearance: auto;
+    -webkit-appearance: auto;
+  }
   .quickForm input:focus,
-  .quickForm textarea:focus{
+  .quickForm textarea:focus,
+  .quickForm select:focus{
     border-width: 2px;
     border-color: rgba(15, 82, 166, 0.55);
     box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.16);
@@ -1017,7 +1023,8 @@
     color: rgba(11, 27, 51, 0.68);
   }
   .quickForm input[aria-invalid="true"],
-  .quickForm textarea[aria-invalid="true"]{
+  .quickForm textarea[aria-invalid="true"],
+  .quickForm select[aria-invalid="true"]{
     border-color: rgba(74, 43, 166, 0.55);
     box-shadow: 0 0 0 4px rgba(74, 43, 166, 0.10);
   }

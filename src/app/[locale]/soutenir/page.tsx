@@ -12,9 +12,9 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   // Все тексты страницы зависят от языка, который выбран в адресе (/ru или /fr).
   const text = soutenirCopy[locale];
 
-  const helloAssoHref = `/${locale}/contacts?topic=donation_helloasso`;
-  const cotizUpHref = `/${locale}/contacts?topic=donation_cotizup`;
-  const volunteerHref = `/${locale}/contacts?topic=volunteer`;
+  const helloAssoHref = `/${locale}/contact?topic=donation_helloasso`;
+  const cotizUpHref = `/${locale}/contact?topic=donation_cotizup`;
+  const volunteerHref = `/${locale}/contact?topic=volunteer`;
 
   return (
     <main className="page--purple support-page">

@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { ContactEmailBox } from "@/components/contacts/ContactEmailBox";
 import { IesList, IesListItem } from "@/components/ui/IesList";
-import { contactCopy, contactTopicLabels, getActionTopicLabels } from "@/content/actions";
+import { contactCopy, resolveContactTopicKey } from "@/content/actions";
 import styles from "./page.module.css";
 
 export default function ContactPage({
@@ -17,25 +17,7 @@ export default function ContactPage({
   const locale = params.locale;
   const email = "contact@associationies.fr";
 
-  // Этот словарь нужен, чтобы по параметру topic подставить понятную строку в начале сообщения.
-  const topicLabels = contactTopicLabels;
-
-  // Этот словарь нужен для “Действия / Actions”: тема должна выглядеть как “Действия — <направление>”.
-  const actionTopicLabels = getActionTopicLabels();
-
-  // Если тема пришла из другой страницы, добавляем её в начало текста — так человеку проще написать.
-  const rawTopic = searchParams?.topic;
-  const topicLabel = rawTopic ? topicLabels[rawTopic] : null;
-  const actionTopicLabel = rawTopic ? actionTopicLabels[rawTopic] : null;
-  const subjectLabel = contactCopy[locale].subjectLabel;
-  const prefillMessage =
-    actionTopicLabel && rawTopic
-      ? `${subjectLabel}: ${locale === "fr" ? actionTopicLabel.fr : actionTopicLabel.ru}\n\n`
-      : topicLabel && rawTopic
-        ? `${subjectLabel}: ${locale === "fr" ? topicLabel.fr : topicLabel.ru}\n\n`
-        : rawTopic
-          ? `${subjectLabel}: ${rawTopic}\n\n`
-          : undefined;
+  const initialTopic = resolveContactTopicKey(searchParams?.topic);
 
   // Тексты страницы меняются в зависимости от языка.
   const pageTitle = contactCopy[locale].pageTitle;
@@ -77,7 +59,7 @@ export default function ContactPage({
             {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
             <div className="contact-form-wrap">
               <p className={styles.formNote}>{locale === "ru" ? helperTextRu : helperTextFr}</p>
-              <QuickContactForm locale={locale} variant="page" prefillMessage={prefillMessage} />
+              <QuickContactForm locale={locale} variant="page" initialTopic={initialTopic} />
             </div>
           </div>
         </div>

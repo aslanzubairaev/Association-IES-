@@ -34,7 +34,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
         <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
           {copy.items.map((topic) => (
             <article
-              key={topic.topicParam}
+              key={topic.topicKey}
               className="card card--paper aide-card aide-card--topic"
             >
               {/* Заголовок карточки: название темы, чтобы быстро “сканировать” взглядом. */}
@@ -54,7 +54,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
 
               {/* Кнопка: сразу ведёт в контакты с выбранной темой. */}
               <div className="aide-cta">
-                <Link className="btn btn--pill btn--blue" href={`/${locale}/contacts?topic=${topic.topicParam}`}>
+                <Link className="btn btn--pill btn--blue" href={`/${locale}/contact?topic=${topic.topicKey}`}>
                   {copy.chooseLabel}
                 </Link>
               </div>
