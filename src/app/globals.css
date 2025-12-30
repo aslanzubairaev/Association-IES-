@@ -733,46 +733,91 @@ a {
   justify-content: center;
 }
 
-/* Instagram-блок: делаем “дороже” (иконка + два текста, без подчёркивания ссылки). */
+/* Instagram-блок: крупный логотип с фирменным градиентом + подписи, без подчёркивания ссылки. */
 .instagramBadge-link {
   display: flex;
   align-items: center;
   gap: 12px;
   text-decoration: none !important;
+  color: inherit;
 }
 
 .instagramBadge-icon {
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at 30% 30%, #feda75 0%, #fa7e1e 35%, #d62976 65%, #962fbf 82%, #4f5bd5 100%);
-  border: 1px solid rgba(11, 27, 51, 0.12);
-  color: #ffffff;
+  background: transparent;
+  border: 0;
   flex: 0 0 auto;
-  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.instagramBadge-link:hover .instagramBadge-icon,
-.instagramBadge-link:focus-visible .instagramBadge-icon {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 22px rgba(16, 24, 40, 0.18);
+.instagramBadge-icon svg {
+  width: 48px;
+  height: 48px;
+  display: block;
 }
 
-.instagramBadge-link:active .instagramBadge-icon {
-  transform: translateY(1px) scale(0.98);
+.instagramBadge-link:hover .instagramBadge-icon svg,
+.instagramBadge-link:focus-visible .instagramBadge-icon svg {
+  animation: instagramBadgePulse 480ms ease;
+}
+
+.instagramBadge-outline {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .instagramBadge-icon {
-    transition: none;
+  .instagramBadge-outline {
+    stroke-dashoffset: 0;
+  }
+
+  .instagramBadge-outline.is-animating {
+    animation: none;
+  }
+
+  .instagramBadge-link:hover .instagramBadge-icon svg,
+  .instagramBadge-link:focus-visible .instagramBadge-icon svg {
+    animation: none;
+  }
+}
+
+.instagramBadge-outline.is-animating {
+  animation: instagramBadgeDraw 1.6s ease forwards;
+}
+
+@keyframes instagramBadgeDraw {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes instagramBadgePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
 .instagramBadge-text {
   display: grid;
   gap: 2px;
+}
+
+.instagramBadge-titleRow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .instagramBadge-label {
@@ -782,7 +827,7 @@ a {
 }
 
 .instagramBadge-handle {
-  font-weight: 900;
+  font-weight: 600;
   font-family: Montserrat, Inter, system-ui, sans-serif;
   letter-spacing: 0.01em;
 }
