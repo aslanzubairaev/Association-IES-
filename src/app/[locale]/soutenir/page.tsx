@@ -17,30 +17,17 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
 
   return (
     <main className="page--purple support-page">
-      {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка. */}
+      {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
       <section className="section section--purple support-donate-section">
         <Container>
           <div className="section-head">
             <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-              {text.heroTitle}
-            </h1>
-            <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
-              {text.heroLead}
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-      <section className="section section--purple">
-        <Container>
-          <div className="section-head">
-            <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
               {text.donateTitle}
-            </h2>
+            </h1>
             <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
               {text.donateLead}
             </p>
+            <p className="note">{text.donateNote}</p>
           </div>
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}

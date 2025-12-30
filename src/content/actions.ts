@@ -1034,10 +1034,9 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
 };
 
 type SoutenirCopy = {
-  heroTitle: string;
-  heroLead: string;
   donateTitle: string;
   donateLead: string;
+  donateNote: string;
   ctaWriteUs: string;
   helloAssoTitle: string;
   helloAssoText: string;
@@ -1056,11 +1055,10 @@ type SoutenirCopy = {
 
 export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
   fr: {
-    heroTitle: "SOUTENIR L’ASSOCIATION",
-    heroLead:
-      "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets d’accompagnement. Choisissez une option : don, cotisation ou bénévolat.",
     donateTitle: "DONS / COTISATIONS",
     donateLead:
+      "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets de soutien. Choisissez la manière qui vous convient : don, cotisation ou bénévolat.",
+    donateNote:
       "Les liens HelloAsso et CotizUp peuvent changer — écrivez-nous via le formulaire et nous vous enverrons le lien à jour.",
     ctaWriteUs: "Demander le lien",
     helloAssoTitle: "HelloAsso",
@@ -1079,11 +1077,10 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     howToHelpItems: ["Aide lors des rencontres", "Traduction et rédaction", "Organisation et logistique", "Photo/vidéo et médias"],
   },
   ru: {
-    heroTitle: "ПОДДЕРЖАТЬ АССОЦИАЦИЮ",
-    heroLead:
-      "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ: донат, взнос или волонтёрство.",
     donateTitle: "ДОНАТ / ВЗНОСЫ",
     donateLead:
+      "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ: донат, взнос или волонтёрство.",
+    donateNote:
       "Ссылки HelloAsso и CotizUp могут обновляться — напишите нам через форму, и мы пришлём актуальную.",
     ctaWriteUs: "Запросить ссылку",
     helloAssoTitle: "HelloAsso",
