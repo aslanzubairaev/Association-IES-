@@ -3,6 +3,7 @@
 
 import { useState, type FormEvent, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button/Button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { contactTopicSelectKeys, getContactTopicLabel, quickContactFormCopy } from "@/content/actions";
 import { buildOutlookComposeUrl, openWebmailCompose } from "@/lib/emailCompose";
 
@@ -149,6 +150,12 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
     body: preparedBody ?? "",
   });
 
+  function handleTopicOpenChange(open: boolean) {
+    if (!open) {
+      setTouched((prev) => ({ ...prev, topic: true }));
+    }
+  }
+
   return (
     <form className="form quickForm" onSubmit={handleSubmit} noValidate>
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
@@ -208,23 +215,23 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
 
         <label className="field">
           <span>{copy.topicLabel}</span>
-          <select
+          <Select
             name="topic"
-            required
-            value={selectedTopic}
-            onChange={(e) => setSelectedTopic(e.target.value)}
-            onBlur={() => setTouched((prev) => ({ ...prev, topic: true }))}
-            aria-invalid={showTopicError ? true : undefined}
+            value={selectedTopic || undefined}
+            onValueChange={setSelectedTopic}
+            onOpenChange={handleTopicOpenChange}
           >
-            <option value="" disabled>
-              {copy.topicPlaceholder}
-            </option>
-            {topicOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger aria-invalid={showTopicError ? true : undefined}>
+              <SelectValue className="ies-select-value" placeholder={copy.topicPlaceholder} />
+            </SelectTrigger>
+            <SelectContent position="popper" sideOffset={8}>
+              {topicOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <div className="fineprint" style={errorTextStyle} aria-live="polite">
             {showTopicError ? copy.required : "\u00A0"}
           </div>

@@ -1472,6 +1472,114 @@ a {
   box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.18);
 }
 
+.quickForm .ies-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  border: 1.5px solid rgba(11, 27, 51, 0.18);
+  padding: 12px 14px;
+  min-height: 44px;
+  font-size: 15px;
+  line-height: 1.55;
+  font-family: inherit;
+  color: rgba(11, 27, 51, 0.92);
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quickForm .ies-select-trigger:focus-visible,
+.quickForm .ies-select-trigger[data-state="open"] {
+  outline: none;
+  border-color: rgba(15, 82, 166, 0.5);
+  box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.18);
+}
+
+.ies-select-value {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ies-select-value[data-placeholder] {
+  color: rgba(11, 27, 51, 0.6);
+}
+
+.ies-select-icon {
+  display: inline-flex;
+  color: rgba(11, 27, 51, 0.6);
+}
+
+.ies-select-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ies-select-content {
+  z-index: 60;
+  min-width: var(--radix-select-trigger-width);
+  border-radius: 16px;
+  border: 1px solid rgba(11, 27, 51, 0.14);
+  background: rgba(255, 252, 240, 0.96);
+  box-shadow: 0 24px 60px rgba(7, 12, 40, 0.22);
+  color: rgba(11, 27, 51, 0.96);
+  overflow: hidden;
+}
+
+.ies-select-viewport {
+  max-height: 320px;
+  overflow: auto;
+  padding: 4px 0;
+}
+
+.ies-select-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  padding-right: 36px;
+  line-height: 1.35;
+  cursor: pointer;
+  user-select: none;
+  text-transform: none;
+  outline: none;
+}
+
+.ies-select-item:not(:last-child) {
+  border-bottom: 1px solid rgba(11, 27, 51, 0.08);
+}
+
+.ies-select-item[data-highlighted] {
+  background: rgba(11, 27, 51, 0.05);
+}
+
+.ies-select-item[data-state="checked"] {
+  background: rgba(11, 27, 51, 0.08);
+  font-weight: 600;
+}
+
+.ies-select-item[data-disabled] {
+  color: rgba(11, 27, 51, 0.4);
+  pointer-events: none;
+}
+
+.ies-select-item-indicator {
+  position: absolute;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(11, 27, 51, 0.6);
+}
+
+.ies-select-item-indicator svg {
+  width: 16px;
+  height: 16px;
+}
+
 @media (max-width: 520px) {
   .contact-page .contact-cta-button {
     width: 100%;
