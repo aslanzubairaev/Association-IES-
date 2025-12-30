@@ -1262,6 +1262,10 @@ a {
   color: rgba(255, 255, 255, 0.98);
 }
 
+.contact-page .contact-card--info .h3--blue {
+  margin-top: 24px;
+}
+
 .contact-card.card--paper .p,
 .contact-card.card--paper .list,
 .contact-card.card--paper .fineprint {
@@ -1311,7 +1315,7 @@ a {
 }
 
 .contact-page .contact-list {
-  margin-top: 10px;
+  margin-top: 18px;
   font-size: 15px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
@@ -1337,6 +1341,13 @@ a {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.contact-page .contact-email-label {
+  color: rgba(255, 255, 255, 0.98);
+  font-size: 19px;
 }
 
 .contact-page .contact-email-value {
@@ -1351,6 +1362,11 @@ a {
 .contact-page .contact-email-helper {
   margin-top: 10px;
   opacity: 0.85;
+}
+
+.contact-page .contact-email-status {
+  text-align: center;
+  width: 100%;
 }
 
 .privacy-page a {
@@ -1386,6 +1402,13 @@ a {
   color: var(--btn-primary-text);
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.contact-page .contact-cta-button--compact {
+  height: 38px;
+  min-height: 38px;
+  padding: 0 16px;
+  font-size: 13px;
 }
 
 .contact-page .contact-cta-button:hover {

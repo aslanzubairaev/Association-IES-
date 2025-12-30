@@ -28,20 +28,19 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
   }
 
   return (
-    <div className="contact-box contact-email-box">
+    <div className="contact-email-box">
       {/* Строка с e-mail: делаем контрастным, но не открываем mailto, чтобы не появлялось системное окно. */}
       <div className="contact-email-row">
         <div>
-          <b>{copy.emailLabel}:</b>{" "}
-          <span
-            className="contact-email-value"
-          >
-            {email}
-          </span>
+          <b className="contact-email-label">{copy.emailLabel}:</b>
         </div>
 
         {/* Запасной вариант: можно просто скопировать адрес и вставить его в любую почту. */}
-        <button type="button" className="btn btn--pill contact-cta-button" onClick={handleCopy}>
+        <button
+          type="button"
+          className="btn btn--pill contact-cta-button contact-cta-button--compact"
+          onClick={handleCopy}
+        >
           {copy.copyLabel}
         </button>
       </div>
