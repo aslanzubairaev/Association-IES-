@@ -1856,4 +1856,14 @@ a {
   .quickForm .form-grid {
     grid-template-columns: 1fr;
   }
+
+  .ies-select-content {
+    width: var(--radix-select-trigger-width);
+    min-width: 0;
+    max-width: calc(100vw - 32px);
+  }
+
+  .ies-select-viewport {
+    max-height: min(320px, 50vh);
+  }
 }
