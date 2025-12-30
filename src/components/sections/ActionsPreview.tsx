@@ -7,6 +7,7 @@
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { actionsPreviewCopy } from "@/content/actions";
 
 type ActionsPreviewProps = {
@@ -27,11 +28,11 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
 
         <div className="grid-2">
           <Card className="card-list" hoverable={false}>
-            <ul className="bullet-list">
+            <IesList className="bullet-list">
               {copy.items.map((it) => (
-                <li key={it}>{it}</li>
+                <IesListItem key={it}>{it}</IesListItem>
               ))}
-            </ul>
+            </IesList>
           </Card>
 
           <Card className="card-summary" hoverable={false}>

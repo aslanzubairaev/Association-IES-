@@ -13,7 +13,7 @@ type FooterProps = {
 };
 
 // Низ сайта: минимальная версия, без сложной логики.
-export function Footer({ locale }: FooterProps) {
+export default function Footer({ locale }: FooterProps) {
   const copy = footerCopy[locale];
 
   return (
@@ -28,14 +28,12 @@ export function Footer({ locale }: FooterProps) {
             <Link href={`/${locale}/contact`}>
               {copy.contactLabel}
             </Link>
+            <Link href={`/${locale}/privacy`}>
+              {copy.privacyLabel}
+            </Link>
           </div>
         </div>
       </Container>
     </footer>
   );
 }
-
-
-
-
-

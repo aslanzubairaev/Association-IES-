@@ -1,33 +1,38 @@
-/* Этот файл показывает форму контактов: проверяет поля и открывает Gmail Web в новой вкладке без mailto и системных окон. */
+/* Этот файл показывает форму контактов: проверяет поля и открывает webmail в новой вкладке без mailto и системных окон. */
 "use client";
 
 import { useState, type FormEvent, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button/Button";
-import { quickContactFormCopy } from "@/content/actions";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { contactTopicSelectKeys, getContactTopicLabel, quickContactFormCopy } from "@/content/actions";
+import { buildOutlookComposeUrl, openWebmailCompose } from "@/lib/emailCompose";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
   // Где используется форма: в Hero (компактный блок) или на отдельной странице контактов.
   variant?: "hero" | "page";
-  // Текст, который можно заранее подставить в сообщение (например, когда тема выбрана на другой странице).
-  prefillMessage?: string;
+  // Тема, которую можно заранее выбрать (например, если пользователь пришёл с другой страницы).
+  initialTopic?: string;
 };
 
 const EMAIL_TO = "contact@associationies.fr";
 
 // Эта форма работает без сервера: она проверяет поля и подготавливает текст письма для копирования.
-export function QuickContactForm({ locale, variant = "hero", prefillMessage }: QuickContactFormProps) {
+export function QuickContactForm({ locale, variant = "hero", initialTopic }: QuickContactFormProps) {
   const copy = quickContactFormCopy[locale];
   const buttonLabel = copy.buttonLabel[variant];
+  const initialTopicValue = initialTopic?.trim() ?? "";
 
   // Эти значения нужны, чтобы собрать текст письма и показать подсказки при ошибках.
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // Сообщение можно заранее заполнить (например, строкой “Тема: CAF …”), чтобы человеку было проще начать.
-  const [message, setMessage] = useState(() => prefillMessage ?? "");
-  const [touched, setTouched] = useState<{ name: boolean; email: boolean; message: boolean }>({
+  const [phone, setPhone] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState(initialTopicValue);
+  const [message, setMessage] = useState("");
+  const [touched, setTouched] = useState<{ name: boolean; email: boolean; topic: boolean; message: boolean }>({
     name: false,
     email: false,
+    topic: false,
     message: false,
   });
   const [preparedBody, setPreparedBody] = useState<string | null>(null);
@@ -40,12 +45,26 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
 
   const nameIsEmpty = name.trim().length === 0;
   const emailIsEmpty = email.trim().length === 0;
+  const topicIsEmpty = selectedTopic.trim().length === 0;
   const messageIsEmpty = message.trim().length === 0;
+
+  const standardTopicOptions = contactTopicSelectKeys.map((key) => ({
+    value: key,
+    label: getContactTopicLabel(locale, key),
+  }));
+  const isStandardTopic = contactTopicSelectKeys.includes(selectedTopic);
+  const extraTopicOption =
+    selectedTopic && !isStandardTopic
+      ? { value: selectedTopic, label: getContactTopicLabel(locale, selectedTopic) }
+      : null;
+  const topicOptions = extraTopicOption ? [extraTopicOption, ...standardTopicOptions] : standardTopicOptions;
+  const messagePlaceholder = selectedTopic === "other" ? copy.messagePlaceholderOther : copy.messagePlaceholderDefault;
 
   const showNameError = touched.name && nameIsEmpty;
   const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   const showEmailRequiredError = touched.email && emailIsEmpty;
   const showEmailInvalidError = touched.email && !emailIsEmpty && !emailLooksValid;
+  const showTopicError = touched.topic && topicIsEmpty;
   const showMessageError = touched.message && messageIsEmpty;
 
   // Эта функция срабатывает при отправке формы: она проверяет поля и подготавливает текст письма.
@@ -53,15 +72,21 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     e.preventDefault();
     setCopyStatus(null);
     setStatusText(null);
-    setTouched({ name: true, email: true, message: true });
+    setTouched({ name: true, email: true, topic: true, message: true });
 
-    if (nameIsEmpty || emailIsEmpty || messageIsEmpty) return;
+    if (nameIsEmpty || emailIsEmpty || topicIsEmpty || messageIsEmpty) return;
     if (!emailLooksValid) return;
 
-    const body =
-      `${copy.bodyLabels.name}: ${name}\n` +
-      `${copy.bodyLabels.email}: ${email}\n\n` +
-      `${copy.bodyLabels.message}:\n${message}\n`;
+    const phoneValue = phone.trim();
+    const topicLabel = getContactTopicLabel(locale, selectedTopic);
+    const headerLines = [
+      `${copy.bodyLabels.name}: ${name}`,
+      `${copy.bodyLabels.email}: ${email}`,
+      phoneValue ? `${copy.bodyLabels.phone}: ${phoneValue}` : null,
+      `${copy.bodyLabels.topic}: ${topicLabel}`,
+    ].filter(Boolean);
+
+    const body = `${headerLines.join("\n")}\n\n${copy.bodyLabels.message}:\n${message}\n`;
 
     const subject = copy.subject;
 
@@ -70,13 +95,7 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
 
     // На странице контактов мы сразу открываем Gmail Web в новой вкладке.
     if (variant === "page") {
-      const gmailComposeHref =
-        "https://mail.google.com/mail/?view=cm&fs=1" +
-        `&to=${encodeURIComponent(EMAIL_TO)}` +
-        `&su=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-
-      const opened = window.open(gmailComposeHref, "_blank", "noopener,noreferrer");
+      const opened = openWebmailCompose({ to: EMAIL_TO, subject, body });
       setStatusText(opened ? copy.openingGmail : copy.sendFailed);
       setShowFollowUps(true);
 
@@ -97,8 +116,10 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
 
     setName("");
     setEmail("");
+    setPhone("");
+    setSelectedTopic("");
     setMessage("");
-    setTouched({ name: false, email: false, message: false });
+    setTouched({ name: false, email: false, topic: false, message: false });
   }
 
   // Действие по кнопке: копируем готовый текст письма в буфер, чтобы его можно было вставить в Gmail/Outlook.
@@ -123,11 +144,17 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     lineHeight: "16px",
   };
 
-  const outlookComposeHref =
-    "https://outlook.office.com/mail/deeplink/compose" +
-    `?to=${encodeURIComponent(EMAIL_TO)}` +
-    `&subject=${encodeURIComponent(preparedSubject ?? "")}` +
-    `&body=${encodeURIComponent(preparedBody ?? "")}`;
+  const outlookComposeHref = buildOutlookComposeUrl({
+    to: EMAIL_TO,
+    subject: preparedSubject ?? "",
+    body: preparedBody ?? "",
+  });
+
+  function handleTopicOpenChange(open: boolean) {
+    if (!open) {
+      setTouched((prev) => ({ ...prev, topic: true }));
+    }
+  }
 
   return (
     <form className="form quickForm" onSubmit={handleSubmit} noValidate>
@@ -170,11 +197,51 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
           </div>
         </label>
 
+        <label className="field">
+          <span>{copy.phoneLabel}</span>
+          <input
+            type="tel"
+            name="phone"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder={copy.phonePlaceholder}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <div className="fineprint" style={errorTextStyle} aria-live="polite">
+            {"\u00A0"}
+          </div>
+        </label>
+
+        <label className="field">
+          <span>{copy.topicLabel}</span>
+          <Select
+            name="topic"
+            value={selectedTopic || undefined}
+            onValueChange={setSelectedTopic}
+            onOpenChange={handleTopicOpenChange}
+          >
+            <SelectTrigger aria-invalid={showTopicError ? true : undefined}>
+              <SelectValue className="ies-select-value" placeholder={copy.topicPlaceholder} />
+            </SelectTrigger>
+            <SelectContent position="popper" sideOffset={8}>
+              {topicOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <div className="fineprint" style={errorTextStyle} aria-live="polite">
+            {showTopicError ? copy.required : "\u00A0"}
+          </div>
+        </label>
+
         <label className="field field--full">
           <span>{copy.messageLabel}</span>
           <textarea
             rows={5}
-            placeholder={copy.messagePlaceholder}
+            placeholder={messagePlaceholder}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, message: true }))}

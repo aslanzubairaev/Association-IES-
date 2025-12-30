@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { soutenirCopy } from "@/content/actions";
 
 export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -11,36 +12,23 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   // Все тексты страницы зависят от языка, который выбран в адресе (/ru или /fr).
   const text = soutenirCopy[locale];
 
-  const helloAssoHref = `/${locale}/contacts?topic=donation_helloasso`;
-  const cotizUpHref = `/${locale}/contacts?topic=donation_cotizup`;
-  const volunteerHref = `/${locale}/contacts?topic=volunteer`;
+  const helloAssoHref = `/${locale}/contact?topic=donation_helloasso`;
+  const cotizUpHref = `/${locale}/contact?topic=donation_cotizup`;
+  const volunteerHref = `/${locale}/contact?topic=volunteer`;
 
   return (
     <main className="page--purple support-page">
-      {/* HERO / Вступление: коротко объясняем, зачем нужна поддержка. */}
+      {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
       <section className="section section--purple support-donate-section">
         <Container>
           <div className="section-head">
             <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-              {text.heroTitle}
-            </h1>
-            <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
-              {text.heroLead}
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-      <section className="section section--purple">
-        <Container>
-          <div className="section-head">
-            <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
               {text.donateTitle}
-            </h2>
+            </h1>
             <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
               {text.donateLead}
             </p>
+            <p className="note">{text.donateNote}</p>
           </div>
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
@@ -102,11 +90,11 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             />
 
             <SupportCard title={text.howToHelpTitle} className="support-card">
-              <ul className="list support-list">
+              <IesList className="list support-list">
                 {text.howToHelpItems.map((item) => (
-                  <li key={item}>{item}</li>
+                  <IesListItem key={item}>{item}</IesListItem>
                 ))}
-              </ul>
+              </IesList>
             </SupportCard>
           </div>
         </Container>

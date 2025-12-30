@@ -6,6 +6,7 @@
 
 import type { CSSProperties } from "react";
 import Script from "next/script";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 
 const slantPurpleStyle = { "--next": "var(--purple)" } as CSSProperties;
 const slantPinkStyle = { "--next": "var(--pink)" } as CSSProperties;
@@ -156,23 +157,23 @@ export function LegacyLanding() {
                   документами, учёбой, работой и поддержкой в повседневных
                   вопросах.
                 </p>
-                <ul className="list">
-                  <li>Понятно объясняем шаги и помогаем с процессом</li>
-                  <li>Работаем локально (Страсбург)</li>
-                  <li>Стараемся делать всё максимально человечески</li>
-                </ul>
+                <IesList className="list">
+                  <IesListItem>Понятно объясняем шаги и помогаем с процессом</IesListItem>
+                  <IesListItem>Работаем локально (Страсбург)</IesListItem>
+                  <IesListItem>Стараемся делать всё максимально человечески</IesListItem>
+                </IesList>
               </div>
 
               <div className="card card--glass accent-left">
                 <h3 className="h3">как мы работаем</h3>
-                <ul className="list">
-                  <li>Вы связываетесь с нами удобным способом</li>
-                  <li>Коротко описываете ситуацию</li>
-                  <li>
+                <IesList className="list">
+                  <IesListItem>Вы связываетесь с нами удобным способом</IesListItem>
+                  <IesListItem>Коротко описываете ситуацию</IesListItem>
+                  <IesListItem>
                     Мы подсказываем следующий шаг
                     (консультация/встреча/сопровождение)
-                  </li>
-                </ul>
+                  </IesListItem>
+                </IesList>
                 <p className="note">
                   Точные условия (по записи/бесплатно/время работы) добавим после
                   подтверждения.
@@ -355,15 +356,15 @@ export function LegacyLanding() {
               <aside className="actions-side" aria-label="почему это работает">
                 <div className="card card--paper actions-strength">
                   <h3 className="h3 h3--blue">что делает IES сильнее</h3>
-                  <ul className="bullet-list">
-                    <li>
+                  <IesList className="bullet-list">
+                    <IesListItem>
                       Человеческий подход и работа “на земле”, рядом с реальными
                       потребностями
-                    </li>
-                    <li>Активная сеть волонтёров и экспертов</li>
-                    <li>Партнёрства с местными центрами и организациями</li>
-                    <li>Сильная вовлечённость в районы и сообщества</li>
-                  </ul>
+                    </IesListItem>
+                    <IesListItem>Активная сеть волонтёров и экспертов</IesListItem>
+                    <IesListItem>Партнёрства с местными центрами и организациями</IesListItem>
+                    <IesListItem>Сильная вовлечённость в районы и сообщества</IesListItem>
+                  </IesList>
                 </div>
 
                 <div className="quote-card" role="note" aria-label="цитата">
@@ -536,7 +537,6 @@ export function LegacyLanding() {
     </>
   );
 }
-
 
 
 

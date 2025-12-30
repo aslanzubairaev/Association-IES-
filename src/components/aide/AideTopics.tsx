@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aideCopy } from "@/content/actions";
 
 type AideTopicsProps = {
@@ -33,18 +34,18 @@ export function AideTopics({ locale }: AideTopicsProps) {
         <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
           {copy.items.map((topic) => (
             <article
-              key={topic.topicParam}
-              className="card card--paper aide-card aide-card--topic accent-left accent--blue"
+              key={topic.topicKey}
+              className="card card--paper aide-card aide-card--topic"
             >
               {/* Заголовок карточки: название темы, чтобы быстро “сканировать” взглядом. */}
               <h3 className="h3 h3--blue">{topic.title}</h3>
 
               {/* Короткие примеры: помогают человеку понять “это про меня?” за 3–5 секунд. */}
-              <ul className="list">
+              <IesList className="list">
                 {topic.examples.map((example) => (
-                  <li key={example}>{example}</li>
+                  <IesListItem key={example}>{example}</IesListItem>
                 ))}
-              </ul>
+              </IesList>
 
               {/* Одна практичная строка: что приложить к сообщению. */}
               <p className="fineprint aide-fineprint">
@@ -53,7 +54,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
 
               {/* Кнопка: сразу ведёт в контакты с выбранной темой. */}
               <div className="aide-cta">
-                <Link className="btn btn--pill btn--blue" href={`/${locale}/contacts?topic=${topic.topicParam}`}>
+                <Link className="btn btn--pill btn--blue" href={`/${locale}/contact?topic=${topic.topicKey}`}>
                   {copy.chooseLabel}
                 </Link>
               </div>

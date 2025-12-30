@@ -6,7 +6,6 @@
 */
 
 import { ActionsPreview } from "@/components/sections/ActionsPreview";
-import { Footer } from "@/components/sections/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { QuickNav } from "@/components/sections/QuickNav";
 import { TrustBlock } from "@/components/sections/TrustBlock";
@@ -23,7 +22,6 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
         <TrustBlock locale={locale} />
         <ActionsPreview locale={locale} />
       </div>
-      <Footer locale={locale} />
     </main>
   );
 }

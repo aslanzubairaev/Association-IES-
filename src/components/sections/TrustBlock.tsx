@@ -7,6 +7,7 @@
 import type { CSSProperties } from "react";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { trustBlockCopy } from "@/content/actions";
 
 type TrustBlockProps = {
@@ -29,13 +30,13 @@ export function TrustBlock({ locale }: TrustBlockProps) {
         </div>
 
         <div className="grid-2">
-          <Card className="accent-left" hoverable={false}>
+          <Card hoverable={false}>
             <h3 className="h3">{copy.benefitsTitle}</h3>
-            <ul className="list">
+            <IesList className="list">
               {copy.points.map((p) => (
-                <li key={p}>{p}</li>
+                <IesListItem key={p}>{p}</IesListItem>
               ))}
-            </ul>
+            </IesList>
           </Card>
 
           <Card className="quote-card" surface={false} role="note" aria-label={copy.quoteAriaLabel}>

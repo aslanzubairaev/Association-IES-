@@ -6,6 +6,7 @@
 
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 // Общая оболочка для страниц /ru и /fr: проверяем язык и показываем переключатель.
 export default function LocaleLayout({
@@ -24,14 +25,14 @@ export default function LocaleLayout({
   }
 
   return (
-    <div>
+    <div className="locale-shell">
       <div id="top" aria-hidden="true" />
       {/* Верхняя шапка, которая остаётся видимой при прокрутке. */}
       <Header locale={locale} />
       {/* Отступ под шапку, чтобы содержимое страницы не уходило под неё. */}
       <div className="locale-content">{children}</div>
+      <Footer locale={locale} />
     </div>
   );
 }
-
 
