@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { buildGmailComposeUrl } from "@/lib/emailCompose";
 import { privacyPageCopy } from "@/content/actions";
 
@@ -47,11 +48,11 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
 
             <section>
               <h2 className="h3 h3--blue">{copy.dataTitle}</h2>
-              <ul className="list">
+              <IesList className="list">
                 {copy.dataItems.map((item) => (
-                  <li key={item}>{item}</li>
+                  <IesListItem key={item}>{item}</IesListItem>
                 ))}
-              </ul>
+              </IesList>
             </section>
 
             <section>
@@ -76,11 +77,11 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
 
             <section>
               <h2 className="h3 h3--blue">{copy.rightsTitle}</h2>
-              <ul className="list">
+              <IesList className="list">
                 {copy.rightsItems.map((item) => (
-                  <li key={item}>{item}</li>
+                  <IesListItem key={item}>{item}</IesListItem>
                 ))}
-              </ul>
+              </IesList>
             </section>
 
             <section>

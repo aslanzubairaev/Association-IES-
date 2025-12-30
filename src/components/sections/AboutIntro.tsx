@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aboutIntroCopy } from "@/content/actions";
 
 type AboutIntroProps = {
@@ -37,11 +38,11 @@ export function AboutIntro({ locale }: AboutIntroProps) {
 
           <div className="card card--paper card--highlight">
             <h3 className="h3 h3--blue">{copy.goalsTitle}</h3>
-            <ul className="list" style={{ marginTop: 10 }}>
+            <IesList className="list" style={{ marginTop: 10 }}>
               {copy.goals.map((goal) => (
-                <li key={goal}>{goal}</li>
+                <IesListItem key={goal}>{goal}</IesListItem>
               ))}
-            </ul>
+            </IesList>
 
             <div style={{ marginTop: 14 }}>
               <Link className="btn btn--pill btn--blue" href={ctaHref}>

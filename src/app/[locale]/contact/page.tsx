@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/contacts/QuickContactForm";
 import { ContactEmailBox } from "@/components/contacts/ContactEmailBox";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { contactCopy, contactTopicLabels, getActionTopicLabels } from "@/content/actions";
 import styles from "./page.module.css";
 
@@ -59,17 +60,17 @@ export default function ContactPage({
         </div>
 
         <div className="grid-2 contact-grid">
-          <div className="card card--paper contact-card contact-card--info accent-left accent--blue">
+          <div className="card card--paper contact-card contact-card--info">
             {/* Общий e-mail ассоциации: без личных телефонов и персональных контактов. */}
             <ContactEmailBox locale={locale} email={email} />
 
             {/* Подсказка “когда писать”: помогает человеку понять, подходит ли вопрос. */}
             <h2 className="h3 h3--blue">{whenTitle}</h2>
-            <ul className="list contact-list">
+            <IesList className="list contact-list">
               {whenItems.map((item) => (
-                <li key={item}>{item}</li>
+                <IesListItem key={item}>{item}</IesListItem>
               ))}
-            </ul>
+            </IesList>
           </div>
 
           <div className="card card--paper contact-card contact-card--yellow contact-card--form">

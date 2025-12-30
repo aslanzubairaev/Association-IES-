@@ -7,6 +7,7 @@
 */
 
 import Link from "next/link";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 
 type ActionCardDirectionProps = {
   variant?: "direction";
@@ -41,18 +42,16 @@ export function ActionCard(props: ActionCardProps) {
     const { title, items, ctaLabel, href } = props;
 
     return (
-      <article className="card card--paper accent-left accent--blue actions-card actions-card--stack">
+      <article className="card card--paper actions-card actions-card--stack">
         {/* Заголовок инфо‑карточки: помогает быстро понять, что это “правила участия”. */}
         <h3 className="h3 h3--blue">{title}</h3>
 
         {/* Список пунктов: делаем небольшой отступ между строками, чтобы текст читался легче. */}
-        <ul className="list actions-card-list">
+        <IesList className="list actions-card-list">
           {items.map((item) => (
-            <li key={item}>
-              {item}
-            </li>
+            <IesListItem key={item}>{item}</IesListItem>
           ))}
-        </ul>
+        </IesList>
 
         {/* Ссылка на контакты: опционально, чтобы не плодить CTA. */}
         {ctaLabel && href ? (

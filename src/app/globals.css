@@ -1691,6 +1691,29 @@ a {
   flex-wrap: nowrap;
 }
 
+/* Списки IES: заменяем стандартные маркеры на вертикальные полоски. */
+.ies-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ies-list .ies-list-item {
+  position: relative;
+  padding-left: calc(var(--ies-list-marker-width, 6px) + var(--ies-list-gap, 16px));
+}
+
+.ies-list .ies-list-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--ies-list-marker-offset, 0.2em);
+  width: var(--ies-list-marker-width, 6px);
+  height: var(--ies-list-marker-height, 18.75px);
+  border-radius: 999px;
+  background: var(--ies-list-marker-color, currentColor);
+  opacity: var(--ies-list-marker-opacity, 0.6);
+}
+
 /* Кнопки “Скопировать” в банковской карточке: делаем компактнее, чтобы две кнопки помещались рядом. */
 .btn.btn--sm {
   padding: 10px 14px;

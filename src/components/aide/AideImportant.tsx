@@ -1,6 +1,7 @@
 /* Этот файл содержит блок “Важно знать / À savoir” и показывает 3 пункта ожиданий про ответ по e-mail и запись. */
 
 import { Container } from "@/components/ui/Container";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aideCopy } from "@/content/actions";
 
 type AideImportantProps = {
@@ -23,11 +24,11 @@ export function AideImportant({ locale }: AideImportantProps) {
 
         {/* Список ожиданий: короткие пункты, без длинных абзацев. */}
         <div className="card card--paper aide-card aide-card--wide">
-          <ul className="list">
+          <IesList className="list">
             {copy.items.map((item) => (
-              <li key={item}>{item}</li>
+              <IesListItem key={item}>{item}</IesListItem>
             ))}
-          </ul>
+          </IesList>
         </div>
       </Container>
     </section>

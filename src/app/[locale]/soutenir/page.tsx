@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { soutenirCopy } from "@/content/actions";
 
 export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -89,11 +90,11 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             />
 
             <SupportCard title={text.howToHelpTitle} className="support-card">
-              <ul className="list support-list">
+              <IesList className="list support-list">
                 {text.howToHelpItems.map((item) => (
-                  <li key={item}>{item}</li>
+                  <IesListItem key={item}>{item}</IesListItem>
                 ))}
-              </ul>
+              </IesList>
             </SupportCard>
           </div>
         </Container>

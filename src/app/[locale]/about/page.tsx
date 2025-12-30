@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aboutPageCopy } from "@/content/actions";
 
 export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -35,7 +36,7 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
 
         {/* Верхний блок: “кто мы” и “наши цели” в двух карточках рядом. */}
         <div className="grid-2">
-          <div className="card card--paper about-card accent-left accent--blue" id="who">
+          <div className="card card--paper about-card" id="who">
             {/* Основной текст: три абзаца, как в новом копирайте. */}
             <p className="p">{copy.mainParagraphs[0]}</p>
             <p className="p">
@@ -46,37 +47,37 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
             </p>
           </div>
 
-          <div className="card card--paper card--highlight about-card accent-left accent--blue">
+          <div className="card card--paper card--highlight about-card">
             {/* Список целей: три пункта, чтобы человек сразу понял направления работы. */}
             <h2 className="h3 h3--blue">{copy.goalsTitle}</h2>
-            <ul className="list">
+            <IesList className="list">
               {copy.goals.map((goal) => (
-                <li key={goal}>{goal}</li>
+                <IesListItem key={goal}>{goal}</IesListItem>
               ))}
-            </ul>
+            </IesList>
           </div>
         </div>
 
         {/* Нижний блок: “сила IES” и понятный призыв к действию в двух карточках рядом. */}
         <div className="grid-2" style={{ marginTop: 18 }}>
-            <div className="card card--paper about-card accent-left accent--blue">
+            <div className="card card--paper about-card">
             {/* Сильные стороны: короткий список, который объясняет, почему подход работает. */}
             <h2 className="h3 h3--blue">{copy.strengthTitle}</h2>
-            <ul className="list">
+            <IesList className="list">
               {copy.strengthItems.map((item) => (
-                <li key={item}>{item}</li>
+                <IesListItem key={item}>{item}</IesListItem>
               ))}
-            </ul>
+            </IesList>
           </div>
 
-          <div className="card card--paper card--highlight about-card accent-left accent--blue">
+          <div className="card card--paper card--highlight about-card">
             {/* Призыв к действию: что можно сделать и куда нажать. */}
             <h2 className="h3 h3--blue">{ctaTitle}</h2>
-            <ul className="list">
+            <IesList className="list">
               {ctaList.map((item) => (
-                <li key={item}>{item}</li>
+                <IesListItem key={item}>{item}</IesListItem>
               ))}
-            </ul>
+            </IesList>
 
             <div className="about-cta">
               <Link className="btn btn--pill btn--blue" href={contactHref}>

@@ -1,6 +1,7 @@
 /* Этот файл содержит блок “Перед тем как написать / Avant d’écrire” и показывает чек-лист, что добавить в сообщение. */
 
 import { Container } from "@/components/ui/Container";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aideCopy } from "@/content/actions";
 
 type AideBeforeYouWriteProps = {
@@ -26,11 +27,11 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
 
         {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}
         <div className="card card--paper aide-card aide-card--wide">
-          <ul className="list">
+          <IesList className="list">
             {copy.items.map((item) => (
-              <li key={item}>{item}</li>
+              <IesListItem key={item}>{item}</IesListItem>
             ))}
-          </ul>
+          </IesList>
         </div>
       </Container>
     </section>
