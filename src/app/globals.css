@@ -1372,10 +1372,61 @@ a {
 .privacy-page a {
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
 }
 
 .privacy-page a:hover {
   text-decoration-thickness: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.8);
+}
+
+.privacy-page .privacy-section {
+  padding: 26px 0;
+}
+
+.privacy-page .privacy-section + .privacy-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.privacy-page .card--paper .h3--blue {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.privacy-page .card--paper .p,
+.privacy-page .card--paper .list {
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+.privacy-page .card--paper .p + .p {
+  margin-top: 10px;
+}
+
+.privacy-page .card--paper .p + .list,
+.privacy-page .card--paper .list + .p {
+  margin-top: 14px;
+}
+
+.privacy-page .ies-list .ies-list-item {
+  margin-bottom: 8px;
+}
+
+.privacy-page .ies-list .ies-list-item:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-page .card--paper .muted {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.privacy-page .card--paper a {
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .privacy-email-link {

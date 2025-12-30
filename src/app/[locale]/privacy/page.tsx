@@ -41,12 +41,12 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
 
         <article className="card card--paper">
           <div style={{ display: "grid", gap: 18 }}>
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.whoTitle}</h2>
               <p className="p">{copy.whoText}</p>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.dataTitle}</h2>
               <IesList className="list">
                 {copy.dataItems.map((item) => (
@@ -55,27 +55,27 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
               </IesList>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.purposeTitle}</h2>
               <p className="p">{copy.purposeText}</p>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.legalTitle}</h2>
               <p className="p">{copy.legalText}</p>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.shareTitle}</h2>
               <p className="p">{copy.shareText}</p>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.retentionTitle}</h2>
               <p className="p">{copy.retentionText}</p>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.rightsTitle}</h2>
               <IesList className="list">
                 {copy.rightsItems.map((item) => (
@@ -84,7 +84,7 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
               </IesList>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.contactTitle}</h2>
               <p className="p">
                 {copy.contactTextBefore}
@@ -101,7 +101,7 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
               </p>
             </section>
 
-            <section>
+            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.cookiesTitle}</h2>
               <p className="p">{copy.cookiesText}</p>
             </section>
