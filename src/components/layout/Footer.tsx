@@ -13,7 +13,7 @@ type FooterProps = {
 };
 
 // Низ сайта: минимальная версия, без сложной логики.
-export function Footer({ locale }: FooterProps) {
+export default function Footer({ locale }: FooterProps) {
   const copy = footerCopy[locale];
 
   return (
@@ -34,8 +34,3 @@ export function Footer({ locale }: FooterProps) {
     </footer>
   );
 }
-
-
-
-
-
