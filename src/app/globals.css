@@ -1308,6 +1308,27 @@ a {
   opacity: 0.85;
 }
 
+.privacy-page a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacy-page a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.privacy-email-link {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 520px) {
+  .privacy-page .privacy-title {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+}
+
 .contact-page .contact-cta-button {
   height: 44px;
   min-height: 44px;

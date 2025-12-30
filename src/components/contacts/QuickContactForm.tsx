@@ -1,9 +1,10 @@
-/* Этот файл показывает форму контактов: проверяет поля и открывает Gmail Web в новой вкладке без mailto и системных окон. */
+/* Этот файл показывает форму контактов: проверяет поля и открывает webmail в новой вкладке без mailto и системных окон. */
 "use client";
 
 import { useState, type FormEvent, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button/Button";
 import { quickContactFormCopy } from "@/content/actions";
+import { buildOutlookComposeUrl, openWebmailCompose } from "@/lib/emailCompose";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
@@ -70,13 +71,7 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
 
     // На странице контактов мы сразу открываем Gmail Web в новой вкладке.
     if (variant === "page") {
-      const gmailComposeHref =
-        "https://mail.google.com/mail/?view=cm&fs=1" +
-        `&to=${encodeURIComponent(EMAIL_TO)}` +
-        `&su=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-
-      const opened = window.open(gmailComposeHref, "_blank", "noopener,noreferrer");
+      const opened = openWebmailCompose({ to: EMAIL_TO, subject, body });
       setStatusText(opened ? copy.openingGmail : copy.sendFailed);
       setShowFollowUps(true);
 
@@ -123,11 +118,11 @@ export function QuickContactForm({ locale, variant = "hero", prefillMessage }: Q
     lineHeight: "16px",
   };
 
-  const outlookComposeHref =
-    "https://outlook.office.com/mail/deeplink/compose" +
-    `?to=${encodeURIComponent(EMAIL_TO)}` +
-    `&subject=${encodeURIComponent(preparedSubject ?? "")}` +
-    `&body=${encodeURIComponent(preparedBody ?? "")}`;
+  const outlookComposeHref = buildOutlookComposeUrl({
+    to: EMAIL_TO,
+    subject: preparedSubject ?? "",
+    body: preparedBody ?? "",
+  });
 
   return (
     <form className="form quickForm" onSubmit={handleSubmit} noValidate>

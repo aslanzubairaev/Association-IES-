@@ -744,6 +744,7 @@ type FooterCopy = {
   copyright: string;
   aboutLabel: string;
   contactLabel: string;
+  privacyLabel: string;
 };
 
 export const footerCopy: Record<ActionsLocale, FooterCopy> = {
@@ -751,11 +752,13 @@ export const footerCopy: Record<ActionsLocale, FooterCopy> = {
     copyright: "© 2025 Association IES",
     aboutLabel: "о нас",
     contactLabel: "контакты",
+    privacyLabel: "Политика конфиденциальности",
   },
   fr: {
     copyright: "© 2025 Association IES",
     aboutLabel: "À propos",
     contactLabel: "Contact",
+    privacyLabel: "Politique de confidentialité",
   },
 };
 
@@ -906,6 +909,127 @@ export const aboutPageCopy: Record<ActionsLocale, AboutPageCopy> = {
     supportLabel: "Soutenir",
     ctaTitle: "Envie d’agir avec nous ?",
     ctaList: ["Participer à nos actions", "Devenir bénévole", "Soutenir nos projets"],
+  },
+};
+
+type PrivacyPageCopy = {
+  title: string;
+  lead: string;
+  metadataTitle: string;
+  metadataDescription: string;
+  whoTitle: string;
+  whoText: string;
+  dataTitle: string;
+  dataItems: string[];
+  purposeTitle: string;
+  purposeText: string;
+  legalTitle: string;
+  legalText: string;
+  shareTitle: string;
+  shareText: string;
+  retentionTitle: string;
+  retentionText: string;
+  rightsTitle: string;
+  rightsItems: string[];
+  contactTitle: string;
+  contactTextBefore: string;
+  contactLinkLabel: string;
+  contactTextAfter: string;
+  contactEmail: string;
+  contactSubject: string;
+  contactBody: string;
+  cookiesTitle: string;
+  cookiesText: string;
+  updatedLabel: string;
+  updatedDate: string;
+};
+
+export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
+  ru: {
+    title: "Политика конфиденциальности",
+    lead: "Мы уважаем вашу приватность и объясняем, какие данные собираем и как используем.",
+    metadataTitle: "Политика конфиденциальности | Association IES",
+    metadataDescription:
+      "Как Association IES собирает и использует данные, ваши права и способы связи.",
+    whoTitle: "Кто мы",
+    whoText: "Association IES — некоммерческая ассоциация в Страсбурге, Франция.",
+    dataTitle: "Какие данные мы собираем",
+    dataItems: ["Имя и фамилия", "Адрес электронной почты", "Текст сообщения"],
+    purposeTitle: "Зачем мы используем данные",
+    purposeText:
+      "Чтобы отвечать на обращения, вести коммуникацию с участниками и улучшать работу ассоциации.",
+    legalTitle: "Правовое основание (GDPR)",
+    legalText:
+      "Согласие (когда вы отправляете сообщение) и наш законный интерес обрабатывать обращения.",
+    shareTitle: "Передача третьим лицам",
+    shareText:
+      "Мы не продаём персональные данные. Передаём их только если это требуется законом или для работы почты/хостинга.",
+    retentionTitle: "Срок хранения",
+    retentionText: "Сообщения храним до 12 месяцев или на разумный срок для обработки обращений.",
+    rightsTitle: "Ваши права",
+    rightsItems: [
+      "Доступ к данным",
+      "Исправление",
+      "Удаление",
+      "Возражение против обработки",
+      "Ограничение обработки",
+      "Переносимость данных",
+    ],
+    contactTitle: "Как связаться",
+    contactTextBefore: "По вопросам конфиденциальности напишите через ",
+    contactLinkLabel: "страницу контактов",
+    contactTextAfter: " или на e-mail:",
+    contactEmail: "contact@associationies.fr",
+    contactSubject: "Сообщение с сайта Association IES (Политика конфиденциальности)",
+    contactBody: "Здравствуйте! У меня вопрос по политике конфиденциальности: ...",
+    cookiesTitle: "Cookies",
+    cookiesText:
+      "Мы используем только технические cookies, необходимые для работы сайта, и не используем рекламный трекинг.",
+    updatedLabel: "Последнее обновление:",
+    updatedDate: "30 декабря 2025",
+  },
+  fr: {
+    title: "Politique de confidentialité",
+    lead: "Nous respectons votre vie privée et expliquons quelles données nous collectons et comment nous les utilisons.",
+    metadataTitle: "Politique de confidentialité | Association IES",
+    metadataDescription:
+      "Données collectées, finalités, droits et contact pour la protection des données de l’association.",
+    whoTitle: "Qui sommes-nous",
+    whoText: "Association IES est une association à Strasbourg, France.",
+    dataTitle: "Données collectées",
+    dataItems: ["Prénom et nom", "Adresse e-mail", "Contenu du message"],
+    purposeTitle: "Finalités",
+    purposeText:
+      "Répondre aux demandes, maintenir la communication avec les personnes et améliorer le fonctionnement de l’association.",
+    legalTitle: "Base légale (RGPD)",
+    legalText: "Consentement (envoi du message) et intérêt légitime pour traiter les demandes.",
+    shareTitle: "Partage",
+    shareText:
+      "Nous ne vendons pas les données. Elles peuvent être transmises uniquement si la loi l’exige ou pour le fonctionnement de la messagerie/l’hébergement.",
+    retentionTitle: "Durée de conservation",
+    retentionText:
+      "Nous conservons les messages jusqu’à 12 mois ou pour une durée raisonnable liée au traitement des demandes.",
+    rightsTitle: "Vos droits",
+    rightsItems: [
+      "Accès",
+      "Rectification",
+      "Effacement",
+      "Opposition",
+      "Limitation du traitement",
+      "Portabilité",
+    ],
+    contactTitle: "Contact",
+    contactTextBefore: "Pour toute question, contactez-nous via la ",
+    contactLinkLabel: "page Contact",
+    contactTextAfter: " ou par e-mail :",
+    contactEmail: "contact@associationies.fr",
+    contactSubject: "Message du site Association IES (Politique de confidentialité)",
+    contactBody: "Bonjour ! J’ai une question concernant la politique de confidentialité : ...",
+    cookiesTitle: "Cookies",
+    cookiesText:
+      "Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site et aucun suivi publicitaire.",
+    updatedLabel: "Dernière mise à jour :",
+    updatedDate: "30 décembre 2025",
   },
 };
 
