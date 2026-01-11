@@ -87,22 +87,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
     },
     items: [
       {
-        slug: "permanences-administratives",
-        topicKey: "admin_consultations",
-        title: "АДМИНИСТРАТИВНЫЕ КОНСУЛЬТАЦИИ (ПО ЗАПИСИ)",
-        forWho: "Для семей, новоприбывших и жителей, у кого есть вопросы по документам и письмам.",
-        benefit: "Понятные шаги и список того, что подготовить для следующего действия.",
-        frequency: "По записи • индивидуально • в течение года",
-      },
-      {
-        slug: "emploi-cv",
-        topicKey: "work_cv_support",
-        title: "СОПРОВОЖДЕНИЕ К РАБОТЕ И CV",
-        forWho: "Для тех, кто ищет работу/стажировку или хочет улучшить CV и подачу.",
-        benefit: "Ориентиры по поиску, оформление CV и подготовка к следующему шагу.",
-        frequency: "Регулярно • по группам и индивидуально (по проекту)",
-      },
-      {
         slug: "langues-ateliers",
         topicKey: "language_development",
         title: "ЯЗЫКОВЫЕ ЗАНЯТИЯ И РАЗВИТИЕ (ВКЛ. ЧЕЧЕНСКИЙ И РУССКИЙ)",
@@ -195,22 +179,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       button: "Écrire",
     },
     items: [
-      {
-        slug: "permanences-administratives",
-        topicKey: "admin_consultations",
-        title: "CONSULTATIONS ADMINISTRATIVES (SUR RENDEZ-VOUS)",
-        forWho: "Familles, nouveaux arrivants et habitants ayant des questions sur des documents et des courriers.",
-        benefit: "Des étapes claires et la liste de ce qu’il faut préparer pour la suite.",
-        frequency: "Sur rendez-vous • individuel • toute l’année",
-      },
-      {
-        slug: "emploi-cv",
-        topicKey: "work_cv_support",
-        title: "ACCOMPAGNEMENT VERS L’EMPLOI & CV",
-        forWho: "Personnes en recherche d’emploi/stage ou souhaitant améliorer leur CV.",
-        benefit: "Repères pour la recherche, mise en forme du CV et préparation du prochain pas.",
-        frequency: "Régulier • en groupe et en individuel (selon le projet)",
-      },
       {
         slug: "langues-ateliers",
         topicKey: "language_development",

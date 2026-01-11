@@ -566,6 +566,10 @@ a {
   align-items: stretch;
 }
 
+.actions-important-block {
+  margin-top: 16px;
+}
+
 /* “Что вам нужно?” на главной: отдельная сетка, чтобы 5 карточек выглядели как 3 + 2 (нижний ряд по центру). */
 .quickNav-grid {
   display: grid;
