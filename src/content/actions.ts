@@ -860,7 +860,7 @@ type HeaderCopy = {
 export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
   ru: {
     brandLabel: "Association IES",
-    brandName: "Association IES",
+    brandName: "Association",
     navAriaLabel: "Меню сайта",
     navLabels: {
       about: "О нас",
@@ -884,7 +884,7 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
   },
   fr: {
     brandLabel: "Association IES",
-    brandName: "Association IES",
+    brandName: "Association",
     navAriaLabel: "Menu du site",
     navLabels: {
       about: "À propos",
