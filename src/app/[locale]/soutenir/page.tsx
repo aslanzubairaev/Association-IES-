@@ -12,8 +12,9 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   // Все тексты страницы зависят от языка, который выбран в адресе (/ru или /fr).
   const text = soutenirCopy[locale];
 
-  const helloAssoHref = `/${locale}/contact?topic=donation_helloasso`;
-  const cotizUpHref = `/${locale}/contact?topic=donation_cotizup`;
+  const helloAssoHref =
+    "https://www.helloasso.com/associations/association-pour-l-education-et-l-insertion-sociale-integration-education-synergie";
+  const cotizUpHref = "https://www.cotizup.com/soutien-ies";
   const volunteerHref = `/${locale}/contact?topic=volunteer`;
 
   return (
@@ -28,7 +29,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
               {text.donateLead}
             </p>
-            <p className="note">{text.donateNote}</p>
+            {text.donateNote ? <p className="note">{text.donateNote}</p> : null}
           </div>
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
@@ -36,15 +37,17 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             <SupportCard
               title={text.helloAssoTitle}
               text={text.helloAssoText}
-              ctaLabel={text.ctaWriteUs}
+              ctaLabel={text.helloAssoCta}
               ctaHref={helloAssoHref}
+              badgeLabel={text.helloAssoBadge}
               className="support-card support-card--pink"
             />
             <SupportCard
               title={text.cotizUpTitle}
               text={text.cotizUpText}
-              ctaLabel={text.ctaWriteUs}
+              ctaLabel={text.cotizUpCta}
               ctaHref={cotizUpHref}
+              badgeLabel={text.cotizUpBadge}
               className="support-card support-card--pink"
             />
             <SupportCard

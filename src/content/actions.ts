@@ -1081,8 +1081,12 @@ type SoutenirCopy = {
   ctaWriteUs: string;
   helloAssoTitle: string;
   helloAssoText: string;
+  helloAssoCta: string;
+  helloAssoBadge: string;
   cotizUpTitle: string;
   cotizUpText: string;
+  cotizUpCta: string;
+  cotizUpBadge: string;
   bankTitle: string;
   bankText: string;
   importantTitle: string;
@@ -1099,13 +1103,16 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     donateTitle: "DONS / COTISATIONS",
     donateLead:
       "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets de soutien. Choisissez la manière qui vous convient : don, cotisation ou bénévolat.",
-    donateNote:
-      "Les liens HelloAsso et CotizUp peuvent changer — écrivez-nous via le formulaire et nous vous enverrons le lien à jour.",
+    donateNote: "",
     ctaWriteUs: "Demander le lien",
     helloAssoTitle: "HelloAsso",
     helloAssoText: "Don en ligne via HelloAsso. Lien envoyé sur demande.",
+    helloAssoCta: "Accéder à HelloAsso",
+    helloAssoBadge: "Lien officiel",
     cotizUpTitle: "CotizUp",
-    cotizUpText: "Cotisation / soutien via CotizUp. Lien envoyé sur demande.",
+    cotizUpText: "Cotisation / soutien via CotizUp. Lien direct pour contribuer en ligne.",
+    cotizUpCta: "Accéder à CotizUp",
+    cotizUpBadge: "Lien officiel",
     bankTitle: "VIREMENT BANCAIRE",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "À SAVOIR",
@@ -1121,13 +1128,16 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     donateTitle: "ДОНАТ / ВЗНОСЫ",
     donateLead:
       "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ: донат, взнос или волонтёрство.",
-    donateNote:
-      "Ссылки HelloAsso и CotizUp могут обновляться — напишите нам через форму, и мы пришлём актуальную.",
+    donateNote: "",
     ctaWriteUs: "Запросить ссылку",
     helloAssoTitle: "HelloAsso",
     helloAssoText: "Онлайн-пожертвование через HelloAsso. Ссылку пришлём по запросу.",
+    helloAssoCta: "Перейти на HelloAsso",
+    helloAssoBadge: "Официальная ссылка",
     cotizUpTitle: "CotizUp",
-    cotizUpText: "Взнос/поддержка через CotizUp. Ссылку пришлём по запросу.",
+    cotizUpText: "Взнос/поддержка через CotizUp. Прямая ссылка для онлайн-взноса.",
+    cotizUpCta: "Перейти на CotizUp",
+    cotizUpBadge: "Официальная ссылка",
     bankTitle: "БАНКОВСКИЙ ПЕРЕВОД",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "ВАЖНО ЗНАТЬ",
