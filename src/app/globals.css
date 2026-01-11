@@ -1772,6 +1772,11 @@ a {
   flex-direction: column;
   height: 100%;
   padding: 30px;
+  transition: none;
+}
+
+.support-page .card--paper {
+  box-shadow: none;
 }
 
 .support-page .support-card.support-card--pink {
@@ -1787,6 +1792,31 @@ a {
   padding-top: 14px;
   display: flex;
   justify-content: center;
+}
+
+.support-page .support-card.card--paper:hover {
+  transform: none;
+  box-shadow: none;
+  background: var(--surface);
+  border-color: var(--surface-border);
+}
+
+.support-page .card--paper:hover {
+  transform: none;
+  box-shadow: none;
+  background: var(--surface);
+  border-color: var(--surface-border);
+}
+
+.support-volunteer-grid .support-card {
+  transition: none;
+}
+
+.support-volunteer-grid .support-card.card--paper:hover {
+  transform: none;
+  box-shadow: none;
+  background: var(--surface);
+  border-color: var(--surface-border);
 }
 
 .support-page .support-cta-button {
@@ -1857,15 +1887,6 @@ a {
 
 /* Наводка курсора: небольшая “живость”, без резких анимаций. */
 @media (prefers-reduced-motion: no-preference) {
-  .support-card.card--paper {
-    transition: transform 160ms ease, box-shadow 160ms ease;
-  }
-
-  .support-card.card--paper:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 22px 60px rgba(11, 27, 51, 0.16);
-  }
-
   .support-card.support-important:hover {
     transform: none;
     box-shadow: none;
