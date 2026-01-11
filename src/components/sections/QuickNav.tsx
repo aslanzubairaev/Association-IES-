@@ -30,7 +30,12 @@ export function QuickNav({ locale }: QuickNavProps) {
             const href = `/${locale}${card.path}`;
 
             return (
-              <Card key={card.id} as="article" className="accent-left accent--blue quickNav-card">
+              <Card
+                key={card.id}
+                as="article"
+                hoverable={false}
+                className="accent--blue quickNav-card"
+              >
                 <h3 className="h3 h3--blue">{card.title[locale]}</h3>
 
                 <p className="p">{card.description[locale]}</p>
