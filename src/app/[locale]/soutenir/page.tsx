@@ -6,6 +6,81 @@ import { BankTransferDetails } from "@/components/support/BankTransferDetails";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { soutenirCopy } from "@/content/actions";
 
+const helloAssoIcon = (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+    <path
+      d="M12 20.5s-7-4.4-7-10a4.2 4.2 0 0 1 7-3 4.2 4.2 0 0 1 7 3c0 5.6-7 10-7 10Z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const cotizUpIcon = (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+    <path
+      d="M5 7.5h9.5A4.5 4.5 0 0 1 19 12v0"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19 8.5v3.5h-3.5"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19 16.5H9.5A4.5 4.5 0 0 1 5 12v0"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5 15.5v-3.5h3.5"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const bankIcon = (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+    <path
+      d="M4 10.5h16"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+    <path
+      d="M6 10.5V18m4-7.5V18m4-7.5V18m4-7.5V18"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+    <path
+      d="M3.5 18H20.5"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+    <path
+      d="M4.5 8.5 12 4l7.5 4.5"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
 
@@ -36,22 +111,41 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
           <div className="actions-cards-grid">
             <SupportCard
               title={text.helloAssoTitle}
+              icon={helloAssoIcon}
               text={text.helloAssoText}
               ctaLabel={text.helloAssoCta}
               ctaHref={helloAssoHref}
-              badgeLabel={text.helloAssoBadge}
               className="support-card support-card--pink"
-            />
+            >
+              <div className="support-info-panel">
+                <div className="support-info-title">{text.benefitsTitle}</div>
+                <IesList className="list support-info-list">
+                  {text.helloAssoBenefits.map((item) => (
+                    <IesListItem key={item}>{item}</IesListItem>
+                  ))}
+                </IesList>
+              </div>
+            </SupportCard>
             <SupportCard
               title={text.cotizUpTitle}
+              icon={cotizUpIcon}
               text={text.cotizUpText}
               ctaLabel={text.cotizUpCta}
               ctaHref={cotizUpHref}
-              badgeLabel={text.cotizUpBadge}
               className="support-card support-card--pink"
-            />
+            >
+              <div className="support-info-panel">
+                <div className="support-info-title">{text.benefitsTitle}</div>
+                <IesList className="list support-info-list">
+                  {text.cotizUpBenefits.map((item) => (
+                    <IesListItem key={item}>{item}</IesListItem>
+                  ))}
+                </IesList>
+              </div>
+            </SupportCard>
             <SupportCard
               title={text.bankTitle}
+              icon={bankIcon}
               text={text.bankText}
               className="support-card support-card--pink"
             >

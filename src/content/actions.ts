@@ -1078,15 +1078,21 @@ type SoutenirCopy = {
   donateTitle: string;
   donateLead: string;
   donateNote: string;
+  officialBadge: string;
+  recommendedBadge: string;
+  externalCtaNote: string;
+  benefitsTitle: string;
   ctaWriteUs: string;
   helloAssoTitle: string;
   helloAssoText: string;
   helloAssoCta: string;
   helloAssoBadge: string;
+  helloAssoBenefits: string[];
   cotizUpTitle: string;
   cotizUpText: string;
   cotizUpCta: string;
   cotizUpBadge: string;
+  cotizUpBenefits: string[];
   bankTitle: string;
   bankText: string;
   importantTitle: string;
@@ -1104,15 +1110,29 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     donateLead:
       "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets de soutien. Choisissez la manière qui vous convient : don, cotisation ou bénévolat.",
     donateNote: "",
+    officialBadge: "Lien officiel",
+    recommendedBadge: "Recommandé",
+    externalCtaNote: "S’ouvre dans un nouvel onglet",
+    benefitsTitle: "Avantages",
     ctaWriteUs: "Demander le lien",
     helloAssoTitle: "HelloAsso",
-    helloAssoText: "Don en ligne via HelloAsso. Lien envoyé sur demande.",
+    helloAssoText: "Don en ligne via HelloAsso. Lien direct pour contribuer.",
     helloAssoCta: "Accéder à HelloAsso",
     helloAssoBadge: "Lien officiel",
+    helloAssoBenefits: [
+      "Paiement par carte en 1 minute",
+      "Reçu après paiement",
+      "Plateforme sécurisée pour les associations",
+    ],
     cotizUpTitle: "CotizUp",
     cotizUpText: "Cotisation / soutien via CotizUp. Lien direct pour contribuer en ligne.",
     cotizUpCta: "Accéder à CotizUp",
     cotizUpBadge: "Lien officiel",
+    cotizUpBenefits: [
+      "Cotisation / soutien en ligne",
+      "Adapté au soutien régulier",
+      "Page officielle de l’association",
+    ],
     bankTitle: "VIREMENT BANCAIRE",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "À SAVOIR",
@@ -1129,15 +1149,29 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     donateLead:
       "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ: донат, взнос или волонтёрство.",
     donateNote: "",
+    officialBadge: "Официальная ссылка",
+    recommendedBadge: "Рекомендуем",
+    externalCtaNote: "Откроется в новой вкладке",
+    benefitsTitle: "Преимущества",
     ctaWriteUs: "Запросить ссылку",
     helloAssoTitle: "HelloAsso",
-    helloAssoText: "Онлайн-пожертвование через HelloAsso. Ссылку пришлём по запросу.",
+    helloAssoText: "Онлайн-пожертвование через HelloAsso.",
     helloAssoCta: "Перейти на HelloAsso",
     helloAssoBadge: "Официальная ссылка",
+    helloAssoBenefits: [
+      "Оплата картой за 1 минуту",
+      "Квитанция после оплаты",
+      "Безопасная платформа для ассоциаций",
+    ],
     cotizUpTitle: "CotizUp",
-    cotizUpText: "Взнос/поддержка через CotizUp. Прямая ссылка для онлайн-взноса.",
+    cotizUpText: "Взнос/поддержка через CotizUp.",
     cotizUpCta: "Перейти на CotizUp",
     cotizUpBadge: "Официальная ссылка",
+    cotizUpBenefits: [
+      "Взнос/поддержка онлайн",
+      "Подходит для регулярной поддержки",
+      "Официальная страница ассоциации",
+    ],
     bankTitle: "БАНКОВСКИЙ ПЕРЕВОД",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "ВАЖНО ЗНАТЬ",
@@ -1322,22 +1356,22 @@ type BankTransferCopy = {
 export const bankTransferCopy: Record<ActionsLocale, BankTransferCopy> = {
   fr: {
     copyAllLabel: "Copier (IBAN + BIC)",
-    copyIbanLabel: "Copier l’IBAN",
-    copyBicLabel: "Copier le BIC",
+    copyIbanLabel: "COPIER IBAN",
+    copyBicLabel: "COPIER BIC",
     copiedLabel: "Copié",
-    copiedIbanStatus: "Copié : IBAN",
-    copiedBicStatus: "Copié : BIC",
+    copiedIbanStatus: "Copié ✓",
+    copiedBicStatus: "Copié ✓",
     copyFailedLabel: "Impossible de copier automatiquement",
     cardTitle: "Coordonnées bancaires",
     hint: "Cliquez pour copier l’IBAN ou le BIC.",
   },
   ru: {
     copyAllLabel: "Скопировать (IBAN + BIC)",
-    copyIbanLabel: "Скопировать IBAN",
-    copyBicLabel: "Скопировать BIC",
+    copyIbanLabel: "Копировать IBAN",
+    copyBicLabel: "Копировать BIC",
     copiedLabel: "Скопировано",
-    copiedIbanStatus: "Скопировано: IBAN",
-    copiedBicStatus: "Скопировано: BIC",
+    copiedIbanStatus: "Скопировано ✓",
+    copiedBicStatus: "Скопировано ✓",
     copyFailedLabel: "Не удалось скопировать автоматически",
     cardTitle: "Реквизиты",
     hint: "Нажмите, чтобы скопировать IBAN или BIC.",

@@ -13,10 +13,19 @@ type CopyToClipboardButtonProps = {
   label: string;
   copiedLabel: string;
   className?: string;
+  showStatus?: boolean;
+  onCopied?: (text: string) => void;
 };
 
 // Кнопка копирования: по нажатию копирует value и на короткое время показывает подтверждение отдельной строкой.
-export function CopyToClipboardButton({ value, label, copiedLabel, className }: CopyToClipboardButtonProps) {
+export function CopyToClipboardButton({
+  value,
+  label,
+  copiedLabel,
+  className,
+  showStatus = true,
+  onCopied,
+}: CopyToClipboardButtonProps) {
   const [statusText, setStatusText] = useState<string | null>(null);
   const statusId = useId();
 
@@ -53,9 +62,24 @@ export function CopyToClipboardButton({ value, label, copiedLabel, className }: 
     }
 
     if (isCopied) {
-      setStatusText(copiedLabel);
-      window.setTimeout(() => setStatusText(null), 1600);
+      if (showStatus) {
+        setStatusText(copiedLabel);
+        window.setTimeout(() => setStatusText(null), 1600);
+      }
+      onCopied?.(copiedLabel);
     }
+  }
+
+  if (!showStatus) {
+    return (
+      <button
+        type="button"
+        className={className ?? "btn btn--pill btn--outline-blue"}
+        onClick={copyValue}
+      >
+        {label}
+      </button>
+    );
   }
 
   return (
