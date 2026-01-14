@@ -1155,7 +1155,7 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     benefitsTitle: "Преимущества",
     ctaWriteUs: "Запросить ссылку",
     helloAssoTitle: "HelloAsso",
-    helloAssoText: "Онлайн-пожертвование через HelloAsso.",
+    helloAssoText: "Пожертвование через HelloAsso",
     helloAssoCta: "Перейти на HelloAsso",
     helloAssoBadge: "Официальная ссылка",
     helloAssoBenefits: [
@@ -1169,13 +1169,13 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     cotizUpBadge: "Официальная ссылка",
     cotizUpBenefits: [
       "Взнос/поддержка онлайн",
-      "Подходит для регулярной поддержки",
+      "Для регулярной поддержки",
       "Официальная страница ассоциации",
     ],
     bankTitle: "БАНКОВСКИЙ ПЕРЕВОД",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "ВАЖНО ЗНАТЬ",
-    importantText: "Если вам нужен чек/подтверждение — напишите нам, и мы ответим по e-mail.",
+    importantText: "Если вам нужен чек/подтверждение — напишите нам, и мы ответим по e‑mail.",
     volunteerTitle: "СТАТЬ ВОЛОНТЁРОМ",
     volunteerText:
       "Хотите помочь со встречами, переводом или организацией? Напишите нам через форму — мы ответим по e-mail.",

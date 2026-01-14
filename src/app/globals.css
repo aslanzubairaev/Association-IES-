@@ -2013,6 +2013,13 @@ a {
   margin-top: 16px;
 }
 
+.support-page .support-important .support-text {
+  display: block;
+  -webkit-line-clamp: initial;
+  -webkit-box-orient: initial;
+  overflow: visible;
+}
+
 @media (max-width: 520px) {
   .support-donate-section {
     padding-top: 32px;
@@ -2020,6 +2027,10 @@ a {
 
   .support-page .support-card {
     padding: 22px;
+  }
+
+  .support-page .support-important {
+    padding-left: 30px;
   }
 
   .support-page .bank-transfer-actions .support-cta-button {
