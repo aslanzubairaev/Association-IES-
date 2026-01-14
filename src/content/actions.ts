@@ -138,7 +138,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
   },
   fr: {
     hero: {
-      title: "ACTIONS",
+      title: "ACTIVITÉ",
       lead:
         "Projets, rencontres et programmes de l’association IES : éducation, sport, culture, soutien et intégration.\nChoisissez un axe — on vous donne les infos et la marche à suivre pour vous inscrire.",
       hint: "Cliquez sur « En savoir plus / s’inscrire » — nous répondons par e-mail et proposons la suite.",
@@ -681,7 +681,7 @@ export const heroCopy: Record<ActionsLocale, HeroCopy> = {
     title: "Nous aidons les personnes\nà s’intégrer à Strasbourg",
     lead: "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement.",
     ctaPrimary: "Demander de l’aide",
-    ctaSecondary: "Nos actions",
+    ctaSecondary: "Notre activité",
     pills: ["Intégration", "Éducation", "Synergie"],
     pillsAriaLabel: "mots-clés",
   },
