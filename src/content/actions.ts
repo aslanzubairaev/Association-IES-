@@ -387,7 +387,7 @@ export const homeNavCards: HomeNavCard[] = [
   },
   {
     id: "actions",
-    title: { fr: "Actions", ru: "Действия" },
+    title: { fr: "Activité", ru: "Действия" },
     description: {
       fr: "Programmes, activités et accompagnement.",
       ru: "Программы, активности и сопровождение.",
@@ -777,7 +777,7 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
       "Ouvrez la page avec les programmes et les formats.",
       "Vous y trouverez les formats, les horaires, l’inscription et les adresses.",
     ],
-    ctaLabel: "Aller aux actions",
+    ctaLabel: "Aller à l’activité",
   },
 };
 
@@ -857,7 +857,7 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
     navLabels: {
       about: "À propos",
       aide: "Aide",
-      actions: "Actions",
+      actions: "Activité",
       soutenir: "Soutenir",
       contact: "Contact",
     },
