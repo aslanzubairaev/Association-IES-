@@ -71,11 +71,6 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
             </section>
 
             <section className="privacy-section">
-              <h2 className="h3 h3--blue">{copy.retentionTitle}</h2>
-              <p className="p">{copy.retentionText}</p>
-            </section>
-
-            <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.rightsTitle}</h2>
               <IesList className="list">
                 {copy.rightsItems.map((item) => (

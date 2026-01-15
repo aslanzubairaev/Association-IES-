@@ -63,8 +63,10 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
               />
             );
           })}
+        </div>
 
-          {/* ИНФО‑КАРТОЧКА: “Важно знать / À savoir” как 9‑я карточка, чтобы сетка на десктопе была 3×3. */}
+        {/* ИНФО‑БЛОК: “Важно знать / À savoir” отдельной широкой карточкой под сеткой. */}
+        <div className="actions-important-block">
           <ActionCard
             variant="info"
             title={copy.important.title}

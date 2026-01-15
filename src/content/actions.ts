@@ -87,22 +87,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
     },
     items: [
       {
-        slug: "permanences-administratives",
-        topicKey: "admin_consultations",
-        title: "АДМИНИСТРАТИВНЫЕ КОНСУЛЬТАЦИИ (ПО ЗАПИСИ)",
-        forWho: "Для семей, новоприбывших и жителей, у кого есть вопросы по документам и письмам.",
-        benefit: "Понятные шаги и список того, что подготовить для следующего действия.",
-        frequency: "По записи • индивидуально • в течение года",
-      },
-      {
-        slug: "emploi-cv",
-        topicKey: "work_cv_support",
-        title: "СОПРОВОЖДЕНИЕ К РАБОТЕ И CV",
-        forWho: "Для тех, кто ищет работу/стажировку или хочет улучшить CV и подачу.",
-        benefit: "Ориентиры по поиску, оформление CV и подготовка к следующему шагу.",
-        frequency: "Регулярно • по группам и индивидуально (по проекту)",
-      },
-      {
         slug: "langues-ateliers",
         topicKey: "language_development",
         title: "ЯЗЫКОВЫЕ ЗАНЯТИЯ И РАЗВИТИЕ (ВКЛ. ЧЕЧЕНСКИЙ И РУССКИЙ)",
@@ -154,7 +138,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
   },
   fr: {
     hero: {
-      title: "ACTIONS",
+      title: "ACTIVITÉ",
       lead:
         "Projets, rencontres et programmes de l’association IES : éducation, sport, culture, soutien et intégration.\nChoisissez un axe — on vous donne les infos et la marche à suivre pour vous inscrire.",
       hint: "Cliquez sur « En savoir plus / s’inscrire » — nous répondons par e-mail et proposons la suite.",
@@ -195,22 +179,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       button: "Écrire",
     },
     items: [
-      {
-        slug: "permanences-administratives",
-        topicKey: "admin_consultations",
-        title: "CONSULTATIONS ADMINISTRATIVES (SUR RENDEZ-VOUS)",
-        forWho: "Familles, nouveaux arrivants et habitants ayant des questions sur des documents et des courriers.",
-        benefit: "Des étapes claires et la liste de ce qu’il faut préparer pour la suite.",
-        frequency: "Sur rendez-vous • individuel • toute l’année",
-      },
-      {
-        slug: "emploi-cv",
-        topicKey: "work_cv_support",
-        title: "ACCOMPAGNEMENT VERS L’EMPLOI & CV",
-        forWho: "Personnes en recherche d’emploi/stage ou souhaitant améliorer leur CV.",
-        benefit: "Repères pour la recherche, mise en forme du CV et préparation du prochain pas.",
-        frequency: "Régulier • en groupe et en individuel (selon le projet)",
-      },
       {
         slug: "langues-ateliers",
         topicKey: "language_development",
@@ -419,7 +387,7 @@ export const homeNavCards: HomeNavCard[] = [
   },
   {
     id: "actions",
-    title: { fr: "Actions", ru: "Действия" },
+    title: { fr: "Activité", ru: "Действия" },
     description: {
       fr: "Programmes, activités et accompagnement.",
       ru: "Программы, активности и сопровождение.",
@@ -713,7 +681,7 @@ export const heroCopy: Record<ActionsLocale, HeroCopy> = {
     title: "Nous aidons les personnes\nà s’intégrer à Strasbourg",
     lead: "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement.",
     ctaPrimary: "Demander de l’aide",
-    ctaSecondary: "Nos actions",
+    ctaSecondary: "Notre activité",
     pills: ["Intégration", "Éducation", "Synergie"],
     pillsAriaLabel: "mots-clés",
   },
@@ -809,7 +777,7 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
       "Ouvrez la page avec les programmes et les formats.",
       "Vous y trouverez les formats, les horaires, l’inscription et les adresses.",
     ],
-    ctaLabel: "Aller aux actions",
+    ctaLabel: "Aller à l’activité",
   },
 };
 
@@ -860,7 +828,7 @@ type HeaderCopy = {
 export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
   ru: {
     brandLabel: "Association IES",
-    brandName: "Association IES",
+    brandName: "Association",
     navAriaLabel: "Меню сайта",
     navLabels: {
       about: "О нас",
@@ -884,12 +852,12 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
   },
   fr: {
     brandLabel: "Association IES",
-    brandName: "Association IES",
+    brandName: "Association",
     navAriaLabel: "Menu du site",
     navLabels: {
       about: "À propos",
       aide: "Aide",
-      actions: "Actions",
+      actions: "Activité",
       soutenir: "Soutenir",
       contact: "Contact",
     },
@@ -1033,8 +1001,8 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Чтобы отвечать на обращения, вести коммуникацию с участниками и улучшать работу ассоциации.",
     legalTitle: "Правовое основание (GDPR)",
     legalText:
-      "Согласие (когда вы отправляете сообщение) и наш законный интерес обрабатывать обращения.",
-    shareTitle: "Передача третьим лицам",
+      "Законный интерес: обработка обращений и ответы на сообщения, которые вы отправляете через форму контакта.",
+    shareTitle: "Получатели данных",
     shareText:
       "Мы не продаём персональные данные. Передаём их только если это требуется законом или для работы почты/хостинга.",
     retentionTitle: "Срок хранения",
@@ -1048,14 +1016,14 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Ограничение обработки",
       "Переносимость данных",
     ],
-    contactTitle: "Как связаться",
+    contactTitle: "Связаться с нами",
     contactTextBefore: "По вопросам конфиденциальности напишите через ",
     contactLinkLabel: "страницу контактов",
-    contactTextAfter: " или на e-mail:",
+    contactTextAfter: " или на e-mail: ",
     contactEmail: "contact@associationies.fr",
     contactSubject: "Сообщение с сайта Association IES (Политика конфиденциальности)",
     contactBody: "Здравствуйте! У меня вопрос по политике конфиденциальности: ...",
-    cookiesTitle: "Cookies",
+    cookiesTitle: "ФАЙЛЫ COOKIE",
     cookiesText:
       "Мы используем только технические cookies, необходимые для работы сайта, и не используем рекламный трекинг.",
     updatedLabel: "Последнее обновление:",
@@ -1075,8 +1043,9 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     purposeText:
       "Répondre aux demandes, maintenir la communication avec les personnes et améliorer le fonctionnement de l’association.",
     legalTitle: "Base légale (RGPD)",
-    legalText: "Consentement (envoi du message) et intérêt légitime pour traiter les demandes.",
-    shareTitle: "Partage",
+    legalText:
+      "Intérêt légitime : traiter les demandes et répondre aux messages envoyés via le formulaire de contact.",
+    shareTitle: "Destinataires",
     shareText:
       "Nous ne vendons pas les données. Elles peuvent être transmises uniquement si la loi l’exige ou pour le fonctionnement de la messagerie/l’hébergement.",
     retentionTitle: "Durée de conservation",
@@ -1091,10 +1060,10 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Limitation du traitement",
       "Portabilité",
     ],
-    contactTitle: "Contact",
+    contactTitle: "Nous contacter",
     contactTextBefore: "Pour toute question, contactez-nous via la ",
     contactLinkLabel: "page Contact",
-    contactTextAfter: " ou par e-mail :",
+    contactTextAfter: " ou par e-mail : ",
     contactEmail: "contact@associationies.fr",
     contactSubject: "Message du site Association IES (Politique de confidentialité)",
     contactBody: "Bonjour ! J’ai une question concernant la politique de confidentialité : ...",
@@ -1110,11 +1079,21 @@ type SoutenirCopy = {
   donateTitle: string;
   donateLead: string;
   donateNote: string;
+  officialBadge: string;
+  recommendedBadge: string;
+  externalCtaNote: string;
+  benefitsTitle: string;
   ctaWriteUs: string;
   helloAssoTitle: string;
   helloAssoText: string;
+  helloAssoCta: string;
+  helloAssoBadge: string;
+  helloAssoBenefits: string[];
   cotizUpTitle: string;
   cotizUpText: string;
+  cotizUpCta: string;
+  cotizUpBadge: string;
+  cotizUpBenefits: string[];
   bankTitle: string;
   bankText: string;
   importantTitle: string;
@@ -1131,13 +1110,30 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     donateTitle: "DONS / COTISATIONS",
     donateLead:
       "Votre contribution nous aide à organiser des rencontres, des ateliers et des projets de soutien. Choisissez la manière qui vous convient : don, cotisation ou bénévolat.",
-    donateNote:
-      "Les liens HelloAsso et CotizUp peuvent changer — écrivez-nous via le formulaire et nous vous enverrons le lien à jour.",
+    donateNote: "",
+    officialBadge: "Lien officiel",
+    recommendedBadge: "Recommandé",
+    externalCtaNote: "S’ouvre dans un nouvel onglet",
+    benefitsTitle: "Avantages",
     ctaWriteUs: "Demander le lien",
     helloAssoTitle: "HelloAsso",
-    helloAssoText: "Don en ligne via HelloAsso. Lien envoyé sur demande.",
+    helloAssoText: "Don en ligne via HelloAsso. Lien direct pour contribuer.",
+    helloAssoCta: "Accéder à HelloAsso",
+    helloAssoBadge: "Lien officiel",
+    helloAssoBenefits: [
+      "Paiement par carte en 1 minute",
+      "Reçu après paiement",
+      "Plateforme sécurisée pour les associations",
+    ],
     cotizUpTitle: "CotizUp",
-    cotizUpText: "Cotisation / soutien via CotizUp. Lien envoyé sur demande.",
+    cotizUpText: "Cotisation / soutien via CotizUp. Lien direct pour contribuer en ligne.",
+    cotizUpCta: "Accéder à CotizUp",
+    cotizUpBadge: "Lien officiel",
+    cotizUpBenefits: [
+      "Cotisation / soutien en ligne",
+      "Adapté au soutien régulier",
+      "Page officielle de l’association",
+    ],
     bankTitle: "VIREMENT BANCAIRE",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "À SAVOIR",
@@ -1153,17 +1149,34 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     donateTitle: "ДОНАТ / ВЗНОСЫ",
     donateLead:
       "Ваш вклад помогает нам проводить встречи, занятия и проекты поддержки. Выберите удобный способ: донат, взнос или волонтёрство.",
-    donateNote:
-      "Ссылки HelloAsso и CotizUp могут обновляться — напишите нам через форму, и мы пришлём актуальную.",
+    donateNote: "",
+    officialBadge: "Официальная ссылка",
+    recommendedBadge: "Рекомендуем",
+    externalCtaNote: "Откроется в новой вкладке",
+    benefitsTitle: "Преимущества",
     ctaWriteUs: "Запросить ссылку",
     helloAssoTitle: "HelloAsso",
-    helloAssoText: "Онлайн-пожертвование через HelloAsso. Ссылку пришлём по запросу.",
+    helloAssoText: "Пожертвование через HelloAsso",
+    helloAssoCta: "Перейти на HelloAsso",
+    helloAssoBadge: "Официальная ссылка",
+    helloAssoBenefits: [
+      "Оплата картой за 1 минуту",
+      "Квитанция после оплаты",
+      "Безопасная платформа для ассоциаций",
+    ],
     cotizUpTitle: "CotizUp",
-    cotizUpText: "Взнос/поддержка через CotizUp. Ссылку пришлём по запросу.",
+    cotizUpText: "Взнос/поддержка через CotizUp.",
+    cotizUpCta: "Перейти на CotizUp",
+    cotizUpBadge: "Официальная ссылка",
+    cotizUpBenefits: [
+      "Взнос/поддержка онлайн",
+      "Для регулярной поддержки",
+      "Официальная страница ассоциации",
+    ],
     bankTitle: "БАНКОВСКИЙ ПЕРЕВОД",
     bankText: "IBAN + BIC (La Banque Postale)",
     importantTitle: "ВАЖНО ЗНАТЬ",
-    importantText: "Если вам нужен чек/подтверждение — напишите нам, и мы ответим по e-mail.",
+    importantText: "Если вам нужен чек/подтверждение — напишите нам, и мы ответим по e‑mail.",
     volunteerTitle: "СТАТЬ ВОЛОНТЁРОМ",
     volunteerText:
       "Хотите помочь со встречами, переводом или организацией? Напишите нам через форму — мы ответим по e-mail.",
@@ -1344,22 +1357,22 @@ type BankTransferCopy = {
 export const bankTransferCopy: Record<ActionsLocale, BankTransferCopy> = {
   fr: {
     copyAllLabel: "Copier (IBAN + BIC)",
-    copyIbanLabel: "Copier l’IBAN",
-    copyBicLabel: "Copier le BIC",
+    copyIbanLabel: "COPIER IBAN",
+    copyBicLabel: "COPIER BIC",
     copiedLabel: "Copié",
-    copiedIbanStatus: "Copié : IBAN",
-    copiedBicStatus: "Copié : BIC",
+    copiedIbanStatus: "Copié ✓",
+    copiedBicStatus: "Copié ✓",
     copyFailedLabel: "Impossible de copier automatiquement",
     cardTitle: "Coordonnées bancaires",
     hint: "Cliquez pour copier l’IBAN ou le BIC.",
   },
   ru: {
     copyAllLabel: "Скопировать (IBAN + BIC)",
-    copyIbanLabel: "Скопировать IBAN",
-    copyBicLabel: "Скопировать BIC",
+    copyIbanLabel: "Копировать IBAN",
+    copyBicLabel: "Копировать BIC",
     copiedLabel: "Скопировано",
-    copiedIbanStatus: "Скопировано: IBAN",
-    copiedBicStatus: "Скопировано: BIC",
+    copiedIbanStatus: "Скопировано ✓",
+    copiedBicStatus: "Скопировано ✓",
     copyFailedLabel: "Не удалось скопировать автоматически",
     cardTitle: "Реквизиты",
     hint: "Нажмите, чтобы скопировать IBAN или BIC.",

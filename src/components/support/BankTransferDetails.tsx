@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CopyToClipboardButton } from "@/components/ui/CopyToClipboardButton";
 import { bankTransferCopy } from "@/content/actions";
 
@@ -19,6 +19,11 @@ type BankTransferDetailsProps = {
 // Блок реквизитов: по клику копирует данные в буфер обмена и показывает короткую подсказку.
 export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsProps) {
   const [status, setStatus] = useState<string | null>(null);
+  const [toastText, setToastText] = useState<string | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastOwner, setToastOwner] = useState<"iban" | "bic" | null>(null);
+  const toastTimeoutRef = useRef<number | null>(null);
+  const toastHideRef = useRef<number | null>(null);
 
   const copy = bankTransferCopy[locale];
 
@@ -39,11 +44,42 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     copyToClipboard(`IBAN: ${iban}\nBIC: ${bic}`, `${copy.copiedLabel}: ${copy.copyAllLabel}`);
   }
 
+  function showToast(owner: "iban" | "bic", text: string) {
+    if (toastTimeoutRef.current) {
+      window.clearTimeout(toastTimeoutRef.current);
+    }
+    if (toastHideRef.current) {
+      window.clearTimeout(toastHideRef.current);
+    }
+
+    setToastText(text);
+    setToastVisible(true);
+    setToastOwner(owner);
+    toastTimeoutRef.current = window.setTimeout(() => {
+      setToastVisible(false);
+    }, 1600);
+    toastHideRef.current = window.setTimeout(() => {
+      setToastText(null);
+      setToastOwner(null);
+    }, 1800);
+  }
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        window.clearTimeout(toastTimeoutRef.current);
+      }
+      if (toastHideRef.current) {
+        window.clearTimeout(toastHideRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div>
+    <div className="bank-transfer-details">
       {/* Блок реквизитов: контрастный и кликабельный, чтобы быстро скопировать данные. */}
       <div
-        className="contact-box bank-transfer-box"
+        className="contact-box bank-transfer-box support-info-panel"
         role="button"
         tabIndex={0}
         onClick={copyAll}
@@ -55,7 +91,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         }}
         aria-label={copy.copyAllLabel}
       >
-        <div className="bank-transfer-title">
+        <div className="support-info-title">
           {copy.cardTitle}
         </div>
 
@@ -75,31 +111,51 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         </div>
 
         {/* Подсказка статуса: показывает, что данные скопированы. */}
-        {status ? (
-          <div className="bank-transfer-status">
-            {status}
-          </div>
-        ) : (
-          <div className="bank-transfer-status">
-            {copy.hint}
-          </div>
-        )}
+        <div className="bank-transfer-status" aria-live="polite">
+          {status ?? copy.hint}
+        </div>
       </div>
 
       {/* Кнопки копирования: делаем две компактные кнопки рядом, чтобы быстро скопировать IBAN или BIC. */}
-      <div className="btn-row bank-transfer-actions">
-        <CopyToClipboardButton
-          value={iban}
-          label={copy.copyIbanLabel}
-          copiedLabel={copy.copiedIbanStatus}
-          className="btn btn--pill support-cta-button support-cta-button--sm"
-        />
-        <CopyToClipboardButton
-          value={bic}
-          label={copy.copyBicLabel}
-          copiedLabel={copy.copiedBicStatus}
-          className="btn btn--pill support-cta-button support-cta-button--sm"
-        />
+      <div className="btn-row bank-transfer-actions support-actions-row support-card-footer">
+        <div className="support-copy-wrap">
+          <CopyToClipboardButton
+            value={iban}
+            label={copy.copyIbanLabel}
+            copiedLabel={copy.copiedIbanStatus}
+            className="btn btn--pill support-cta-button"
+            showStatus={false}
+            onCopied={(text) => showToast("iban", text)}
+          />
+          {toastOwner === "iban" && toastText ? (
+            <div
+              className={`support-copy-toast ${toastVisible ? "support-copy-toast--visible" : ""}`}
+              role="status"
+              aria-live="polite"
+            >
+              {toastText}
+            </div>
+          ) : null}
+        </div>
+        <div className="support-copy-wrap">
+          <CopyToClipboardButton
+            value={bic}
+            label={copy.copyBicLabel}
+            copiedLabel={copy.copiedBicStatus}
+            className="btn btn--pill support-cta-button"
+            showStatus={false}
+            onCopied={(text) => showToast("bic", text)}
+          />
+          {toastOwner === "bic" && toastText ? (
+            <div
+              className={`support-copy-toast ${toastVisible ? "support-copy-toast--visible" : ""}`}
+              role="status"
+              aria-live="polite"
+            >
+              {toastText}
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

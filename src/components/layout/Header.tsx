@@ -146,10 +146,11 @@ export function Header({ locale }: HeaderProps) {
     >
       <Container>
         <div className="header-inner">
-          <a className="brand" href={`/${locale}#top`} aria-label={copy.brandLabel}>
-            <span className="brand-mark" aria-hidden="true" />
+          <Link className="brand" href={`/${locale}`} aria-label={copy.brandLabel}>
+            <span className="brand-wordmark">IES</span>
+            <span className="brand-divider" aria-hidden="true" />
             <span className="brand-name">{copy.brandName}</span>
-          </a>
+          </Link>
 
           {/* Меню для больших экранов: на мобильных оно скрыто, вместо него показывается бургер. */}
           <nav className="nav header-nav-desktop" aria-label={copy.navAriaLabel}>
