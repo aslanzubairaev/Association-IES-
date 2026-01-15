@@ -1001,8 +1001,8 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Чтобы отвечать на обращения, вести коммуникацию с участниками и улучшать работу ассоциации.",
     legalTitle: "Правовое основание (GDPR)",
     legalText:
-      "Согласие (когда вы отправляете сообщение) и наш законный интерес обрабатывать обращения.",
-    shareTitle: "Передача третьим лицам",
+      "Законный интерес: обработка обращений и ответы на сообщения, которые вы отправляете через форму контакта.",
+    shareTitle: "Получатели данных",
     shareText:
       "Мы не продаём персональные данные. Передаём их только если это требуется законом или для работы почты/хостинга.",
     retentionTitle: "Срок хранения",
@@ -1016,14 +1016,14 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Ограничение обработки",
       "Переносимость данных",
     ],
-    contactTitle: "Как связаться",
+    contactTitle: "Связаться с нами",
     contactTextBefore: "По вопросам конфиденциальности напишите через ",
     contactLinkLabel: "страницу контактов",
-    contactTextAfter: " или на e-mail:",
+    contactTextAfter: " или на e-mail: ",
     contactEmail: "contact@associationies.fr",
     contactSubject: "Сообщение с сайта Association IES (Политика конфиденциальности)",
     contactBody: "Здравствуйте! У меня вопрос по политике конфиденциальности: ...",
-    cookiesTitle: "Cookies",
+    cookiesTitle: "ФАЙЛЫ COOKIE",
     cookiesText:
       "Мы используем только технические cookies, необходимые для работы сайта, и не используем рекламный трекинг.",
     updatedLabel: "Последнее обновление:",
@@ -1043,8 +1043,9 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     purposeText:
       "Répondre aux demandes, maintenir la communication avec les personnes et améliorer le fonctionnement de l’association.",
     legalTitle: "Base légale (RGPD)",
-    legalText: "Consentement (envoi du message) et intérêt légitime pour traiter les demandes.",
-    shareTitle: "Partage",
+    legalText:
+      "Intérêt légitime : traiter les demandes et répondre aux messages envoyés via le formulaire de contact.",
+    shareTitle: "Destinataires",
     shareText:
       "Nous ne vendons pas les données. Elles peuvent être transmises uniquement si la loi l’exige ou pour le fonctionnement de la messagerie/l’hébergement.",
     retentionTitle: "Durée de conservation",
@@ -1059,10 +1060,10 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Limitation du traitement",
       "Portabilité",
     ],
-    contactTitle: "Contact",
+    contactTitle: "Nous contacter",
     contactTextBefore: "Pour toute question, contactez-nous via la ",
     contactLinkLabel: "page Contact",
-    contactTextAfter: " ou par e-mail :",
+    contactTextAfter: " ou par e-mail : ",
     contactEmail: "contact@associationies.fr",
     contactSubject: "Message du site Association IES (Politique de confidentialité)",
     contactBody: "Bonjour ! J’ai une question concernant la politique de confidentialité : ...",
