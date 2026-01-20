@@ -786,6 +786,13 @@ type FooterCopy = {
   aboutLabel: string;
   contactLabel: string;
   privacyLabel: string;
+  socialLabels: {
+    instagram: string;
+    facebook: string;
+    linkedin: string;
+    tiktok: string;
+    whatsapp: string;
+  };
 };
 
 export const footerCopy: Record<ActionsLocale, FooterCopy> = {
@@ -794,12 +801,26 @@ export const footerCopy: Record<ActionsLocale, FooterCopy> = {
     aboutLabel: "о нас",
     contactLabel: "контакты",
     privacyLabel: "Политика конфиденциальности",
+    socialLabels: {
+      instagram: "Instagram",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      tiktok: "TikTok",
+      whatsapp: "WhatsApp группа (рассылка)",
+    },
   },
   fr: {
     copyright: "© 2025 Association IES",
     aboutLabel: "À propos",
     contactLabel: "Contact",
     privacyLabel: "Politique de confidentialité",
+    socialLabels: {
+      instagram: "Instagram",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      tiktok: "TikTok",
+      whatsapp: "Groupe WhatsApp (diffusion)",
+    },
   },
 };
 
