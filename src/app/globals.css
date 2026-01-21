@@ -268,6 +268,7 @@ a {
 
 /* Мобильные: 1 колонка. */
 @media (max-width: 520px) {
+  /* Мобильные: 1 колонка. */
   .actions-cards-grid {
     grid-template-columns: 1fr;
   }
@@ -580,94 +581,6 @@ a {
   color: rgba(255, 255, 255, 0.96);
 }
 
-.actions-page .actions-card {
-  padding: 30px;
-  padding-left: 38px;
-}
-
-.actions-page .actions-card--stack {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.actions-page .actions-card-row {
-  margin-top: 10px;
-}
-
-.actions-page .actions-card-label {
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.96);
-  text-shadow: var(--card-text-shadow);
-}
-
-.actions-page .actions-card-value {
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: var(--card-text-shadow);
-}
-
-.actions-page .actions-card-cta {
-  margin-top: auto;
-  padding-top: 14px;
-  display: flex;
-  justify-content: center;
-}
-
-.actions-page .actions-card-button {
-  height: 44px;
-  min-height: 44px;
-  width: 100%;
-  max-width: 260px;
-  padding: 0 22px;
-  border-radius: 999px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  background: rgba(15, 82, 166, 0.38);
-  border: 1.5px solid rgba(255, 255, 255, 0.26);
-  color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 20px rgba(7, 12, 40, 0.22);
-}
-
-.actions-page .actions-card-button:hover {
-  background: rgba(15, 82, 166, 0.5);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
-  transform: translateY(-2px);
-}
-
-.actions-page .actions-card-button:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
-  outline-offset: 3px;
-}
-
-.actions-page .actions-card-button:active {
-  transform: translateY(1px);
-}
-
-.actions-page .actions-card-list {
-  margin-top: 10px;
-}
-
-.actions-page .actions-card-list li {
-  margin: 12px 0;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: var(--card-text-shadow);
-}
-
-.actions-page .actions-card-list li::marker {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.actions-page .actions-directions-head {
-  margin-top: 160px;
-}
-
-@media (max-width: 520px) {
-  .actions-page .actions-directions-head {
-    margin-top: 130px;
-  }
-}
-
 /* Плавные переходы между цветными секциями: тонкая “лента” градиента внизу секции. */
 .section-seam-bottom {
   position: relative;
@@ -938,123 +851,7 @@ a {
   }
 }
 
-/* Левая карточка на странице “Контакты”: такой же фон, как у quickNav. */
-.contact-card.card--paper {
-  background: var(--surface);
-  border-color: var(--surface-border);
-  color: var(--text-primary);
-}
-
-.contact-card.card--paper .h3--blue {
-  color: rgba(255, 255, 255, 0.98);
-}
-
-.contact-page .contact-card--info .h3--blue {
-  margin-top: 24px;
-}
-
-.contact-card.card--paper .p,
-.contact-card.card--paper .list,
-.contact-card.card--paper .fineprint {
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.contact-card.card--paper .contact-box {
-  color: rgba(11, 27, 51, 0.92) !important;
-}
-
-/* Правая карточка с формой: золотой фон как у .card--yellow. */
-.contact-card.contact-card--yellow.card--paper {
-  background: var(--yellow);
-  border: var(--border) solid rgba(11, 27, 51, 0.14);
-  box-shadow: 0 22px 60px rgba(11, 27, 51, 0.18);
-  color: var(--ink);
-}
-
-.contact-page .contact-grid {
-  align-items: stretch;
-}
-
-.contact-page .contact-grid > * {
-  height: 100%;
-}
-
-.contact-page .contact-card {
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-}
-
-@media (max-width: 520px) {
-  .contact-page .contact-card--form {
-    order: 1;
-  }
-
-  .contact-page .contact-card--info {
-    order: 2;
-  }
-}
-
-.contact-page .contact-form-wrap {
-  max-width: 720px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.contact-page .contact-list {
-  margin-top: 18px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: var(--card-text-shadow);
-}
-
-.contact-page .contact-list li {
-  margin: 10px 0;
-}
-
-.contact-page .contact-list li::marker {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.contact-page .contact-email-box {
-  margin-bottom: 16px;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: var(--card-text-shadow);
-}
-
-.contact-page .contact-email-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-
-.contact-page .contact-email-label {
-  color: rgba(255, 255, 255, 0.98);
-  font-size: 19px;
-}
-
-.contact-page .contact-email-value {
-  color: rgba(255, 255, 255, 0.98);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  font-weight: 900;
-}
-
-.contact-page .contact-email-status,
-.contact-page .contact-email-helper {
-  margin-top: 10px;
-  opacity: 0.85;
-}
-
-.contact-page .contact-email-status {
-  text-align: center;
-  width: 100%;
-}
+/* moved to src/app/[locale]/contact/page.module.css */
 
 .privacy-page a {
   text-decoration: underline;
@@ -1139,87 +936,7 @@ a {
   }
 }
 
-.contact-page .contact-cta-button {
-  height: 44px;
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 999px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  background: var(--btn-primary-bg);
-  border: 1.5px solid var(--btn-primary-border);
-  color: var(--btn-primary-text);
-  text-decoration: none;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
-}
-
-.contact-page .contact-cta-button--compact {
-  height: 38px;
-  min-height: 38px;
-  padding: 0 16px;
-  font-size: 13px;
-}
-
-.contact-page .contact-cta-button:hover {
-  background: var(--btn-primary-bg-hover);
-  border-color: var(--btn-primary-border);
-  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
-  transform: translateY(-2px);
-}
-
-.contact-page .contact-cta-button:active {
-  transform: translateY(1px) scale(0.98);
-}
-
-.contact-page .contact-cta-button:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
-  outline-offset: 3px;
-}
-
-.contact-page .contact-cta-button:active {
-  transform: translateY(1px);
-}
-
-.contact-page .quickForm-submitRow {
-  display: flex;
-  justify-content: center;
-}
-
-.contact-page .quickForm .field span {
-  font-weight: 800;
-  color: rgba(11, 27, 51, 0.9);
-}
-
-.contact-page .quickForm input,
-.contact-page .quickForm textarea,
-.contact-page .quickForm select {
-  border: 1.5px solid rgba(11, 27, 51, 0.18);
-  padding: 12px 14px;
-  font-size: 15px;
-  line-height: 1.55;
-}
-
-.contact-page .quickForm input,
-.contact-page .quickForm select {
-  height: 44px;
-}
-
-.contact-page .quickForm textarea {
-  min-height: 150px;
-  resize: vertical;
-}
-
-.contact-page .quickForm input::placeholder,
-.contact-page .quickForm textarea::placeholder {
-  color: rgba(11, 27, 51, 0.6);
-}
-
-.contact-page .quickForm input:focus,
-.contact-page .quickForm textarea:focus,
-.contact-page .quickForm select:focus {
-  border-color: rgba(15, 82, 166, 0.5);
-  box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.18);
-}
+/* moved to src/app/[locale]/contact/page.module.css */
 
 .quickForm .ies-select-trigger {
   display: flex;
@@ -1329,11 +1046,7 @@ a {
   height: 16px;
 }
 
-@media (max-width: 520px) {
-  .contact-page .contact-cta-button {
-    width: 100%;
-  }
-}
+/* moved to src/app/[locale]/contact/page.module.css */
 
 /* Карточки на странице “Поддержать / Soutenir”: такие же полу-прозрачные поверхности, как у quickNav. */
 .support-card.card--paper {
@@ -1438,25 +1151,7 @@ a {
   font-weight: 700;
 }
 
-.support-page .support-card {
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  transition: none;
-  min-width: 0;
-}
-
-.support-page .card--paper {
-  box-shadow: none;
-}
-
-.support-page .support-card.support-card--pink {
-  padding: 30px;
-}
-
-.support-page .support-body {
-  margin-top: 12px;
-}
+/* moved to src/app/[locale]/soutenir/page.module.css */
 
 .support-card-intro {
   display: flex;
@@ -1514,14 +1209,6 @@ a {
   margin: 8px 0;
 }
 
-.support-page .support-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-}
-
 .support-card-footer {
   margin-top: auto;
   padding-top: var(--support-footer-gap, 14px);
@@ -1542,47 +1229,7 @@ a {
   justify-self: center;
 }
 
-.support-page .support-cta-button {
-  height: 46px;
-  min-height: 46px;
-  width: 100%;
-  max-width: none;
-  padding: 0 22px;
-  border-radius: 999px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  background: rgba(15, 82, 166, 0.38);
-  border: 1.5px solid rgba(255, 255, 255, 0.26);
-  color: rgba(255, 255, 255, 0.98);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.support-page .support-cta-button:hover {
-  background: rgba(15, 82, 166, 0.5);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
-  transform: translateY(-2px);
-}
-
-.support-page .support-cta-button:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
-  outline-offset: 3px;
-}
-
-.support-page .support-cta-button:active {
-  transform: translateY(1px);
-}
-
-.support-page .support-cta-button--sm {
-  height: 40px;
-  min-height: 40px;
-  padding: 0 16px;
-  font-size: 12px;
-}
+/* moved to src/app/[locale]/soutenir/page.module.css */
 
 .support-cta-label {
   white-space: nowrap;
@@ -1616,35 +1263,16 @@ a {
   margin-bottom: var(--support-footer-gap, 14px);
 }
 
-.support-page .support-important {
-  margin-top: 16px;
-}
-
-.support-page .support-important .support-text {
-  display: block;
-  -webkit-line-clamp: initial;
-  -webkit-box-orient: initial;
-  overflow: visible;
-}
+/* moved to src/app/[locale]/soutenir/page.module.css */
 
 @media (max-width: 520px) {
   .support-donate-section {
     padding-top: 32px;
   }
 
-  .support-page .support-card {
-    padding: 22px;
-  }
-
-  .support-page .support-important {
-    padding-left: 30px;
-  }
-
-  .support-page .bank-transfer-actions .support-cta-button {
-    padding: 0 12px;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-  }
+  /* moved to src/app/[locale]/soutenir/page.module.css */
+  /* moved to src/app/[locale]/soutenir/page.module.css */
+  /* moved to src/app/[locale]/soutenir/page.module.css */
 }
 
 
@@ -1710,50 +1338,7 @@ a {
   padding-bottom: 36px;
 }
 
-.support-page .bank-transfer-lines {
-  line-height: 1.45;
-}
-
-.support-page .bank-transfer-row {
-  margin-top: 6px;
-}
-
-.support-page .bank-transfer-label {
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.96);
-  text-shadow: var(--card-text-shadow);
-  font-size: 13px;
-}
-
-.support-page .bank-transfer-value {
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 600;
-  text-shadow: var(--card-text-shadow);
-  font-size: 14px;
-}
-
-.support-page .bank-transfer-value--mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
-  word-break: break-word;
-}
-
-.support-page .bank-transfer-status {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 12px;
-  font-size: 12px;
-  opacity: 0.85;
-}
-
-.support-page .bank-transfer-actions {
-  width: 100%;
-}
-
-.support-page .bank-transfer-actions .support-cta-button {
-  white-space: nowrap;
-  font-size: 12px;
-}
+/* moved to src/app/[locale]/soutenir/page.module.css */
 
 .support-copy-wrap {
   position: relative;
@@ -1822,13 +1407,8 @@ a {
 }
 
 @media (max-width: 520px) {
-  .support-page .bank-transfer-actions {
-    gap: 8px;
-  }
-
-  .support-page .support-actions-row {
-    gap: 8px;
-  }
+  /* moved to src/app/[locale]/soutenir/page.module.css */
+  /* moved to src/app/[locale]/soutenir/page.module.css */
 }
 
 /* (анимация волонтёрской кнопки удалена: теперь используются обычные hover/active для .btn) */

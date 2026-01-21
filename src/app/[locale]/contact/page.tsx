@@ -30,7 +30,7 @@ export default function ContactPage({
     "Décrivez la situation de façon structurée : dates, démarches déjà faites, délais/courriers. Cela nous aide à répondre plus vite et plus précisément.";
 
   return (
-    <main className="section section--purple contact-page">
+    <main className={`section section--purple contact-page ${styles.contactScope}`}>
       <Container>
         <div className="section-head">
           <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
