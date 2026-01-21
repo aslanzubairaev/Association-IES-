@@ -710,30 +710,8 @@
   .btn:active{ transform: translateY(0); }
   
   /* LAYOUTS */
-  .hero-grid{
-    display: grid;
-    grid-template-columns: 1.25fr .85fr;
-    gap: 22px;
-    align-items: stretch;
-  }
-  
-  .hero-left{ padding: 26px; }
-  .hero-right{ padding: 22px; }
-  
   .actions{ display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
   .pill-row{ display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-
-  /* HERO: буклетный стек ключевых слов (на жёлтом блоке) */
-  .hero-slogan{
-    margin: 10px 0 16px;
-    font-family: Montserrat, Inter, system-ui, sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: .02em;
-    line-height: 1.02;
-    font-size: clamp(20px, 2.6vw, 34px);
-    color: var(--blue);
-  }
 
   /* БЕЙДЖИ (как красные плашки “по записи / раз в неделю”) */
   .badge{
@@ -1100,7 +1078,6 @@
       --space-section-y: var(--space-section-y-md);
     }
     .nav{ display: none; } /* для демо, потом сделаешь burger */
-    .hero-grid{ grid-template-columns: 1fr; }
     .grid-2{ grid-template-columns: 1fr; }
     .cards-grid{ grid-template-columns: 1fr; }
     .actions-layout{ grid-template-columns: 1fr; }

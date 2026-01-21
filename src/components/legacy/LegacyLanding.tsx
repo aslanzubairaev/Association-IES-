@@ -7,6 +7,7 @@
 import type { CSSProperties } from "react";
 import Script from "next/script";
 import { IesList, IesListItem } from "@/components/ui/IesList";
+import styles from "../sections/Hero.module.css";
 
 const slantPurpleStyle = { "--next": "var(--purple)" } as CSSProperties;
 const slantPinkStyle = { "--next": "var(--pink)" } as CSSProperties;
@@ -52,7 +53,7 @@ export function LegacyLanding() {
 
       <main id="top">
         <section
-          className="section section--purple slant slant--to-blue"
+          className={`section section--purple slant slant--to-blue ${styles.heroScope}`}
           style={slantPurpleStyle}
         >
           <div className="container hero-grid">
