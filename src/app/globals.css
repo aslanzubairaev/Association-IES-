@@ -627,91 +627,31 @@ a {
   border-color: var(--surface-border);
 }
 
-.about-page .about-card {
-  padding: 30px;
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-card .h3,
-.about-page .about-card .h3--blue {
-  color: var(--card-title-color);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-shadow: var(--card-text-shadow);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-card .p {
-  margin: 0;
-  color: var(--card-body-color);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.6;
-  text-shadow: var(--card-text-shadow);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-card .p + .p {
-  margin-top: 10px;
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-card .list {
-  margin-top: 12px;
-  color: var(--card-body-color);
-  font-size: 16px;
-  line-height: 1.6;
-  text-shadow: var(--card-text-shadow);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-card .list li {
-  margin: 10px 0;
-  color: var(--card-body-color);
-  text-shadow: var(--card-text-shadow);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-card .list li::marker {
-  color: rgba(255, 255, 255, 0.78);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-cta {
-  margin-top: 14px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-cta .btn {
-  height: 44px;
-  min-height: 44px;
-  padding: 0 22px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  flex: 1 1 0;
-  justify-content: center;
-  text-decoration: none;
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-cta .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-cta .btn:active {
-  transform: translateY(1px) scale(0.98);
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-.about-page .about-cta .btn:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
-  outline-offset: 3px;
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
-@media (max-width: 520px) {
-  .about-page .about-cta {
-    width: 100%;
-  }
-
-  .about-page .about-cta .btn {
-    width: 100%;
-  }
-}
+/* moved to src/app/[locale]/about/page.module.css */
 
 /* Карточки на странице “Aide / Чем помогаем”: такие же цвета, как у quickNav. */
 .aide-card.card--paper {

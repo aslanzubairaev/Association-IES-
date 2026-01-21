@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import Link from "next/link";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aboutPageCopy } from "@/content/actions";
+import styles from "./page.module.css";
 
 export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
@@ -19,8 +20,9 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
   const ctaList = copy.ctaList;
 
   return (
-    <main className="section section--purple about-page">
-      <Container>
+    <div className={styles.aboutScope}>
+      <main className="section section--purple about-page">
+        <Container>
         <div className="section-head">
           <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
             {copy.title}
@@ -89,8 +91,9 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
             </div>
           </div>
         </div>
-      </Container>
-    </main>
+        </Container>
+      </main>
+    </div>
   );
 }
 
