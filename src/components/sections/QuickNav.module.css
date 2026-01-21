@@ -1,0 +1,66 @@
+:where(.quickNavScope) :global(.quickNav-grid) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+:where(.quickNavScope) :global(.quickNav-card) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  padding-right: calc(var(--card-padding) + 150px);
+}
+
+:where(.quickNavScope) :global(.quickNav-cta) {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+:where(.quickNavScope) :global(.quickNav-icon) {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 120px;
+  height: auto;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+@media (min-width: 521px) {
+  :where(.quickNavScope) :global(.quickNav-grid .quickNav-card .quickNav-icon) {
+    bottom: -6px;
+  }
+}
+
+@media (max-width: 520px) {
+  :where(.quickNavScope) :global(.quickNav-grid .quickNav-card .quickNav-icon) {
+    bottom: -6px;
+  }
+}
+
+@media (min-width: 640px) {
+  :where(.quickNavScope) :global(.quickNav-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  :where(.quickNavScope) :global(.quickNav-grid) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  :where(.quickNavScope) :global(.quickNav-card) {
+    grid-column: span 2;
+  }
+
+  :where(.quickNavScope) :global(.quickNav-grid .quickNav-card:nth-child(4)) {
+    grid-column: 2 / span 2;
+  }
+
+  :where(.quickNavScope) :global(.quickNav-grid .quickNav-card:nth-child(5)) {
+    grid-column: 4 / span 2;
+  }
+}

@@ -166,48 +166,6 @@ a {
   margin-top: 16px;
 }
 
-/* “Что вам нужно?” на главной: отдельная сетка, чтобы 5 карточек выглядели как 3 + 2 (нижний ряд по центру). */
-.quickNav-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: stretch;
-}
-
-.quickNav-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  padding-right: calc(var(--card-padding) + 150px);
-}
-
-.quickNav-cta {
-  margin-top: auto;
-  padding-top: 12px;
-}
-
-.quickNav-icon {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 120px;
-  height: auto;
-  opacity: 0.9;
-  pointer-events: none;
-}
-
-@media (min-width: 521px) {
-  .quickNav-grid .quickNav-card .quickNav-icon {
-    bottom: -6px;
-  }
-}
-
-@media (max-width: 520px) {
-  .quickNav-grid .quickNav-card .quickNav-icon {
-    bottom: -6px;
-  }
-}
 
 /* Главная страница: мягкая стыковка секций без “двойного воздуха” на границах. */
 .hero-section + .section--soft {
@@ -233,31 +191,6 @@ a {
   padding-bottom: 48px;
 }
 
-@media (min-width: 640px) {
-  .quickNav-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 980px) {
-  .quickNav-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    align-items: stretch;
-  }
-
-  .quickNav-card {
-    grid-column: span 2;
-  }
-
-  /* Центрируем нижний ряд из 2 карточек (когда всего 5). */
-  .quickNav-grid .quickNav-card:nth-child(4) {
-    grid-column: 2 / span 2;
-  }
-
-  .quickNav-grid .quickNav-card:nth-child(5) {
-    grid-column: 4 / span 2;
-  }
-}
 
 /* Планшет: 2 колонки. */
 @media (max-width: 980px) {
