@@ -1,0 +1,59 @@
+.quickFormScope {
+}
+
+:where(.quickFormScope) :global(.quickForm-submitRow) {
+  display: flex;
+  justify-content: center;
+}
+
+:where(.quickFormScope):global(.quickForm) :global(.field) span {
+  font-weight: 800;
+  color: rgba(11, 27, 51, 0.9);
+}
+
+:where(.quickFormScope):global(.quickForm) input,
+:where(.quickFormScope):global(.quickForm) textarea,
+:where(.quickFormScope):global(.quickForm) select {
+  border: 1.5px solid rgba(11, 27, 51, 0.18);
+  padding: 12px 14px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+:where(.quickFormScope):global(.quickForm) input,
+:where(.quickFormScope):global(.quickForm) select {
+  height: 44px;
+}
+
+:where(.quickFormScope):global(.quickForm) textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+:where(.quickFormScope):global(.quickForm) :global(.field) {
+  min-width: 0;
+}
+
+:where(.quickFormScope):global(.quickForm) :global(.field) input,
+:where(.quickFormScope):global(.quickForm) :global(.field) textarea,
+:where(.quickFormScope):global(.quickForm) :global(.ies-select-trigger) {
+  max-width: 100%;
+}
+
+:where(.quickFormScope):global(.quickForm) input::placeholder,
+:where(.quickFormScope):global(.quickForm) textarea::placeholder {
+  color: rgba(11, 27, 51, 0.6);
+}
+
+:where(.quickFormScope):global(.quickForm) input:focus,
+:where(.quickFormScope):global(.quickForm) textarea:focus,
+:where(.quickFormScope):global(.quickForm) select:focus {
+  border-color: rgba(15, 82, 166, 0.5);
+  box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.18);
+}
+
+@media (max-width: 520px) {
+  :where(.quickFormScope):global(.quickForm) :global(.form-grid) {
+    grid-template-columns: 1fr;
+  }
+}

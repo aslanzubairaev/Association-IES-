@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { contactTopicSelectKeys, getContactTopicLabel, quickContactFormCopy } from "@/content/actions";
 import { buildOutlookComposeUrl, openWebmailCompose } from "@/lib/emailCompose";
+import styles from "./QuickContactForm.module.css";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
@@ -16,6 +17,10 @@ type QuickContactFormProps = {
 };
 
 const EMAIL_TO = "contact@associationies.fr";
+
+function cn(...classes: Array<string | null | undefined | false>) {
+  return classes.filter(Boolean).join(" ");
+}
 
 // Эта форма работает без сервера: она проверяет поля и подготавливает текст письма для копирования.
 export function QuickContactForm({ locale, variant = "hero", initialTopic }: QuickContactFormProps) {
@@ -157,7 +162,7 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
   }
 
   return (
-    <form className="form quickForm" onSubmit={handleSubmit} noValidate>
+    <form className={cn("form quickForm", styles.quickFormScope)} onSubmit={handleSubmit} noValidate>
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
       {variant === "hero" ? <h3 className="h3">{copy.title}</h3> : null}
 
