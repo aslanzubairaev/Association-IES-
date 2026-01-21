@@ -270,14 +270,6 @@ a {
   outline-offset: 3px;
 }
 
-.hero-right .quickForm .field > span {
-  font-family: Inter, system-ui, sans-serif;
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
 /* HERO: убираем диагональный декоративный слой снизу, чтобы не было фиолетового “пояса” между секциями. */
 .hero-section.slant::after {
   content: none;
@@ -328,17 +320,6 @@ a {
     line-height: 1;
     white-space: nowrap;
   }
-}
-
-/* Быстрая форма в Hero: небольшая подсказка под заголовком и выравнивание кнопки по центру. */
-.quickForm-helper {
-  margin: 8px 0 12px;
-  opacity: 0.78;
-}
-
-.quickForm-submitRow--hero {
-  display: flex;
-  justify-content: center;
 }
 
 /* Карточки растягиваем по высоте строки, чтобы сетка смотрелась ровно. */
