@@ -402,41 +402,6 @@ a {
   color: rgba(255, 255, 255, 0.96);
 }
 
-/* Плавные переходы между цветными секциями: тонкая “лента” градиента внизу секции. */
-.section-seam-bottom {
-  position: relative;
-  overflow: hidden;
-}
-
-.section-seam-bottom::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 28px;
-  pointer-events: none;
-  background: linear-gradient(to bottom, var(--seam-from, transparent), var(--seam-to, transparent));
-}
-
-/* Цвет “откуда”: берём его из текущей секции. */
-.section--yellow.section-seam-bottom {
-  --seam-from: var(--yellow);
-}
-
-.section--pink.section-seam-bottom {
-  --seam-from: var(--color-bg);
-}
-
-/* Цвет “куда”: задаём его отдельным классом в разметке. */
-.seam-to-pink {
-  --seam-to: var(--color-bg);
-}
-
-.seam-to-purple {
-  --seam-to: var(--purple);
-}
-
 /* Карточки на странице “О нас”: такие же полу-прозрачные поверхности, как у quickNav. */
 .about-card.card--paper {
   background: var(--surface);

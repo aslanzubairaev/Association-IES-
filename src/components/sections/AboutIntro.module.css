@@ -1,0 +1,31 @@
+:where(.aboutIntroScope):global(.section-seam-bottom) {
+  position: relative;
+  overflow: hidden;
+}
+
+:where(.aboutIntroScope):global(.section-seam-bottom)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 28px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--seam-from, transparent), var(--seam-to, transparent));
+}
+
+:where(.aboutIntroScope):global(.section--yellow.section-seam-bottom) {
+  --seam-from: var(--yellow);
+}
+
+:where(.aboutIntroScope):global(.section--pink.section-seam-bottom) {
+  --seam-from: var(--color-bg);
+}
+
+:where(.aboutIntroScope):global(.seam-to-pink) {
+  --seam-to: var(--color-bg);
+}
+
+:where(.aboutIntroScope):global(.seam-to-purple) {
+  --seam-to: var(--purple);
+}

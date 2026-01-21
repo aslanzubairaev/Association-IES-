@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aboutIntroCopy } from "@/content/actions";
+import styles from "./AboutIntro.module.css";
 
 type AboutIntroProps = {
   locale: "ru" | "fr";
@@ -22,7 +23,9 @@ export function AboutIntro({ locale }: AboutIntroProps) {
   const ctaHref = `/${locale}/contact`;
 
   return (
-    <section className="section section--yellow section-seam-bottom seam-to-pink">
+    <section
+      className={`${styles.aboutIntroScope} section section--yellow section-seam-bottom seam-to-pink`}
+    >
       <Container>
         <div className="section-head">
           <h2 className="h2 h2--blue">{copy.title}</h2>
