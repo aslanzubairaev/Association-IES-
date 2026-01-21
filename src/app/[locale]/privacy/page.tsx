@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { buildGmailComposeUrl } from "@/lib/emailCompose";
 import { privacyPageCopy } from "@/content/actions";
+import styles from "./page.module.css";
 
 export function generateMetadata({
   params,
@@ -32,8 +33,9 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
   });
 
   return (
-    <main className="section section--soft privacy-page">
-      <Container>
+    <div className={styles.privacyScope}>
+      <main className="section section--soft privacy-page">
+        <Container>
         <div className="section-head">
           <h1 className="h2 h2--blue privacy-title">{copy.title}</h1>
           <p className="lead">{copy.lead}</p>
@@ -106,7 +108,8 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
             {copy.updatedLabel} {copy.updatedDate}
           </p>
         </article>
-      </Container>
-    </main>
+        </Container>
+      </main>
+    </div>
   );
 }
