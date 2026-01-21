@@ -678,10 +678,10 @@ export const heroCopy: Record<ActionsLocale, HeroCopy> = {
     pillsAriaLabel: "ключевые слова",
   },
   fr: {
-    title: "Nous aidons les personnes\nà s’intégrer à Strasbourg",
+    title: "Aide à l’intégration, accompagnement à Strasbourg",
     lead: "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement.",
-    ctaPrimary: "Demander de l’aide",
-    ctaSecondary: "Notre activité",
+    ctaPrimary: "Demande d'aide",
+    ctaSecondary: "Activités",
     pills: ["Intégration", "Éducation", "Synergie"],
     pillsAriaLabel: "mots-clés",
   },
