@@ -627,32 +627,6 @@ a {
   border-color: var(--surface-border);
 }
 
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
-/* moved to src/app/[locale]/about/page.module.css */
-
 /* Карточки на странице “Aide / Чем помогаем”: такие же цвета, как у quickNav. */
 .aide-card.card--paper {
   background: var(--surface);
@@ -663,20 +637,6 @@ a {
 .aide-card .fineprint {
   color: rgba(255, 255, 255, 0.82) !important;
 }
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
 
 .aide-topics-grid,
 .aide-steps-grid {
@@ -691,42 +651,16 @@ a {
   padding-top: 56px;
 }
 
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
 @media (max-width: 520px) {
   .aide-topics-section {
     padding-top: 32px;
   }
 }
 
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/aide/page.module.css */
-
-/* moved to src/app/[locale]/contact/page.module.css */
-
-/* moved to src/app/[locale]/privacy/page.module.css */
-
 .privacy-email-link {
   cursor: pointer;
   font-weight: 700;
 }
-
-/* moved to src/app/[locale]/contact/page.module.css */
 
 .quickForm .ies-select-trigger {
   display: flex;
@@ -836,8 +770,6 @@ a {
   height: 16px;
 }
 
-/* moved to src/app/[locale]/contact/page.module.css */
-
 /* Карточки на странице “Поддержать / Soutenir”: такие же полу-прозрачные поверхности, как у quickNav. */
 .support-card.card--paper {
   background: var(--surface);
@@ -941,8 +873,6 @@ a {
   font-weight: 700;
 }
 
-/* moved to src/app/[locale]/soutenir/page.module.css */
-
 .support-card-intro {
   display: flex;
   flex-direction: column;
@@ -1019,8 +949,6 @@ a {
   justify-self: center;
 }
 
-/* moved to src/app/[locale]/soutenir/page.module.css */
-
 .support-cta-label {
   white-space: nowrap;
 }
@@ -1053,16 +981,10 @@ a {
   margin-bottom: var(--support-footer-gap, 14px);
 }
 
-/* moved to src/app/[locale]/soutenir/page.module.css */
-
 @media (max-width: 520px) {
   .support-donate-section {
     padding-top: 32px;
   }
-
-  /* moved to src/app/[locale]/soutenir/page.module.css */
-  /* moved to src/app/[locale]/soutenir/page.module.css */
-  /* moved to src/app/[locale]/soutenir/page.module.css */
 }
 
 
@@ -1127,8 +1049,6 @@ a {
   position: relative;
   padding-bottom: 36px;
 }
-
-/* moved to src/app/[locale]/soutenir/page.module.css */
 
 .support-copy-wrap {
   position: relative;
@@ -1197,8 +1117,6 @@ a {
 }
 
 @media (max-width: 520px) {
-  /* moved to src/app/[locale]/soutenir/page.module.css */
-  /* moved to src/app/[locale]/soutenir/page.module.css */
 }
 
 /* (анимация волонтёрской кнопки удалена: теперь используются обычные hover/active для .btn) */
