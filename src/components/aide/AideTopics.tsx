@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import Link from "next/link";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aideCopy } from "@/content/actions";
+import styles from "./AideTopics.module.css";
 
 type AideTopicsProps = {
   locale: "ru" | "fr";
@@ -16,7 +17,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
 
   return (
     <section
-      className="section section--purple aide-topics-section"
+      className={`section section--purple aide-topics-section ${styles.topicsScope}`}
       id="topics"
       style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
     >
