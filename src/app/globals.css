@@ -141,19 +141,6 @@ a {
   background: transparent;
 }
 
-/* Контент страниц /ru и /fr: всегда начинается ниже фиксированной шапки. */
-.locale-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.locale-content {
-  padding-top: calc(var(--site-header-height) + env(safe-area-inset-top));
-  background: var(--color-bg);
-  flex: 1 0 auto;
-}
-
 /* Карточки на странице “Actions / Действия”: ровная сетка 3×3 на десктопе. */
 .actions-cards-grid {
   display: grid;

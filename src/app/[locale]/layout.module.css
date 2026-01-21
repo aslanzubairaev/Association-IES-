@@ -1,0 +1,11 @@
+:where(.localeScope):global(.locale-shell) {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.localeScope) :global(.locale-content) {
+  padding-top: calc(var(--site-header-height) + env(safe-area-inset-top));
+  background: var(--color-bg);
+  flex: 1 0 auto;
+}
