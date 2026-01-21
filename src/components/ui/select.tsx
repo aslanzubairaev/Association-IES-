@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import styles from "./select.module.css";
 
 function cn(...classes: Array<string | null | undefined | false>) {
   return classes.filter(Boolean).join(" ");
@@ -35,17 +36,33 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+type SelectProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>;
+
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
-const SelectValue = SelectPrimitive.Value;
+const SelectValue = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Value>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Value
+    ref={ref}
+    className={cn(styles.selectValue, "ies-select-value", className)}
+    {...props}
+  />
+));
+SelectValue.displayName = SelectPrimitive.Value.displayName;
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Trigger ref={ref} className={cn("ies-select-trigger", className)} {...props}>
+  <SelectPrimitive.Trigger
+    ref={ref}
+    className={cn(styles.selectTrigger, "ies-select-trigger", className)}
+    {...props}
+  >
     {children}
-    <SelectPrimitive.Icon className="ies-select-icon">
+    <SelectPrimitive.Icon className={cn(styles.selectIcon, "ies-select-icon")}>
       <ChevronDownIcon />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
@@ -59,12 +76,14 @@ const SelectContent = React.forwardRef<
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
-      className={cn("ies-select-content", className)}
+      className={cn(styles.selectContent, "ies-select-content", className)}
       position={position}
       sideOffset={sideOffset}
       {...props}
     >
-      <SelectPrimitive.Viewport className="ies-select-viewport">{children}</SelectPrimitive.Viewport>
+      <SelectPrimitive.Viewport className={cn(styles.selectViewport, "ies-select-viewport")}>
+        {children}
+      </SelectPrimitive.Viewport>
     </SelectPrimitive.Content>
   </SelectPrimitive.Portal>
 ));
@@ -74,9 +93,11 @@ const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
 >(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Item ref={ref} className={cn("ies-select-item", className)} {...props}>
+  <SelectPrimitive.Item ref={ref} className={cn(styles.selectItem, "ies-select-item", className)} {...props}>
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-    <SelectPrimitive.ItemIndicator className="ies-select-item-indicator">
+    <SelectPrimitive.ItemIndicator
+      className={cn(styles.selectItemIndicator, "ies-select-item-indicator")}
+    >
       <CheckIcon />
     </SelectPrimitive.ItemIndicator>
   </SelectPrimitive.Item>
