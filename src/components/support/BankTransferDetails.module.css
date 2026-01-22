@@ -1,0 +1,59 @@
+.bankTransferDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1 1 auto;
+}
+
+.bankTransferDetails :global(.support-info-panel) {
+  margin-bottom: var(--support-footer-gap, 14px);
+}
+
+.bankTransferBox:global(.contact-box) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  user-select: text;
+  text-shadow: var(--card-text-shadow);
+  position: relative;
+  padding-bottom: 36px;
+}
+
+.supportCopyWrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.supportCopyToast {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translate(-50%, 2px);
+  opacity: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: var(--card-text-shadow);
+  box-shadow: 0 8px 18px rgba(7, 12, 40, 0.18);
+  white-space: nowrap;
+  max-width: calc(100% - 8px);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.supportCopyToastVisible {
+  opacity: 1;
+  transform: translate(-50%, -2px);
+}

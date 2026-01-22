@@ -494,17 +494,6 @@ a {
   text-shadow: var(--card-text-shadow);
 }
 
-.bank-transfer-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  flex: 1 1 auto;
-}
-
-.bank-transfer-details .support-info-panel {
-  margin-bottom: var(--support-footer-gap, 14px);
-}
-
 @media (max-width: 520px) {
   .support-donate-section {
     padding-top: 32px;
@@ -560,56 +549,6 @@ a {
 }
 
 /* (специальные стили для кнопки волонтёрства удалены: используем общий стиль кнопок сайта) */
-
-/* Реквизиты в банковской карточке: делаем “бумагу” чуть темнее, чтобы данные читались лучше. */
-.bank-transfer-box.contact-box {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.22);
-  border-radius: 16px;
-  color: rgba(255, 255, 255, 0.92);
-  cursor: pointer;
-  user-select: text;
-  text-shadow: var(--card-text-shadow);
-  position: relative;
-  padding-bottom: 36px;
-}
-
-.support-copy-wrap {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.support-copy-toast {
-  position: absolute;
-  left: 50%;
-  top: calc(100% + 6px);
-  transform: translate(-50%, 2px);
-  opacity: 0;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-shadow: var(--card-text-shadow);
-  box-shadow: 0 8px 18px rgba(7, 12, 40, 0.18);
-  white-space: nowrap;
-  max-width: calc(100% - 8px);
-  text-align: center;
-  pointer-events: none;
-  user-select: none;
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-
-.support-copy-toast--visible {
-  opacity: 1;
-  transform: translate(-50%, -2px);
-}
 
 /* Списки IES: заменяем стандартные маркеры на вертикальные полоски. */
 .ies-list {

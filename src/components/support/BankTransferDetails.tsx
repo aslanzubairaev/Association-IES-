@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CopyToClipboardButton } from "@/components/ui/CopyToClipboardButton";
 import { bankTransferCopy } from "@/content/actions";
+import styles from "./BankTransferDetails.module.css";
 
 type BankTransferDetailsProps = {
   locale: "ru" | "fr";
@@ -76,10 +77,10 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
   }, []);
 
   return (
-    <div className="bank-transfer-details">
+    <div className={styles.bankTransferDetails}>
       {/* Блок реквизитов: контрастный и кликабельный, чтобы быстро скопировать данные. */}
       <div
-        className="contact-box bank-transfer-box support-info-panel"
+        className={`contact-box support-info-panel ${styles.bankTransferBox}`}
         role="button"
         tabIndex={0}
         onClick={copyAll}
@@ -118,7 +119,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
 
       {/* Кнопки копирования: делаем две компактные кнопки рядом, чтобы быстро скопировать IBAN или BIC. */}
       <div className="btn-row bank-transfer-actions support-actions-row support-card-footer">
-        <div className="support-copy-wrap">
+        <div className={styles.supportCopyWrap}>
           <CopyToClipboardButton
             value={iban}
             label={copy.copyIbanLabel}
@@ -129,7 +130,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
           />
           {toastOwner === "iban" && toastText ? (
             <div
-              className={`support-copy-toast ${toastVisible ? "support-copy-toast--visible" : ""}`}
+              className={`${styles.supportCopyToast} ${toastVisible ? styles.supportCopyToastVisible : ""}`}
               role="status"
               aria-live="polite"
             >
@@ -137,7 +138,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
             </div>
           ) : null}
         </div>
-        <div className="support-copy-wrap">
+        <div className={styles.supportCopyWrap}>
           <CopyToClipboardButton
             value={bic}
             label={copy.copyBicLabel}
@@ -148,7 +149,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
           />
           {toastOwner === "bic" && toastText ? (
             <div
-              className={`support-copy-toast ${toastVisible ? "support-copy-toast--visible" : ""}`}
+              className={`${styles.supportCopyToast} ${toastVisible ? styles.supportCopyToastVisible : ""}`}
               role="status"
               aria-live="polite"
             >
