@@ -162,7 +162,7 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
   }
 
   return (
-    <form className={cn("form quickForm", styles.quickFormScope)} onSubmit={handleSubmit} noValidate>
+    <form className={cn("form quickForm quickFormScope", styles.quickFormScope)} onSubmit={handleSubmit} noValidate>
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
       {variant === "hero" ? <h3 className="h3">{copy.title}</h3> : null}
 
@@ -227,7 +227,7 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
             onOpenChange={handleTopicOpenChange}
           >
             <SelectTrigger aria-invalid={showTopicError ? true : undefined}>
-              <SelectValue className="ies-select-value" placeholder={copy.topicPlaceholder} />
+              <SelectValue placeholder={copy.topicPlaceholder} />
             </SelectTrigger>
             <SelectContent position="popper" sideOffset={8}>
               {topicOptions.map((option) => (

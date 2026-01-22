@@ -35,8 +35,7 @@
 }
 
 :where(.quickFormScope):global(.quickForm) :global(.field) input,
-:where(.quickFormScope):global(.quickForm) :global(.field) textarea,
-:where(.quickFormScope):global(.quickForm) :global(.ies-select-trigger) {
+:where(.quickFormScope):global(.quickForm) :global(.field) textarea {
   max-width: 100%;
 }
 
