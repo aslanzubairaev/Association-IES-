@@ -1,0 +1,107 @@
+.aideScope :global(.aide-page .aide-card) {
+  padding: 30px;
+}
+
+.aideScope :global(.aide-page .aide-card .h3),
+.aideScope :global(.aide-page .aide-card .h3--blue) {
+  color: var(--card-title-color);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aideScope :global(.aide-page .aide-card .p) {
+  margin: 10px 0 0;
+  color: var(--card-body-color);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aideScope :global(.aide-page .aide-card .list) {
+  margin-top: 12px;
+  color: var(--card-body-color);
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aideScope :global(.aide-page .aide-card .list li) {
+  margin: 10px 0;
+  color: var(--card-body-color);
+  text-shadow: var(--card-text-shadow);
+}
+
+.aideScope :global(.aide-page .aide-card .list li::marker) {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.aideScope :global(.aide-page .aide-card .fineprint),
+.aideScope :global(.aide-page .aide-card .aide-fineprint) {
+  margin-top: 12px;
+  color: var(--card-muted-color) !important;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.55;
+  text-shadow: var(--card-text-shadow);
+}
+
+.aideScope :global(.aide-page .aide-card--topic) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.aideScope :global(.aide-page .aide-cta) {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.aideScope :global(.aide-page .aide-cta .btn) {
+  padding: 12px 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.aideScope :global(.aide-page .aide-cta .btn:hover) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
+}
+
+.aideScope :global(.aide-page .aide-cta .btn:active) {
+  transform: translateY(1px) scale(0.98);
+}
+
+.aideScope :global(.aide-page .aide-cta .btn:focus-visible) {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
+}
+
+.aideScope :global(.aide-page .aide-card--wide) {
+  padding: 34px;
+}
+
+.aideScope :global(.aide-page .aide-card--wide .list) {
+  margin-top: 0;
+  line-height: 1.65;
+}
+
+.aideScope :global(.aide-page .aide-card--wide .list li) {
+  margin: 12px 0;
+  line-height: 1.65;
+}
+
+@media (max-width: 520px) {
+  .aideScope :global(.aide-page .aide-cta) {
+    width: 100%;
+  }
+
+  .aideScope :global(.aide-page .aide-cta .btn) {
+    width: 100%;
+  }
+}

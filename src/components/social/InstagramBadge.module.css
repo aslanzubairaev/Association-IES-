@@ -1,0 +1,98 @@
+.badgeScope :global(.instagramBadge-link) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.badgeScope :global(.instagramBadge-icon) {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  flex: 0 0 auto;
+}
+
+.badgeScope :global(.instagramBadge-icon svg) {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.badgeScope :global(.instagramBadge-link:hover .instagramBadge-icon svg),
+.badgeScope :global(.instagramBadge-link:focus-visible .instagramBadge-icon svg) {
+  animation: instagramBadgePulse 480ms ease;
+}
+
+.badgeScope :global(.instagramBadge-outline) {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badgeScope :global(.instagramBadge-outline) {
+    stroke-dashoffset: 0;
+  }
+
+  .badgeScope :global(.instagramBadge-outline.is-animating) {
+    animation: none;
+  }
+
+  .badgeScope :global(.instagramBadge-link:hover .instagramBadge-icon svg),
+  .badgeScope :global(.instagramBadge-link:focus-visible .instagramBadge-icon svg) {
+    animation: none;
+  }
+}
+
+.badgeScope :global(.instagramBadge-outline.is-animating) {
+  animation: instagramBadgeDraw 1.6s ease forwards;
+}
+
+@keyframes instagramBadgeDraw {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes instagramBadgePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.badgeScope :global(.instagramBadge-text) {
+  display: grid;
+  gap: 2px;
+}
+
+.badgeScope :global(.instagramBadge-titleRow) {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.badgeScope :global(.instagramBadge-label) {
+  font-size: 12px;
+  opacity: 0.78;
+  font-weight: 700;
+}
+
+.badgeScope :global(.instagramBadge-handle) {
+  font-weight: 600;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}

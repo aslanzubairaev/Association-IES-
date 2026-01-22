@@ -1,0 +1,77 @@
+.privacyScope :global(.privacy-page a) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+}
+
+.privacyScope :global(.privacy-page a:hover) {
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.8);
+}
+
+.privacyScope :global(.privacy-page .card--paper) {
+  transition: none;
+}
+
+.privacyScope :global(.privacy-page .card--paper:hover) {
+  transform: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.privacyScope :global(.privacy-page .privacy-section) {
+  padding: 26px 0;
+}
+
+.privacyScope :global(.privacy-page .privacy-section + .privacy-section) {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.privacyScope :global(.privacy-page .card--paper .h3--blue) {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.privacyScope :global(.privacy-page .card--paper .p),
+.privacyScope :global(.privacy-page .card--paper .list) {
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+.privacyScope :global(.privacy-page .card--paper .p + .p) {
+  margin-top: 10px;
+}
+
+.privacyScope :global(.privacy-page .card--paper .p + .list),
+.privacyScope :global(.privacy-page .card--paper .list + .p) {
+  margin-top: 14px;
+}
+
+.privacyScope :global(.privacy-page .ies-list .ies-list-item) {
+  margin-bottom: 8px;
+}
+
+.privacyScope :global(.privacy-page .ies-list .ies-list-item:last-child) {
+  margin-bottom: 0;
+}
+
+.privacyScope :global(.privacy-page .card--paper .muted) {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.privacyScope :global(.privacy-page .card--paper a) {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 520px) {
+  .privacyScope :global(.privacy-page .privacy-title) {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+}

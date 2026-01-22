@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
 import { heroCopy } from "@/content/actions";
+import styles from "./Hero.module.css";
 
 type HeroProps = {
   locale: "ru" | "fr";
@@ -15,12 +16,16 @@ type HeroProps = {
 // Переход секции вниз: уводим фиолетовый Hero в общий светлый фон сайта без “третьего” фона.
 const slantPurpleStyle = { "--next": "var(--color-bg)" } as CSSProperties;
 
+function cn(...classes: Array<string | null | undefined | false>) {
+  return classes.filter(Boolean).join(" ");
+}
+
 // Верхний блок: тексты и кнопки зависят от выбранного языка.
 export function Hero({ locale }: HeroProps) {
   const copy = heroCopy[locale];
 
   return (
-    <section className="section section--purple slant hero-section" style={slantPurpleStyle}>
+    <section className={cn("section section--purple slant hero-section", styles.heroScope)} style={slantPurpleStyle}>
       <Container>
         <div className="hero-grid">
           <Card className="card--glass hero-left hero-left--mobile-plain" surface={false}>

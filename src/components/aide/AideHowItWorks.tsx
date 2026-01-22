@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { aideCopy } from "@/content/actions";
+import styles from "./AideHowItWorks.module.css";
 
 type AideHowItWorksProps = {
   locale: "ru" | "fr";
@@ -13,7 +14,7 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
   const copy = aideCopy[locale].howItWorks;
 
   return (
-    <section className="section section--purple" id="how">
+    <section className={`section section--purple ${styles.stepsScope}`} id="how">
       <Container>
         <div className="section-head">
           <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>

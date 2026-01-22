@@ -8,6 +8,8 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
 import { homeNavCards, quickNavCopy } from "@/content/actions";
+import Image from "next/image";
+import styles from "./QuickNav.module.css";
 
 type QuickNavProps = {
   locale: "ru" | "fr";
@@ -19,7 +21,7 @@ export function QuickNav({ locale }: QuickNavProps) {
   const quickNavIcons = ["/01.png", "/02.png", "/03.png", "/04.png", "/05.png"];
 
   return (
-    <section className="section section--soft needs-block">
+    <section className={`${styles.quickNavScope} section section--soft needs-block`}>
       <Container>
         <div className="section-head">
           <h2 className="h2 h2--blue">{copy.title}</h2>
@@ -49,7 +51,14 @@ export function QuickNav({ locale }: QuickNavProps) {
                 </div>
 
                 {iconSrc ? (
-                  <img className="quickNav-icon" src={iconSrc} alt="" aria-hidden="true" />
+                  <Image
+                    className="quickNav-icon"
+                    src={iconSrc}
+                    alt=""
+                    aria-hidden="true"
+                    width={120}
+                    height={120}
+                  />
                 ) : null}
               </Card>
             );

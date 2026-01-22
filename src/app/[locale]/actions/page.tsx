@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { ActionCard } from "@/components/actions/ActionCard";
 import { actionsCopy, actionsPageCopy } from "@/content/actions";
+import styles from "./page.module.css";
 
 export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
@@ -11,8 +12,9 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
   const copy = actionsCopy[locale];
 
   return (
-    <main className="section section--purple actions-page">
-      <Container>
+    <div className={styles.actionsScope}>
+      <main className="section section--purple actions-page">
+        <Container>
         {/* HERO: объясняем, что это за направления, и даём короткую подсказку, что делать дальше. */}
         <div className="section-head">
           <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
@@ -73,8 +75,9 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
             items={copy.important.items}
           />
         </div>
-      </Container>
-    </main>
+        </Container>
+      </main>
+    </div>
   );
 }
 
