@@ -36,8 +36,6 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-type SelectProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>;
-
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
 const SelectValue = React.forwardRef<

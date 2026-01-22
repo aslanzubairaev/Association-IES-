@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
 import { homeNavCards, quickNavCopy } from "@/content/actions";
+import Image from "next/image";
 import styles from "./QuickNav.module.css";
 
 type QuickNavProps = {
@@ -50,7 +51,14 @@ export function QuickNav({ locale }: QuickNavProps) {
                 </div>
 
                 {iconSrc ? (
-                  <img className="quickNav-icon" src={iconSrc} alt="" aria-hidden="true" />
+                  <Image
+                    className="quickNav-icon"
+                    src={iconSrc}
+                    alt=""
+                    aria-hidden="true"
+                    width={120}
+                    height={120}
+                  />
                 ) : null}
               </Card>
             );
