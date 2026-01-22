@@ -162,16 +162,16 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
   }
 
   return (
-    <form className={cn("form quickForm quickFormScope", styles.quickFormScope)} onSubmit={handleSubmit} noValidate>
+    <form className={cn("form quickForm", styles.root)} onSubmit={handleSubmit} noValidate>
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
       {variant === "hero" ? <h3 className="h3">{copy.title}</h3> : null}
 
       {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
-      {variant === "hero" ? <p className="fineprint quickForm-helper">{copy.helper}</p> : null}
+      {variant === "hero" ? <p className={cn("fineprint", styles.helper)}>{copy.helper}</p> : null}
 
-      <div className="form-grid">
-        <label className="field">
-          <span>{copy.nameLabel}</span>
+      <div className={styles.grid}>
+        <label className={styles.field}>
+          <span className={styles.label}>{copy.nameLabel}</span>
           <input
             type="text"
             placeholder={copy.namePlaceholder}
@@ -185,8 +185,8 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
           </div>
         </label>
 
-        <label className="field">
-          <span>{copy.emailLabel}</span>
+        <label className={styles.field}>
+          <span className={styles.label}>{copy.emailLabel}</span>
           <input
             type="text"
             inputMode="email"
@@ -202,8 +202,8 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
           </div>
         </label>
 
-        <label className="field">
-          <span>{copy.phoneLabel}</span>
+        <label className={styles.field}>
+          <span className={styles.label}>{copy.phoneLabel}</span>
           <input
             type="tel"
             name="phone"
@@ -218,8 +218,8 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
           </div>
         </label>
 
-        <label className="field">
-          <span>{copy.topicLabel}</span>
+        <label className={styles.field}>
+          <span className={styles.label}>{copy.topicLabel}</span>
           <Select
             name="topic"
             value={selectedTopic || undefined}
@@ -242,8 +242,8 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
           </div>
         </label>
 
-        <label className="field field--full">
-          <span>{copy.messageLabel}</span>
+        <label className={cn(styles.field, styles.fieldFull)}>
+          <span className={styles.label}>{copy.messageLabel}</span>
           <textarea
             rows={5}
             placeholder={messagePlaceholder}
@@ -259,7 +259,7 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
       </div>
 
       {/* Кнопка отправки: по нажатию проверяем поля и открываем письмо в почте (в зависимости от варианта формы). */}
-      <div className={variant === "hero" ? "quickForm-submitRow quickForm-submitRow--hero" : "quickForm-submitRow"}>
+      <div className={styles.submitRow}>
         <Button variant="primary" type="submit" className="contact-cta-button">
           {buttonLabel}
         </Button>

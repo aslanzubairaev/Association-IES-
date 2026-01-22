@@ -17,10 +17,6 @@
   cursor: pointer;
 }
 
-:where(.quickFormScope):global(.quickForm) :global(.field) :global(.ies-select-trigger) {
-  max-width: 100%;
-}
-
 :global(.quickForm) .selectTrigger:global(.ies-select-trigger:focus-visible),
 :global(.quickForm) .selectTrigger:global(.ies-select-trigger[data-state="open"]) {
   outline: none;
