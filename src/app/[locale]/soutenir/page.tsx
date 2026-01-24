@@ -111,7 +111,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
             </div>
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
-          <div className="actions-cards-grid">
+          <div className={styles.supportCardsGrid}>
             <SupportCard
               title={text.helloAssoTitle}
               icon={helloAssoIcon}

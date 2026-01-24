@@ -8,6 +8,7 @@
 
 import Link from "next/link";
 import { IesList, IesListItem } from "@/components/ui/IesList";
+import styles from "./ActionCard.module.css";
 
 type ActionCardDirectionProps = {
   variant?: "direction";
@@ -42,12 +43,12 @@ export function ActionCard(props: ActionCardProps) {
     const { title, items, ctaLabel, href } = props;
 
     return (
-      <article className="card card--paper actions-card actions-card--stack">
+      <article className={`card card--paper ${styles.card} ${styles.cardStack}`}>
         {/* Заголовок инфо‑карточки: помогает быстро понять, что это “правила участия”. */}
         <h3 className="h3 h3--blue">{title}</h3>
 
         {/* Список пунктов: делаем небольшой отступ между строками, чтобы текст читался легче. */}
-        <IesList className="list actions-card-list">
+        <IesList className={`list ${styles.cardList}`}>
           {items.map((item) => (
             <IesListItem key={item}>{item}</IesListItem>
           ))}
@@ -55,13 +56,13 @@ export function ActionCard(props: ActionCardProps) {
 
         {/* Ссылка на контакты: опционально, чтобы не плодить CTA. */}
         {ctaLabel && href ? (
-          <div className="actions-card-cta">
-            <Link className="btn btn--pill actions-card-button" href={href}>
+          <div className={styles.cardCta}>
+            <Link className={`btn btn--pill ${styles.cardButton}`} href={href}>
               {ctaLabel}
             </Link>
           </div>
         ) : (
-          <div className="actions-card-cta" />
+          <div className={styles.cardCta} />
         )}
       </article>
     );
@@ -82,36 +83,38 @@ export function ActionCard(props: ActionCardProps) {
   } = props;
 
   return (
-    <article className="card card--paper accent-left accent--blue actions-card actions-card--stack">
+    <article
+      className={`card card--paper accent-left accent--blue ${styles.card} ${styles.cardStack}`}
+    >
       {/* Название направления: главный ориентир в карточке. */}
       <h3 className="h3 h3--blue">{title}</h3>
 
       {/* “Для кого”: одна строка, чтобы быстро оценить, подходит ли это направление. */}
-      <p className="p actions-card-row">
-        <span className="actions-card-label">{forWhoLabel}:</span>{" "}
-        <span className="actions-card-value">{forWho}</span>
+      <p className={`p ${styles.cardRow}`}>
+        <span className={styles.cardLabel}>{forWhoLabel}:</span>{" "}
+        <span className={styles.cardValue}>{forWho}</span>
       </p>
 
       {/* “Что даёт”: одна строка, без обещаний — только нейтральное описание результата. */}
-      <p className="p actions-card-row">
-        <span className="actions-card-label">{benefitLabel}:</span>{" "}
-        <span className="actions-card-value">{benefit}</span>
+      <p className={`p ${styles.cardRow}`}>
+        <span className={styles.cardLabel}>{benefitLabel}:</span>{" "}
+        <span className={styles.cardValue}>{benefit}</span>
       </p>
 
       {/* “Формат/частота”: помогает понять, регулярное ли это направление или событийное. */}
-      <p className="p actions-card-row">
-        <span className="actions-card-label">{frequencyLabel}:</span>{" "}
-        <span className="actions-card-value">{frequency}</span>
+      <p className={`p ${styles.cardRow}`}>
+        <span className={styles.cardLabel}>{frequencyLabel}:</span>{" "}
+        <span className={styles.cardValue}>{frequency}</span>
       </p>
 
       {/* “Когда/где”: на этой странице всегда без общего адреса/графика — уточняется при записи. */}
-      <p className="actions-card-meta">
-        <span className="actions-card-meta-label">{whenWhereLabel}</span> {whenWhereText}
+      <p className={styles.cardMeta}>
+        <span className={styles.cardMetaLabel}>{whenWhereLabel}</span> {whenWhereText}
       </p>
 
       {/* Кнопка записи: ведёт на страницу контактов, без телефонов и личных контактов. */}
-      <div className="actions-card-cta">
-        <Link className="btn btn--pill actions-card-button" href={href}>
+      <div className={styles.cardCta}>
+        <Link className={`btn btn--pill ${styles.cardButton}`} href={href}>
           {ctaLabel}
         </Link>
       </div>
