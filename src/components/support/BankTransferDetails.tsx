@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { CopyToClipboardButton } from "@/components/ui/CopyToClipboardButton";
 import { bankTransferCopy } from "@/content/actions";
 import styles from "./BankTransferDetails.module.css";
+import supportCardStyles from "./SupportCard.module.css";
 
 type BankTransferDetailsProps = {
   locale: "ru" | "fr";
@@ -118,13 +119,15 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
       </div>
 
       {/* Кнопки копирования: делаем две компактные кнопки рядом, чтобы быстро скопировать IBAN или BIC. */}
-      <div className="btn-row bank-transfer-actions support-actions-row support-card-footer">
+      <div
+        className={`btn-row bank-transfer-actions support-actions-row support-card-footer ${supportCardStyles.supportActionsRow} ${supportCardStyles.supportCardFooter}`}
+      >
         <div className={styles.supportCopyWrap}>
           <CopyToClipboardButton
             value={iban}
             label={copy.copyIbanLabel}
             copiedLabel={copy.copiedIbanStatus}
-            className="btn btn--pill support-cta-button"
+            className={`btn btn--pill support-cta-button ${supportCardStyles.supportCtaButton}`}
             showStatus={false}
             onCopied={(text) => showToast("iban", text)}
           />
@@ -143,7 +146,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
             value={bic}
             label={copy.copyBicLabel}
             copiedLabel={copy.copiedBicStatus}
-            className="btn btn--pill support-cta-button"
+            className={`btn btn--pill support-cta-button ${supportCardStyles.supportCtaButton}`}
             showStatus={false}
             onCopied={(text) => showToast("bic", text)}
           />

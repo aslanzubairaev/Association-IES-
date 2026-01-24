@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
+import supportCardStyles from "@/components/support/SupportCard.module.css";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { soutenirCopy } from "@/content/actions";
 import styles from "./page.module.css";
@@ -161,9 +162,11 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
           </div>
 
           {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
-          <article className="card card--paper support-card accent-left accent--blue support-important">
+          <article
+            className={`card card--paper support-card accent-left accent--blue support-important ${supportCardStyles.supportCard}`}
+          >
             <h3 className="h3 h3--blue">{text.importantTitle}</h3>
-            <p className="p support-text">
+            <p className={`p support-text ${supportCardStyles.supportText}`}>
               {text.importantText}
             </p>
           </article>

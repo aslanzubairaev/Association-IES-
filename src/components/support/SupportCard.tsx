@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
+import styles from "./SupportCard.module.css";
 
 // Данные карточки: заголовок обязателен, остальное можно не показывать (например, если внутри есть реквизиты).
 type SupportCardProps = {
@@ -44,19 +45,21 @@ export function SupportCard({
   const hasCta = Boolean(ctaLabel && ctaHref);
 
   return (
-    <article className={`card card--paper support-card ${className ?? ""}`.trim()}>
-      <div className="support-card-intro">
+    <article className={`card card--paper support-card ${styles.supportCard} ${className ?? ""}`.trim()}>
+      <div className={styles.supportCardIntro}>
         {/* Заголовок: главный ориентир, чтобы сразу понять способ поддержки. */}
-        <div className="support-card-head">
-          <div className="support-card-title">
-            {icon ? <span className="support-card-icon">{icon}</span> : null}
+        <div className={styles.supportCardHead}>
+          <div className={styles.supportCardTitle}>
+            {icon ? <span className={styles.supportCardIcon}>{icon}</span> : null}
             <h3 className="h3 h3--blue">{title}</h3>
           </div>
           {badgeLabel || badgeSecondaryLabel ? (
-            <div className="support-card-badges">
-              {badgeLabel ? <span className="support-card-badge">{badgeLabel}</span> : null}
+            <div className={styles.supportCardBadges}>
+              {badgeLabel ? <span className={styles.supportCardBadge}>{badgeLabel}</span> : null}
               {badgeSecondaryLabel ? (
-                <span className="support-card-badge support-card-badge--muted">{badgeSecondaryLabel}</span>
+                <span className={`${styles.supportCardBadge} ${styles.supportCardBadgeMuted}`}>
+                  {badgeSecondaryLabel}
+                </span>
               ) : null}
             </div>
           ) : null}
@@ -64,23 +67,28 @@ export function SupportCard({
 
         {/* Короткое описание: объясняем смысл карточки одной фразой, без лишних деталей. */}
         {text ? (
-          <p className="p support-text">
+          <p className={`p support-text ${styles.supportText}`}>
             {text}
           </p>
         ) : null}
       </div>
 
       {/* Дополнительное содержимое: сюда можно вставить реквизиты, список или другие детали. */}
-      {children ? <div className="support-card-body">{children}</div> : null}
+      {children ? <div className={styles.supportCardBody}>{children}</div> : null}
 
       {/* Кнопка: ведёт к следующему шагу (ссылка, форма или внешняя платформа). */}
       {hasCta ? (
-        <div className="support-cta support-card-footer">
-          <div className="support-actions-row support-actions-row--single">
-            <Link className="btn btn--pill support-cta-button" href={ctaHref!} target={linkTarget} rel={linkRel}>
-              <span className="support-cta-label">{ctaLabel}</span>
+        <div className={`support-cta support-card-footer ${styles.supportCardFooter}`}>
+          <div className={`support-actions-row ${styles.supportActionsRow} ${styles.supportActionsRowSingle}`}>
+            <Link
+              className={`btn btn--pill support-cta-button ${styles.supportCtaButton}`}
+              href={ctaHref!}
+              target={linkTarget}
+              rel={linkRel}
+            >
+              <span className={styles.supportCtaLabel}>{ctaLabel}</span>
               {isExternal ? (
-                <span className="support-cta-icon" aria-hidden="true">
+                <span className={styles.supportCtaIcon} aria-hidden="true">
                   <svg viewBox="0 0 20 20" fill="none" focusable="false">
                     <path
                       d="M11.5 4h4.5v4.5"
@@ -108,7 +116,7 @@ export function SupportCard({
               ) : null}
             </Link>
           </div>
-          {ctaNote ? <span className="support-cta-note">{ctaNote}</span> : null}
+          {ctaNote ? <span className={styles.supportCtaNote}>{ctaNote}</span> : null}
         </div>
       ) : null}
     </article>
