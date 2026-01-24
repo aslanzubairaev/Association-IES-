@@ -201,12 +201,6 @@ a {
   color: rgba(255, 255, 255, 0.82) !important;
 }
 
-.privacy-email-link {
-  cursor: pointer;
-  font-weight: 700;
-}
-
-
 .support-donate-section {
   --support-footer-gap: 14px;
 }
