@@ -27,15 +27,23 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
 
         {/* Список шагов: карточки одинакового размера, на мобильном складываются в 1 колонку. */}
         <div className="cards-grid aide-steps-grid" aria-label={copy.title}>
-          {copy.steps.map((step) => (
+          {copy.steps.map((step) => {
+            const badge = step.icon;
+            const badgeClassName = styles.stepIco;
+
+            return (
             <article key={step.title} className="card card--paper aide-card aide-card--step accent-left accent--blue">
               {/* Заголовок карточки: “Шаг 1/2/3 …” или “Étape 1/2/3 …”, без дополнительных значков. */}
-              <h3 className="h3 h3--blue">{step.title}</h3>
+              <div className={styles.step}>
+                {badge ? <span className={badgeClassName}>{badge}</span> : null}
+                <h3 className="h3 h3--blue">{step.title}</h3>
+              </div>
 
               {/* 1–3 предложения: что именно происходит на этом шаге. */}
               <p className="p">{step.text}</p>
             </article>
-          ))}
+            );
+          })}
         </div>
       </Container>
     </section>

@@ -698,24 +698,6 @@
   }
   .focus-text{ color: rgba(255,255,255,.86); line-height: 1.5; }
   
-  .step{ display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .step-num{
-    width: 34px; height: 34px;
-    border-radius: 999px;
-    display: grid; place-items: center;
-    background: rgba(255,255,255,.16);
-    border: 1px solid rgba(255,255,255,.18);
-    font-weight: 900;
-  }
-  .step-ico{
-    width: 34px; height: 34px;
-    border-radius: 999px;
-    display: grid; place-items: center;
-    background: rgba(240,212,107,.22);
-    border: 1px solid rgba(240,212,107,.35);
-    font-weight: 900;
-  }
-  
   .btn-row{ display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
   
   .contact-box{

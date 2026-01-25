@@ -419,6 +419,7 @@ export type AideLocale = ActionsLocale;
 type AideHowItWorksStep = {
   title: string;
   text: string;
+  icon?: string;
 };
 
 type AideTopic = {
