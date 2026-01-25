@@ -69,6 +69,11 @@
   color: rgba(255, 255, 255, 0.92);
 }
 
+.privacyEmailLink {
+  cursor: pointer;
+  font-weight: 700;
+}
+
 @media (max-width: 520px) {
   .privacyScope :global(.privacy-page .privacy-title) {
     font-size: 26px;

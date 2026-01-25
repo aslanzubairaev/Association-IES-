@@ -5,6 +5,8 @@
 
 import type { HTMLAttributes, LiHTMLAttributes } from "react";
 
+import styles from "./IesList.module.css";
+
 const joinClassNames = (...names: Array<string | undefined>) =>
   names.filter(Boolean).join(" ");
 
@@ -12,12 +14,22 @@ export function IesList({
   className,
   ...props
 }: HTMLAttributes<HTMLUListElement>) {
-  return <ul className={joinClassNames("ies-list", className)} {...props} />;
+  return (
+    <ul
+      className={joinClassNames(styles.iesList, "ies-list", className)}
+      {...props}
+    />
+  );
 }
 
 export function IesListItem({
   className,
   ...props
 }: LiHTMLAttributes<HTMLLIElement>) {
-  return <li className={joinClassNames("ies-list-item", className)} {...props} />;
+  return (
+    <li
+      className={joinClassNames(styles.iesListItem, "ies-list-item", className)}
+      {...props}
+    />
+  );
 }

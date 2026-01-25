@@ -88,7 +88,7 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
                 <Link href={contactHref}>{copy.contactLinkLabel}</Link>
                 {copy.contactTextAfter}
                 <a
-                  className="privacy-email-link"
+                  className={styles.privacyEmailLink}
                   href={emailComposeUrl}
                   target="_blank"
                   rel="noopener noreferrer"

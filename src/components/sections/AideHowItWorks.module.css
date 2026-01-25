@@ -1,0 +1,3 @@
+:where(.stepsScope) :global(.aide-steps-grid) {
+  align-items: stretch;
+}

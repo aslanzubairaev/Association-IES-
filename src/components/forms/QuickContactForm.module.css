@@ -1,0 +1,82 @@
+.root {
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  color: rgba(11, 27, 51, 0.9);
+}
+
+.helper {
+  margin: 8px 0 12px;
+  opacity: 0.78;
+}
+
+.submitRow {
+  display: flex;
+  justify-content: center;
+}
+
+.root input,
+.root textarea,
+.root select {
+  border: 1.5px solid rgba(11, 27, 51, 0.18);
+  padding: 12px 14px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.root input,
+.root select {
+  height: 44px;
+}
+
+.root textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.root input,
+.root textarea {
+  max-width: 100%;
+}
+
+.root input::placeholder,
+.root textarea::placeholder {
+  color: rgba(11, 27, 51, 0.6);
+}
+
+.root input:focus,
+.root textarea:focus,
+.root select:focus {
+  border-color: rgba(15, 82, 166, 0.5);
+  box-shadow: 0 0 0 4px rgba(15, 82, 166, 0.18);
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,21 +1,3 @@
-:where(.heroScope) :global(.hero-right .quickForm .field > span) {
-  font-family: Inter, system-ui, sans-serif;
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-:where(.heroScope) :global(.quickForm-helper) {
-  margin: 8px 0 12px;
-  opacity: 0.78;
-}
-
-:where(.heroScope) :global(.quickForm-submitRow--hero) {
-  display: flex;
-  justify-content: center;
-}
-
 :where(.heroScope):global(.hero-section) + :global(.section--soft) {
   padding-top: 64px;
 }

@@ -1,0 +1,25 @@
+.iesList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.iesListItem {
+  position: relative;
+  padding-left: calc(var(--ies-list-marker-width, 6px) + var(--ies-list-gap, 16px));
+}
+
+.iesListItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--ies-list-marker-offset, 0.2em);
+  width: var(--ies-list-marker-width, 6px);
+  height: var(--ies-list-marker-height, 18.75px);
+  border-radius: 999px;
+  background: var(--ies-list-marker-color, currentColor);
+  opacity: var(--ies-list-marker-opacity, 0.6);
+}
+
+:global(.support-info-list) .iesListItem {
+  margin: 8px 0;
+}
