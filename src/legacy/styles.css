@@ -25,10 +25,6 @@
   
     --border: 2px;
     --shadow: var(--shadow-soft);
-    --bg-hero-canvas: radial-gradient(900px 420px at 15% 15%, rgba(255,255,255,.10), transparent 60%),
-                      radial-gradient(800px 380px at 85% 40%, rgba(0,0,0,.18), transparent 55%),
-                      linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
-  
     /* Вертикальный ритм секций: один стандарт на весь сайт. */
     --space-section-y: 88px;
     --space-section-y-md: 72px;
@@ -65,10 +61,6 @@
     overflow: hidden;
   }
 
-  .bg-hero-canvas{
-    background: var(--bg-hero-canvas);
-  }
-  
   .section--purple{
     background: radial-gradient(900px 420px at 15% 15%, rgba(255,255,255,.10), transparent 60%),
                 radial-gradient(800px 380px at 85% 40%, rgba(0,0,0,.18), transparent 55%),
@@ -99,19 +91,6 @@
     z-index: 0;
   }
 
-  .bg-hero-canvas .section--soft,
-  .bg-hero-canvas .section--pink-2,
-  .bg-hero-canvas .section--purple.trust-block,
-  .bg-hero-canvas .hero-section.section--purple{
-    background: transparent;
-  }
-
-  .bg-hero-canvas .section--soft::before,
-  .bg-hero-canvas .section--pink-2::before,
-  .bg-hero-canvas .section--soft::after,
-  .bg-hero-canvas .section--pink-2::after,
-  .bg-hero-canvas .trust-block::before,
-  .bg-hero-canvas .trust-block::after,
   .trust-block.slant::after{
     content: none !important;
     display: none !important;
@@ -132,14 +111,6 @@
     content: none !important;
     display: none !important;
   }
-
-  .bg-hero-canvas .section--pink-2{
-    border-top: none;
-    box-shadow: none;
-    position: relative;
-    z-index: 1;
-  }
-
 
   .section--soft > *,
   .section--pink-2 > *{
