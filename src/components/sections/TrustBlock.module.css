@@ -1,0 +1,52 @@
+.trustBlock .quoteCard{
+  clip-path: none;
+}
+
+.quoteCard{
+  background: linear-gradient(135deg, var(--blue), var(--blue-2));
+  color: #fff;
+  border: var(--border) solid rgba(255,255,255,.14);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 22px 60px rgba(11, 27, 51, .18);
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+}
+
+.quoteCardText{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--card-body-color);
+  text-shadow: var(--card-text-shadow);
+}
+
+.quoteCardSign{
+  margin: 12px 0 0;
+  font-weight: 700;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--card-muted-color);
+  text-shadow: var(--card-text-shadow);
+}
+
+.quote{
+  margin-top: 18px;
+  padding: 22px 26px;
+}
+
+.quoteText{
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.90);
+}
+
+.quoteSign{
+  margin-top: 10px;
+  font-weight: 900;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
+  color: rgba(255,255,255,.85);
+}

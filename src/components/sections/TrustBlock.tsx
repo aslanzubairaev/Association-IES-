@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { trustBlockCopy } from "@/content/actions";
+import styles from "./TrustBlock.module.css";
 
 type TrustBlockProps = {
   locale: "ru" | "fr";
@@ -22,7 +23,7 @@ export function TrustBlock({ locale }: TrustBlockProps) {
   const copy = trustBlockCopy[locale];
 
   return (
-    <section className="section section--purple trust-block" style={slantPinkStyle}>
+    <section className={`section section--purple trust-block ${styles.trustBlock}`} style={slantPinkStyle}>
       <Container>
         <div className="section-head section-head--on-dark">
           <h2 className="h2">{copy.title}</h2>
@@ -39,11 +40,11 @@ export function TrustBlock({ locale }: TrustBlockProps) {
             </IesList>
           </Card>
 
-          <Card className="quote-card" surface={false} role="note" aria-label={copy.quoteAriaLabel}>
-            <p className="quote-card__text">
+          <Card className={styles.quoteCard} surface={false} role="note" aria-label={copy.quoteAriaLabel}>
+            <p className={styles.quoteCardText}>
               {copy.quoteText}
             </p>
-            <p className="quote-card__sign">{copy.quoteSignature}</p>
+            <p className={styles.quoteCardSign}>{copy.quoteSignature}</p>
           </Card>
         </div>
       </Container>
