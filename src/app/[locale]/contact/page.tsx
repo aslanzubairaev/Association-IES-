@@ -1,8 +1,8 @@
 /* Этот файл задаёт страницу “Контакты / Contact” и показывает, как быстро связаться с ассоциацией (форма + e-mail). */
 
 import { Container } from "@/components/ui/Container";
-import { QuickContactForm } from "@/components/contacts/QuickContactForm";
-import { ContactEmailBox } from "@/components/contacts/ContactEmailBox";
+import { QuickContactForm } from "@/components/forms/QuickContactForm";
+import { ContactEmailBox } from "@/components/forms/ContactEmailBox";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { contactCopy, resolveContactTopicKey } from "@/content/actions";
 import styles from "./page.module.css";

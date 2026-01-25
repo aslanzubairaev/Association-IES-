@@ -1,7 +1,7 @@
 /* Этот файл задаёт страницу “Actions / Действия” и показывает каталог направлений с карточками (RU/FR). */
 
 import { Container } from "@/components/ui/Container";
-import { ActionCard } from "@/components/actions/ActionCard";
+import { ActionCard } from "@/components/ui/ActionCard";
 import { actionsCopy, actionsPageCopy } from "@/content/actions";
 import styles from "./page.module.css";
 

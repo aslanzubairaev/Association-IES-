@@ -1,10 +1,10 @@
 /* Этот файл задаёт страницу “Aide / Чем помогаем” (RU/FR) и показывает секции помощи в логичном порядке. */
 
-import { AideHero } from "@/components/aide/AideHero";
-import { AideHowItWorks } from "@/components/aide/AideHowItWorks";
-import { AideTopics } from "@/components/aide/AideTopics";
-import { AideBeforeYouWrite } from "@/components/aide/AideBeforeYouWrite";
-import { AideImportant } from "@/components/aide/AideImportant";
+import { AideHero } from "@/components/sections/AideHero";
+import { AideHowItWorks } from "@/components/sections/AideHowItWorks";
+import { AideTopics } from "@/components/sections/AideTopics";
+import { AideBeforeYouWrite } from "@/components/sections/AideBeforeYouWrite";
+import { AideImportant } from "@/components/sections/AideImportant";
 import styles from "./page.module.css";
 
 export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }) {

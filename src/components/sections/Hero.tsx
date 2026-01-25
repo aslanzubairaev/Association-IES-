@@ -1,7 +1,7 @@
 /* Этот файл показывает верхний блок главной страницы: заголовок, описание, кнопки и компактную форму связи. */
 
 import type { CSSProperties } from "react";
-import { QuickContactForm } from "@/components/contacts/QuickContactForm";
+import { QuickContactForm } from "@/components/forms/QuickContactForm";
 import { InstagramBadge } from "@/components/social/InstagramBadge";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card/Card";
