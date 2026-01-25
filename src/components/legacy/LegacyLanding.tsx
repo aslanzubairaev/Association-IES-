@@ -8,6 +8,7 @@ import type { CSSProperties } from "react";
 import Script from "next/script";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import styles from "../sections/Hero.module.css";
+import headerStyles from "../layout/Header.module.css";
 
 const slantPurpleStyle = { "--next": "var(--purple)" } as CSSProperties;
 const slantPinkStyle = { "--next": "var(--pink)" } as CSSProperties;
@@ -24,7 +25,7 @@ export function LegacyLanding() {
   const contactPageHref = "../contact";
 
   return (
-    <>
+    <div className={headerStyles.legacyHeader}>
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="Association IES">
@@ -535,7 +536,7 @@ export function LegacyLanding() {
   alert('Демо: сообщение “отправлено”.');
 });`}
       </Script>
-    </>
+    </div>
   );
 }
 

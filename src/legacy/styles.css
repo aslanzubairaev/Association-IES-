@@ -58,139 +58,6 @@
     margin: 0 auto;
   }
   
-  /* HEADER */
-  .site-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    background: var(--blue);
-    border-bottom: 1px solid rgba(255,255,255,.18);
-  }
-  
-  .header-inner{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 14px 0;
-  }
-  
-  .brand{
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 800;
-    position: relative;
-    transition: transform 200ms ease;
-    text-decoration: none;
-  }
-  .brand:hover{
-    text-decoration: none;
-  }
-  
-  .brand-mark{
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-    background: radial-gradient(circle at 20% 20%, rgba(15, 82, 166, 0.60), transparent 60%),
-                radial-gradient(circle at 80% 30%, rgba(91, 54, 184, 0.60), transparent 60%),
-                linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
-    border: 1px solid rgba(255,255,255,.24);
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
-    animation: brand-mark-pop 900ms ease-out both, brand-mark-float 4.5s ease-in-out 1.2s infinite;
-  }
-
-  .brand-mark::after{
-    content: "";
-    position: absolute;
-    inset: -40%;
-    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.45) 45%, transparent 60%);
-    transform: translateX(-60%) rotate(10deg);
-    animation: brand-mark-sheen 3.6s ease-in-out 1.4s infinite;
-    opacity: 0.85;
-  }
-  
-  .brand-name{
-    color: #fff;
-    font-family: Montserrat, Inter, system-ui, sans-serif;
-    font-weight: 900;
-    letter-spacing: .01em;
-    animation: brand-name-reveal 900ms ease-out 120ms both;
-    transition: transform 220ms ease, text-shadow 220ms ease, letter-spacing 220ms ease;
-  }
-
-  .brand:hover{
-    transform: translateY(-1px);
-  }
-
-  .brand:hover .brand-name{
-    transform: translateY(-1px);
-    letter-spacing: .04em;
-    text-shadow: 0 6px 14px rgba(9, 12, 35, 0.35);
-  }
-
-  .brand:hover .brand-mark{
-    box-shadow: 0 12px 22px rgba(9, 12, 35, 0.25);
-  }
-
-  @keyframes brand-mark-pop{
-    0%{ transform: translateY(6px) scale(.94); opacity: 0; }
-    60%{ transform: translateY(-1px) scale(1.02); opacity: 1; }
-    100%{ transform: translateY(0) scale(1); opacity: 1; }
-  }
-
-  @keyframes brand-mark-float{
-    0%{ transform: translateY(0) scale(1); }
-    50%{ transform: translateY(-3px) scale(1.02); }
-    100%{ transform: translateY(0) scale(1); }
-  }
-
-  @keyframes brand-mark-sheen{
-    0%{ transform: translateX(-60%) rotate(10deg); opacity: 0; }
-    35%{ opacity: .85; }
-    65%{ opacity: .85; }
-    100%{ transform: translateX(60%) rotate(10deg); opacity: 0; }
-  }
-
-  @keyframes brand-name-reveal{
-    0%{ opacity: 0; transform: translateY(6px); letter-spacing: .18em; }
-    100%{ opacity: 1; transform: translateY(0); letter-spacing: .01em; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .brand,
-    .brand *{
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-  
-  .nav{
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .nav a{
-    color: rgba(255,255,255,.9);
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    opacity: .95;
-  }
-  .nav a:hover{ opacity: 1; text-decoration: none; }
-  
-  .header-cta{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  
   /* SECTIONS */
   .section{
     position: relative;
@@ -1018,7 +885,6 @@
     :root{
       --space-section-y: var(--space-section-y-md);
     }
-    .nav{ display: none; } /* для демо, потом сделаешь burger */
     .grid-2{ grid-template-columns: 1fr; }
     .cards-grid{ grid-template-columns: 1fr; }
     .actions-layout{ grid-template-columns: 1fr; }
@@ -1029,7 +895,6 @@
     :root{
       --space-section-y: var(--space-section-y-sm);
     }
-    .header-cta{ display: none; }
     .section{ padding: var(--space-section-y) 0; }
     .actions-short-block .actions-short-cta{
       display: flex;
