@@ -236,40 +236,6 @@ a {
 }
 
 
-/* Карточки в фиолетовой секции “Волонтёрство”: лёгкий лавандовый тон, чтобы сочеталось с фоном. */
-.support-panel.support-panel--purple.card--paper {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(106, 65, 200, 0.10) 100%
-  );
-}
-
-/* Мягкий фон для секции волонтёрства: без яркой заливки, только лёгкий жёлтый градиент. */
-.section.support-soft-yellow {
-  background: linear-gradient(
-    180deg,
-    rgba(230, 205, 106, 0.24) 0%,
-    rgba(230, 205, 106, 0.12) 55%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-/* Наводка курсора: небольшая “живость”, без резких анимаций. */
-@media (prefers-reduced-motion: no-preference) {
-  .support-panel.support-panel--purple.card--paper {
-    transition: transform 160ms ease, box-shadow 160ms ease;
-  }
-
-  .support-panel.support-panel--purple.card--paper:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 22px 60px rgba(11, 27, 51, 0.16);
-  }
-}
-
-/* (специальные стили для кнопки волонтёрства удалены: используем общий стиль кнопок сайта) */
-
-
 /* Кнопки “Скопировать” в банковской карточке: делаем компактнее, чтобы две кнопки помещались рядом. */
 .btn.btn--sm {
   padding: 10px 14px;
