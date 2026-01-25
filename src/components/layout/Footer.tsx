@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { footerCopy } from "@/content/actions";
+import styles from "./Footer.module.css";
 
 type FooterProps = {
   locale: "ru" | "fr";
@@ -89,15 +90,15 @@ export default function Footer({ locale }: FooterProps) {
   ];
 
   return (
-    <footer className="site-footer">
+    <footer className={styles["site-footer"]}>
       <Container>
-        <div className="footer-inner">
+        <div className={styles["footer-inner"]}>
           <div>{copy.copyright}</div>
-          <div className="footer-socials">
+          <div className={styles["footer-socials"]}>
             {socialLinks.map((link) => (
               <a
                 key={link.id}
-                className={`footer-social-link ${link.className}`}
+                className={`${styles["footer-social-link"]} ${styles[link.className]}`}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -108,7 +109,7 @@ export default function Footer({ locale }: FooterProps) {
               </a>
             ))}
           </div>
-          <div className="footer-links">
+          <div className={styles["footer-links"]}>
             <Link href={`/${locale}/about`}>
               {copy.aboutLabel}
             </Link>
