@@ -1,4 +1,16 @@
-.badgeScope :global(.instagramBadge-link) {
+.badgeScope {
+}
+
+.badge {
+}
+
+.description {
+}
+
+.animating {
+}
+
+.link {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -6,7 +18,7 @@
   color: inherit;
 }
 
-.badgeScope :global(.instagramBadge-icon) {
+.icon {
   width: 48px;
   height: 48px;
   border-radius: 12px;
@@ -17,38 +29,38 @@
   flex: 0 0 auto;
 }
 
-.badgeScope :global(.instagramBadge-icon svg) {
+.icon svg {
   width: 48px;
   height: 48px;
   display: block;
 }
 
-.badgeScope :global(.instagramBadge-link:hover .instagramBadge-icon svg),
-.badgeScope :global(.instagramBadge-link:focus-visible .instagramBadge-icon svg) {
+.link:hover .icon svg,
+.link:focus-visible .icon svg {
   animation: instagramBadgePulse 480ms ease;
 }
 
-.badgeScope :global(.instagramBadge-outline) {
+.outline {
   stroke-dasharray: 120;
   stroke-dashoffset: 120;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .badgeScope :global(.instagramBadge-outline) {
+  .outline {
     stroke-dashoffset: 0;
   }
 
-  .badgeScope :global(.instagramBadge-outline.is-animating) {
+  .outline.animating {
     animation: none;
   }
 
-  .badgeScope :global(.instagramBadge-link:hover .instagramBadge-icon svg),
-  .badgeScope :global(.instagramBadge-link:focus-visible .instagramBadge-icon svg) {
+  .link:hover .icon svg,
+  .link:focus-visible .icon svg {
     animation: none;
   }
 }
 
-.badgeScope :global(.instagramBadge-outline.is-animating) {
+.outline.animating {
   animation: instagramBadgeDraw 1.6s ease forwards;
 }
 
@@ -74,24 +86,24 @@
 }
 
 
-.badgeScope :global(.instagramBadge-text) {
+.text {
   display: grid;
   gap: 2px;
 }
 
-.badgeScope :global(.instagramBadge-titleRow) {
+.titleRow {
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
 }
 
-.badgeScope :global(.instagramBadge-label) {
+.label {
   font-size: 12px;
   opacity: 0.78;
   font-weight: 700;
 }
 
-.badgeScope :global(.instagramBadge-handle) {
+.handle {
   font-weight: 600;
   font-family: Montserrat, Inter, system-ui, sans-serif;
   letter-spacing: 0.01em;
