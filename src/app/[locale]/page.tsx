@@ -9,7 +9,7 @@ import { ActionsPreview } from "@/components/sections/ActionsPreview";
 import { Hero } from "@/components/sections/Hero";
 import { QuickNav } from "@/components/sections/QuickNav";
 import { TrustBlock } from "@/components/sections/TrustBlock";
-import styles from "./page.module.css";
+
 
 // Главная страница языка: только новая структура, без legacy-лендинга.
 export default function LocalePage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -17,7 +17,7 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
 
   return (
     <main>
-      <div className={styles.bgHeroCanvas}>
+      <div className="page--purple">
         <Hero locale={locale} />
         <QuickNav locale={locale} />
         <TrustBlock locale={locale} />
@@ -26,4 +26,3 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
     </main>
   );
 }
-

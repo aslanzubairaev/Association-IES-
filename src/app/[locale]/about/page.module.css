@@ -2,12 +2,15 @@
   padding: 30px;
 }
 
-.aboutScope :global(.about-page .about-card .h3),
 .aboutScope :global(.about-page .about-card .h3--blue) {
   color: var(--card-title-color);
   font-weight: 800;
   letter-spacing: 0.02em;
   text-shadow: var(--card-text-shadow);
+}
+
+.aboutScope :global(.grid-2 + .grid-2) {
+  margin-top: 18px;
 }
 
 .aboutScope :global(.about-page .about-card .p) {

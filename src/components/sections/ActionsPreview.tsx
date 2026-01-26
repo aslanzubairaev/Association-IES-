@@ -22,7 +22,6 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
   return (
     <Section
       className={`actions-preview-section ${styles.preview}`}
-      inverse
       id="actions"
       title={copy.title}
       subtitle={copy.subtitle}

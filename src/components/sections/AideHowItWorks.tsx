@@ -16,7 +16,6 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
 
   return (
     <Section
-      inverse
       className={styles.stepsScope}
       id="how"
       title={copy.title}

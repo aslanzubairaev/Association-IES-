@@ -20,7 +20,6 @@ export function Hero({ locale }: HeroProps) {
   return (
     <Section
       className={`hero-section ${styles.hero}`}
-      inverse
     >
       <div className={styles.heroLayout}>
         <Card className="card--glass hero-left hero-left--mobile-plain" surface={false}>

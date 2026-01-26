@@ -13,7 +13,7 @@ export function AideHero({ locale }: AideHeroProps) {
   const copy = aideCopy[locale].hero;
 
   return (
-    <Section inverse style={{ paddingBottom: 56 }}
+    <Section
       title={copy.title}
       titleAs="h1"
       subtitle={
@@ -27,7 +27,7 @@ export function AideHero({ locale }: AideHeroProps) {
       {/* Важная короткая строка: фиксируем три ожидания — бесплатно, по записи, ответ по e-mail. */}
       {/* Выносим из section-head, чтобы использовать стандартный Section. */}
       {/* Добавляем отступ сверху отрицательный, если нужно визуально приблизить, или оставляем как есть. */}
-      <p className="fineprint" style={{ opacity: 0.9, marginTop: -12, marginBottom: 24 }}>
+      <p className="note-hero">
         {copy.badge}
       </p>
     </Section>

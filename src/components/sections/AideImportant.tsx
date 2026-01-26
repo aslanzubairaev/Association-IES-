@@ -15,7 +15,6 @@ export function AideImportant({ locale }: AideImportantProps) {
 
   return (
     <Section
-      inverse
       id="important"
       title={copy.title}
     >

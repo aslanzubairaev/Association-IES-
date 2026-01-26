@@ -5,12 +5,16 @@
   align-items: stretch;
 }
 
-.actionsScope .actionsCardsGrid > * {
+.actionsScope .actionsCardsGrid>* {
   height: 100%;
 }
 
 .actionsScope .actionsImportantBlock {
   margin-top: 16px;
+}
+
+.actionsScope :global(.section-head .p + .p) {
+  margin-top: 10px;
 }
 
 .actionsScope .actionsDirectionsHead {

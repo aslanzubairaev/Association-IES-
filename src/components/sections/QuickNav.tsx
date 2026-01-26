@@ -23,7 +23,6 @@ export function QuickNav({ locale }: QuickNavProps) {
   return (
     <Section
       className={`${styles.quickNavScope} needs-block`}
-      inverse
       title={copy.title}
       subtitle={copy.subtitle}
     >

@@ -98,12 +98,12 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
     <div className={styles.supportScope}>
       <main className="page--purple support-page">
         {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-        <Section inverse className="support-donate-section"
+        <Section className="support-donate-section"
           title={text.donateTitle}
           titleAs="h1"
           subtitle={text.donateLead}
         >
-          {text.donateNote && <p className="note" style={{ textAlign: "center", marginTop: -12, marginBottom: 24, opacity: 0.9 }}>{text.donateNote}</p>}
+          {text.donateNote && <p className="note-hero note-center">{text.donateNote}</p>}
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
           <div className={styles.supportCardsGrid}>
@@ -168,7 +168,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
         </Section>
 
         {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
-        <Section inverse title={text.volunteerTitle}>
+        <Section title={text.volunteerTitle}>
           <div className="grid-2 support-volunteer-grid">
             <SupportCard
               title={text.volunteerTitle}

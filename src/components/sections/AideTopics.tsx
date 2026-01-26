@@ -16,7 +16,6 @@ export function AideTopics({ locale }: AideTopicsProps) {
 
   return (
     <Section
-      inverse
       className={`aide-topics-section ${styles.topicsScope}`}
       id="topics"
       style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}

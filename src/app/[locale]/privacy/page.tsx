@@ -42,7 +42,7 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
         subtitle={copy.lead}
       >
         <Card className="card--paper">
-          <CardContent style={{ display: "grid", gap: 18 }}>
+          <CardContent className={styles.privacyContent}>
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.whoTitle}</h2>
               <p className="p">{copy.whoText}</p>
@@ -104,7 +104,7 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
             </section>
           </CardContent>
 
-          <p className="muted" style={{ marginTop: 16, padding: "0 18px 18px" }}>
+          <p className={`muted ${styles.footerNote}`}>
             {copy.updatedLabel} {copy.updatedDate}
           </p>
         </Card>

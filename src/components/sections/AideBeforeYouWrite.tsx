@@ -15,7 +15,6 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
 
   return (
     <Section
-      inverse
       id="before"
       title={copy.title}
       subtitle={copy.subtitle}

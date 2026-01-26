@@ -82,27 +82,50 @@ li {
   overflow: hidden;
 }
 
-/* Внутри страницы с общим фоном секции остаются как “контейнеры” с отступами, без отдельного фона. */
-/* (Backgrounds are now handled by pages) */
-.trust-block.slant::after {
-  content: none !important;
-  display: none !important;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  filter: none;
-  transform: none;
-  transition: none;
-  animation: none;
+/*
+  STYLE UPDATES:
+  - Page-level background overrides.
+  - Text color overrides for dark pages ("white mode").
+*/
+
+/* Page Backgrounds */
+.page--purple {
+  background: radial-gradient(900px 420px at 15% 15%, rgba(255, 255, 255, .10), transparent 60%),
+    radial-gradient(800px 380px at 85% 40%, rgba(0, 0, 0, .18), transparent 55%),
+    linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
+  color: #fff;
 }
 
-section.trust-block.slant::before,
-section.trust-block.slant::after {
-  content: none !important;
-  display: none !important;
+/* Ensure headings and text are white on purple pages */
+.page--purple h1,
+.page--purple h2,
+.page--purple h3,
+.page--purple .h1,
+.page--purple .h2,
+.page--purple .h3,
+.page--purple p,
+.page--purple .p,
+.page--purple .muted {
+  color: #ffffff;
+}
+
+.page--purple .h2--blue,
+.page--purple .h3--blue {
+  color: #ffffff;
+  /* Override blue headers on dark pages */
+}
+
+/* Utility for negative margin notes (Subtitle expansion) */
+.note-hero {
+  margin-top: -12px;
+  margin-bottom: 24px;
+  opacity: 0.9;
+  font-size: 16px;
+  /* Matches fineprint/p size roughly? p is default. */
+}
+
+.note-center {
+  text-align: center;
 }
 
 .section-head {

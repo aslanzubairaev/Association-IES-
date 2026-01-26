@@ -23,9 +23,6 @@ type SectionProps = {
     // Семантический тег самой секции (например, main)
     as?: ElementType;
 
-    // Принудительно включить "тёмный режим" (белый текст)
-    inverse?: boolean;
-
     // Дополнительные стили
     style?: CSSProperties;
 };
@@ -38,7 +35,6 @@ export function Section({
     titleAs: TitleComponent = "h2",
     id,
     as: Component = "section",
-    inverse = false,
     style,
 }: SectionProps) {
 
@@ -47,21 +43,18 @@ export function Section({
         className
     ].filter(Boolean).join(" ");
 
-    // Определяем, тёмный ли фон (для белого текста)
-    const isDark = inverse;
-
     return (
         <Component className={combinedClasses} id={id} style={style}>
             <Container>
                 {(title || subtitle) && (
-                    <div className={`section-head ${isDark ? "section-head--on-dark" : ""}`}>
+                    <div className="section-head">
                         {title && (
-                            <TitleComponent className={`h2 ${!isDark ? "h2--blue" : ""}`}>
+                            <TitleComponent className="h2 h2--blue">
                                 {title}
                             </TitleComponent>
                         )}
                         {subtitle && (
-                            <p className={isDark ? "muted-on-dark" : "muted"}>
+                            <p className="muted">
                                 {subtitle}
                             </p>
                         )}

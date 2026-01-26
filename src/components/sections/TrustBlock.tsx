@@ -22,7 +22,6 @@ export function TrustBlock({ locale }: TrustBlockProps) {
     <Section
       className="trust-block"
       id="trust"
-      inverse
       title={copy.title}
       subtitle={copy.subtitle}
     >

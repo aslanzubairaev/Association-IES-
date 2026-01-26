@@ -13,31 +13,31 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
 
   return (
     <div className={styles.actionsScope}>
-      <main className="section section--purple">
+      <main className="section page--purple">
         <Container>
           {/* HERO: объясняем, что это за направления, и даём короткую подсказку, что делать дальше. */}
           <div className="section-head">
-            <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            <h1 className="h2">
               {copy.hero.title}
             </h1>
-            <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            <p className="muted-on-dark">
               {copy.hero.lead}
             </p>
-            <p className="p" style={{ marginTop: 10, color: "rgba(255,255,255,.92)" }}>
+            <p className="p" style={{ marginTop: 10 }}>
               {copy.hero.hint}
             </p>
           </div>
 
-        {/* НАПРАВЛЕНИЯ: каталог карточек, чтобы за 30 секунд понять варианты. */}
+          {/* НАПРАВЛЕНИЯ: каталог карточек, чтобы за 30 секунд понять варианты. */}
           <div
             id="directions"
             className={`section-head ${styles.actionsDirectionsHead}`}
             style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
           >
-            <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
+            <h2 className="h2">
               {copy.directions.title}
             </h2>
-            <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
+            <p className="muted-on-dark">
               {copy.directions.subtitle}
             </p>
           </div>
@@ -67,7 +67,7 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
             })}
           </div>
 
-        {/* ИНФО‑БЛОК: “Важно знать / À savoir” отдельной широкой карточкой под сеткой. */}
+          {/* ИНФО‑БЛОК: “Важно знать / À savoir” отдельной широкой карточкой под сеткой. */}
           <div className={styles.actionsImportantBlock}>
             <ActionCard
               variant="info"
