@@ -1,8 +1,7 @@
 /* Этот файл задаёт страницу “Soutenir / Поддержать” и показывает способы поддержки (донат/взнос/волонтёрство). */
 
-import { SupportCard } from "@/components/support/SupportCard";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
-import supportCardStyles from "@/components/support/SupportCard.module.css";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { soutenirCopy } from "@/content/actions";
 import styles from "./page.module.css";
@@ -107,45 +106,45 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
           <div className={styles.supportCardsGrid}>
-            <SupportCard
+            <ContentCard
+              className="support-card support-card--pink"
               title={text.helloAssoTitle}
               icon={helloAssoIcon}
-              text={text.helloAssoText}
-              ctaLabel={text.helloAssoCta}
-              ctaHref={helloAssoHref}
-              className="support-card support-card--pink"
+              description={text.helloAssoText}
+              actions={[{ label: text.helloAssoCta, href: helloAssoHref, variant: "pill", target: "_blank", rel: "noopener noreferrer" }]}
             >
               <div className="support-info-panel">
                 <div className="support-info-title">{text.benefitsTitle}</div>
-                <IesList className="list support-info-list">
+                <IesList className="list support-info-list" style={{ marginTop: 12 }}>
                   {text.helloAssoBenefits.map((item) => (
                     <IesListItem key={item}>{item}</IesListItem>
                   ))}
                 </IesList>
               </div>
-            </SupportCard>
-            <SupportCard
+            </ContentCard>
+
+            <ContentCard
+              className="support-card support-card--pink"
               title={text.cotizUpTitle}
               icon={cotizUpIcon}
-              text={text.cotizUpText}
-              ctaLabel={text.cotizUpCta}
-              ctaHref={cotizUpHref}
-              className="support-card support-card--pink"
+              description={text.cotizUpText}
+              actions={[{ label: text.cotizUpCta, href: cotizUpHref, variant: "pill", target: "_blank", rel: "noopener noreferrer" }]}
             >
               <div className="support-info-panel">
                 <div className="support-info-title">{text.benefitsTitle}</div>
-                <IesList className="list support-info-list">
+                <IesList className="list support-info-list" style={{ marginTop: 12 }}>
                   {text.cotizUpBenefits.map((item) => (
                     <IesListItem key={item}>{item}</IesListItem>
                   ))}
                 </IesList>
               </div>
-            </SupportCard>
-            <SupportCard
+            </ContentCard>
+
+            <ContentCard
+              className="support-card support-card--pink"
               title={text.bankTitle}
               icon={bankIcon}
-              text={text.bankText}
-              className="support-card support-card--pink"
+              description={text.bankText}
             >
               {/* Реквизиты перевода: человек может нажать и быстро скопировать IBAN/BIC для приложения банка. */}
               <BankTransferDetails
@@ -153,38 +152,32 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
                 iban="FR89 2004 1010 1509 6137 7K03 615"
                 bic="PSSTFRPPSTR"
               />
-            </SupportCard>
+            </ContentCard>
           </div>
 
           {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
-          <article
-            className={`card card--paper support-card accent-left accent--blue support-important ${supportCardStyles.supportCard}`}
-          >
-            <h3 className="h3 h3--blue">{text.importantTitle}</h3>
-            <p className={`p support-text ${supportCardStyles.supportText}`}>
-              {text.importantText}
-            </p>
-          </article>
+          <ContentCard
+            className="support-card accent-left accent--blue support-important"
+            title={text.importantTitle}
+            description={text.importantText}
+          />
         </Section>
 
         {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
         <Section title={text.volunteerTitle}>
           <div className="grid-2 support-volunteer-grid">
-            <SupportCard
-              title={text.volunteerTitle}
-              text={text.volunteerText}
-              ctaLabel={text.volunteerCta}
-              ctaHref={volunteerHref}
+            <ContentCard
               className="support-card"
+              title={text.volunteerTitle}
+              description={text.volunteerText}
+              actions={[{ label: text.volunteerCta, href: volunteerHref, variant: "pill" }]}
             />
 
-            <SupportCard title={text.howToHelpTitle} className="support-card">
-              <IesList className="list support-list">
-                {text.howToHelpItems.map((item) => (
-                  <IesListItem key={item}>{item}</IesListItem>
-                ))}
-              </IesList>
-            </SupportCard>
+            <ContentCard
+              className="support-card"
+              title={text.howToHelpTitle}
+              listItems={text.howToHelpItems}
+            />
           </div>
         </Section>
       </main>

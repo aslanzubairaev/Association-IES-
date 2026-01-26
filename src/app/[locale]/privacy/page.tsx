@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/ui/Section/Section";
-import { Card, CardContent } from "@/components/ui/Card/Card";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { buildGmailComposeUrl } from "@/lib/emailCompose";
 import { privacyPageCopy } from "@/content/actions";
@@ -41,8 +41,11 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
         title={copy.title}
         subtitle={copy.lead}
       >
-        <Card className="card--paper">
-          <CardContent className={styles.privacyContent}>
+        <ContentCard
+          className="card--paper"
+          footerText={`${copy.updatedLabel} ${copy.updatedDate}`}
+        >
+          <div className={styles.privacyContent}>
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.whoTitle}</h2>
               <p className="p">{copy.whoText}</p>
@@ -102,12 +105,8 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
               <h2 className="h3 h3--blue">{copy.cookiesTitle}</h2>
               <p className="p">{copy.cookiesText}</p>
             </section>
-          </CardContent>
-
-          <p className={`muted ${styles.footerNote}`}>
-            {copy.updatedLabel} {copy.updatedDate}
-          </p>
-        </Card>
+          </div>
+        </ContentCard>
       </Section>
     </div>
   );

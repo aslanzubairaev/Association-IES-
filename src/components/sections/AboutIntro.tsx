@@ -5,8 +5,7 @@
 */
 
 import { Section } from "@/components/ui/Section/Section";
-import { InfoCard } from "@/components/ui/Card/InfoCard";
-import { Card, CardContent } from "@/components/ui/Card/Card";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { aboutIntroCopy } from "@/content/actions";
 import styles from "./AboutIntro.module.css";
 
@@ -29,21 +28,15 @@ export function AboutIntro({ locale }: AboutIntroProps) {
       title={copy.title}
     >
       <div className="grid-2">
-        <Card>
-          <CardContent>
-            <p className="p">{copy.paragraph1}</p>
-            <p className="p" style={{ marginTop: 10 }}>
-              {copy.paragraph2}
-            </p>
-          </CardContent>
-        </Card>
+        <ContentCard
+          description={[copy.paragraph1, copy.paragraph2]}
+        />
 
-        <InfoCard
+        <ContentCard
           className="card--highlight"
           title={copy.goalsTitle}
-          items={copy.goals}
-          ctaLabel={ctaLabel}
-          ctaHref={ctaHref}
+          listItems={copy.goals}
+          actions={[{ label: ctaLabel, href: ctaHref, variant: "pill" }]}
         />
       </div>
     </Section>

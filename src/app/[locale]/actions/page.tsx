@@ -1,7 +1,7 @@
 /* Этот файл задаёт страницу “Actions / Действия” и показывает каталог направлений с карточками (RU/FR). */
 
 import { Container } from "@/components/ui/Container";
-import { ActionCard } from "@/components/ui/ActionCard";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { actionsCopy, actionsPageCopy } from "@/content/actions";
 import styles from "./page.module.css";
 
@@ -48,31 +48,37 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
           >
             {copy.items.map((it) => {
               return (
-                <ActionCard
+                <ContentCard
                   key={it.slug}
-                  variant="direction"
                   title={it.title}
-                  forWhoLabel={copy.directions.forWhoLabel}
-                  forWho={it.forWho}
-                  benefitLabel={copy.directions.benefitLabel}
-                  benefit={it.benefit}
-                  frequencyLabel={copy.directions.frequencyLabel}
-                  frequency={it.frequency}
-                  whenWhereLabel={copy.directions.whenWhereLabel}
-                  whenWhereText={copy.directions.whenWhereText}
-                  ctaLabel={copy.directions.cta}
-                  href={`/${locale}/contact?topic=${encodeURIComponent(it.topicKey)}`}
-                />
+                  actions={[{
+                    label: copy.directions.cta,
+                    href: `/${locale}/contact?topic=${encodeURIComponent(it.topicKey)}`,
+                    variant: "pill"
+                  }]}
+                >
+                  <p className="p" style={{ marginBottom: 10 }}>
+                    <strong>{copy.directions.forWhoLabel}:</strong> {it.forWho}
+                  </p>
+                  <p className="p" style={{ marginBottom: 10 }}>
+                    <strong>{copy.directions.benefitLabel}:</strong> {it.benefit}
+                  </p>
+                  <p className="p" style={{ marginBottom: 10 }}>
+                    <strong>{copy.directions.frequencyLabel}:</strong> {it.frequency}
+                  </p>
+                  <p className="fineprint muted" style={{ marginTop: 14 }}>
+                    <strong>{copy.directions.whenWhereLabel}</strong> {copy.directions.whenWhereText}
+                  </p>
+                </ContentCard>
               );
             })}
           </div>
 
           {/* ИНФО‑БЛОК: “Важно знать / À savoir” отдельной широкой карточкой под сеткой. */}
           <div className={styles.actionsImportantBlock}>
-            <ActionCard
-              variant="info"
+            <ContentCard
               title={copy.important.title}
-              items={copy.important.items}
+              listItems={copy.important.items}
             />
           </div>
         </Container>

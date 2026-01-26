@@ -5,9 +5,7 @@
 */
 
 import { Section } from "@/components/ui/Section/Section";
-import { InfoCard } from "@/components/ui/Card/InfoCard";
-import { Card, CardContent } from "@/components/ui/Card/Card";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { actionsPreviewCopy } from "@/content/actions";
 import styles from "./ActionsPreview.module.css";
 
@@ -27,31 +25,18 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
       subtitle={copy.subtitle}
     >
       <div className="grid-2">
-        <Card className="card-list" hoverable={false}>
-          <CardContent>
-            <IesList className="bullet-list">
-              {copy.items.map((it) => (
-                <IesListItem key={it}>{it}</IesListItem>
-              ))}
-            </IesList>
-          </CardContent>
-        </Card>
+        <ContentCard
+          className="card-list"
+          hoverable={false}
+          listItems={copy.items}
+        />
 
-        <InfoCard
+        <ContentCard
           className="card-summary"
           hoverable={false}
           title={copy.cardTitle}
-          text={copy.cardParagraphs}
-          ctaLabel={copy.ctaLabel}
-          ctaHref={`/${locale}/actions`}
-          ctaVariant="primary" // InfoCard default is pill, but original used "primary". Need to check InfoCard support for variant or override.
-        // Wait, InfoCard implementation:
-        // <Link className="btn btn--pill btn--blue" href={ctaHref}>
-        // It hardcodes btn--pill btn--blue.
-        // Original: <Button variant="primary" ...> which produces "btn btn--primary".
-        // If I want to match exactly, I might need to adjust InfoCard or use Card.
-        // Let's use Card here to match perfectly if InfoCard is too rigid.
-        // OR update InfoCard to accept variant.
+          description={copy.cardParagraphs}
+          actions={[{ label: copy.ctaLabel, href: `/${locale}/actions`, variant: "primary" }]}
         />
       </div>
     </Section>

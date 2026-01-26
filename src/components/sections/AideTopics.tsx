@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Частые темы / Sujets fréquents” и показывает 6 карточек тем, чтобы быстро выбрать направление. */
 
 import { Section } from "@/components/ui/Section/Section";
-import { InfoCard } from "@/components/ui/Card/InfoCard";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { aideCopy } from "@/content/actions";
 import styles from "./AideTopics.module.css";
 
@@ -25,18 +25,13 @@ export function AideTopics({ locale }: AideTopicsProps) {
       {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}
       <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
         {copy.items.map((topic) => (
-          <InfoCard
+          <ContentCard
             key={topic.topicKey}
             className="aide-card aide-card--topic"
-            surface={true} // Matches "card--paper" logic if defaults align, or we might need className="card--paper"
-            // Actually "card--paper" usually means white bg, shadow. 
-            // Our Card default surface=true is effectively card--paper.
-            // Let's pass card--paper explicitly in className to be safe if it has specific overrides.
             title={topic.title}
-            items={topic.examples}
+            listItems={topic.examples}
             footerText={`${copy.preparePrefix} ${topic.prepareLine}`}
-            ctaLabel={copy.chooseLabel}
-            ctaHref={`/${locale}/contact?topic=${topic.topicKey}`}
+            actions={[{ label: copy.chooseLabel, href: `/${locale}/contact?topic=${topic.topicKey}`, variant: "pill" }]}
           />
         ))}
       </div>

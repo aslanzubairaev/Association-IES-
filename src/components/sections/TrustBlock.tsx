@@ -5,7 +5,7 @@
 */
 
 import { Section } from "@/components/ui/Section/Section";
-import { InfoCard } from "@/components/ui/Card/InfoCard";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { Card, CardContent } from "@/components/ui/Card/Card";
 import { trustBlockCopy } from "@/content/actions";
 import styles from "./TrustBlock.module.css";
@@ -26,11 +26,10 @@ export function TrustBlock({ locale }: TrustBlockProps) {
       subtitle={copy.subtitle}
     >
       <div className="grid-2">
-        <InfoCard
+        <ContentCard
           title={copy.benefitsTitle}
-          items={copy.points}
+          listItems={copy.points}
           hoverable={false}
-        // Default surface=true match typical card behavior
         />
 
         <Card className={styles.quoteCard} surface={false} role="note" aria-label={copy.quoteAriaLabel}>

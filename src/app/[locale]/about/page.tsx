@@ -1,8 +1,5 @@
-/* Этот файл задаёт страницу “À propos / О нас” и показывает кто мы, цели, сильные стороны и ссылки для связи/поддержки. */
-
 import { Container } from "@/components/ui/Container";
-import Link from "next/link";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { aboutPageCopy } from "@/content/actions";
 import styles from "./page.module.css";
 
@@ -38,58 +35,38 @@ export default function AboutPage({ params }: { params: { locale: "ru" | "fr" } 
 
           {/* Верхний блок: “кто мы” и “наши цели” в двух карточках рядом. */}
           <div className="grid-2">
-            <div className="card card--paper about-card" id="who">
-              {/* Основной текст: три абзаца, как в новом копирайте. */}
-              <p className="p">{copy.mainParagraphs[0]}</p>
-              <p className="p">
-                {copy.mainParagraphs[1]}
-              </p>
-              <p className="p">
-                {copy.mainParagraphs[2]}
-              </p>
-            </div>
+            <ContentCard
+              className="about-card"
+              id="who"
+              description={copy.mainParagraphs}
+            />
 
-            <div className="card card--paper card--highlight about-card">
-              {/* Список целей: три пункта, чтобы человек сразу понял направления работы. */}
-              <h2 className="h3 h3--blue">{copy.goalsTitle}</h2>
-              <IesList className="list">
-                {copy.goals.map((goal) => (
-                  <IesListItem key={goal}>{goal}</IesListItem>
-                ))}
-              </IesList>
-            </div>
+            <ContentCard
+              className="about-card"
+              highlight
+              title={copy.goalsTitle}
+              listItems={copy.goals}
+            />
           </div>
 
           {/* Нижний блок: “сила IES” и понятный призыв к действию в двух карточках рядом. */}
-          <div className="grid-2" style={{ marginTop: 18 }}>
-            <div className="card card--paper about-card">
-              {/* Сильные стороны: короткий список, который объясняет, почему подход работает. */}
-              <h2 className="h3 h3--blue">{copy.strengthTitle}</h2>
-              <IesList className="list">
-                {copy.strengthItems.map((item) => (
-                  <IesListItem key={item}>{item}</IesListItem>
-                ))}
-              </IesList>
-            </div>
+          <div className="grid-2">
+            <ContentCard
+              className="about-card"
+              title={copy.strengthTitle}
+              listItems={copy.strengthItems}
+            />
 
-            <div className="card card--paper card--highlight about-card">
-              {/* Призыв к действию: что можно сделать и куда нажать. */}
-              <h2 className="h3 h3--blue">{ctaTitle}</h2>
-              <IesList className="list">
-                {ctaList.map((item) => (
-                  <IesListItem key={item}>{item}</IesListItem>
-                ))}
-              </IesList>
-
-              <div className="about-cta">
-                <Link className="btn btn--pill btn--blue" href={contactHref}>
-                  {contactLabel}
-                </Link>
-                <Link className="btn btn--pill btn--mint" href={supportHref}>
-                  {supportLabel}
-                </Link>
-              </div>
-            </div>
+            <ContentCard
+              className="about-card"
+              highlight
+              title={ctaTitle}
+              listItems={ctaList}
+              actions={[
+                { label: contactLabel, href: contactHref, variant: "pill" }, // Blue default
+                { label: supportLabel, href: supportHref, variant: "mint" }
+              ]}
+            />
           </div>
         </Container>
       </main>

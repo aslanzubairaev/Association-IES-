@@ -1,9 +1,8 @@
-/* Этот файл задаёт страницу “Контакты / Contact” и показывает, как быстро связаться с ассоциацией (форма + e-mail). */
-
 import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/forms/QuickContactForm";
 import { ContactEmailBox } from "@/components/forms/ContactEmailBox";
 import { IesList, IesListItem } from "@/components/ui/IesList";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { contactCopy, resolveContactTopicKey } from "@/content/actions";
 import styles from "./page.module.css";
 
@@ -42,26 +41,28 @@ export default function ContactPage({
         </div>
 
         <div className="grid-2 contact-grid">
-          <div className="card card--paper contact-card contact-card--info">
+          <ContentCard className="contact-card contact-card--info">
             {/* Общий e-mail ассоциации: без личных телефонов и персональных контактов. */}
             <ContactEmailBox locale={locale} email={email} />
 
             {/* Подсказка “когда писать”: помогает человеку понять, подходит ли вопрос. */}
-            <h2 className="h3 h3--blue">{whenTitle}</h2>
-            <IesList className="list contact-list">
-              {whenItems.map((item) => (
-                <IesListItem key={item}>{item}</IesListItem>
-              ))}
-            </IesList>
-          </div>
+            <div style={{ marginTop: 24 }}>
+              <h2 className="h3 h3--blue">{whenTitle}</h2>
+              <IesList className="list contact-list">
+                {whenItems.map((item) => (
+                  <IesListItem key={item}>{item}</IesListItem>
+                ))}
+              </IesList>
+            </div>
+          </ContentCard>
 
-          <div className="card card--paper contact-card contact-card--yellow contact-card--form">
+          <ContentCard className="contact-card contact-card--yellow contact-card--form">
             {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
             <div className="contact-form-wrap">
               <p className={styles.formNote}>{locale === "ru" ? helperTextRu : helperTextFr}</p>
               <QuickContactForm locale={locale} variant="page" initialTopic={initialTopic} />
             </div>
-          </div>
+          </ContentCard>
         </div>
       </Container>
     </main>

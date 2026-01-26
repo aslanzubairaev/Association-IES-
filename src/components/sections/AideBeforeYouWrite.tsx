@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Перед тем как написать / Avant d’écrire” и показывает чек-лист, что добавить в сообщение. */
 
 import { Section } from "@/components/ui/Section/Section";
-import { InfoCard } from "@/components/ui/Card/InfoCard";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { aideCopy } from "@/content/actions";
 
 type AideBeforeYouWriteProps = {
@@ -20,11 +20,10 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
       subtitle={copy.subtitle}
     >
       {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}
-      {/* Используем InfoCard для списка. */}
-      <InfoCard
-        title=""
+      {/* Используем ContentCard для списка. */}
+      <ContentCard
         className="aide-card aide-card--wide"
-        items={copy.items}
+        listItems={copy.items}
       />
     </Section>
   );

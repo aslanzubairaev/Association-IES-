@@ -9,6 +9,25 @@
   margin-bottom: var(--support-footer-gap, 14px);
 }
 
+.footer {
+  margin-top: auto;
+  padding-top: var(--support-footer-gap, 14px);
+  width: 100%;
+}
+
+.actionsRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  position: relative;
+}
+
+.ctaButton {
+  /* No specific styles needed if btn--pill handles look, 
+     but maybe width/layout inside grid? */
+}
+
 .bankTransferBox:global(.contact-box) {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.22);

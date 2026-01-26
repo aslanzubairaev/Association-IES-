@@ -756,6 +756,11 @@ li {
   color: rgba(11, 27, 51, .84);
 }
 
+.page--purple .list,
+.page--purple .card--paper .list {
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .trust-block .list {
   font-size: 15px;
   line-height: 1.6;
