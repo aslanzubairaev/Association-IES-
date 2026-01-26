@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Перед тем как написать / Avant d’écrire” и показывает чек-лист, что добавить в сообщение. */
 
-import { Container } from "@/components/ui/Container";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import { Section } from "@/components/ui/Section/Section";
+import { InfoCard } from "@/components/ui/Card/InfoCard";
 import { aideCopy } from "@/content/actions";
 
 type AideBeforeYouWriteProps = {
@@ -14,27 +14,20 @@ export function AideBeforeYouWrite({ locale }: AideBeforeYouWriteProps) {
   const copy = aideCopy[locale].beforeYouWrite;
 
   return (
-    <section className="section section--purple" id="before">
-      <Container>
-        <div className="section-head">
-          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-            {copy.title}
-          </h2>
-          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
-            {copy.subtitle}
-          </p>
-        </div>
-
-        {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}
-        <div className="card card--paper aide-card aide-card--wide">
-          <IesList className="list">
-            {copy.items.map((item) => (
-              <IesListItem key={item}>{item}</IesListItem>
-            ))}
-          </IesList>
-        </div>
-      </Container>
-    </section>
+    <Section
+      inverse
+      id="before"
+      title={copy.title}
+      subtitle={copy.subtitle}
+    >
+      {/* Чеклист: короткий список, чтобы его можно было прочитать за несколько секунд. */}
+      {/* Используем InfoCard для списка. */}
+      <InfoCard
+        title=""
+        className="aide-card aide-card--wide"
+        items={copy.items}
+      />
+    </Section>
   );
 }
 

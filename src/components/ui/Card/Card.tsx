@@ -29,3 +29,30 @@ export function Card({
     </Component>
   );
 }
+
+// Заголовок карточки: обычно содержит H3/H4
+export function CardHeader({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={`card-header ${className || ""}`} {...rest}>
+      {children}
+    </div>
+  );
+}
+
+// Основной контент карточки
+export function CardContent({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={`card-content ${className || ""}`} {...rest}>
+      {children}
+    </div>
+  );
+}
+
+// Подвал карточки: для кнопок, подписей и мета-информации
+export function CardFooter({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={`card-footer ${className || ""}`} {...rest}>
+      {children}
+    </div>
+  );
+}

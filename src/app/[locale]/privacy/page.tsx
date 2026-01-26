@@ -2,7 +2,8 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section/Section";
+import { Card, CardContent } from "@/components/ui/Card/Card";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { buildGmailComposeUrl } from "@/lib/emailCompose";
 import { privacyPageCopy } from "@/content/actions";
@@ -34,15 +35,14 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
 
   return (
     <div className={styles.privacyScope}>
-      <main className="section section--soft privacy-page">
-        <Container>
-        <div className="section-head">
-          <h1 className="h2 h2--blue privacy-title">{copy.title}</h1>
-          <p className="lead">{copy.lead}</p>
-        </div>
-
-        <article className="card card--paper">
-          <div style={{ display: "grid", gap: 18 }}>
+      <Section
+        as="main"
+        className="privacy-page"
+        title={copy.title}
+        subtitle={copy.lead}
+      >
+        <Card className="card--paper">
+          <CardContent style={{ display: "grid", gap: 18 }}>
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.whoTitle}</h2>
               <p className="p">{copy.whoText}</p>
@@ -102,14 +102,13 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
               <h2 className="h3 h3--blue">{copy.cookiesTitle}</h2>
               <p className="p">{copy.cookiesText}</p>
             </section>
-          </div>
+          </CardContent>
 
-          <p className="muted" style={{ marginTop: 16 }}>
+          <p className="muted" style={{ marginTop: 16, padding: "0 18px 18px" }}>
             {copy.updatedLabel} {copy.updatedDate}
           </p>
-        </article>
-        </Container>
-      </main>
+        </Card>
+      </Section>
     </div>
   );
 }

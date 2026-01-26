@@ -1,12 +1,12 @@
 /* Этот файл задаёт страницу “Soutenir / Поддержать” и показывает способы поддержки (донат/взнос/волонтёрство). */
 
-import { Container } from "@/components/ui/Container";
 import { SupportCard } from "@/components/support/SupportCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
 import supportCardStyles from "@/components/support/SupportCard.module.css";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { soutenirCopy } from "@/content/actions";
 import styles from "./page.module.css";
+import { Section } from "@/components/ui/Section/Section";
 
 const helloAssoIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
@@ -98,17 +98,12 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
     <div className={styles.supportScope}>
       <main className="page--purple support-page">
         {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
-        <section className="section section--purple support-donate-section">
-          <Container>
-            <div className="section-head">
-              <h1 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-                {text.donateTitle}
-              </h1>
-              <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
-                {text.donateLead}
-              </p>
-              {text.donateNote ? <p className="note">{text.donateNote}</p> : null}
-            </div>
+        <Section inverse className="support-donate-section"
+          title={text.donateTitle}
+          titleAs="h1"
+          subtitle={text.donateLead}
+        >
+          {text.donateNote && <p className="note" style={{ textAlign: "center", marginTop: -12, marginBottom: 24, opacity: 0.9 }}>{text.donateNote}</p>}
 
           {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
           <div className={styles.supportCardsGrid}>
@@ -170,18 +165,10 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
               {text.importantText}
             </p>
           </article>
-          </Container>
-        </section>
+        </Section>
 
-      {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
-        <section className="section section--purple">
-          <Container>
-            <div className="section-head">
-              <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-                {text.volunteerTitle}
-              </h2>
-            </div>
-
+        {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
+        <Section inverse title={text.volunteerTitle}>
           <div className="grid-2 support-volunteer-grid">
             <SupportCard
               title={text.volunteerTitle}
@@ -199,13 +186,8 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
               </IesList>
             </SupportCard>
           </div>
-          </Container>
-        </section>
+        </Section>
       </main>
     </div>
   );
 }
-
-
-
-

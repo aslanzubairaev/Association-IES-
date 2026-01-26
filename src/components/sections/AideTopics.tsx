@@ -1,8 +1,7 @@
 /* Этот файл содержит блок “Частые темы / Sujets fréquents” и показывает 6 карточек тем, чтобы быстро выбрать направление. */
 
-import { Container } from "@/components/ui/Container";
-import Link from "next/link";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import { Section } from "@/components/ui/Section/Section";
+import { InfoCard } from "@/components/ui/Card/InfoCard";
 import { aideCopy } from "@/content/actions";
 import styles from "./AideTopics.module.css";
 
@@ -16,54 +15,33 @@ export function AideTopics({ locale }: AideTopicsProps) {
   const copy = aideCopy[locale].topics;
 
   return (
-    <section
-      className={`section section--purple aide-topics-section ${styles.topicsScope}`}
+    <Section
+      inverse
+      className={`aide-topics-section ${styles.topicsScope}`}
       id="topics"
       style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
+      title={copy.title}
+      subtitle={copy.subtitle}
     >
-      <Container>
-        <div className="section-head">
-          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-            {copy.title}
-          </h2>
-          <p className="muted-on-dark" style={{ color: "rgba(255,255,255,.90)" }}>
-            {copy.subtitle}
-          </p>
-        </div>
-
-        {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}
-        <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
-          {copy.items.map((topic) => (
-            <article
-              key={topic.topicKey}
-              className="card card--paper aide-card aide-card--topic"
-            >
-              {/* Заголовок карточки: название темы, чтобы быстро “сканировать” взглядом. */}
-              <h3 className="h3 h3--blue">{topic.title}</h3>
-
-              {/* Короткие примеры: помогают человеку понять “это про меня?” за 3–5 секунд. */}
-              <IesList className="list">
-                {topic.examples.map((example) => (
-                  <IesListItem key={example}>{example}</IesListItem>
-                ))}
-              </IesList>
-
-              {/* Одна практичная строка: что приложить к сообщению. */}
-              <p className="fineprint aide-fineprint">
-                {copy.preparePrefix} {topic.prepareLine}
-              </p>
-
-              {/* Кнопка: сразу ведёт в контакты с выбранной темой. */}
-              <div className="aide-cta">
-                <Link className="btn btn--pill btn--blue" href={`/${locale}/contact?topic=${topic.topicKey}`}>
-                  {copy.chooseLabel}
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </section>
+      {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}
+      <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
+        {copy.items.map((topic) => (
+          <InfoCard
+            key={topic.topicKey}
+            className="aide-card aide-card--topic"
+            surface={true} // Matches "card--paper" logic if defaults align, or we might need className="card--paper"
+            // Actually "card--paper" usually means white bg, shadow. 
+            // Our Card default surface=true is effectively card--paper.
+            // Let's pass card--paper explicitly in className to be safe if it has specific overrides.
+            title={topic.title}
+            items={topic.examples}
+            footerText={`${copy.preparePrefix} ${topic.prepareLine}`}
+            ctaLabel={copy.chooseLabel}
+            ctaHref={`/${locale}/contact?topic=${topic.topicKey}`}
+          />
+        ))}
+      </div>
+    </Section>
   );
 }
 

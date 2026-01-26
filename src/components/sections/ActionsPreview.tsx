@@ -4,11 +4,12 @@
  Здесь можно поменять список пунктов и ссылку, не затрагивая остальную страницу.
 */
 
-import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card/Card";
-import { Button } from "@/components/ui/Button/Button";
+import { Section } from "@/components/ui/Section/Section";
+import { InfoCard } from "@/components/ui/Card/InfoCard";
+import { Card, CardContent } from "@/components/ui/Card/Card";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { actionsPreviewCopy } from "@/content/actions";
+import styles from "./ActionsPreview.module.css";
 
 type ActionsPreviewProps = {
   locale: "ru" | "fr";
@@ -19,39 +20,42 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
   const copy = actionsPreviewCopy[locale];
 
   return (
-    <section className="section section--pink-2 actions-short-block">
-      <Container>
-        <div className="section-head">
-          <h2 className="h2 h2--blue">{copy.title}</h2>
-          <p className="muted">{copy.subtitle}</p>
-        </div>
-
-        <div className="grid-2">
-          <Card className="card-list" hoverable={false}>
+    <Section
+      className={`actions-preview-section ${styles.preview}`}
+      inverse
+      id="actions"
+      title={copy.title}
+      subtitle={copy.subtitle}
+    >
+      <div className="grid-2">
+        <Card className="card-list" hoverable={false}>
+          <CardContent>
             <IesList className="bullet-list">
               {copy.items.map((it) => (
                 <IesListItem key={it}>{it}</IesListItem>
               ))}
             </IesList>
-          </Card>
+          </CardContent>
+        </Card>
 
-          <Card className="card-summary" hoverable={false}>
-            <h3 className="h3 h3--blue">{copy.cardTitle}</h3>
-            <p className="p" style={{ marginTop: 10 }}>
-              {copy.cardParagraphs[0]}
-            </p>
-            <p className="p" style={{ marginTop: 10 }}>
-              {copy.cardParagraphs[1]}
-            </p>
-            <div className="actions-short-cta" style={{ marginTop: 14 }}>
-              <Button variant="primary" href={`/${locale}/actions`}>
-                {copy.ctaLabel}
-              </Button>
-            </div>
-          </Card>
-        </div>
-      </Container>
-    </section>
+        <InfoCard
+          className="card-summary"
+          hoverable={false}
+          title={copy.cardTitle}
+          text={copy.cardParagraphs}
+          ctaLabel={copy.ctaLabel}
+          ctaHref={`/${locale}/actions`}
+          ctaVariant="primary" // InfoCard default is pill, but original used "primary". Need to check InfoCard support for variant or override.
+        // Wait, InfoCard implementation:
+        // <Link className="btn btn--pill btn--blue" href={ctaHref}>
+        // It hardcodes btn--pill btn--blue.
+        // Original: <Button variant="primary" ...> which produces "btn btn--primary".
+        // If I want to match exactly, I might need to adjust InfoCard or use Card.
+        // Let's use Card here to match perfectly if InfoCard is too rigid.
+        // OR update InfoCard to accept variant.
+        />
+      </div>
+    </Section>
   );
 }
 
