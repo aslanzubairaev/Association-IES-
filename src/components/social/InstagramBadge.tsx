@@ -9,6 +9,7 @@
 import { useEffect, useRef } from "react";
 import { instagramBadgeCopy } from "@/content/actions";
 import styles from "./InstagramBadge.module.css";
+import infoStyles from "@/components/ui/InfoStack.module.css";
 
 type InstagramBadgeProps = {
   locale: "ru" | "fr";
@@ -37,11 +38,12 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
     let lastScrollY = window.scrollY;
     let isInView = false;
     let ticking = false;
+    const animatingClass = styles.animating;
 
     const restart = () => {
-      outline.classList.remove("is-animating");
+      outline.classList.remove(animatingClass);
       void outline.getBoundingClientRect();
-      outline.classList.add("is-animating");
+      outline.classList.add(animatingClass);
     };
 
     const onScroll = () => {
@@ -81,10 +83,10 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
   }, []);
 
   return (
-    <div className={styles.badgeScope}>
-      <div className="info instagramBadge">
-        <a ref={badgeRef} className="instagramBadge-link" href={href} target="_blank" rel="noreferrer">
-          <span className="instagramBadge-icon" aria-hidden="true">
+      <div className={styles.badgeScope}>
+      <div className={`${styles.badge} ${infoStyles.info}`}>
+        <a ref={badgeRef} className={styles.link} href={href} target="_blank" rel="noreferrer">
+          <span className={styles.icon} aria-hidden="true">
             <svg
               width="48"
               height="48"
@@ -110,7 +112,7 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
               </defs>
               <path
                 ref={outlineRef}
-                className="instagramBadge-outline is-animating"
+                className={`${styles.outline} ${styles.animating}`}
                 d="M16.8 3H7.2C4.88 3 3 4.88 3 7.2v9.6C3 19.12 4.88 21 7.2 21h9.6c2.32 0 4.2-1.88 4.2-4.2V7.2C21 4.88 19.12 3 16.8 3Z"
                 stroke="url(#instagramBadgeGradient)"
                 strokeWidth="2"
@@ -133,12 +135,12 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
               />
             </svg>
           </span>
-          <span className="instagramBadge-text">
-            <span className="instagramBadge-titleRow">
-              <span className="instagramBadge-label">{copy.label}</span>
-              <span className="instagramBadge-handle">{handle}</span>
+          <span className={styles.text}>
+            <span className={styles.titleRow}>
+              <span className={styles.label}>{copy.label}</span>
+              <span className={styles.handle}>{handle}</span>
             </span>
-            <span className="instagramBadge-description">{copy.description}</span>
+            <span className={styles.description}>{copy.description}</span>
           </span>
         </a>
       </div>

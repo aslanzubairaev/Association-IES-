@@ -1,3 +1,32 @@
 :where(.stepsScope) :global(.aide-steps-grid) {
   align-items: stretch;
 }
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.stepNum {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-weight: 900;
+}
+
+.stepIco {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(240, 212, 107, 0.22);
+  border: 1px solid rgba(240, 212, 107, 0.35);
+  font-weight: 900;
+}

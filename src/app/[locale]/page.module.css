@@ -1,0 +1,39 @@
+.bgHeroCanvas{
+  background: radial-gradient(900px 420px at 15% 15%, rgba(255,255,255,.10), transparent 60%),
+              radial-gradient(800px 380px at 85% 40%, rgba(0,0,0,.18), transparent 55%),
+              linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
+}
+
+.bgHeroCanvas :global(.section--soft),
+.bgHeroCanvas :global(.section--pink-2),
+.bgHeroCanvas :global(.section--purple.trust-block),
+.bgHeroCanvas :global(.hero-section.section--purple){
+  background: transparent;
+}
+
+.bgHeroCanvas :global(.section--soft)::before,
+.bgHeroCanvas :global(.section--pink-2)::before,
+.bgHeroCanvas :global(.section--soft)::after,
+.bgHeroCanvas :global(.section--pink-2)::after,
+.bgHeroCanvas :global(.trust-block)::before,
+.bgHeroCanvas :global(.trust-block)::after{
+  content: none !important;
+  display: none !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  filter: none;
+  transform: none;
+  transition: none;
+  animation: none;
+}
+
+.bgHeroCanvas :global(.section--pink-2){
+  border-top: none;
+  box-shadow: none;
+  position: relative;
+  z-index: 1;
+}

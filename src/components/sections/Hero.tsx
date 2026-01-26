@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
 import { heroCopy } from "@/content/actions";
 import styles from "./Hero.module.css";
+import infoStyles from "@/components/ui/InfoStack.module.css";
 
 type HeroProps = {
   locale: "ru" | "fr";
@@ -67,7 +68,7 @@ export function Hero({ locale }: HeroProps) {
             <QuickContactForm locale={locale} />
 
             {/* Ссылка на Instagram: быстрый канал связи и новости ассоциации. */}
-            <div className="info-stack" style={{ marginTop: 12 }}>
+            <div className={infoStyles.infoStack} style={{ marginTop: 12 }}>
               <InstagramBadge locale={locale} href="https://instagram.com/ies_info" handle="@ies_info" />
             </div>
           </Card>
