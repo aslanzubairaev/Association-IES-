@@ -9,6 +9,7 @@
 import { useEffect, useRef } from "react";
 import { instagramBadgeCopy } from "@/content/actions";
 import styles from "./InstagramBadge.module.css";
+import infoStyles from "@/components/ui/InfoStack.module.css";
 
 type InstagramBadgeProps = {
   locale: "ru" | "fr";
@@ -82,8 +83,8 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
   }, []);
 
   return (
-    <div className={styles.badgeScope}>
-      <div className={`info ${styles.badge}`}>
+      <div className={styles.badgeScope}>
+      <div className={`${styles.badge} ${infoStyles.info}`}>
         <a ref={badgeRef} className={styles.link} href={href} target="_blank" rel="noreferrer">
           <span className={styles.icon} aria-hidden="true">
             <svg
