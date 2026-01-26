@@ -1,6 +1,7 @@
 /* Этот файл содержит универсальную карточку для секций главной страницы. */
 
 import type { HTMLAttributes, ReactNode } from "react";
+import Link from "next/link";
 import styles from "./Card.module.css";
 
 type CardProps = {
@@ -8,7 +9,8 @@ type CardProps = {
   className?: string;
   surface?: boolean;
   hoverable?: boolean;
-  as?: "div" | "article" | "section" | "aside";
+  as?: any;
+  href?: string;
 } & HTMLAttributes<HTMLElement>;
 
 // Карточка: по умолчанию задаём общий surface-слой, но можно отключить для особых вариантов (hero/quote).
@@ -18,13 +20,19 @@ export function Card({
   surface = true,
   hoverable = true,
   as = "div",
+  href,
   ...rest
 }: CardProps) {
   const classes = ["card", surface ? styles.surface : null, className].filter(Boolean).join(" ");
-  const Component = as;
+  const Component = href ? Link : as;
+
+  // Если передан href, используем Link и передаем ему href.
+  // Иначе используем as (div, article...)
+  const linkProps = href ? { href } : {};
 
   return (
-    <Component className={classes} data-hover={hoverable ? undefined : "false"} {...rest}>
+    // @ts-ignore - Link/Component typing mismatch is common, explicit ignore is safer than complex casting here
+    <Component className={classes} data-hover={hoverable ? undefined : "false"} {...linkProps} {...rest}>
       {children}
     </Component>
   );

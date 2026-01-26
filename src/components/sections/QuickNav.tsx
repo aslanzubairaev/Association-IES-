@@ -6,7 +6,6 @@
 
 import { Section } from "@/components/ui/Section/Section";
 import { Card, CardContent } from "@/components/ui/Card/Card";
-import { Button } from "@/components/ui/Button/Button";
 import { homeNavCards, quickNavCopy } from "@/content/actions";
 import Image from "next/image";
 import styles from "./QuickNav.module.css";
@@ -35,7 +34,7 @@ export function QuickNav({ locale }: QuickNavProps) {
             <Card
               key={card.id}
               as="article"
-              hoverable={false}
+              href={href}
               className="accent--blue quickNav-card"
             >
               <CardContent>
@@ -44,12 +43,6 @@ export function QuickNav({ locale }: QuickNavProps) {
                 <h3 className="h3 h3--blue">{card.title[locale]}</h3>
 
                 <p className="p">{card.description[locale]}</p>
-
-                <div className="quickNav-cta">
-                  <Button variant="secondary" href={href}>
-                    {copy.ctaLabel}
-                  </Button>
-                </div>
 
                 {iconSrc ? (
                   <Image
