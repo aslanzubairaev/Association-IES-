@@ -1,52 +1,59 @@
-.trustBlock .quoteCard {
-  clip-path: none;
+.section {
+  position: relative;
+}
+
+.cardsRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.photosRow {
+  margin-top: 18px;
 }
 
 .quoteCard {
-  background: linear-gradient(135deg, var(--blue), var(--blue-2));
+  background: linear-gradient(135deg, rgba(72, 56, 160, 0.94), rgba(24, 12, 64, 0.96));
   color: #fff;
-  border: var(--border) solid rgba(255, 255, 255, .14);
-  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
   padding: 2rem;
-  box-shadow: 0 22px 60px rgba(11, 27, 51, .18);
+  box-shadow: 0 26px 70px rgba(11, 27, 51, 0.22);
   position: relative;
   overflow: hidden;
-  clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
 }
 
 .quoteCardText {
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
-  color: var(--card-body-color);
-  text-shadow: var(--card-text-shadow);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 6px 16px rgba(10, 8, 24, 0.35);
 }
 
 .quoteCardSign {
   margin: 12px 0 0;
   font-weight: 700;
   font-family: Montserrat, Inter, system-ui, sans-serif;
-  letter-spacing: .02em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 12px;
-  color: var(--card-muted-color);
-  text-shadow: var(--card-text-shadow);
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 6px 16px rgba(10, 8, 24, 0.35);
 }
 
-.quote {
-  margin-top: 18px;
-  padding: 22px 26px;
-}
+@media (min-width: 720px) {
+  .cardsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
 
-.quoteText {
-  font-size: 16px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, .90);
-}
-
-.quoteSign {
-  margin-top: 10px;
-  font-weight: 900;
-  font-family: Montserrat, Inter, system-ui, sans-serif;
-  color: rgba(255, 255, 255, .85);
+  .photosRow {
+    margin-top: 24px;
+  }
 }

@@ -1,0 +1,47 @@
+.card {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  background: rgba(12, 12, 24, 0.3);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.tint {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 120% at 10% 10%, rgba(133, 104, 255, 0.65) 0%, rgba(37, 16, 74, 0.15) 55%),
+    linear-gradient(140deg, rgba(116, 78, 255, 0.6) 0%, rgba(32, 10, 62, 0.85) 65%, rgba(18, 6, 36, 0.95) 100%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(80% 60% at 20% 10%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 60%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.label {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+  text-transform: uppercase;
+}

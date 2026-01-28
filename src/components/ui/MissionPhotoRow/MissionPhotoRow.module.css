@@ -1,0 +1,30 @@
+.row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 88%;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  overscroll-behavior-x: contain;
+}
+
+.row::-webkit-scrollbar {
+  height: 0;
+}
+
+.item {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 720px) {
+  .row {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+    gap: 22px;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+}

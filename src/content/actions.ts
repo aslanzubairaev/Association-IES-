@@ -698,11 +698,23 @@ type TrustBlockCopy = {
   quoteText: string;
   quoteSignature: string;
   quoteAriaLabel: string;
+  photos: {
+    left: {
+      src: string;
+      alt: string;
+      label?: string;
+    };
+    right: {
+      src: string;
+      alt: string;
+      label?: string;
+    };
+  };
 };
 
 export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
   ru: {
-    title: "Доверие",
+    title: "Наша миссия",
     subtitle: "Понятные шаги и человеческая поддержка.",
     points: [
       "Понятный следующий шаг без сложных слов",
@@ -714,9 +726,19 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
     quoteText: "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»",
     quoteSignature: "ASSOCIATION IES",
     quoteAriaLabel: "цитата",
+    photos: {
+      left: {
+        src: "/1.jpg",
+        alt: "Участники встречи Association IES",
+      },
+      right: {
+        src: "/2.JPG",
+        alt: "Поддержка и общение в Association IES",
+      },
+    },
   },
   fr: {
-    title: "Confiance",
+    title: "Notre mission",
     subtitle: "Des étapes claires et un soutien humain.",
     points: [
       "Une prochaine étape claire, sans jargon",
@@ -728,6 +750,16 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
     quoteText: "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »",
     quoteSignature: "ASSOCIATION IES",
     quoteAriaLabel: "citation",
+    photos: {
+      left: {
+        src: "/1.jpg",
+        alt: "Participants à une rencontre Association IES",
+      },
+      right: {
+        src: "/2.JPG",
+        alt: "Soutien et échanges au sein de l’Association IES",
+      },
+    },
   },
 };
 

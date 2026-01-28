@@ -7,6 +7,7 @@
 import { Section } from "@/components/ui/Section/Section";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { Card, CardContent } from "@/components/ui/Card/Card";
+import { MissionPhotoRow } from "@/components/ui/MissionPhotoRow/MissionPhotoRow";
 import { trustBlockCopy } from "@/content/actions";
 import styles from "./TrustBlock.module.css";
 
@@ -20,12 +21,12 @@ export function TrustBlock({ locale }: TrustBlockProps) {
 
   return (
     <Section
-      className="trust-block"
+      className={styles.section}
       id="trust"
       title={copy.title}
       subtitle={copy.subtitle}
     >
-      <div className="grid-2">
+      <div className={styles.cardsRow}>
         <ContentCard
           title={copy.benefitsTitle}
           listItems={copy.points}
@@ -40,6 +41,18 @@ export function TrustBlock({ locale }: TrustBlockProps) {
             <p className={styles.quoteCardSign}>{copy.quoteSignature}</p>
           </CardContent>
         </Card>
+      </div>
+      <div className={styles.photosRow}>
+        <MissionPhotoRow
+          left={{
+            src: copy.photos.left.src,
+            alt: copy.photos.left.alt,
+          }}
+          right={{
+            src: copy.photos.right.src,
+            alt: copy.photos.right.alt,
+          }}
+        />
       </div>
     </Section>
   );
