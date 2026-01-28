@@ -17,7 +17,6 @@ type QuickNavProps = {
 // Карточки навигации: тексты берём из общего файла данных.
 export function QuickNav({ locale }: QuickNavProps) {
   const copy = quickNavCopy[locale];
-  const quickNavIcons = ["/01.png", "/02.png", "/03.png", "/04.png", "/05.png"];
 
   return (
     <Section
@@ -26,9 +25,8 @@ export function QuickNav({ locale }: QuickNavProps) {
       subtitle={copy.subtitle}
     >
       <div className="cards-grid quickNav-grid" aria-label={copy.title}>
-        {homeNavCards.map((card, index) => {
+        {homeNavCards.map((card) => {
           const href = `/${locale}${card.path}`;
-          const iconSrc = quickNavIcons[index];
 
           return (
             <Card
@@ -44,10 +42,10 @@ export function QuickNav({ locale }: QuickNavProps) {
 
                 <p className="p">{card.description[locale]}</p>
 
-                {iconSrc ? (
+                {card.icon ? (
                   <Image
                     className="quickNav-icon"
-                    src={iconSrc}
+                    src={card.icon}
                     alt=""
                     aria-hidden="true"
                     width={120}

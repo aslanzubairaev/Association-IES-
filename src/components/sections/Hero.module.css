@@ -1,35 +1,80 @@
-:where(.heroScope):global(.hero-section) + :global(.section--soft) {
+:where(.heroScope):global(.hero-section) {
+  /* Remove old background properties */
+  padding: 0 !important;
+  /* Ensure image goes edge to edge */
+  width: 100%;
+}
+
+/* New Grid Layout */
+.heroGridWrapper {
+  display: grid;
+  grid-template-areas: "stack";
+  align-items: start;
+  justify-items: center;
+  width: 100%;
+}
+
+.heroContent,
+.heroBg {
+  grid-area: 1 / 1 / 2 / 2;
+  /* Occupy the same cell */
+}
+
+/* Background Images */
+.heroBg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.heroBgDesktop {
+  display: block;
+}
+
+.heroBgMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .heroBgDesktop {
+    display: none;
+  }
+
+  .heroBgMobile {
+    display: block;
+  }
+}
+
+:where(.heroScope):global(.hero-section)+ :global(.section--soft) {
   padding-top: 64px;
 }
 
 @media (max-width: 520px) {
-  :where(.heroScope):global(.hero-section) + :global(.section--soft) {
+  :where(.heroScope):global(.hero-section)+ :global(.section--soft) {
     padding-top: 48px;
   }
 }
 
-@media (max-width: 520px) {
-  :where(.heroScope) :global(.hero-left.hero-left--mobile-plain) {
-    padding: 0;
-  }
-
-  :where(.heroScope) :global(.hero-left.hero-left--mobile-plain.card--glass) {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-}
-
+/* Left Content Styling */
 :where(.heroScope) :global(.hero-left) {
   text-align: center;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  z-index: 10;
+  /* Ensure text is above image */
+  padding: 8vw 20px 40px;
+  /* Add some padding so text doesn't touch edges if image is small */
+  width: 100%;
+  max-width: 900px;
+  /* Constraint content width */
 }
 
 :where(.heroScope) :global(.hero-left .hero-lead) {
   margin-top: 34px;
   line-height: 1.6;
   font-weight: 500;
-  color: var(--text-muted);
+  color: #fff;
   margin-left: auto;
   margin-right: auto;
   max-width: 38rem;
@@ -73,7 +118,7 @@
 :where(.heroScope) :global(.hero-left .hero-pillRow .pill) {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  color: var(--text-muted);
+  color: #fff;
   font-weight: 600;
 }
 
@@ -109,37 +154,5 @@
     font-size: 10px;
     line-height: 1;
     white-space: nowrap;
-  }
-}
-
-:where(.heroScope) :global(.hero-grid) {
-  display: grid;
-  grid-template-columns: 1.25fr .85fr;
-  gap: 22px;
-  align-items: stretch;
-}
-
-:where(.heroScope) :global(.hero-left) {
-  padding: 26px;
-}
-
-:where(.heroScope) :global(.hero-right) {
-  padding: 22px;
-}
-
-:where(.heroScope) :global(.hero-slogan) {
-  margin: 10px 0 16px;
-  font-family: Montserrat, Inter, system-ui, sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .02em;
-  line-height: 1.02;
-  font-size: clamp(20px, 2.6vw, 34px);
-  color: var(--blue);
-}
-
-@media (max-width: 980px) {
-  :where(.heroScope) :global(.hero-grid) {
-    grid-template-columns: 1fr;
   }
 }

@@ -353,9 +353,6 @@ export function resolveContactTopicKey(rawTopic?: string | null) {
   if (contactTopicLabels[normalized]) return normalized;
   return trimmed;
 }
-
-
-
 type LocaleText = { fr: string; ru: string };
 
 export type HomeNavCard = {
@@ -364,53 +361,39 @@ export type HomeNavCard = {
   description: LocaleText;
   // Куда ведёт карточка (часть пути без языка, например "/aide")
   path: string;
+  icon: string;
 };
 
 export const homeNavCards: HomeNavCard[] = [
   {
-    id: "about",
-    title: { fr: "À propos", ru: "О нас" },
-    description: {
-      fr: "Qui nous sommes et comment nous travaillons.",
-      ru: "Кто мы и как мы работаем.",
-    },
-    path: "/about",
-  },
-  {
     id: "aide",
-    title: { fr: "Aide", ru: "Чем помогаем" },
+    title: { fr: "Obtenir de l'aide", ru: "Получить помощь" },
     description: {
       fr: "Comprendre les démarches et avancer.",
       ru: "Разобраться с шагами и получить поддержку.",
     },
     path: "/aide",
+    icon: "/02.png",
   },
   {
     id: "actions",
-    title: { fr: "Activité", ru: "Действия" },
+    title: { fr: "M'inscrire a une activité", ru: "Записаться на занятие" },
     description: {
       fr: "Programmes, activités et accompagnement.",
       ru: "Программы, активности и сопровождение.",
     },
     path: "/actions",
+    icon: "/03.png",
   },
   {
     id: "soutenir",
-    title: { fr: "Soutenir", ru: "Поддержать" },
+    title: { fr: "Soutenir l'association", ru: "Поддержать ассоциацию" },
     description: {
       fr: "Bénévolat, dons et partenariats.",
       ru: "Волонтёрство, пожертвования и партнёрства.",
     },
     path: "/soutenir",
-  },
-  {
-    id: "contact",
-    title: { fr: "Contact", ru: "Контакты" },
-    description: {
-      fr: "Écrire via le formulaire ou par e-mail.",
-      ru: "Написать через форму или по e-mail.",
-    },
-    path: "/contact",
+    icon: "/04.png",
   },
 ];
 
@@ -671,7 +654,7 @@ type HeroCopy = {
 
 export const heroCopy: Record<ActionsLocale, HeroCopy> = {
   ru: {
-    title: "Помогаем людям\nадаптироваться в Страсбурге",
+    title: "ПОМОЩЬ, ИНТЕГРАЦИЯ, СТРАСБУРГ",
     lead: "Документы, работа, обучение и поддержка в Страсбурге — подскажем понятный следующий шаг без лишней бюрократии.",
     ctaPrimary: "Получить помощь",
     ctaSecondary: "Наши действия",
@@ -679,7 +662,7 @@ export const heroCopy: Record<ActionsLocale, HeroCopy> = {
     pillsAriaLabel: "ключевые слова",
   },
   fr: {
-    title: "Aide à l’intégration, accompagnement à Strasbourg",
+    title: "AIDE, INTÉGRATION, STRASBOURG",
     lead: "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement.",
     ctaPrimary: "Demande d'aide",
     ctaSecondary: "Activités",
