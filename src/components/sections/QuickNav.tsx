@@ -31,7 +31,6 @@ export function QuickNav({ locale }: QuickNavProps) {
           return (
             <Card
               key={card.id}
-              as="article"
               href={href}
               className="accent--blue quickNav-card"
             >
