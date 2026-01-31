@@ -4,6 +4,7 @@
  Здесь можно поменять список пунктов и ссылку, не затрагивая остальную страницу.
 */
 
+import Image from "next/image";
 import { Section } from "@/components/ui/Section/Section";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { actionsPreviewCopy } from "@/content/actions";
@@ -24,20 +25,41 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
       title={copy.title}
       subtitle={copy.subtitle}
     >
-      <div className="grid-2">
+      <div className={styles.contentGrid}>
         <ContentCard
-          className="card-list"
+          className={`${styles.cardList} card-list`}
           hoverable={false}
           listItems={copy.items}
         />
 
         <ContentCard
-          className="card-summary"
+          className={`${styles.cardSummary} card-summary`}
           hoverable={false}
           title={copy.cardTitle}
           description={copy.cardParagraphs}
           actions={[{ label: copy.ctaLabel, href: `/${locale}/actions`, variant: "primary" }]}
         />
+
+        <div className={styles.photoGrid}>
+          {copy.photos.map((photo) => (
+            <figure key={photo.src} className={styles.photoCard}>
+              <div className={styles.photoMedia}>
+                <Image
+                  className={styles.photoImage}
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(min-width: 900px) 50vw, 92vw"
+                  priority={false}
+                />
+                <figcaption className={styles.photoCaption}>
+                  <p className={styles.photoTitle}>{photo.title}</p>
+                  <p className={styles.photoDescription}>{photo.description}</p>
+                </figcaption>
+              </div>
+            </figure>
+          ))}
+        </div>
       </div>
     </Section>
   );

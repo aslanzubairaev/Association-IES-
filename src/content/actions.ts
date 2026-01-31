@@ -699,21 +699,11 @@ type TrustBlockCopy = {
   quoteSignature: string;
   quoteAriaLabel: string;
   photos: {
-    left: {
-      src: string;
-      alt: string;
-      title?: string;
-      description?: string;
-      objectPosition?: string;
-    };
-    right: {
-      src: string;
-      alt: string;
-      title?: string;
-      description?: string;
-      objectPosition?: string;
-    };
-  };
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  }[];
 };
 
 export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
@@ -730,20 +720,20 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
     quoteText: "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»",
     quoteSignature: "ASSOCIATION IES",
     quoteAriaLabel: "цитата",
-    photos: {
-      left: {
+    photos: [
+      {
         src: "/1.jpg",
         alt: "Участники встречи Association IES",
         title: "Ежегодный форум IES",
         description: "Форум, где обсуждаем поддержку, интеграцию и совместные шаги.",
       },
-      right: {
+      {
         src: "/2.JPG",
         alt: "Поддержка и общение в Association IES",
         title: "Консультации и поддержка",
         description: "Советы и помощь по документам, работе и обучению.",
       },
-    },
+    ],
   },
   fr: {
     title: "Notre mission",
@@ -758,20 +748,20 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
     quoteText: "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »",
     quoteSignature: "ASSOCIATION IES",
     quoteAriaLabel: "citation",
-    photos: {
-      left: {
+    photos: [
+      {
         src: "/1.jpg",
         alt: "Participants à une rencontre Association IES",
         title: "Forum annuel IES",
         description: "Un forum pour parler du soutien, de l’intégration et des actions communes.",
       },
-      right: {
+      {
         src: "/2.JPG",
         alt: "Soutien et échanges au sein de l’Association IES",
         title: "Conseils et soutien",
         description: "Aide pour démarches, emploi et apprentissage.",
       },
-    },
+    ],
   },
 };
 
@@ -782,6 +772,12 @@ type ActionsPreviewCopy = {
   cardTitle: string;
   cardParagraphs: string[];
   ctaLabel: string;
+  photos: {
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  }[];
 };
 
 export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
@@ -795,6 +791,20 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
       "Там будут форматы, расписания, регистрация и адреса по активностям.",
     ],
     ctaLabel: "Перейти к действиям",
+    photos: [
+      {
+        src: "/3.JPG",
+        alt: "Волонтёры работают в саду Association IES",
+        title: "Сад волонтёров",
+        description: "Забота и совместный труд.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Участники вместе собирают фрукты",
+        title: "Сбор фруктов",
+        description: "Тёплые встречи и помощь.",
+      },
+    ],
   },
   fr: {
     title: "Nos actions (en bref)",
@@ -806,6 +816,20 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
       "Vous y trouverez les formats, les horaires, l’inscription et les adresses.",
     ],
     ctaLabel: "Aller à l’activité",
+    photos: [
+      {
+        src: "/3.JPG",
+        alt: "Bénévoles au jardin de l’association IES",
+        title: "Jardin solidaire",
+        description: "Soin et travail partagé.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Participants en train de cueillir des fruits",
+        title: "Cueillette",
+        description: "Rencontres et entraide.",
+      },
+    ],
   },
 };
 

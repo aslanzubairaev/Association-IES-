@@ -13,7 +13,6 @@ export type PhotoCaptionCardProps = {
   title?: string;
   description?: string;
   priority?: boolean;
-  objectPosition?: string;
 };
 
 // Карточка с фото и подписью, предназначенная для секций миссии и доверия.
@@ -23,11 +22,10 @@ export function PhotoCaptionCard({
   title,
   description,
   priority,
-  objectPosition,
 }: PhotoCaptionCardProps) {
   return (
     <div className={styles.card}>
-      {/* Верхняя зона с фотографией в оригинальных цветах. */}
+      {/* Фотография с подписью поверх изображения. */}
       <div className={styles.media}>
         <Image
           className={styles.image}
@@ -36,13 +34,13 @@ export function PhotoCaptionCard({
           fill
           sizes="(min-width: 900px) 50vw, 92vw"
           priority={priority}
-          style={{ objectPosition: objectPosition || "center" }}
         />
-      </div>
-      {/* Нижняя зона с подписью и коротким описанием. */}
-      <div className={styles.caption}>
-        {title ? <p className={styles.title}>{title}</p> : null}
-        {description ? <p className={styles.description}>{description}</p> : null}
+        {(title || description) ? (
+          <div className={styles.caption}>
+            {title ? <p className={styles.title}>{title}</p> : null}
+            {description ? <p className={styles.description}>{description}</p> : null}
+          </div>
+        ) : null}
       </div>
     </div>
   );

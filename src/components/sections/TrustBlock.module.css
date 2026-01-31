@@ -2,18 +2,30 @@
   position: relative;
 }
 
-.cardsRow {
+.contentGrid {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-areas:
+    "list"
+    "photos"
+    "quote";
   gap: 18px;
   align-items: stretch;
 }
 
+.listCard {
+  grid-area: list;
+}
+
 .photosRow {
-  margin-top: 18px;
+  grid-area: photos;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
 }
 
 .quoteCard {
+  grid-area: quote;
   background: linear-gradient(135deg, rgba(72, 56, 160, 0.94), rgba(24, 12, 64, 0.96));
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -48,12 +60,17 @@
 }
 
 @media (min-width: 720px) {
-  .cardsRow {
+  .contentGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
+    grid-template-areas:
+      "list quote"
+      "photos photos";
+    column-gap: 22px;
+    row-gap: 24px;
   }
 
   .photosRow {
-    margin-top: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
   }
 }

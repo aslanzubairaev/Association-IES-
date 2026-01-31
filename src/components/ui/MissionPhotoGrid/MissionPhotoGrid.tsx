@@ -13,7 +13,6 @@ export type MissionPhoto = {
   title?: string;
   description?: string;
   priority?: boolean;
-  objectPosition?: string;
 };
 
 type MissionPhotoGridProps = {
@@ -32,7 +31,6 @@ export function MissionPhotoGrid({ left, right }: MissionPhotoGridProps) {
         title={left.title}
         description={left.description}
         priority={left.priority}
-        objectPosition={left.objectPosition}
       />
       {/* Правая карточка с фотографией и подписью. */}
       <PhotoCaptionCard
@@ -41,7 +39,6 @@ export function MissionPhotoGrid({ left, right }: MissionPhotoGridProps) {
         title={right.title}
         description={right.description}
         priority={right.priority}
-        objectPosition={right.objectPosition}
       />
     </div>
   );

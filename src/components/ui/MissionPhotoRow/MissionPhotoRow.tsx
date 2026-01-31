@@ -26,8 +26,8 @@ export function MissionPhotoRow({ left, right }: MissionPhotoRowProps) {
       {/* Левая фотокарточка. */}
       <div className={styles.item}>
         <PhotoCard
-          imageSrc={left.src}
-          imageAlt={left.alt}
+          src={left.src}
+          alt={left.alt}
           title={left.title}
           description={left.description}
         />
@@ -35,8 +35,8 @@ export function MissionPhotoRow({ left, right }: MissionPhotoRowProps) {
       {/* Правая фотокарточка. */}
       <div className={styles.item}>
         <PhotoCard
-          imageSrc={right.src}
-          imageAlt={right.alt}
+          src={right.src}
+          alt={right.alt}
           title={right.title}
           description={right.description}
         />

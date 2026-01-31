@@ -5,37 +5,35 @@
 */
 
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/Card/Card";
 import styles from "./PhotoCard.module.css";
 
 type PhotoCardProps = {
-  imageSrc: string;
-  imageAlt: string;
+  src: string;
+  alt: string;
   title: string;
   description: string;
+  priority?: boolean;
+  sizes?: string;
 };
 
-// Карточка фото: сочетает изображение и подпись в едином стиле.
-export function PhotoCard({ imageSrc, imageAlt, title, description }: PhotoCardProps) {
+// Карточка фото: премиальная подача с подписью поверх изображения.
+export function PhotoCard({ src, alt, title, description, priority = false, sizes }: PhotoCardProps) {
   return (
-    <Card className={styles.card} hoverable={false}>
-      {/* Блок изображения без цветных фильтров. */}
+    <div className={styles.card}>
       <div className={styles.media}>
         <Image
           className={styles.image}
-          src={imageSrc}
-          alt={imageAlt}
+          src={src}
+          alt={alt}
           fill
-          sizes="(min-width: 900px) 50vw, 92vw"
-          priority={false}
+          sizes={sizes ?? "(min-width: 900px) 50vw, 92vw"}
+          priority={priority}
         />
-        <span className={styles.shine} aria-hidden="true" />
+        <div className={styles.caption}>
+          <p className={styles.title}>{title}</p>
+          <p className={styles.description}>{description}</p>
+        </div>
       </div>
-      {/* Текстовый блок с заголовком и описанием. */}
-      <CardContent className={styles.caption}>
-        <p className={styles.title}>{title}</p>
-        <p className={styles.description}>{description}</p>
-      </CardContent>
-    </Card>
+    </div>
   );
 }
