@@ -1,12 +1,17 @@
+/*
+ Этот файл определяет ряд из двух фотокарточек.
+ Он показывает фото с подписью рядом друг с другом или в колонку.
+ Он используется там, где нужно компактно показать пару снимков.
+*/
+
 import { PhotoCard } from "@/components/ui/PhotoCard/PhotoCard";
 import styles from "./MissionPhotoRow.module.css";
 
 export type Photo = {
   src: string;
   alt: string;
-  label?: string;
-  priority?: boolean;
-  objectPosition?: string;
+  title: string;
+  description: string;
 };
 
 type MissionPhotoRowProps = {
@@ -14,25 +19,26 @@ type MissionPhotoRowProps = {
   right: Photo;
 };
 
+// Ряд из двух карточек с фотографиями и подписями.
 export function MissionPhotoRow({ left, right }: MissionPhotoRowProps) {
   return (
     <div className={styles.row}>
+      {/* Левая фотокарточка. */}
       <div className={styles.item}>
         <PhotoCard
-          src={left.src}
-          alt={left.alt}
-          label={left.label}
-          priority={left.priority}
-          objectPosition={left.objectPosition}
+          imageSrc={left.src}
+          imageAlt={left.alt}
+          title={left.title}
+          description={left.description}
         />
       </div>
+      {/* Правая фотокарточка. */}
       <div className={styles.item}>
         <PhotoCard
-          src={right.src}
-          alt={right.alt}
-          label={right.label}
-          priority={right.priority}
-          objectPosition={right.objectPosition}
+          imageSrc={right.src}
+          imageAlt={right.alt}
+          title={right.title}
+          description={right.description}
         />
       </div>
     </div>

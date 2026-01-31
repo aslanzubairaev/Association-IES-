@@ -7,7 +7,7 @@
 import { Section } from "@/components/ui/Section/Section";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { Card, CardContent } from "@/components/ui/Card/Card";
-import { MissionPhotoRow } from "@/components/ui/MissionPhotoRow/MissionPhotoRow";
+import { MissionPhotoGrid } from "@/components/ui/MissionPhotoGrid/MissionPhotoGrid";
 import { trustBlockCopy } from "@/content/actions";
 import styles from "./TrustBlock.module.css";
 
@@ -17,6 +17,7 @@ type TrustBlockProps = {
 
 // Блок доверения: простой список тезисов, двуязычный.
 export function TrustBlock({ locale }: TrustBlockProps) {
+  // Тексты и подписи для выбранного языка.
   const copy = trustBlockCopy[locale];
 
   return (
@@ -26,6 +27,7 @@ export function TrustBlock({ locale }: TrustBlockProps) {
       title={copy.title}
       subtitle={copy.subtitle}
     >
+      {/* Верхняя часть с тезисами и цитатой. */}
       <div className={styles.cardsRow}>
         <ContentCard
           title={copy.benefitsTitle}
@@ -42,15 +44,22 @@ export function TrustBlock({ locale }: TrustBlockProps) {
           </CardContent>
         </Card>
       </div>
+      {/* Нижняя часть с фотокарточками миссии. */}
       <div className={styles.photosRow}>
-        <MissionPhotoRow
+        <MissionPhotoGrid
           left={{
             src: copy.photos.left.src,
             alt: copy.photos.left.alt,
+            title: copy.photos.left.title,
+            description: copy.photos.left.description,
+            objectPosition: copy.photos.left.objectPosition,
           }}
           right={{
             src: copy.photos.right.src,
             alt: copy.photos.right.alt,
+            title: copy.photos.right.title,
+            description: copy.photos.right.description,
+            objectPosition: copy.photos.right.objectPosition,
           }}
         />
       </div>

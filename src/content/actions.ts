@@ -702,12 +702,16 @@ type TrustBlockCopy = {
     left: {
       src: string;
       alt: string;
-      label?: string;
+      title?: string;
+      description?: string;
+      objectPosition?: string;
     };
     right: {
       src: string;
       alt: string;
-      label?: string;
+      title?: string;
+      description?: string;
+      objectPosition?: string;
     };
   };
 };
@@ -730,10 +734,14 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
       left: {
         src: "/1.jpg",
         alt: "Участники встречи Association IES",
+        title: "Ежегодный форум IES",
+        description: "Форум, где обсуждаем поддержку, интеграцию и совместные шаги.",
       },
       right: {
         src: "/2.JPG",
         alt: "Поддержка и общение в Association IES",
+        title: "Консультации и поддержка",
+        description: "Советы и помощь по документам, работе и обучению.",
       },
     },
   },
@@ -754,10 +762,14 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
       left: {
         src: "/1.jpg",
         alt: "Participants à une rencontre Association IES",
+        title: "Forum annuel IES",
+        description: "Un forum pour parler du soutien, de l’intégration et des actions communes.",
       },
       right: {
         src: "/2.JPG",
         alt: "Soutien et échanges au sein de l’Association IES",
+        title: "Conseils et soutien",
+        description: "Aide pour démarches, emploi et apprentissage.",
       },
     },
   },

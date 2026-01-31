@@ -1,29 +1,41 @@
+/*
+ Этот файл определяет карточку с фотографией и подписью.
+ Он показывает фото без фильтров и короткий текст под ним.
+ Он используется в секции миссии для доверительного визуального блока.
+*/
+
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/Card/Card";
 import styles from "./PhotoCard.module.css";
 
 type PhotoCardProps = {
-  src: string;
-  alt: string;
-  label?: string;
-  priority?: boolean;
-  objectPosition?: string;
+  imageSrc: string;
+  imageAlt: string;
+  title: string;
+  description: string;
 };
 
-export function PhotoCard({ src, alt, label, priority, objectPosition }: PhotoCardProps) {
+// Карточка фото: сочетает изображение и подпись в едином стиле.
+export function PhotoCard({ imageSrc, imageAlt, title, description }: PhotoCardProps) {
   return (
-    <div className={styles.card}>
-      <Image
-        className={styles.image}
-        src={src}
-        alt={alt}
-        fill
-        sizes="(min-width: 900px) 50vw, 88vw"
-        priority={priority}
-        style={{ objectPosition: objectPosition || "center" }}
-      />
-      <span className={styles.tint} aria-hidden="true" />
-      <span className={styles.shine} aria-hidden="true" />
-      {label ? <span className={styles.label}>{label}</span> : null}
-    </div>
+    <Card className={styles.card} hoverable={false}>
+      {/* Блок изображения без цветных фильтров. */}
+      <div className={styles.media}>
+        <Image
+          className={styles.image}
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="(min-width: 900px) 50vw, 92vw"
+          priority={false}
+        />
+        <span className={styles.shine} aria-hidden="true" />
+      </div>
+      {/* Текстовый блок с заголовком и описанием. */}
+      <CardContent className={styles.caption}>
+        <p className={styles.title}>{title}</p>
+        <p className={styles.description}>{description}</p>
+      </CardContent>
+    </Card>
   );
 }
