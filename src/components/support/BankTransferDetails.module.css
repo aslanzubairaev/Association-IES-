@@ -23,6 +23,24 @@
   position: relative;
 }
 
+.actionsRow :global(.cta-pill) {
+  height: 38px;
+  min-height: 38px;
+  max-width: 200px;
+  padding: 0 14px;
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .actionsRow :global(.cta-pill) {
+    height: 34px;
+    min-height: 34px;
+    max-width: 170px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+}
+
 .ctaButton {
   /* No specific styles needed if btn--pill handles look, 
      but maybe width/layout inside grid? */
@@ -37,7 +55,7 @@
   user-select: text;
   text-shadow: var(--card-text-shadow);
   position: relative;
-  padding-bottom: 36px;
+  padding-bottom: 14px;
 }
 
 .supportCopyWrap {

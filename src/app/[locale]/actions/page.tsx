@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { actionsCopy, actionsPageCopy } from "@/content/actions";
 import styles from "./page.module.css";
 
@@ -51,21 +52,25 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
                 <ContentCard
                   key={it.slug}
                   title={it.title}
+                  hoverable={false}
                   actions={[{
                     label: copy.directions.cta,
                     href: `/${locale}/contact?topic=${encodeURIComponent(it.topicKey)}`,
-                    variant: "pill"
+                    variant: "pill",
+                    className: "cta-pill"
                   }]}
                 >
-                  <p className="p" style={{ marginBottom: 10 }}>
-                    <strong>{copy.directions.forWhoLabel}:</strong> {it.forWho}
-                  </p>
-                  <p className="p" style={{ marginBottom: 10 }}>
-                    <strong>{copy.directions.benefitLabel}:</strong> {it.benefit}
-                  </p>
-                  <p className="p" style={{ marginBottom: 10 }}>
-                    <strong>{copy.directions.frequencyLabel}:</strong> {it.frequency}
-                  </p>
+                  <IesList className="list">
+                    <IesListItem>
+                      <strong>{copy.directions.forWhoLabel}:</strong> {it.forWho}
+                    </IesListItem>
+                    <IesListItem>
+                      <strong>{copy.directions.benefitLabel}:</strong> {it.benefit}
+                    </IesListItem>
+                    <IesListItem>
+                      <strong>{copy.directions.frequencyLabel}:</strong> {it.frequency}
+                    </IesListItem>
+                  </IesList>
                   <p className="fineprint muted" style={{ marginTop: 14 }}>
                     <strong>{copy.directions.whenWhereLabel}</strong> {copy.directions.whenWhereText}
                   </p>
@@ -79,6 +84,8 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
             <ContentCard
               title={copy.important.title}
               listItems={copy.important.items}
+              hoverable={false}
+              className="actions-important-card"
             />
           </div>
         </Container>

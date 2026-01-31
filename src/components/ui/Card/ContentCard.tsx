@@ -5,7 +5,6 @@
 */
 
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { Button } from "@/components/ui/Button/Button";
 import { Card, CardHeader, CardContent, CardFooter } from "./Card";
@@ -17,6 +16,7 @@ export type ContentCardAction = {
     target?: string;
     rel?: string;
     icon?: ReactNode;
+    className?: string;
 };
 
 type ContentCardProps = {
@@ -132,36 +132,19 @@ export function ContentCard({
                     {/* Кнопки */}
                     {(actions || actionsNode) && (
                         <div className="btn-row">
-                            {actions?.map((action, i) => {
-                                if (action.variant === "pill" || action.variant === "mint") {
-                                    // Legacy pill/mint styles via Link class
-                                    // TODO: Migrate Button component to support these variants fully
-                                    return (
-                                        <Link
-                                            key={i}
-                                            href={action.href}
-                                            className={`btn btn--pill btn--${action.variant === 'mint' ? 'mint' : 'blue'}`}
-                                            target={action.target}
-                                            rel={action.rel}
-                                        >
-                                            {action.label}
-                                            {action.icon}
-                                        </Link>
-                                    )
-                                }
-                                return (
-                                    <Button
-                                        key={i}
-                                        variant={action.variant || "primary"}
-                                        href={action.href}
-                                        target={action.target}
-                                        rel={action.rel}
-                                    >
-                                        {action.label}
-                                        {action.icon}
-                                    </Button>
-                                );
-                            })}
+                            {actions?.map((action, i) => (
+                                <Button
+                                    key={i}
+                                    variant={action.variant || "primary"}
+                                    href={action.href}
+                                    target={action.target}
+                                    rel={action.rel}
+                                    className={action.className}
+                                >
+                                    {action.label}
+                                    {action.icon}
+                                </Button>
+                            ))}
                             {actionsNode}
                         </div>
                     )}

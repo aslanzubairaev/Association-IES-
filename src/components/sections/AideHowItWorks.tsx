@@ -2,6 +2,7 @@
 
 import { Section } from "@/components/ui/Section/Section";
 import { Card, CardContent } from "@/components/ui/Card/Card";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { aideCopy } from "@/content/actions";
 import styles from "./AideHowItWorks.module.css";
 
@@ -13,6 +14,21 @@ type AideHowItWorksProps = {
 export function AideHowItWorks({ locale }: AideHowItWorksProps) {
   // Тексты для блока “Как это работает”: шаги и подписи для RU/FR лежат в одном месте.
   const copy = aideCopy[locale].howItWorks;
+
+  const splitIntoSentences = (text: string) => {
+    const sentences = (text.match(/[^.!?]+[.!?…]?/g) ?? [text])
+      .map((sentence) => sentence.trim())
+      .filter(Boolean);
+
+    if (sentences.length === 1 && text.includes(":")) {
+      const [head, tail] = text.split(":");
+      const headText = head.trim();
+      const tailText = tail.trim();
+      return [headText, tailText].filter(Boolean);
+    }
+
+    return sentences;
+  };
 
   return (
     <Section
@@ -41,7 +57,11 @@ export function AideHowItWorks({ locale }: AideHowItWorksProps) {
                 </div>
 
                 {/* 1–3 предложения: что именно происходит на этом шаге. */}
-                <p className="p">{step.text}</p>
+                <IesList className="list">
+                  {splitIntoSentences(step.text).map((sentence, index) => (
+                    <IesListItem key={`${step.title}-${index}`}>{sentence}</IesListItem>
+                  ))}
+                </IesList>
               </CardContent>
             </Card>
           );

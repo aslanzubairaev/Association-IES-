@@ -215,6 +215,18 @@ a {
   min-height: 190px;
 }
 
+/* Общий стиль для CTA-pill кнопок (Aide + Actions). */
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 200px;
+  max-width: 240px;
+  height: 44px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
 .support-info-title {
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -226,8 +238,12 @@ a {
 
 .support-info-list {
   --ies-list-marker-width: 6px;
+  --ies-list-marker-height: 18.75px;
+  --ies-list-marker-color: currentColor;
+  --ies-list-marker-opacity: 0.6;
   --ies-list-gap: 12px;
 }
+
 
 @media (max-width: 520px) {
   .support-donate-section {

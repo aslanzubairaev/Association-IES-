@@ -9,8 +9,49 @@
   height: 100%;
 }
 
+.actionsScope .actionsCardsGrid :global(.card) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.actionsScope .actionsCardsGrid :global(.card-content) {
+  flex: 1 1 auto;
+}
+
+.actionsScope .actionsCardsGrid :global(.card-footer) {
+  margin-top: auto !important;
+}
+
+.actionsScope .actionsCardsGrid :global(.btn-row) {
+  display: flex;
+  justify-content: center;
+}
+
+.actionsScope .actionsCardsGrid :global(.card[class*="Card_surface__"]:hover),
+.actionsScope .actionsCardsGrid :global([class*="Card_surface__"]:hover) {
+  transform: none !important;
+  box-shadow: var(--shadow-soft) !important;
+  border-color: var(--surface-border) !important;
+  background: var(--surface) !important;
+}
+
 .actionsScope .actionsImportantBlock {
   margin-top: 16px;
+}
+
+.actionsScope :global(.actions-important-card .list) {
+  list-style: none;
+  padding-left: 0;
+  --ies-list-marker-width: 6px;
+  --ies-list-marker-height: 18.75px;
+  --ies-list-marker-color: currentColor;
+  --ies-list-marker-opacity: 0.6;
+}
+
+.actionsScope .actionsCardsGrid :global(.list) {
+  list-style: none;
+  padding-left: 0;
 }
 
 .actionsScope :global(.section-head .p + .p) {

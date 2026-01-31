@@ -2,6 +2,13 @@
   padding: 30px;
 }
 
+.aboutScope :global(.about-page .about-card[class*="Card_surface__"]:hover) {
+  transform: none;
+  box-shadow: var(--shadow-soft);
+  border-color: var(--surface-border);
+  background: var(--surface);
+}
+
 .aboutScope :global(.about-page .about-card .h3--blue) {
   color: var(--card-title-color);
   font-weight: 800;

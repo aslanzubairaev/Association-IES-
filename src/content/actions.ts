@@ -1100,7 +1100,7 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     cookiesText:
       "Мы используем только технические cookies, необходимые для работы сайта, и не используем рекламный трекинг.",
     updatedLabel: "Последнее обновление:",
-    updatedDate: "30 декабря 2025",
+    updatedDate: "31 января 2026",
   },
   fr: {
     title: "Politique de confidentialité",
@@ -1144,7 +1144,7 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     cookiesText:
       "Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site et aucun suivi publicitaire.",
     updatedLabel: "Dernière mise à jour :",
-    updatedDate: "30 décembre 2025",
+    updatedDate: "31 janvier 2026",
   },
 };
 

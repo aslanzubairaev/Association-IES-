@@ -31,7 +31,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
             title={topic.title}
             listItems={topic.examples}
             footerText={`${copy.preparePrefix} ${topic.prepareLine}`}
-            actions={[{ label: copy.chooseLabel, href: `/${locale}/contact?topic=${topic.topicKey}`, variant: "pill" }]}
+            actions={[{ label: copy.chooseLabel, href: `/${locale}/contact?topic=${topic.topicKey}`, variant: "pill", className: "cta-pill" }]}
           />
         ))}
       </div>

@@ -8,6 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { CopyToClipboardButton } from "@/components/ui/CopyToClipboardButton";
+import { IesList, IesListItem } from "@/components/ui/IesList";
 import { bankTransferCopy } from "@/content/actions";
 import styles from "./BankTransferDetails.module.css";
 
@@ -96,20 +97,20 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
           {copy.cardTitle}
         </div>
 
-        <div className="bank-transfer-lines">
-          <div>
+        <IesList className="bank-transfer-lines support-info-list">
+          <IesListItem>
             <span className="bank-transfer-label">IBAN:</span>{" "}
             <span className="bank-transfer-value bank-transfer-value--mono">
               {iban}
             </span>
-          </div>
-          <div className="bank-transfer-row">
+          </IesListItem>
+          <IesListItem className="bank-transfer-row">
             <span className="bank-transfer-label">BIC:</span>{" "}
             <span className="bank-transfer-value bank-transfer-value--mono">
               {bic}
             </span>
-          </div>
-        </div>
+          </IesListItem>
+        </IesList>
 
         {/* Подсказка статуса: показывает, что данные скопированы. */}
         <div className="bank-transfer-status" aria-live="polite">
@@ -126,7 +127,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
             value={iban}
             label={copy.copyIbanLabel}
             copiedLabel={copy.copiedIbanStatus}
-            className="btn btn--pill"
+            className="btn btn--pill cta-pill"
             showStatus={false}
             onCopied={(text) => showToast("iban", text)}
           />
@@ -145,7 +146,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
             value={bic}
             label={copy.copyBicLabel}
             copiedLabel={copy.copiedBicStatus}
-            className="btn btn--pill"
+            className="btn btn--pill cta-pill"
             showStatus={false}
             onCopied={(text) => showToast("bic", text)}
           />

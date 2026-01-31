@@ -2,6 +2,14 @@
   align-items: stretch;
 }
 
+:where(.stepsScope) :global(.aide-card--step.accent-left) {
+  padding-left: var(--card-padding);
+}
+
+:where(.stepsScope) :global(.aide-card--step.accent-left::before) {
+  content: none;
+}
+
 .step {
   display: flex;
   align-items: center;

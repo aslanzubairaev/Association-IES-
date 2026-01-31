@@ -799,6 +799,16 @@ li {
   margin-bottom: 14px;
 }
 
+.card .btn-row {
+  justify-content: center;
+}
+
+.card .btn-row > a,
+.card .btn-row > button {
+  flex: 1 1 200px;
+  max-width: 240px;
+}
+
 .contact-box {
   background: var(--paper-warm);
   border: 1px solid rgba(11, 27, 51, .12);

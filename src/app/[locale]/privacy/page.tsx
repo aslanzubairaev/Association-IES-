@@ -37,13 +37,14 @@ export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" 
     <div className={styles.privacyScope}>
       <Section
         as="main"
-        className="privacy-page"
+        className="page--purple privacy-page"
         title={copy.title}
         subtitle={copy.lead}
       >
         <ContentCard
           className="card--paper"
           footerText={`${copy.updatedLabel} ${copy.updatedDate}`}
+          hoverable={false}
         >
           <div className={styles.privacyContent}>
             <section className="privacy-section">

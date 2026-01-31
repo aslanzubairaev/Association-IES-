@@ -111,7 +111,8 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
               title={text.helloAssoTitle}
               icon={helloAssoIcon}
               description={text.helloAssoText}
-              actions={[{ label: text.helloAssoCta, href: helloAssoHref, variant: "pill", target: "_blank", rel: "noopener noreferrer" }]}
+              hoverable={false}
+              actions={[{ label: text.helloAssoCta, href: helloAssoHref, variant: "pill", className: "cta-pill", target: "_blank", rel: "noopener noreferrer" }]}
             >
               <div className="support-info-panel">
                 <div className="support-info-title">{text.benefitsTitle}</div>
@@ -128,7 +129,8 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
               title={text.cotizUpTitle}
               icon={cotizUpIcon}
               description={text.cotizUpText}
-              actions={[{ label: text.cotizUpCta, href: cotizUpHref, variant: "pill", target: "_blank", rel: "noopener noreferrer" }]}
+              hoverable={false}
+              actions={[{ label: text.cotizUpCta, href: cotizUpHref, variant: "pill", className: "cta-pill", target: "_blank", rel: "noopener noreferrer" }]}
             >
               <div className="support-info-panel">
                 <div className="support-info-title">{text.benefitsTitle}</div>
@@ -145,6 +147,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
               title={text.bankTitle}
               icon={bankIcon}
               description={text.bankText}
+              hoverable={false}
             >
               {/* Реквизиты перевода: человек может нажать и быстро скопировать IBAN/BIC для приложения банка. */}
               <BankTransferDetails
@@ -157,9 +160,10 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
 
           {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
           <ContentCard
-            className="support-card accent-left accent--blue support-important"
+            className="support-card support-important"
             title={text.importantTitle}
             description={text.importantText}
+            hoverable={false}
           />
         </Section>
 
@@ -170,13 +174,15 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
               className="support-card"
               title={text.volunteerTitle}
               description={text.volunteerText}
-              actions={[{ label: text.volunteerCta, href: volunteerHref, variant: "pill" }]}
+              hoverable={false}
+              actions={[{ label: text.volunteerCta, href: volunteerHref, variant: "pill", className: "cta-pill" }]}
             />
 
             <ContentCard
               className="support-card"
               title={text.howToHelpTitle}
               listItems={text.howToHelpItems}
+              hoverable={false}
             />
           </div>
         </Section>
