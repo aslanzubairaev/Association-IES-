@@ -23,11 +23,6 @@ export default function ContactPage({
   const pageLead = contactCopy[locale].pageLead;
   const whenTitle = contactCopy[locale].whenTitle;
   const whenItems = contactCopy[locale].whenItems;
-  const helperTextRu =
-    "Опишите ситуацию по пунктам: даты, что уже сделано и какие есть сроки/письма. Так мы ответим быстрее и точнее.";
-  const helperTextFr =
-    "Décrivez la situation de façon structurée : dates, démarches déjà faites, délais/courriers. Cela nous aide à répondre plus vite et plus précisément.";
-
   return (
     <main className={`section page--purple contact-page ${styles.contactScope}`}>
       <Container>
@@ -59,8 +54,12 @@ export default function ContactPage({
           <ContentCard className="contact-card contact-card--yellow contact-card--form" hoverable={false}>
             {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
             <div className="contact-form-wrap">
-              <p className={styles.formNote}>{locale === "ru" ? helperTextRu : helperTextFr}</p>
-              <QuickContactForm locale={locale} variant="page" initialTopic={initialTopic} />
+              <QuickContactForm
+                locale={locale}
+                variant="page"
+                initialTopic={initialTopic}
+                pageNoteClassName={styles.formNote}
+              />
             </div>
           </ContentCard>
         </div>

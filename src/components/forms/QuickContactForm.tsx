@@ -14,6 +14,8 @@ type QuickContactFormProps = {
   variant?: "hero" | "page";
   // Тема, которую можно заранее выбрать (например, если пользователь пришёл с другой страницы).
   initialTopic?: string;
+  onTopicChange?: (value: string) => void;
+  pageNoteClassName?: string;
 };
 
 const EMAIL_TO = "contact@associationies.fr";
@@ -23,7 +25,13 @@ function cn(...classes: Array<string | null | undefined | false>) {
 }
 
 // Эта форма работает без сервера: она проверяет поля и подготавливает текст письма для копирования.
-export function QuickContactForm({ locale, variant = "hero", initialTopic }: QuickContactFormProps) {
+export function QuickContactForm({
+  locale,
+  variant = "hero",
+  initialTopic,
+  onTopicChange,
+  pageNoteClassName,
+}: QuickContactFormProps) {
   const copy = quickContactFormCopy[locale];
   const buttonLabel = copy.buttonLabel[variant];
   const initialTopicValue = initialTopic?.trim() ?? "";
@@ -63,7 +71,13 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
       ? { value: selectedTopic, label: getContactTopicLabel(locale, selectedTopic) }
       : null;
   const topicOptions = extraTopicOption ? [extraTopicOption, ...standardTopicOptions] : standardTopicOptions;
-  const messagePlaceholder = selectedTopic === "other" ? copy.messagePlaceholderOther : copy.messagePlaceholderDefault;
+  const messagePlaceholder =
+    selectedTopic === "volunteer"
+      ? copy.messagePlaceholderVolunteer
+      : selectedTopic === "other"
+        ? copy.messagePlaceholderOther
+        : copy.messagePlaceholderDefault;
+  const pageNoteText = selectedTopic === "volunteer" ? copy.pageNoteVolunteer : copy.pageNoteDefault;
 
   const showNameError = touched.name && nameIsEmpty;
   const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -169,6 +183,8 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
       {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
       {variant === "hero" ? <p className={cn("fineprint", styles.helper)}>{copy.helper}</p> : null}
 
+      {variant === "page" ? <p className={pageNoteClassName}>{pageNoteText}</p> : null}
+
       <div className={styles.grid}>
         <label className={styles.field}>
           <span className={styles.label}>{copy.nameLabel}</span>
@@ -223,7 +239,10 @@ export function QuickContactForm({ locale, variant = "hero", initialTopic }: Qui
           <Select
             name="topic"
             value={selectedTopic || undefined}
-            onValueChange={setSelectedTopic}
+            onValueChange={(value) => {
+              setSelectedTopic(value);
+              onTopicChange?.(value);
+            }}
             onOpenChange={handleTopicOpenChange}
           >
             <SelectTrigger aria-invalid={showTopicError ? true : undefined}>

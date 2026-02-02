@@ -1315,6 +1315,9 @@ type QuickContactFormCopy = {
   topicPlaceholder: string;
   messagePlaceholderDefault: string;
   messagePlaceholderOther: string;
+  messagePlaceholderVolunteer: string;
+  pageNoteDefault: string;
+  pageNoteVolunteer: string;
   buttonLabel: { hero: string; page: string };
   hint: string;
   required: string;
@@ -1347,6 +1350,12 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
       "Décrivez la situation en détail. S’il y a des délais ou un courrier, précisez-le dans le message.",
     messagePlaceholderOther:
       "Décrivez votre demande en détail. S’il y a des délais ou un courrier, précisez-le dans le message.",
+    messagePlaceholderVolunteer:
+      "Dites-nous comment vous souhaitez aider (rencontres, traductions, organisation, média) et quand vous êtes disponible. Nous répondrons par e-mail.",
+    pageNoteDefault:
+      "Décrivez la situation de façon structurée : dates, démarches déjà faites, délais/courriers. Cela nous aide à répondre plus vite et plus précisément.",
+    pageNoteVolunteer:
+      "Dites-nous comment vous souhaitez aider (rencontres, traductions, organisation, média) et quand vous êtes disponible. Nous répondrons par e-mail.",
     buttonLabel: { hero: "Envoyer", page: "Envoyer" },
     hint: "Réponse par e-mail. Rendez-vous uniquement sur inscription.",
     required: "Champ requis",
@@ -1375,6 +1384,12 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
     topicPlaceholder: "Выберите тему",
     messagePlaceholderDefault: "Опишите ситуацию подробно. Если есть сроки или письмо — укажите это в тексте.",
     messagePlaceholderOther: "Опишите ваш вопрос подробно. Если есть сроки или письмо — укажите это в тексте.",
+    messagePlaceholderVolunteer:
+      "Расскажите, чем вы хотите помочь (встречи/переводы/организация/медиа) и когда вам удобно. Мы ответим по e-mail.",
+    pageNoteDefault:
+      "Опишите ситуацию по пунктам: даты, что уже сделано и какие есть сроки/письма. Так мы ответим быстрее и точнее.",
+    pageNoteVolunteer:
+      "Расскажите, чем вы хотите помочь (встречи/переводы/организация/медиа) и когда вам удобно. Мы ответим по e-mail.",
     buttonLabel: { hero: "Отправить", page: "Отправить" },
     hint: "Ответим по e-mail. Встреча — только по записи.",
     required: "Заполните поле",
