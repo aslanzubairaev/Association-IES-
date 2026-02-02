@@ -540,6 +540,7 @@ li {
   cursor: pointer;
   user-select: none;
   min-height: 44px;
+  white-space: nowrap;
 }
 
 .btn--pill {
@@ -807,6 +808,15 @@ li {
 .card .btn-row > button {
   flex: 1 1 200px;
   max-width: 240px;
+}
+
+@media (max-width: 420px) {
+  .card .btn-row > a,
+  .card .btn-row > button {
+    font-size: 12px;
+    padding: 10px 14px;
+    letter-spacing: .01em;
+  }
 }
 
 .contact-box {
