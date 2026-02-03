@@ -471,7 +471,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       ],
     },
     topics: {
-      title: "Частые темы",
+      title: "чем вам помочь?",
       subtitle: "Выберите тему — так мы быстрее поймём запрос.",
       preparePrefix: "Что подготовить:",
       chooseLabel: "ЗАПИСАТЬСЯ",
@@ -570,7 +570,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       ],
     },
     topics: {
-      title: "Thèmes fréquents",
+      title: "Comment vous aider ?",
       subtitle: "Choisissez un thème — nous comprendrons plus vite votre demande.",
       preparePrefix: "À préparer :",
       chooseLabel: "S’INSCRIRE",
