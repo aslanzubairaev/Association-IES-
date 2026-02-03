@@ -8,6 +8,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { QuickNav } from "@/components/sections/QuickNav";
 import { TrustBlock } from "@/components/sections/TrustBlock";
+import { HistorySection } from "@/components/sections/HistorySection";
 
 
 // Главная страница языка: только новая структура, без legacy-лендинга.
@@ -20,6 +21,7 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
         <Hero locale={locale} />
         <QuickNav locale={locale} />
         <TrustBlock locale={locale} />
+        <HistorySection locale={locale} />
       </div>
     </main>
   );

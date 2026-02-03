@@ -1315,6 +1315,29 @@ export const aboutIntroCopy: Record<ActionsLocale, AboutIntroCopy> = {
   },
 };
 
+type HistoryCopy = {
+  title: string;
+  paragraph1: string;
+  paragraph2: string;
+};
+
+export const historyCopy: Record<ActionsLocale, HistoryCopy> = {
+  ru: {
+    title: "Наша история",
+    paragraph1:
+      "Association IES появилась в Strasbourg в 2019 году — из опыта людей, которые знают, что такое переезд и поиск своего места. Мы рядом, чтобы путь к интеграции был понятным и человеческим: шаг за шагом, с уважением к культурам и с настоящим «вместе».",
+    paragraph2:
+      "Мы поддерживаем семьи и молодёжь в социальной и профессиональной адаптации, помогаем выстраивать связи, находить опору и участие в жизни города. Потому что сильное сообщество рождается там, где есть гуманность, солидарность и синергия — и где люди встречаются не «по необходимости», а по-настоящему.",
+  },
+  fr: {
+    title: "Notre histoire",
+    paragraph1:
+      "Association IES est née à Strasbourg en 2019, portée par celles et ceux qui connaissent l’expérience de l’exil. Notre mission : rendre l’intégration plus simple et plus humaine, étape par étape, dans le respect des cultures et du vivre-ensemble.",
+    paragraph2:
+      "Nous accompagnons les familles et les jeunes dans leur insertion sociale et professionnelle, et nous favorisons les rencontres entre habitants, cultures et générations. Car une cohésion durable se construit avec humanité, solidarité et synergie — quand les liens deviennent vrais.",
+  },
+};
+
 type QuickContactFormCopy = {
   title: string;
   helper: string;
