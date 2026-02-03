@@ -692,12 +692,6 @@ export const quickNavCopy: Record<ActionsLocale, QuickNavCopy> = {
 
 type TrustBlockCopy = {
   title: string;
-  subtitle: string;
-  points: string[];
-  benefitsTitle: string;
-  quoteText: string;
-  quoteSignature: string;
-  quoteAriaLabel: string;
   photos: {
     src: string;
     alt: string;
@@ -708,18 +702,7 @@ type TrustBlockCopy = {
 
 export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
   ru: {
-    title: "Наша миссия",
-    subtitle: "Понятные шаги и человеческая поддержка.",
-    points: [
-      "Понятный следующий шаг без сложных слов",
-      "Локальная работа в Страсбурге",
-      "Поддержка по документам, работе и обучению",
-      "Сеть волонтёров и партнёров",
-    ],
-    benefitsTitle: "что вы получаете",
-    quoteText: "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»",
-    quoteSignature: "ASSOCIATION IES",
-    quoteAriaLabel: "цитата",
+    title: "ЧЕМ МЫ ЗАНИМАЕМСЯ?",
     photos: [
       {
         src: "/1.jpg",
@@ -733,21 +716,34 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
         title: "Консультации и поддержка",
         description: "Советы и помощь по документам, работе и обучению.",
       },
+      {
+        src: "/3.JPG",
+        alt: "Волонтёры работают в саду Association IES",
+        title: "Сад волонтёров",
+        description: "Забота и совместный труд.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Участники вместе собирают фрукты",
+        title: "Сбор фруктов",
+        description: "Тёплые встречи и помощь.",
+      },
+      {
+        src: "/5.jpg",
+        alt: "Футбол и турниры",
+        title: "Футбол и турниры",
+        description: "Командный дух, активность и участие в спортивных событиях.",
+      },
+      {
+        src: "/6.JPG",
+        alt: "Тхэквондо для детей",
+        title: "Тхэквондо для детей",
+        description: "Дисциплина, уверенность и спорт в безопасной атмосфере.",
+      },
     ],
   },
   fr: {
-    title: "Notre mission",
-    subtitle: "Des étapes claires et un soutien humain.",
-    points: [
-      "Une prochaine étape claire, sans jargon",
-      "Une action locale à Strasbourg",
-      "Un appui pour démarches, emploi et apprentissage",
-      "Un réseau de bénévoles et partenaires",
-    ],
-    benefitsTitle: "Ce que vous obtenez",
-    quoteText: "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »",
-    quoteSignature: "ASSOCIATION IES",
-    quoteAriaLabel: "citation",
+    title: "CE QUE NOUS FAISONS ?",
     photos: [
       {
         src: "/1.jpg",
@@ -761,13 +757,35 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
         title: "Conseils et soutien",
         description: "Aide pour démarches, emploi et apprentissage.",
       },
+      {
+        src: "/3.JPG",
+        alt: "Bénévoles au jardin de l’association IES",
+        title: "Jardin solidaire",
+        description: "Soin et travail partagé.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Participants en train de cueillir des fruits",
+        title: "Cueillette",
+        description: "Rencontres et entraide.",
+      },
+      {
+        src: "/5.jpg",
+        alt: "Football et tournois",
+        title: "Football et tournois",
+        description: "Esprit d’équipe, activité et participation à des événements sportif",
+      },
+      {
+        src: "/6.JPG",
+        alt: "Taekwondo pour enfants",
+        title: "Taekwondo pour enfants",
+        description: "Discipline, confiance et sport dans un cadre bienveillant.",
+      },
     ],
   },
 };
 
 type ActionsPreviewCopy = {
-  title: string;
-  subtitle: string;
   items: string[];
   cardTitle: string;
   cardParagraphs: string[];
@@ -782,8 +800,6 @@ type ActionsPreviewCopy = {
 
 export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
   ru: {
-    title: "Наши действия (кратко)",
-    subtitle: "Короткий обзор программ и активностей ассоциации.",
     items: ["Административные консультации", "Сопровождение к работе", "Языковые занятия", "Культурные встречи и выезды"],
     cardTitle: "Посмотреть все",
     cardParagraphs: [
@@ -807,8 +823,6 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
     ],
   },
   fr: {
-    title: "Nos actions (en bref)",
-    subtitle: "Un aperçu rapide de nos programmes et activités.",
     items: ["Consultations administratives", "Accompagnement vers l’emploi", "Ateliers de langue", "Rencontres et sorties"],
     cardTitle: "Voir tout",
     cardParagraphs: [

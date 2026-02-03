@@ -5,8 +5,6 @@
 */
 
 import { Section } from "@/components/ui/Section/Section";
-import { ContentCard } from "@/components/ui/Card/ContentCard";
-import { Card, CardContent } from "@/components/ui/Card/Card";
 import { PhotoCard } from "@/components/ui/PhotoCard/PhotoCard";
 import { trustBlockCopy } from "@/content/actions";
 import styles from "./TrustBlock.module.css";
@@ -25,21 +23,8 @@ export function TrustBlock({ locale }: TrustBlockProps) {
       className={styles.section}
       id="trust"
       title={copy.title}
-      subtitle={copy.subtitle}
     >
       <div className={styles.contentGrid}>
-        <ContentCard
-          className={styles.listCard}
-          title={copy.benefitsTitle}
-          listItems={copy.points}
-          hoverable={false}
-        />
-        <Card className={styles.quoteCard} surface={false} role="note" aria-label={copy.quoteAriaLabel}>
-          <CardContent>
-            <p className={styles.quoteCardText}>{copy.quoteText}</p>
-            <p className={styles.quoteCardSign}>{copy.quoteSignature}</p>
-          </CardContent>
-        </Card>
         <div className={styles.photosRow}>
           {copy.photos.map((photo) => (
             <PhotoCard
