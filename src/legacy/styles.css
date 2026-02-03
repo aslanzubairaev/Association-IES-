@@ -550,14 +550,15 @@ li {
 /* Базовые варианты кнопок (единый радиус/высота/бордер/hover). */
 .btnPrimary,
 .btn--blue {
-  background: var(--color-primary);
+  background: rgba(255, 255, 255, .10);
   color: #fff;
-  border-color: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .32);
 }
 
 .btnPrimary:hover,
 .btn--blue:hover {
-  background: var(--color-primary-dark);
+  background: rgba(255, 255, 255, .16);
+  border-color: rgba(255, 255, 255, .45);
 }
 
 .btnSecondary,
