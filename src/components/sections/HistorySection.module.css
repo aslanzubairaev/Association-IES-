@@ -1,0 +1,25 @@
+.section {
+  position: relative;
+}
+
+.text {
+  max-width: 740px;
+  display: grid;
+  gap: 18px;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.7;
+}
+
+.text p {
+  margin: 0;
+}
+
+.section :global(.section-head) {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 520px) {
+  .text {
+    gap: 16px;
+  }
+}

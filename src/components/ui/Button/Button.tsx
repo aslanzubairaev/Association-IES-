@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
 
-type ButtonVariant = "primary" | "secondary" | "accent";
+type ButtonVariant = "primary" | "secondary" | "accent" | "pill" | "mint";
 
 type ButtonProps = {
   children: ReactNode;
@@ -24,7 +24,12 @@ export function Button({
   variant = "primary",
   ...rest
 }: ButtonProps) {
-  const classes = [styles.button, styles[variant], className].filter(Boolean).join(" ");
+  const isLegacyPill = variant === "pill" || variant === "mint";
+  const classes = isLegacyPill
+    ? ["btn", "btn--pill", variant === "mint" ? "btn--mint" : "btn--blue", className]
+        .filter(Boolean)
+        .join(" ")
+    : [styles.button, styles[variant], className].filter(Boolean).join(" ");
 
   if (href) {
     const linkProps = { ...rest };

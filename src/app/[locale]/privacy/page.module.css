@@ -80,3 +80,14 @@
     line-height: 1.15;
   }
 }
+
+
+.privacyContent {
+  display: grid;
+  gap: 18px;
+}
+
+.footerNote {
+  margin-top: 16px;
+  padding: 0 18px 18px;
+}

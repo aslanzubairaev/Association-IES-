@@ -2,12 +2,22 @@
   padding: 30px;
 }
 
-.aboutScope :global(.about-page .about-card .h3),
+.aboutScope :global(.about-page .about-card[class*="Card_surface__"]:hover) {
+  transform: none;
+  box-shadow: var(--shadow-soft);
+  border-color: var(--surface-border);
+  background: var(--surface);
+}
+
 .aboutScope :global(.about-page .about-card .h3--blue) {
   color: var(--card-title-color);
   font-weight: 800;
   letter-spacing: 0.02em;
   text-shadow: var(--card-text-shadow);
+}
+
+.aboutScope :global(.grid-2 + .grid-2) {
+  margin-top: 18px;
 }
 
 .aboutScope :global(.about-page .about-card .p) {

@@ -1,7 +1,7 @@
 /* Этот файл содержит блок “Важно знать / À savoir” и показывает 3 пункта ожиданий про ответ по e-mail и запись. */
 
-import { Container } from "@/components/ui/Container";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import { Section } from "@/components/ui/Section/Section";
+import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { aideCopy } from "@/content/actions";
 
 type AideImportantProps = {
@@ -14,24 +14,17 @@ export function AideImportant({ locale }: AideImportantProps) {
   const copy = aideCopy[locale].important;
 
   return (
-    <section className="section section--purple" id="important">
-      <Container>
-        <div className="section-head">
-          <h2 className="h2" style={{ color: "rgba(255,255,255,.98)" }}>
-            {copy.title}
-          </h2>
-        </div>
-
-        {/* Список ожиданий: короткие пункты, без длинных абзацев. */}
-        <div className="card card--paper aide-card aide-card--wide">
-          <IesList className="list">
-            {copy.items.map((item) => (
-              <IesListItem key={item}>{item}</IesListItem>
-            ))}
-          </IesList>
-        </div>
-      </Container>
-    </section>
+    <Section
+      id="important"
+      title={copy.title}
+    >
+      {/* Список ожиданий: короткие пункты, без длинных абзацев. */}
+      {/* Используем ContentCard, но без заголовка внутри карточки, так как заголовок уже в секции. */}
+      <ContentCard
+        className="aide-card aide-card--wide"
+        listItems={copy.items}
+      />
+    </Section>
   );
 }
 

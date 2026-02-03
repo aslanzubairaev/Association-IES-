@@ -4,11 +4,10 @@
  Здесь можно поменять список пунктов и ссылку, не затрагивая остальную страницу.
 */
 
-import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card/Card";
-import { Button } from "@/components/ui/Button/Button";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import Image from "next/image";
+import { Section } from "@/components/ui/Section/Section";
 import { actionsPreviewCopy } from "@/content/actions";
+import styles from "./ActionsPreview.module.css";
 
 type ActionsPreviewProps = {
   locale: "ru" | "fr";
@@ -19,39 +18,33 @@ export function ActionsPreview({ locale }: ActionsPreviewProps) {
   const copy = actionsPreviewCopy[locale];
 
   return (
-    <section className="section section--pink-2 actions-short-block">
-      <Container>
-        <div className="section-head">
-          <h2 className="h2 h2--blue">{copy.title}</h2>
-          <p className="muted">{copy.subtitle}</p>
+    <Section
+      className={`actions-preview-section ${styles.preview}`}
+      id="actions"
+    >
+      <div className={styles.contentGrid}>
+        <div className={styles.photoGrid}>
+          {copy.photos.map((photo) => (
+            <figure key={photo.src} className={styles.photoCard}>
+              <div className={styles.photoMedia}>
+                <Image
+                  className={styles.photoImage}
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(min-width: 900px) 50vw, 92vw"
+                  priority={false}
+                />
+                <figcaption className={styles.photoCaption}>
+                  <p className={styles.photoTitle}>{photo.title}</p>
+                  <p className={styles.photoDescription}>{photo.description}</p>
+                </figcaption>
+              </div>
+            </figure>
+          ))}
         </div>
-
-        <div className="grid-2">
-          <Card className="card-list" hoverable={false}>
-            <IesList className="bullet-list">
-              {copy.items.map((it) => (
-                <IesListItem key={it}>{it}</IesListItem>
-              ))}
-            </IesList>
-          </Card>
-
-          <Card className="card-summary" hoverable={false}>
-            <h3 className="h3 h3--blue">{copy.cardTitle}</h3>
-            <p className="p" style={{ marginTop: 10 }}>
-              {copy.cardParagraphs[0]}
-            </p>
-            <p className="p" style={{ marginTop: 10 }}>
-              {copy.cardParagraphs[1]}
-            </p>
-            <div className="actions-short-cta" style={{ marginTop: 14 }}>
-              <Button variant="primary" href={`/${locale}/actions`}>
-                {copy.ctaLabel}
-              </Button>
-            </div>
-          </Card>
-        </div>
-      </Container>
-    </section>
+      </div>
+    </Section>
   );
 }
 

@@ -353,9 +353,6 @@ export function resolveContactTopicKey(rawTopic?: string | null) {
   if (contactTopicLabels[normalized]) return normalized;
   return trimmed;
 }
-
-
-
 type LocaleText = { fr: string; ru: string };
 
 export type HomeNavCard = {
@@ -364,53 +361,39 @@ export type HomeNavCard = {
   description: LocaleText;
   // Куда ведёт карточка (часть пути без языка, например "/aide")
   path: string;
+  icon: string;
 };
 
 export const homeNavCards: HomeNavCard[] = [
   {
-    id: "about",
-    title: { fr: "À propos", ru: "О нас" },
-    description: {
-      fr: "Qui nous sommes et comment nous travaillons.",
-      ru: "Кто мы и как мы работаем.",
-    },
-    path: "/about",
-  },
-  {
     id: "aide",
-    title: { fr: "Aide", ru: "Чем помогаем" },
+    title: { fr: "Obtenir de l'aide", ru: "Получить помощь" },
     description: {
       fr: "Comprendre les démarches et avancer.",
       ru: "Разобраться с шагами и получить поддержку.",
     },
     path: "/aide",
+    icon: "/02.png",
   },
   {
     id: "actions",
-    title: { fr: "Activité", ru: "Действия" },
+    title: { fr: "M'inscrire a une activité", ru: "Записаться на занятие" },
     description: {
       fr: "Programmes, activités et accompagnement.",
       ru: "Программы, активности и сопровождение.",
     },
     path: "/actions",
+    icon: "/03.png",
   },
   {
     id: "soutenir",
-    title: { fr: "Soutenir", ru: "Поддержать" },
+    title: { fr: "Soutenir l'association", ru: "Поддержать ассоциацию" },
     description: {
       fr: "Bénévolat, dons et partenariats.",
       ru: "Волонтёрство, пожертвования и партнёрства.",
     },
     path: "/soutenir",
-  },
-  {
-    id: "contact",
-    title: { fr: "Contact", ru: "Контакты" },
-    description: {
-      fr: "Écrire via le formulaire ou par e-mail.",
-      ru: "Написать через форму или по e-mail.",
-    },
-    path: "/contact",
+    icon: "/04.png",
   },
 ];
 
@@ -671,7 +654,7 @@ type HeroCopy = {
 
 export const heroCopy: Record<ActionsLocale, HeroCopy> = {
   ru: {
-    title: "Помогаем людям\nадаптироваться в Страсбурге",
+    title: "ПОМОЩЬ, ИНТЕГРАЦИЯ, СТРАСБУРГ",
     lead: "Документы, работа, обучение и поддержка в Страсбурге — подскажем понятный следующий шаг без лишней бюрократии.",
     ctaPrimary: "Получить помощь",
     ctaSecondary: "Наши действия",
@@ -679,7 +662,7 @@ export const heroCopy: Record<ActionsLocale, HeroCopy> = {
     pillsAriaLabel: "ключевые слова",
   },
   fr: {
-    title: "Aide à l’intégration, accompagnement à Strasbourg",
+    title: "AIDE, INTÉGRATION, STRASBOURG",
     lead: "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement.",
     ctaPrimary: "Demande d'aide",
     ctaSecondary: "Activités",
@@ -709,58 +692,114 @@ export const quickNavCopy: Record<ActionsLocale, QuickNavCopy> = {
 
 type TrustBlockCopy = {
   title: string;
-  subtitle: string;
-  points: string[];
-  benefitsTitle: string;
-  quoteText: string;
-  quoteSignature: string;
-  quoteAriaLabel: string;
+  photos: {
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  }[];
 };
 
 export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
   ru: {
-    title: "Доверие",
-    subtitle: "Понятные шаги и человеческая поддержка.",
-    points: [
-      "Понятный следующий шаг без сложных слов",
-      "Локальная работа в Страсбурге",
-      "Поддержка по документам, работе и обучению",
-      "Сеть волонтёров и партнёров",
+    title: "ЧЕМ МЫ ЗАНИМАЕМСЯ?",
+    photos: [
+      {
+        src: "/1.jpg",
+        alt: "Участники встречи Association IES",
+        title: "Ежегодный форум IES",
+        description: "Форум, где обсуждаем поддержку, интеграцию и совместные шаги.",
+      },
+      {
+        src: "/2.JPG",
+        alt: "Поддержка и общение в Association IES",
+        title: "Консультации и поддержка",
+        description: "Советы и помощь по документам, работе и обучению.",
+      },
+      {
+        src: "/3.JPG",
+        alt: "Волонтёры работают в саду Association IES",
+        title: "Сад волонтёров",
+        description: "Забота и совместный труд.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Участники вместе собирают фрукты",
+        title: "Сбор фруктов",
+        description: "Тёплые встречи и помощь.",
+      },
+      {
+        src: "/5.jpg",
+        alt: "Футбол и турниры",
+        title: "Футбол и турниры",
+        description: "Командный дух, активность и участие в спортивных событиях.",
+      },
+      {
+        src: "/6.JPG",
+        alt: "Тхэквондо для детей",
+        title: "Тхэквондо для детей",
+        description: "Дисциплина, уверенность и спорт в безопасной атмосфере.",
+      },
     ],
-    benefitsTitle: "что вы получаете",
-    quoteText: "«Наша миссия — открыть пути. Помочь каждому найти своё место, здесь и сейчас.»",
-    quoteSignature: "ASSOCIATION IES",
-    quoteAriaLabel: "цитата",
   },
   fr: {
-    title: "Confiance",
-    subtitle: "Des étapes claires et un soutien humain.",
-    points: [
-      "Une prochaine étape claire, sans jargon",
-      "Une action locale à Strasbourg",
-      "Un appui pour démarches, emploi et apprentissage",
-      "Un réseau de bénévoles et partenaires",
+    title: "CE QUE NOUS FAISONS ?",
+    photos: [
+      {
+        src: "/1.jpg",
+        alt: "Participants à une rencontre Association IES",
+        title: "Forum annuel IES",
+        description: "Un forum pour parler du soutien, de l’intégration et des actions communes.",
+      },
+      {
+        src: "/2.JPG",
+        alt: "Soutien et échanges au sein de l’Association IES",
+        title: "Conseils et soutien",
+        description: "Aide pour démarches, emploi et apprentissage.",
+      },
+      {
+        src: "/3.JPG",
+        alt: "Bénévoles au jardin de l’association IES",
+        title: "Jardin solidaire",
+        description: "Soin et travail partagé.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Participants en train de cueillir des fruits",
+        title: "Cueillette",
+        description: "Rencontres et entraide.",
+      },
+      {
+        src: "/5.jpg",
+        alt: "Football et tournois",
+        title: "Football et tournois",
+        description: "Esprit d’équipe, activité et participation à des événements sportif",
+      },
+      {
+        src: "/6.JPG",
+        alt: "Taekwondo pour enfants",
+        title: "Taekwondo pour enfants",
+        description: "Discipline, confiance et sport dans un cadre bienveillant.",
+      },
     ],
-    benefitsTitle: "Ce que vous obtenez",
-    quoteText: "« Notre mission — ouvrir des chemins. Aider chacun à trouver sa place, ici et maintenant. »",
-    quoteSignature: "ASSOCIATION IES",
-    quoteAriaLabel: "citation",
   },
 };
 
 type ActionsPreviewCopy = {
-  title: string;
-  subtitle: string;
   items: string[];
   cardTitle: string;
   cardParagraphs: string[];
   ctaLabel: string;
+  photos: {
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  }[];
 };
 
 export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
   ru: {
-    title: "Наши действия (кратко)",
-    subtitle: "Короткий обзор программ и активностей ассоциации.",
     items: ["Административные консультации", "Сопровождение к работе", "Языковые занятия", "Культурные встречи и выезды"],
     cardTitle: "Посмотреть все",
     cardParagraphs: [
@@ -768,10 +807,22 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
       "Там будут форматы, расписания, регистрация и адреса по активностям.",
     ],
     ctaLabel: "Перейти к действиям",
+    photos: [
+      {
+        src: "/3.JPG",
+        alt: "Волонтёры работают в саду Association IES",
+        title: "Сад волонтёров",
+        description: "Забота и совместный труд.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Участники вместе собирают фрукты",
+        title: "Сбор фруктов",
+        description: "Тёплые встречи и помощь.",
+      },
+    ],
   },
   fr: {
-    title: "Nos actions (en bref)",
-    subtitle: "Un aperçu rapide de nos programmes et activités.",
     items: ["Consultations administratives", "Accompagnement vers l’emploi", "Ateliers de langue", "Rencontres et sorties"],
     cardTitle: "Voir tout",
     cardParagraphs: [
@@ -779,6 +830,20 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
       "Vous y trouverez les formats, les horaires, l’inscription et les adresses.",
     ],
     ctaLabel: "Aller à l’activité",
+    photos: [
+      {
+        src: "/3.JPG",
+        alt: "Bénévoles au jardin de l’association IES",
+        title: "Jardin solidaire",
+        description: "Soin et travail partagé.",
+      },
+      {
+        src: "/4.JPG",
+        alt: "Participants en train de cueillir des fruits",
+        title: "Cueillette",
+        description: "Rencontres et entraide.",
+      },
+    ],
   },
 };
 
@@ -1049,7 +1114,7 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     cookiesText:
       "Мы используем только технические cookies, необходимые для работы сайта, и не используем рекламный трекинг.",
     updatedLabel: "Последнее обновление:",
-    updatedDate: "30 декабря 2025",
+    updatedDate: "31 января 2026",
   },
   fr: {
     title: "Politique de confidentialité",
@@ -1093,7 +1158,7 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     cookiesText:
       "Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site et aucun suivi publicitaire.",
     updatedLabel: "Dernière mise à jour :",
-    updatedDate: "30 décembre 2025",
+    updatedDate: "31 janvier 2026",
   },
 };
 
@@ -1250,6 +1315,29 @@ export const aboutIntroCopy: Record<ActionsLocale, AboutIntroCopy> = {
   },
 };
 
+type HistoryCopy = {
+  title: string;
+  paragraph1: string;
+  paragraph2: string;
+};
+
+export const historyCopy: Record<ActionsLocale, HistoryCopy> = {
+  ru: {
+    title: "Наша история",
+    paragraph1:
+      "Association IES появилась в Strasbourg в 2019 году — из опыта людей, которые знают, что такое переезд и поиск своего места. Мы рядом, чтобы путь к интеграции был понятным и человеческим: шаг за шагом, с уважением к культурам и с настоящим «вместе».",
+    paragraph2:
+      "Мы поддерживаем семьи и молодёжь в социальной и профессиональной адаптации, помогаем выстраивать связи, находить опору и участие в жизни города. Потому что сильное сообщество рождается там, где есть гуманность, солидарность и синергия — и где люди встречаются не «по необходимости», а по-настоящему.",
+  },
+  fr: {
+    title: "Notre histoire",
+    paragraph1:
+      "Association IES est née à Strasbourg en 2019, portée par celles et ceux qui connaissent l’expérience de l’exil. Notre mission : rendre l’intégration plus simple et plus humaine, étape par étape, dans le respect des cultures et du vivre-ensemble.",
+    paragraph2:
+      "Nous accompagnons les familles et les jeunes dans leur insertion sociale et professionnelle, et nous favorisons les rencontres entre habitants, cultures et générations. Car une cohésion durable se construit avec humanité, solidarité et synergie — quand les liens deviennent vrais.",
+  },
+};
+
 type QuickContactFormCopy = {
   title: string;
   helper: string;
@@ -1264,6 +1352,9 @@ type QuickContactFormCopy = {
   topicPlaceholder: string;
   messagePlaceholderDefault: string;
   messagePlaceholderOther: string;
+  messagePlaceholderVolunteer: string;
+  pageNoteDefault: string;
+  pageNoteVolunteer: string;
   buttonLabel: { hero: string; page: string };
   hint: string;
   required: string;
@@ -1296,6 +1387,12 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
       "Décrivez la situation en détail. S’il y a des délais ou un courrier, précisez-le dans le message.",
     messagePlaceholderOther:
       "Décrivez votre demande en détail. S’il y a des délais ou un courrier, précisez-le dans le message.",
+    messagePlaceholderVolunteer:
+      "Dites-nous comment vous souhaitez aider (rencontres, traductions, organisation, média) et quand vous êtes disponible. Nous répondrons par e-mail.",
+    pageNoteDefault:
+      "Décrivez la situation de façon structurée : dates, démarches déjà faites, délais/courriers. Cela nous aide à répondre plus vite et plus précisément.",
+    pageNoteVolunteer:
+      "Dites-nous comment vous souhaitez aider (rencontres, traductions, organisation, média) et quand vous êtes disponible. Nous répondrons par e-mail.",
     buttonLabel: { hero: "Envoyer", page: "Envoyer" },
     hint: "Réponse par e-mail. Rendez-vous uniquement sur inscription.",
     required: "Champ requis",
@@ -1324,6 +1421,12 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
     topicPlaceholder: "Выберите тему",
     messagePlaceholderDefault: "Опишите ситуацию подробно. Если есть сроки или письмо — укажите это в тексте.",
     messagePlaceholderOther: "Опишите ваш вопрос подробно. Если есть сроки или письмо — укажите это в тексте.",
+    messagePlaceholderVolunteer:
+      "Расскажите, чем вы хотите помочь (встречи/переводы/организация/медиа) и когда вам удобно. Мы ответим по e-mail.",
+    pageNoteDefault:
+      "Опишите ситуацию по пунктам: даты, что уже сделано и какие есть сроки/письма. Так мы ответим быстрее и точнее.",
+    pageNoteVolunteer:
+      "Расскажите, чем вы хотите помочь (встречи/переводы/организация/медиа) и когда вам удобно. Мы ответим по e-mail.",
     buttonLabel: { hero: "Отправить", page: "Отправить" },
     hint: "Ответим по e-mail. Встреча — только по записи.",
     required: "Заполните поле",
