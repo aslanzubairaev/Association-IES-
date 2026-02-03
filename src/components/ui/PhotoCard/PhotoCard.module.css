@@ -42,7 +42,7 @@
 
 .title {
   margin: 0;
-  font-size: 15.5px;
+  font-size: 18px;
   font-weight: 800;
   color: #ffffff;
   text-shadow: 0 3px 14px rgba(0, 0, 0, 0.45);
@@ -50,7 +50,7 @@
 
 .description {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.95);
   display: -webkit-box;
@@ -72,6 +72,6 @@
   }
 
   .description {
-    font-size: 13.5px;
+    font-size: 15.5px;
   }
 }
