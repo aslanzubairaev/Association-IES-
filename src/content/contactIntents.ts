@@ -149,19 +149,19 @@ const supportIntents: ContactIntent[] = [
 ];
 
 // Формирует поводы для обращения из раздела помощи.
-const aideIntents: ContactIntent[] = aideCopy.ru.topics.items
-  .map((ruTopic) => {
-    const frTopic = aideCopy.fr.topics.items.find((item) => item.intentId === ruTopic.intentId);
-    if (!frTopic) return null;
-    const bullets: LocalePair<string[]> = {
-      ru: ruTopic.examples,
-      fr: frTopic.examples,
-    };
-    const fineprint: LocalePair<string> = {
-      ru: `${aideCopy.ru.topics.preparePrefix} ${ruTopic.prepareLine}`,
-      fr: `${aideCopy.fr.topics.preparePrefix} ${frTopic.prepareLine}`,
-    };
-    return {
+const aideIntents: ContactIntent[] = aideCopy.ru.topics.items.flatMap((ruTopic) => {
+  const frTopic = aideCopy.fr.topics.items.find((item) => item.intentId === ruTopic.intentId);
+  if (!frTopic) return [];
+  const bullets: LocalePair<string[]> = {
+    ru: ruTopic.examples,
+    fr: frTopic.examples,
+  };
+  const fineprint: LocalePair<string> = {
+    ru: `${aideCopy.ru.topics.preparePrefix} ${ruTopic.prepareLine}`,
+    fr: `${aideCopy.fr.topics.preparePrefix} ${frTopic.prepareLine}`,
+  };
+  return [
+    {
       id: ruTopic.intentId,
       source: "aide",
       title: { ru: ruTopic.title, fr: frTopic.title },
@@ -169,26 +169,26 @@ const aideIntents: ContactIntent[] = aideCopy.ru.topics.items
       fineprint,
       topicValue: ruTopic.topicKey,
       messagePlaceholder: aidePlaceholderById[ruTopic.intentId] ?? aidePrefecturePlaceholder,
-    };
-  })
-  .filter((intent): intent is ContactIntent => Boolean(intent));
+    },
+  ];
+});
 
 // Формирует поводы для обращения из раздела действий.
-const actionIntents: ContactIntent[] = actionsCopy.ru.items
-  .map((ruItem) => {
-    const frItem = actionsCopy.fr.items.find((item) => item.intentId === ruItem.intentId);
-    if (!frItem) return null;
-    const bullets: LocalePair<string[]> = {
-      ru: [
-        `${actionsCopy.ru.directions.forWhoLabel}: ${ruItem.forWho}`,
-        `${actionsCopy.ru.directions.benefitLabel}: ${ruItem.benefit}`,
-      ],
-      fr: [
-        `${actionsCopy.fr.directions.forWhoLabel}: ${frItem.forWho}`,
-        `${actionsCopy.fr.directions.benefitLabel}: ${frItem.benefit}`,
-      ],
-    };
-    return {
+const actionIntents: ContactIntent[] = actionsCopy.ru.items.flatMap((ruItem) => {
+  const frItem = actionsCopy.fr.items.find((item) => item.intentId === ruItem.intentId);
+  if (!frItem) return [];
+  const bullets: LocalePair<string[]> = {
+    ru: [
+      `${actionsCopy.ru.directions.forWhoLabel}: ${ruItem.forWho}`,
+      `${actionsCopy.ru.directions.benefitLabel}: ${ruItem.benefit}`,
+    ],
+    fr: [
+      `${actionsCopy.fr.directions.forWhoLabel}: ${frItem.forWho}`,
+      `${actionsCopy.fr.directions.benefitLabel}: ${frItem.benefit}`,
+    ],
+  };
+  return [
+    {
       id: ruItem.intentId,
       source: "actions",
       title: { ru: ruItem.title, fr: frItem.title },
@@ -196,9 +196,9 @@ const actionIntents: ContactIntent[] = actionsCopy.ru.items
       extraInfo: actionExtraInfoById[ruItem.intentId],
       topicValue: ruItem.topicKey,
       messagePlaceholder: actionPlaceholderById[ruItem.intentId] ?? actionsMessagePlaceholder,
-    };
-  })
-  .filter((intent): intent is ContactIntent => Boolean(intent));
+    },
+  ];
+});
 
 // Собирает все поводы в справочник по идентификатору для быстрого поиска.
 export const contactIntents: Record<string, ContactIntent> = Object.fromEntries(
