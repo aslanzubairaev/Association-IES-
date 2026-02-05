@@ -63,6 +63,10 @@
   text-shadow: var(--card-text-shadow);
 }
 
+.actionsScope .actionsCardsGrid :global(.card-content > .list:first-child) {
+  margin-top: 0;
+}
+
 .actionsScope :global(.section-head .p + .p) {
   margin-top: 10px;
 }
