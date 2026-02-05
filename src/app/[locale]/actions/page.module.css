@@ -50,8 +50,17 @@
 }
 
 .actionsScope .actionsCardsGrid :global(.list) {
-  list-style: none;
-  padding-left: 0;
+  margin-top: 12px;
+  color: var(--card-body-color);
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: var(--card-text-shadow);
+}
+
+.actionsScope .actionsCardsGrid :global(.list li) {
+  margin: 10px 0;
+  color: var(--card-body-color);
+  text-shadow: var(--card-text-shadow);
 }
 
 .actionsScope :global(.section-head .p + .p) {

@@ -22,7 +22,7 @@ export function ContactIntentButton({ locale, intentId, label, className, varian
 
   // По нажатию открываем страницу контактов с выбранной темой.
   function handleClick() {
-    router.push(`/${locale}/contacts?intent=${encodeURIComponent(intentId)}`);
+    router.push(`/${locale}/contact?intent=${encodeURIComponent(intentId)}`);
   }
 
   return (

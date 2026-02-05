@@ -42,7 +42,7 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
                   hoverable={false}
                   actions={[{
                     label: copy.directions.cta,
-                    href: `/${locale}/contacts?intent=${encodeURIComponent(it.intentId)}`,
+                    href: `/${locale}/contact?intent=${encodeURIComponent(it.intentId)}`,
                     variant: "pill",
                     className: "cta-pill"
                   }]}

@@ -9,7 +9,6 @@ import styles from "./ContactContextBlock.module.css";
 
 // Данные для блока с темой: заголовок, примеры и пояснение.
 type ContactContextBlockProps = {
-  title?: string;
   bullets?: string[];
   fineprint?: string;
   extraInfo?: string[];
@@ -20,10 +19,9 @@ function cn(...classes: Array<string | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function ContactContextBlock({ title, bullets, fineprint, extraInfo, className }: ContactContextBlockProps) {
+export function ContactContextBlock({ bullets, fineprint, extraInfo, className }: ContactContextBlockProps) {
   return (
     <div className={cn(styles.root, className)}>
-      {title ? <h2 className={styles.title}>{title}</h2> : null}
       {/* Список примеров: показываем только если есть пункты. */}
       {bullets && bullets.length > 0 ? (
         <IesList className={styles.list}>

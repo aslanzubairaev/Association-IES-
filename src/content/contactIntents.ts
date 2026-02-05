@@ -1,9 +1,9 @@
-import { actionsCopy, aideCopy } from "@/content/actions";
+import { actionsCopy, aideCopy, soutenirCopy } from "@/content/actions";
 
 // Описывает один повод для обращения: идентификатор, заголовок, подсказки и текст темы.
 export type ContactIntent = {
   id: string;
-  source: "aide" | "actions";
+  source: "aide" | "actions" | "support";
   title: { ru: string; fr: string };
   bullets?: { ru: string[]; fr: string[] };
   fineprint?: { ru: string; fr: string };
@@ -127,6 +127,27 @@ const actionExtraInfoById: Record<string, LocalePair<string[]>> = {
   },
 };
 
+// Формирует повод для обращения из раздела поддержки (волонтёрство).
+const supportIntents: ContactIntent[] = [
+  {
+    id: "support_volunteer",
+    source: "support",
+    title: {
+      ru: soutenirCopy.ru.volunteerTitle,
+      fr: soutenirCopy.fr.volunteerTitle,
+    },
+    bullets: {
+      ru: soutenirCopy.ru.howToHelpItems,
+      fr: soutenirCopy.fr.howToHelpItems,
+    },
+    fineprint: {
+      ru: soutenirCopy.ru.volunteerText,
+      fr: soutenirCopy.fr.volunteerText,
+    },
+    topicValue: "volunteer",
+  },
+];
+
 // Формирует поводы для обращения из раздела помощи.
 const aideIntents: ContactIntent[] = aideCopy.ru.topics.items
   .map((ruTopic) => {
@@ -188,5 +209,5 @@ const actionIntents: ContactIntent[] = actionsCopy.ru.items
 
 // Собирает все поводы в справочник по идентификатору для быстрого поиска.
 export const contactIntents: Record<string, ContactIntent> = Object.fromEntries(
-  [...aideIntents, ...actionIntents].map((intent) => [intent.id, intent]),
+  [...aideIntents, ...actionIntents, ...supportIntents].map((intent) => [intent.id, intent]),
 );

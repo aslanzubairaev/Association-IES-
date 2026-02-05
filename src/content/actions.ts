@@ -326,13 +326,10 @@ export const contactTopicLabels: Record<string, { ru: string; fr: string }> = {
 
 // Ключи тем, связанных с действиями.
 export const actionContactTopicKeys = actionsCopy.ru.items.map((item) => item.topicKey);
+// Ключи тем, связанных с поддержкой (используем только волонтёрство).
+export const supportContactTopicKeys = ["volunteer"];
 
 // Полный список ключей тем для выпадающего списка в форме.
-export const contactTopicSelectKeys = [
-  ...baseContactTopicKeys,
-  ...actionContactTopicKeys,
-  "other",
-];
 
 // Тексты для страницы контактов.
 export const contactCopy: Record<ActionsLocale, ContactCopy> = {
@@ -844,6 +841,17 @@ export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
     ],
   },
 };
+
+// Ключи тем, связанных с блоком помощи.
+export const aideContactTopicKeys = aideCopy.ru.topics.items.map((item) => item.topicKey);
+
+// Полный список ключей тем для выпадающего списка в форме.
+export const contactTopicSelectKeys = [
+  ...aideContactTopicKeys,
+  ...actionContactTopicKeys,
+  ...supportContactTopicKeys,
+  "other",
+];
 
 type ActionsPreviewCopy = {
   items: string[];
