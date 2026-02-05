@@ -63,7 +63,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       ctaWrite: "Записаться / Написать",
     },
     directions: {
-      title: "НАПРАВЛЕНИЯ",
+      title: "Наша деятельность",
       subtitle:
         "Проекты, встречи и программы Association IES: образование, спорт, культура, поддержка и интеграция. Выберите направление — мы расскажем детали, подскажем формат участия и поможем записаться. Нажмите «Записаться», и мы ответим по e-mail с ближайшим шагом.",
       forWhoLabel: "Для кого",
@@ -163,7 +163,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       ctaWrite: "S’inscrire / Écrire",
     },
     directions: {
-      title: "NOS AXES",
+      title: "Nos activités",
       subtitle:
         "Projets, rencontres et programmes de l’Association IES : éducation, sport, culture, accompagnement et intégration. Choisissez un axe — nous vous expliquons les détails, le format de participation et la prochaine étape. Cliquez sur « S’inscrire » : nous vous répondrons par e-mail.",
       forWhoLabel: "Pour qui",
