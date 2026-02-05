@@ -5,7 +5,7 @@ import { useState, type FormEvent, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button/Button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { contactTopicSelectKeys, getContactTopicLabel, quickContactFormCopy } from "@/content/actions";
-import { buildOutlookComposeUrl, openWebmailCompose } from "@/lib/emailCompose";
+import { openWebmailCompose } from "@/lib/emailCompose";
 import styles from "./QuickContactForm.module.css";
 
 type QuickContactFormProps = {
@@ -14,6 +14,8 @@ type QuickContactFormProps = {
   variant?: "hero" | "page";
   // Тема, которую можно заранее выбрать (например, если пользователь пришёл с другой страницы).
   initialTopic?: string;
+  messagePlaceholderOverride?: string;
+  messagePlaceholderTopic?: string;
   onTopicChange?: (value: string) => void;
   pageNoteClassName?: string;
 };
@@ -29,6 +31,8 @@ export function QuickContactForm({
   locale,
   variant = "hero",
   initialTopic,
+  messagePlaceholderOverride,
+  messagePlaceholderTopic,
   onTopicChange,
   pageNoteClassName,
 }: QuickContactFormProps) {
@@ -48,13 +52,6 @@ export function QuickContactForm({
     topic: false,
     message: false,
   });
-  const [preparedBody, setPreparedBody] = useState<string | null>(null);
-  const [preparedSubject, setPreparedSubject] = useState<string | null>(null);
-  const [showFollowUps, setShowFollowUps] = useState(false);
-  const [statusText, setStatusText] = useState<string | null>(null);
-  const [copyStatus, setCopyStatus] = useState<string | null>(null);
-  const [hideStatusTimerId, setHideStatusTimerId] = useState<number | null>(null);
-  const [hideFollowUpsTimerId, setHideFollowUpsTimerId] = useState<number | null>(null);
 
   const nameIsEmpty = name.trim().length === 0;
   const emailIsEmpty = email.trim().length === 0;
@@ -71,12 +68,18 @@ export function QuickContactForm({
       ? { value: selectedTopic, label: getContactTopicLabel(locale, selectedTopic) }
       : null;
   const topicOptions = extraTopicOption ? [extraTopicOption, ...standardTopicOptions] : standardTopicOptions;
+  const intentPlaceholder = messagePlaceholderOverride?.trim();
+  const shouldUseIntentPlaceholder = messagePlaceholderTopic
+    ? Boolean(intentPlaceholder && intentPlaceholder.length > 0 && selectedTopic === messagePlaceholderTopic)
+    : Boolean(intentPlaceholder && intentPlaceholder.length > 0 && selectedTopic === initialTopicValue);
   const messagePlaceholder =
-    selectedTopic === "volunteer"
-      ? copy.messagePlaceholderVolunteer
-      : selectedTopic === "other"
-        ? copy.messagePlaceholderOther
-        : copy.messagePlaceholderDefault;
+    shouldUseIntentPlaceholder
+      ? intentPlaceholder
+      : selectedTopic === "volunteer"
+        ? copy.messagePlaceholderVolunteer
+        : selectedTopic === "other"
+          ? copy.messagePlaceholderOther
+          : copy.messagePlaceholderDefault;
   const pageNoteText = selectedTopic === "volunteer" ? copy.pageNoteVolunteer : copy.pageNoteDefault;
 
   const showNameError = touched.name && nameIsEmpty;
@@ -89,8 +92,6 @@ export function QuickContactForm({
   // Эта функция срабатывает при отправке формы: она проверяет поля и подготавливает текст письма.
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setCopyStatus(null);
-    setStatusText(null);
     setTouched({ name: true, email: true, topic: true, message: true });
 
     if (nameIsEmpty || emailIsEmpty || topicIsEmpty || messageIsEmpty) return;
@@ -109,28 +110,9 @@ export function QuickContactForm({
 
     const subject = copy.subject;
 
-    setPreparedBody(body);
-    setPreparedSubject(subject);
-
     // На странице контактов мы сразу открываем Gmail Web в новой вкладке.
     if (variant === "page") {
-      const opened = openWebmailCompose({ to: EMAIL_TO, subject, body });
-      setStatusText(opened ? copy.openingGmail : copy.sendFailed);
-      setShowFollowUps(true);
-
-      if (hideStatusTimerId) window.clearTimeout(hideStatusTimerId);
-      setHideStatusTimerId(
-        window.setTimeout(() => {
-          setStatusText(null);
-        }, 3600),
-      );
-
-      if (hideFollowUpsTimerId) window.clearTimeout(hideFollowUpsTimerId);
-      setHideFollowUpsTimerId(
-        window.setTimeout(() => {
-          setShowFollowUps(false);
-        }, 8000),
-      );
+      openWebmailCompose({ to: EMAIL_TO, subject, body });
     }
 
     setName("");
@@ -141,20 +123,6 @@ export function QuickContactForm({
     setTouched({ name: false, email: false, topic: false, message: false });
   }
 
-  // Действие по кнопке: копируем готовый текст письма в буфер, чтобы его можно было вставить в Gmail/Outlook.
-  async function handleCopyLetter() {
-    if (!preparedBody || !preparedSubject) return;
-    try {
-      const letterText = `To: ${EMAIL_TO}\nSubject: ${preparedSubject}\n\n${preparedBody}`;
-      await navigator.clipboard.writeText(letterText);
-      setCopyStatus(copy.copied);
-      window.setTimeout(() => setCopyStatus(null), 1600);
-    } catch {
-      setCopyStatus(copy.copyFailed);
-      window.setTimeout(() => setCopyStatus(null), 2200);
-    }
-  }
-
   // Этот стиль резервирует место под строку ошибки, чтобы поля не “прыгали”, когда ошибка появляется.
   const errorTextStyle: CSSProperties = {
     color: "rgba(185, 28, 28, 0.92)",
@@ -163,12 +131,7 @@ export function QuickContactForm({
     lineHeight: "16px",
   };
 
-  const outlookComposeHref = buildOutlookComposeUrl({
-    to: EMAIL_TO,
-    subject: preparedSubject ?? "",
-    body: preparedBody ?? "",
-  });
-
+  // Когда список тем закрывается, отмечаем поле, чтобы показать ошибку при пустом выборе.
   function handleTopicOpenChange(open: boolean) {
     if (!open) {
       setTouched((prev) => ({ ...prev, topic: true }));
@@ -183,7 +146,7 @@ export function QuickContactForm({
       {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
       {variant === "hero" ? <p className={cn("fineprint", styles.helper)}>{copy.helper}</p> : null}
 
-      {variant === "page" ? <p className={pageNoteClassName}>{pageNoteText}</p> : null}
+      {variant === "page" && pageNoteClassName ? <p className={pageNoteClassName}>{pageNoteText}</p> : null}
 
       <div className={styles.grid}>
         <label className={styles.field}>
@@ -287,32 +250,7 @@ export function QuickContactForm({
       {/* Подсказка под формой: в Hero оставляем, а на странице /contact она уже есть в тексте страницы. */}
       {variant === "hero" ? <p className="fineprint">{copy.hint}</p> : null}
 
-      {/* На странице контактов показываем маленький статус и компактные запасные варианты после отправки. */}
-      {variant === "page" ? (
-        <div style={{ marginTop: 10 }}>
-          {statusText ? (
-            <div className="fineprint" style={{ opacity: 0.85 }}>
-              {statusText}
-            </div>
-          ) : null}
-
-          {showFollowUps && preparedBody && preparedSubject ? (
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 8, alignItems: "center" }}>
-              <a className="btn btn--pill btn--outline-blue btn--sm" href={outlookComposeHref} target="_blank" rel="noreferrer">
-                {copy.openOutlook}
-              </a>
-              <button type="button" className="btn btn--pill btn--outline-blue btn--sm" onClick={handleCopyLetter}>
-                {copy.copyLetter}
-              </button>
-              {copyStatus ? (
-                <span className="fineprint" style={{ opacity: 0.85 }}>
-                  {copyStatus}
-                </span>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
-      ) : null}
+      {/* На странице контактов не показываем дополнительный статус после отправки. */}
     </form>
   );
 }

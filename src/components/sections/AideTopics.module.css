@@ -7,11 +7,11 @@
 }
 
 :where(.topicsScope):global(.aide-topics-section) {
-  padding-top: 56px;
+  padding-top: var(--space-section-y);
 }
 
 @media (max-width: 520px) {
   :where(.topicsScope):global(.aide-topics-section) {
-    padding-top: 32px;
+    padding-top: var(--space-section-y-sm);
   }
 }

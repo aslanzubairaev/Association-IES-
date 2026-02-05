@@ -2,6 +2,7 @@
 
 import { Section } from "@/components/ui/Section/Section";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
+import { ContactIntentButton } from "@/components/contacts/ContactIntentButton";
 import { aideCopy } from "@/content/actions";
 import styles from "./AideTopics.module.css";
 
@@ -30,8 +31,15 @@ export function AideTopics({ locale }: AideTopicsProps) {
             className="aide-card aide-card--topic"
             title={topic.title}
             listItems={topic.examples}
-            footerText={`${copy.preparePrefix} ${topic.prepareLine}`}
-            actions={[{ label: copy.chooseLabel, href: `/${locale}/contact?topic=${topic.topicKey}`, variant: "pill", className: "cta-pill" }]}
+            footerText={`${topic.preparePrefix ?? copy.preparePrefix} ${topic.prepareLine}`}
+            actionsNode={
+              <ContactIntentButton
+                locale={locale}
+                intentId={topic.intentId}
+                label={copy.chooseLabel}
+                className="cta-pill"
+              />
+            }
           />
         ))}
       </div>

@@ -1,69 +1,26 @@
-import { Container } from "@/components/ui/Container";
-import { QuickContactForm } from "@/components/forms/QuickContactForm";
-import { ContactEmailBox } from "@/components/forms/ContactEmailBox";
-import { IesList, IesListItem } from "@/components/ui/IesList";
-import { ContentCard } from "@/components/ui/Card/ContentCard";
-import { contactCopy, resolveContactTopicKey } from "@/content/actions";
-import styles from "./page.module.css";
+/*
+ Этот файл задаёт страницу контактов.
+ Он показывает заголовок, карточку с подсказками и форму для обращения.
+ Здесь можно заполнить поля и отправить сообщение в ассоциацию.
+*/
+
+import { ContactPageContent } from "@/components/contacts/ContactPageContent";
 
 export default function ContactPage({
   params,
   searchParams,
 }: {
   params: { locale: "ru" | "fr" };
-  searchParams?: { topic?: string };
+  searchParams?: { topic?: string; intent?: string };
 }) {
-  const locale = params.locale;
-  const email = "contact@associationies.fr";
-
-  const initialTopic = resolveContactTopicKey(searchParams?.topic);
-
-  // Тексты страницы меняются в зависимости от языка.
-  const pageTitle = contactCopy[locale].pageTitle;
-  const pageLead = contactCopy[locale].pageLead;
-  const whenTitle = contactCopy[locale].whenTitle;
-  const whenItems = contactCopy[locale].whenItems;
   return (
-    <main className={`section page--purple contact-page ${styles.contactScope}`}>
-      <Container>
-        <div className="section-head">
-          <h1 className="h2">
-            {pageTitle}
-          </h1>
-          <p className="muted-on-dark">
-            {pageLead}
-          </p>
-        </div>
-
-        <div className="grid-2 contact-grid">
-          <ContentCard className="contact-card contact-card--info" hoverable={false}>
-            {/* Общий e-mail ассоциации: без личных телефонов и персональных контактов. */}
-            <ContactEmailBox locale={locale} email={email} />
-
-            {/* Подсказка “когда писать”: помогает человеку понять, подходит ли вопрос. */}
-            <div style={{ marginTop: 24 }}>
-              <h2 className="h3 h3--blue">{whenTitle}</h2>
-              <IesList className="list contact-list">
-                {whenItems.map((item) => (
-                  <IesListItem key={item}>{item}</IesListItem>
-                ))}
-              </IesList>
-            </div>
-          </ContentCard>
-
-          <ContentCard className="contact-card contact-card--yellow contact-card--form" hoverable={false}>
-            {/* Форма обращения: визуально как в Hero, но с кнопкой “Отправить сообщение / Envoyer un message”. */}
-            <div className="contact-form-wrap">
-              <QuickContactForm
-                locale={locale}
-                variant="page"
-                initialTopic={initialTopic}
-                pageNoteClassName={styles.formNote}
-              />
-            </div>
-          </ContentCard>
-        </div>
-      </Container>
-    </main>
+    <>
+      {/* Контент страницы контактов — клиентский, чтобы реагировать на выбор темы в списке. */}
+      <ContactPageContent
+        locale={params.locale}
+        initialTopic={searchParams?.topic}
+        initialIntentId={searchParams?.intent}
+      />
+    </>
   );
 }
