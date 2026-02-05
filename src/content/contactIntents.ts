@@ -52,9 +52,9 @@ const aideHousingPlaceholder: LocalePair<string> = {
 
 const aideUnsurePlaceholder: LocalePair<string> = {
   ru:
-    "Опишите ситуацию простыми словами и укажите, что уже пробовали. Если есть письмо — приложите фото/скан.",
+    "Опишите ситуацию простыми словами и укажите, что уже пробовали. Если есть письмо — опишите его кратко.",
   fr:
-    "Décrivez simplement la situation et ce que vous avez déjà essayé. S’il y a un courrier, joignez une photo/scan.",
+    "Décrivez simplement la situation et ce que vous avez déjà essayé. S’il y a un courrier, décrivez‑le brièvement.",
 };
 
 const actionsMessagePlaceholder: LocalePair<string> = {
@@ -75,7 +75,7 @@ const aidePlaceholderById: Record<string, LocalePair<string>> = {
 
 const actionPlaceholderById: Record<string, LocalePair<string>> = {
   action_lang: {
-    ru: "Опишите: кто будет заниматься и возраст, какой язык (FR/RU/чеченский), уровень/цель.",
+    ru: "Опишите: кто будет заниматься и возраст, какой язык (FR/RU/Чеченский), уровень/цель.",
     fr: "Précisez : qui participe et l’âge, quelle langue (FR/RU/tchétchène), niveau/objectif, ville/quartier, jours et horaires.",
   },
   action_sport: {
@@ -182,24 +182,17 @@ const actionIntents: ContactIntent[] = actionsCopy.ru.items
       ru: [
         `${actionsCopy.ru.directions.forWhoLabel}: ${ruItem.forWho}`,
         `${actionsCopy.ru.directions.benefitLabel}: ${ruItem.benefit}`,
-        `${actionsCopy.ru.directions.frequencyLabel}: ${ruItem.frequency}`,
       ],
       fr: [
         `${actionsCopy.fr.directions.forWhoLabel}: ${frItem.forWho}`,
         `${actionsCopy.fr.directions.benefitLabel}: ${frItem.benefit}`,
-        `${actionsCopy.fr.directions.frequencyLabel}: ${frItem.frequency}`,
       ],
-    };
-    const fineprint: LocalePair<string> = {
-      ru: `${actionsCopy.ru.directions.whenWhereLabel} ${actionsCopy.ru.directions.whenWhereText}`,
-      fr: `${actionsCopy.fr.directions.whenWhereLabel} ${actionsCopy.fr.directions.whenWhereText}`,
     };
     return {
       id: ruItem.intentId,
       source: "actions",
       title: { ru: ruItem.title, fr: frItem.title },
       bullets,
-      fineprint,
       extraInfo: actionExtraInfoById[ruItem.intentId],
       topicValue: ruItem.topicKey,
       messagePlaceholder: actionPlaceholderById[ruItem.intentId] ?? actionsMessagePlaceholder,

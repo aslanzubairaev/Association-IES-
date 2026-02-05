@@ -51,12 +51,14 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
                     <IesListItem>
                       <strong>{copy.directions.forWhoLabel}:</strong> {it.forWho}
                     </IesListItem>
-                    <IesListItem>
-                      <strong>{copy.directions.benefitLabel}:</strong> {it.benefit}
-                    </IesListItem>
+                  <IesListItem>
+                    <strong>{copy.directions.benefitLabel}:</strong> {it.benefit}
+                  </IesListItem>
+                  {it.frequency?.trim() && (
                     <IesListItem>
                       <strong>{copy.directions.frequencyLabel}:</strong> {it.frequency}
                     </IesListItem>
+                  )}
                   </IesList>
                   <p className="fineprint muted" style={{ marginTop: 14 }}>
                     <strong>{copy.directions.whenWhereLabel}</strong> {copy.directions.whenWhereText}

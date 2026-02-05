@@ -501,7 +501,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       steps: [
         {
           title: "ШАГ 1 — ВЫ ОТПРАВЛЯЕТЕ ЗАПРОС",
-          text: "Заполните форму на сайте — сообщение приходит нам на e-mail. Если есть, приложите фото/сканы писем и документов.",
+          text: "Заполните форму на сайте — сообщение приходит нам на e-mail. Если есть письма/документы, кратко опишите их.",
         },
         {
           title: "Шаг 2 — Уточняем детали и предлагаем запись",
@@ -564,7 +564,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
             "Скажете, что уже пробовали",
             "Мы подскажем направление",
           ],
-          prepareLine: "1–2 предложения о ситуации + фото/скан письма (если есть)",
+          prepareLine: "1–2 предложения о ситуации + краткое описание письма (если есть)",
         },
       ],
     },
@@ -578,7 +578,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         "Что уже сделали",
         "Сроки/дедлайны (если есть)",
         "Ваш город/район (Страсбург/окрестности)",
-        "Фото/сканы писем и документов (если есть)",
+        "Краткое описание писем и документов (если есть)",
         "Ваш вопрос одним предложением",
       ],
     },
@@ -606,7 +606,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       steps: [
         {
           title: "ÉTAPE 1 — VOUS ENVOYEZ VOTRE DEMANDE",
-          text: "Remplissez le formulaire — nous recevons votre message par e-mail. Joignez, si possible, des photos/scans de courriers et de documents.",
+          text: "Remplissez le formulaire — nous recevons votre message par e-mail. S’il y a des courriers/documents, décrivez‑les brièvement.",
         },
         {
           title: "Étape 2 — Nous précisons et proposons un rendez-vous",
@@ -670,7 +670,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
             "Nous vous orienterons",
           ],
           preparePrefix: "À préparer\u00A0:",
-          prepareLine: "1–2 phrases sur la situation + photo/scan du courrier (si possible)",
+          prepareLine: "1–2 phrases sur la situation + bref descriptif du courrier (si possible)",
         },
       ],
     },
@@ -684,7 +684,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         "Ce que vous avez déjà fait",
         "Délais / échéances (si disponibles)",
         "Votre ville/quartier (Strasbourg/alentours)",
-        "Photos/scans de courriers et documents (si possible)",
+        "Bref descriptif des courriers et documents (si possible)",
         "Votre question en une phrase",
       ],
     },
