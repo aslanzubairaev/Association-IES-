@@ -64,7 +64,8 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
     },
     directions: {
       title: "НАПРАВЛЕНИЯ",
-      subtitle: "Коротко: для кого каждое направление, что даёт и как присоединиться.",
+      subtitle:
+        "Проекты, встречи и программы Association IES: образование, спорт, культура, поддержка и интеграция. Выберите направление — мы расскажем детали, подскажем формат участия и поможем записаться. Нажмите «Записаться», и мы ответим по e-mail с ближайшим шагом.",
       forWhoLabel: "Для кого",
       benefitLabel: "Что даёт",
       frequencyLabel: "Формат / частота",
@@ -99,9 +100,10 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
         slug: "langues-ateliers",
         topicKey: "language_development",
         intentId: "action_lang",
-        title: "ЯЗЫКОВЫЕ ЗАНЯТИЯ И РАЗВИТИЕ (ВКЛ. ЧЕЧЕНСКИЙ И РУССКИЙ)",
+        title: "ЯЗЫКИ И РАЗВИТИЕ",
         forWho: "Для детей и взрослых, кто хочет укрепить язык и навыки общения.",
-        benefit: "Практика языка, уверенность в общении и участие в жизни города.",
+        benefit:
+          "Практика языка, уверенность в общении и участие в жизни города. Включая чеченский и русский.",
         frequency: "Регулярно • по группам / мастерские (по проекту)",
       },
       {
@@ -162,7 +164,8 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
     },
     directions: {
       title: "NOS AXES",
-      subtitle: "En bref : pour qui, ce que cela apporte, et comment participer.",
+      subtitle:
+        "Projets, rencontres et programmes de l’Association IES : éducation, sport, culture, accompagnement et intégration. Choisissez un axe — nous vous expliquons les détails, le format de participation et la prochaine étape. Cliquez sur « S’inscrire » : nous vous répondrons par e-mail.",
       forWhoLabel: "Pour qui",
       benefitLabel: "Ce que ça apporte",
       frequencyLabel: "Format / fréquence",
@@ -198,9 +201,10 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
         slug: "langues-ateliers",
         topicKey: "language_development",
         intentId: "action_lang",
-        title: "ATELIERS LINGUISTIQUES & DÉVELOPPEMENT (DONT TCHÉTCHÈNE ET RUSSE)",
+        title: "LANGUES ET DÉVELOPPEMENT",
         forWho: "Enfants et adultes qui souhaitent renforcer la langue et la communication.",
-        benefit: "Pratique, confiance à l’oral et participation à la vie locale.",
+        benefit:
+          "Pratique, confiance à l’oral et participation à la vie locale. Y compris le tchétchène et le russe.",
         frequency: "Régulier • groupes / ateliers (selon le projet)",
       },
       {

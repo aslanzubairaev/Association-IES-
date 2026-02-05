@@ -59,7 +59,7 @@
 }
 
 .actionsScope .actionsDirectionsHead {
-  margin-top: 160px;
+  margin-top: 0;
 }
 
 @media (max-width: 980px) {
@@ -74,6 +74,6 @@
   }
 
   .actionsScope .actionsDirectionsHead {
-    margin-top: 130px;
+    margin-top: 0;
   }
 }

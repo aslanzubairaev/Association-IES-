@@ -16,19 +16,6 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
     <div className={styles.actionsScope}>
       <main className="section page--purple">
         <Container>
-          {/* HERO: объясняем, что это за направления, и даём короткую подсказку, что делать дальше. */}
-          <div className="section-head">
-            <h1 className="h2">
-              {copy.hero.title}
-            </h1>
-            <p className="muted-on-dark">
-              {copy.hero.lead}
-            </p>
-            <p className="p" style={{ marginTop: 10 }}>
-              {copy.hero.hint}
-            </p>
-          </div>
-
           {/* НАПРАВЛЕНИЯ: каталог карточек, чтобы за 30 секунд понять варианты. */}
           <div
             id="directions"
