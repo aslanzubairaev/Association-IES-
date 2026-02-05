@@ -13,31 +13,6 @@
 .contactScope {
 }
 
-/* Левая карточка на странице “Контакты”: такой же фон, как у quickNav. */
-.contactScope :global(.contact-card.card--paper) {
-  background: var(--surface);
-  border-color: var(--surface-border);
-  color: var(--text-primary);
-}
-
-.contactScope :global(.contact-card.card--paper .h3--blue) {
-  color: rgba(255, 255, 255, 0.98);
-}
-
-.contactScope :global(.contact-card--info .h3--blue) {
-  margin-top: 24px;
-}
-
-.contactScope :global(.contact-card.card--paper .p),
-.contactScope :global(.contact-card.card--paper .list),
-.contactScope :global(.contact-card.card--paper .fineprint) {
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.contactScope :global(.contact-card.card--paper .contact-box) {
-  color: rgba(11, 27, 51, 0.92) !important;
-}
-
 /* Правая карточка с формой: золотой фон как у .card--yellow. */
 .contactScope :global(.contact-card.contact-card--yellow.card--paper) {
   background: var(--yellow);
@@ -46,34 +21,46 @@
   color: var(--ink);
 }
 
-.contactScope :global(.contact-grid) {
-  align-items: stretch;
-}
-
-.contactScope :global(.contact-grid > *) {
-  height: 100%;
-}
-
 .contactScope :global(.contact-card) {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 36px 40px;
 }
 
-@media (max-width: 520px) {
-  .contactScope :global(.contact-card--form) {
-    order: 1;
-  }
-
-  .contactScope :global(.contact-card--info) {
-    order: 2;
-  }
+.contactScope :global(.contact-card--form) {
+  width: 100%;
+  margin: 0;
 }
 
 .contactScope :global(.contact-form-wrap) {
   max-width: 720px;
   margin: 0 auto;
   width: 100%;
+}
+
+.contactContent {
+  max-width: 880px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.contactContext {
+  margin: 16px 0 28px;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.contactContext :global(.ies-list-item) {
+  color: inherit;
+}
+
+.contactContext :global(.ies-list) {
+  color: inherit;
+}
+
+@media (max-width: 720px) {
+  .contactScope :global(.contact-card) {
+    padding: 28px 24px;
+  }
 }
 
 .contactScope :global(.contact-list) {

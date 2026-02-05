@@ -14,6 +14,7 @@ type QuickContactFormProps = {
   variant?: "hero" | "page";
   // Тема, которую можно заранее выбрать (например, если пользователь пришёл с другой страницы).
   initialTopic?: string;
+  messagePlaceholderOverride?: string;
   onTopicChange?: (value: string) => void;
   pageNoteClassName?: string;
 };
@@ -29,6 +30,7 @@ export function QuickContactForm({
   locale,
   variant = "hero",
   initialTopic,
+  messagePlaceholderOverride,
   onTopicChange,
   pageNoteClassName,
 }: QuickContactFormProps) {
@@ -71,12 +73,17 @@ export function QuickContactForm({
       ? { value: selectedTopic, label: getContactTopicLabel(locale, selectedTopic) }
       : null;
   const topicOptions = extraTopicOption ? [extraTopicOption, ...standardTopicOptions] : standardTopicOptions;
+  const intentPlaceholder = messagePlaceholderOverride?.trim();
+  const shouldUseIntentPlaceholder =
+    intentPlaceholder && intentPlaceholder.length > 0 && selectedTopic === initialTopicValue;
   const messagePlaceholder =
-    selectedTopic === "volunteer"
-      ? copy.messagePlaceholderVolunteer
-      : selectedTopic === "other"
-        ? copy.messagePlaceholderOther
-        : copy.messagePlaceholderDefault;
+    shouldUseIntentPlaceholder
+      ? intentPlaceholder
+      : selectedTopic === "volunteer"
+        ? copy.messagePlaceholderVolunteer
+        : selectedTopic === "other"
+          ? copy.messagePlaceholderOther
+          : copy.messagePlaceholderDefault;
   const pageNoteText = selectedTopic === "volunteer" ? copy.pageNoteVolunteer : copy.pageNoteDefault;
 
   const showNameError = touched.name && nameIsEmpty;
@@ -169,6 +176,7 @@ export function QuickContactForm({
     body: preparedBody ?? "",
   });
 
+  // Когда список тем закрывается, отмечаем поле, чтобы показать ошибку при пустом выборе.
   function handleTopicOpenChange(open: boolean) {
     if (!open) {
       setTouched((prev) => ({ ...prev, topic: true }));
@@ -183,7 +191,7 @@ export function QuickContactForm({
       {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
       {variant === "hero" ? <p className={cn("fineprint", styles.helper)}>{copy.helper}</p> : null}
 
-      {variant === "page" ? <p className={pageNoteClassName}>{pageNoteText}</p> : null}
+      {variant === "page" && pageNoteClassName ? <p className={pageNoteClassName}>{pageNoteText}</p> : null}
 
       <div className={styles.grid}>
         <label className={styles.field}>

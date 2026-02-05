@@ -1,8 +1,16 @@
+/*
+ Этот файл хранит тексты, заголовки и списки для страниц и блоков сайта (RU/FR).
+ Он также содержит справочные данные для форм и навигации.
+*/
+
+// Доступные языки для текстов на сайте.
 export type ActionsLocale = "ru" | "fr";
 
+// Описание одного направления на странице действий.
 export type ActionDirection = {
   slug: string;
   topicKey: string;
+  intentId: string;
   title: string;
   forWho: string;
   benefit: string;
@@ -43,6 +51,7 @@ type ActionsCopy = {
   items: ActionDirection[];
 };
 
+// Тексты и данные для страницы “Действия” на двух языках.
 export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
   ru: {
     hero: {
@@ -89,6 +98,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "langues-ateliers",
         topicKey: "language_development",
+        intentId: "action_lang",
         title: "ЯЗЫКОВЫЕ ЗАНЯТИЯ И РАЗВИТИЕ (ВКЛ. ЧЕЧЕНСКИЙ И РУССКИЙ)",
         forWho: "Для детей и взрослых, кто хочет укрепить язык и навыки общения.",
         benefit: "Практика языка, уверенность в общении и участие в жизни города.",
@@ -97,6 +107,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "sport",
         topicKey: "sport_regular",
+        intentId: "action_sport",
         title: "СПОРТ И РЕГУЛЯРНАЯ АКТИВНОСТЬ",
         forWho: "Для детей, подростков и взрослых.",
         benefit: "Здоровая активность, дисциплина, командный дух и вовлечённость.",
@@ -105,6 +116,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "jardin-ateliers-nature",
         topicKey: "garden_workshops_nature",
+        intentId: "action_garden_workshops",
         title: "САД, МАСТЕРСКИЕ И ВСТРЕЧИ НА ПРИРОДЕ",
         forWho: "Для семей, детей и всех, кому важны совместные дела и общение.",
         benefit: "Совместная деятельность, навыки и тёплые встречи вне формальностей.",
@@ -113,6 +125,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "sorties-culturelles",
         topicKey: "cultural_outings_trips",
+        intentId: "action_culture_trips",
         title: "КУЛЬТУРНЫЕ ВЫХОДЫ И ПОЕЗДКИ",
         forWho: "Для семей, подростков и взрослых.",
         benefit: "Открытие города и региона, новые знакомства, расширение кругозора.",
@@ -121,6 +134,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "forums-jeunesse-entrepreneuriat",
         topicKey: "youth_forums_entrepreneurship",
+        intentId: "action_youth_forums",
         title: "ФОРУМЫ МОЛОДЁЖИ И ПРЕДПРИНИМАТЕЛЬСТВА",
         forWho: "Для молодёжи и тех, кто интересуется инициативами и проектами.",
         benefit: "Встречи, вдохновение, полезные контакты и ориентация по возможностям.",
@@ -129,6 +143,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "rencontres-cohesion",
         topicKey: "community_meetings_cohesion",
+        intentId: "action_meetings_community",
         title: "ВСТРЕЧИ И СПЛОЧЕНИЕ СООБЩЕСТВА",
         forWho: "Для всех, кто хочет общаться, поддерживать друг друга и интегрироваться.",
         benefit: "Обмен опытом, поддержка, участие и чувство принадлежности.",
@@ -182,6 +197,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "langues-ateliers",
         topicKey: "language_development",
+        intentId: "action_lang",
         title: "ATELIERS LINGUISTIQUES & DÉVELOPPEMENT (DONT TCHÉTCHÈNE ET RUSSE)",
         forWho: "Enfants et adultes qui souhaitent renforcer la langue et la communication.",
         benefit: "Pratique, confiance à l’oral et participation à la vie locale.",
@@ -190,6 +206,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "sport",
         topicKey: "sport_regular",
+        intentId: "action_sport",
         title: "SPORT & ACTIVITÉ RÉGULIÈRE",
         forWho: "Enfants, ados et adultes.",
         benefit: "Activité saine, discipline, esprit d’équipe et engagement.",
@@ -198,6 +215,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "jardin-ateliers-nature",
         topicKey: "garden_workshops_nature",
+        intentId: "action_garden_workshops",
         title: "JARDIN, ATELIERS & RENCONTRES NATURE",
         forWho: "Familles, enfants et toute personne qui aime faire ensemble et échanger.",
         benefit: "Activités partagées, apprentissages et rencontres conviviales.",
@@ -206,6 +224,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "sorties-culturelles",
         topicKey: "cultural_outings_trips",
+        intentId: "action_culture_trips",
         title: "SORTIES CULTURELLES & EXCURSIONS",
         forWho: "Familles, ados et adultes.",
         benefit: "Découvrir la ville et la région, faire des rencontres, élargir l’horizon.",
@@ -214,6 +233,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "forums-jeunesse-entrepreneuriat",
         topicKey: "youth_forums_entrepreneurship",
+        intentId: "action_youth_forums",
         title: "FORUMS JEUNESSE & ENTREPRENEURIAT",
         forWho: "Jeunes et personnes intéressées par les initiatives et les projets.",
         benefit: "Rencontres, inspiration, contacts utiles et repères sur les opportunités.",
@@ -222,6 +242,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       {
         slug: "rencontres-cohesion",
         topicKey: "community_meetings_cohesion",
+        intentId: "action_meetings_community",
         title: "RENCONTRES & COHÉSION DU LIEN SOCIAL",
         forWho: "Toute personne souhaitant échanger, se soutenir et s’intégrer.",
         benefit: "Partage d’expérience, soutien, participation et sentiment d’appartenance.",
@@ -238,6 +259,8 @@ type ContactCopy = {
   whenItems: string[];
   subjectLabel: string;
 };
+
+// Базовые ключи тем для контактов (без тем действий и помощи).
 export const baseContactTopicKeys = [
   "prefecture_vnj",
   "caf_cpam_francetravail",
@@ -246,6 +269,7 @@ export const baseContactTopicKeys = [
   "projects_events",
 ] as const;
 
+// Подписи к базовым темам на двух языках.
 const baseContactTopicLabels: Record<(typeof baseContactTopicKeys)[number], { ru: string; fr: string }> = {
   prefecture_vnj: { ru: "Префектура / ВНЖ", fr: "Préfecture / titre de séjour" },
   caf_cpam_francetravail: { ru: "CAF / CPAM / France Travail", fr: "CAF / CPAM / France Travail" },
@@ -254,6 +278,7 @@ const baseContactTopicLabels: Record<(typeof baseContactTopicKeys)[number], { ru
   projects_events: { ru: "Проекты и мероприятия ассоциации", fr: "Projets et événements de l’association" },
 };
 
+// Темы для блока помощи с короткими названиями.
 const aideTopicLabels: Record<string, { ru: string; fr: string }> = {
   caf_support: { ru: "CAF (пособия, письма, личный кабинет)", fr: "CAF (allocations, courriers, compte)" },
   cpam_health: { ru: "CPAM / здоровье (письма, CARTE VITALE)", fr: "CPAM / santé (courriers, CARTE VITALE)" },
@@ -262,14 +287,17 @@ const aideTopicLabels: Record<string, { ru: string; fr: string }> = {
   not_sure: { ru: "Не знаете куда?", fr: "Vous ne savez pas où ?" },
 };
 
+// Темы для поддержки ассоциации.
 const supportTopicLabels: Record<string, { ru: string; fr: string }> = {
   donation_helloasso: { ru: "Донат через HelloAsso", fr: "Don via HelloAsso" },
   donation_cotizup: { ru: "Взнос через CotizUp", fr: "Cotisation via CotizUp" },
   volunteer: { ru: "Волонтёрство", fr: "Bénévolat" },
 };
 
+// Универсальная метка для прочих вопросов.
 const otherTopicLabels = { ru: "Другое", fr: "Autre" };
 
+// Темы, которые берём из списка действий, чтобы они совпадали с карточками.
 const actionTopicLabels: Record<string, { ru: string; fr: string }> = Object.fromEntries(
   actionsCopy.ru.items.map((ruItem) => {
     const frItem = actionsCopy.fr.items.find((x) => x.slug === ruItem.slug);
@@ -283,6 +311,7 @@ const actionTopicLabels: Record<string, { ru: string; fr: string }> = Object.fro
   }),
 );
 
+// Общий справочник тем для формы контактов.
 export const contactTopicLabels: Record<string, { ru: string; fr: string }> = {
   ...baseContactTopicLabels,
   ...aideTopicLabels,
@@ -291,18 +320,21 @@ export const contactTopicLabels: Record<string, { ru: string; fr: string }> = {
   other: otherTopicLabels,
 };
 
+// Ключи тем, связанных с действиями.
 export const actionContactTopicKeys = actionsCopy.ru.items.map((item) => item.topicKey);
 
+// Полный список ключей тем для выпадающего списка в форме.
 export const contactTopicSelectKeys = [
   ...baseContactTopicKeys,
   ...actionContactTopicKeys,
   "other",
 ];
 
+// Тексты для страницы контактов.
 export const contactCopy: Record<ActionsLocale, ContactCopy> = {
   ru: {
     pageTitle: "Контакты",
-    pageLead: "Напишите через форму или на e-mail — ответим по e-mail. Встреча возможна только по записи.",
+    pageLead: "Напишите через форму — ответим по e-mail.",
     whenTitle: "С какими вопросами писать?",
     whenItems: baseContactTopicKeys.map((key) => baseContactTopicLabels[key].ru),
     subjectLabel: "Тема",
@@ -310,7 +342,7 @@ export const contactCopy: Record<ActionsLocale, ContactCopy> = {
   fr: {
     pageTitle: "Contact",
     pageLead:
-      "Écrivez via le formulaire ou par e-mail — nous répondrons par e-mail. Rendez-vous uniquement sur inscription.",
+      "Écrivez via le formulaire — nous répondrons par e-mail.",
     whenTitle: "Pour quels sujets écrire ?",
     whenItems: baseContactTopicKeys.map((key) => baseContactTopicLabels[key].fr),
     subjectLabel: "Sujet",
@@ -321,6 +353,7 @@ const actionTopicAliases: Record<string, string> = Object.fromEntries(
   actionsCopy.ru.items.map((item) => [`actions_${item.slug}`, item.topicKey]),
 );
 
+// Альтернативные названия тем, которые встречаются в старых ссылках или внешних источниках.
 const topicKeyAliases: Record<string, string> = {
   "prefecture-vnz": "prefecture_vnj",
   "prefecture-vnj": "prefecture_vnj",
@@ -339,10 +372,12 @@ const topicKeyAliases: Record<string, string> = {
   ...actionTopicAliases,
 };
 
+// Возвращает подпись темы на выбранном языке.
 export function getContactTopicLabel(locale: ActionsLocale, topicKey: string) {
   return contactTopicLabels[topicKey]?.[locale] ?? topicKey;
 }
 
+// Нормализует ключ темы из строки (адресной или пользовательской).
 export function resolveContactTopicKey(rawTopic?: string | null) {
   if (!rawTopic) return "";
   const trimmed = rawTopic.trim();
@@ -355,6 +390,7 @@ export function resolveContactTopicKey(rawTopic?: string | null) {
 }
 type LocaleText = { fr: string; ru: string };
 
+// Карточка для навигации на главной странице.
 export type HomeNavCard = {
   id: string;
   title: LocaleText;
@@ -364,6 +400,7 @@ export type HomeNavCard = {
   icon: string;
 };
 
+// Список карточек навигации для главной страницы.
 export const homeNavCards: HomeNavCard[] = [
   {
     id: "aide",
@@ -397,6 +434,7 @@ export const homeNavCards: HomeNavCard[] = [
   },
 ];
 
+// Язык для данных раздела помощи.
 export type AideLocale = ActionsLocale;
 
 type AideHowItWorksStep = {
@@ -405,8 +443,10 @@ type AideHowItWorksStep = {
   icon?: string;
 };
 
+// Описание одной темы помощи: ключ, заголовок и примеры.
 type AideTopic = {
   topicKey: string;
+  intentId: string;
   title: string;
   examples: string[];
   prepareLine: string;
@@ -443,6 +483,7 @@ type AideCopy = {
   };
 };
 
+// Тексты и данные для страницы помощи.
 export const aideCopy: Record<AideLocale, AideCopy> = {
   ru: {
     hero: {
@@ -478,36 +519,42 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       items: [
         {
           topicKey: "prefecture_vnj",
+          intentId: "aide_prefecture_vnj",
           title: "Префектура / ВНЖ",
           examples: ["Список документов", "Запись/загрузка документов", "Письма из префектуры", "Сроки и что делать дальше"],
           prepareLine: "письма/уведомления, документы, номер досье (если есть)",
         },
         {
           topicKey: "caf_support",
+          intentId: "aide_caf",
           title: "CAF (пособия, письма, личный кабинет)",
           examples: ["Создать/войти в аккаунт", "Письмо «document manquant»", "Отправить документы", "Понять статус заявки"],
           prepareLine: "номер allocataire (если есть), письма CAF, список отправленных документов",
         },
         {
           topicKey: "cpam_health",
+          intentId: "aide_cpam_sante",
           title: "CPAM / здоровье (письма, CARTE VITALE)",
           examples: ["Открыть права (droits)", "Письма/запрос документов", "Carte Vitale / attestation", "Куда обратиться по ситуации"],
           prepareLine: "письма CPAM, документы, номер sécurité sociale (если есть)",
         },
         {
           topicKey: "france_travail",
+          intentId: "aide_france_travail",
           title: "France Travail / поиск работы",
           examples: ["Регистрация/аккаунт", "Письма и требования", "Какие шаги сейчас важны", "Куда идти дальше"],
           prepareLine: "письма France Travail, ваш статус/документы, что уже сделали",
         },
         {
           topicKey: "housing_school_everyday",
+          intentId: "aide_logement_ecole_quotidien",
           title: "Жильё / школа / повседневные вопросы",
           examples: ["Куда обращаться (город/службы)", "Школа/сад: что нужно", "Медицина: базовая ориентация", "Письма и формальности"],
           prepareLine: "город/район, письма/документы, кратко цель (что хотите получить)",
         },
         {
           topicKey: "not_sure",
+          intentId: "aide_dont_know",
           title: "Не знаете куда?",
           examples: [
             "Опишите ситуацию простыми словами",
@@ -577,36 +624,42 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       items: [
         {
           topicKey: "prefecture_vnj",
+          intentId: "aide_prefecture_vnj",
           title: "Préfecture / titre de séjour",
           examples: ["Liste de documents", "Prise de rendez-vous / dépôt", "Courriers de la préfecture", "Délais et suite"],
           prepareLine: "courriers/notifications, documents, numéro de dossier (si disponible)",
         },
         {
           topicKey: "caf_support",
+          intentId: "aide_caf",
           title: "CAF (allocations, courriers, espace perso)",
           examples: ["Créer/se connecter au compte", "Courrier « document manquant »", "Envoyer des pièces", "Comprendre le statut"],
           prepareLine: "numéro allocataire (si disponible), courriers CAF, liste des documents envoyés",
         },
         {
           topicKey: "cpam_health",
+          intentId: "aide_cpam_sante",
           title: "CPAM / santé (courriers, CARTE VITALE)",
           examples: ["Ouvrir des droits", "Courriers / demandes", "Carte Vitale / attestation", "Où s’adresser"],
           prepareLine: "courriers CPAM, documents, numéro de sécurité sociale (si disponible)",
         },
         {
           topicKey: "france_travail",
+          intentId: "aide_france_travail",
           title: "France Travail / recherche d’emploi",
           examples: ["Inscription/compte", "Courriers et exigences", "Quelles étapes maintenant", "Où aller ensuite"],
           prepareLine: "courriers France Travail, votre statut/documents, ce que vous avez déjà fait",
         },
         {
           topicKey: "housing_school_everyday",
+          intentId: "aide_logement_ecole_quotidien",
           title: "Logement / école / quotidien",
           examples: ["Où s’adresser (ville/services)", "École/crèche : quoi préparer", "Santé : orientation de base", "Courriers et formalités"],
           prepareLine: "ville/quartier, courriers/documents, objectif en bref (ce que vous voulez obtenir)",
         },
         {
           topicKey: "not_sure",
+          intentId: "aide_dont_know",
           title: "Vous ne savez pas où ?",
           examples: [
             "Décrivez la situation simplement",
@@ -652,6 +705,7 @@ type HeroCopy = {
   pillsAriaLabel: string;
 };
 
+// Тексты и кнопки первого экрана главной страницы.
 export const heroCopy: Record<ActionsLocale, HeroCopy> = {
   ru: {
     title: "ПОМОЩЬ, ИНТЕГРАЦИЯ, СТРАСБУРГ",
@@ -677,6 +731,7 @@ type QuickNavCopy = {
   ctaLabel: string;
 };
 
+// Тексты для блока быстрого перехода по темам.
 export const quickNavCopy: Record<ActionsLocale, QuickNavCopy> = {
   ru: {
     title: "Что вам нужно?",
@@ -700,6 +755,7 @@ type TrustBlockCopy = {
   }[];
 };
 
+// Тексты и фотографии для блока доверия на главной странице.
 export const trustBlockCopy: Record<ActionsLocale, TrustBlockCopy> = {
   ru: {
     title: "ЧЕМ МЫ ЗАНИМАЕМСЯ?",
@@ -798,6 +854,7 @@ type ActionsPreviewCopy = {
   }[];
 };
 
+// Тексты и карточка‑превью для блока действий на главной странице.
 export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
   ru: {
     items: ["Административные консультации", "Сопровождение к работе", "Языковые занятия", "Культурные встречи и выезды"],
@@ -861,6 +918,7 @@ type FooterCopy = {
   };
 };
 
+// Подписи и ссылки для футера сайта.
 export const footerCopy: Record<ActionsLocale, FooterCopy> = {
   ru: {
     copyright: "© 2025 Association IES",
@@ -912,6 +970,7 @@ type HeaderCopy = {
   langMenuItems: { locale: ActionsLocale; code: string; name: string }[];
 };
 
+// Тексты для шапки сайта и мобильного меню.
 export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
   ru: {
     brandLabel: "Association IES",
@@ -977,6 +1036,7 @@ type AboutPageCopy = {
   ctaList: string[];
 };
 
+// Тексты для страницы «О нас».
 export const aboutPageCopy: Record<ActionsLocale, AboutPageCopy> = {
   ru: {
     title: "О нас",
@@ -1072,6 +1132,7 @@ type PrivacyPageCopy = {
   updatedDate: string;
 };
 
+// Тексты для страницы политики конфиденциальности.
 export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
   ru: {
     title: "Политика конфиденциальности",
@@ -1192,6 +1253,7 @@ type SoutenirCopy = {
   howToHelpItems: string[];
 };
 
+// Тексты для страницы поддержки ассоциации.
 export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
   fr: {
     donateTitle: "DONS / COTISATIONS",
@@ -1282,6 +1344,7 @@ type AboutIntroCopy = {
   ctaLabel: string;
 };
 
+// Короткое вступление для блока «О нас».
 export const aboutIntroCopy: Record<ActionsLocale, AboutIntroCopy> = {
   ru: {
     title: "О нас",
@@ -1321,6 +1384,7 @@ type HistoryCopy = {
   paragraph2: string;
 };
 
+// Тексты для блока «Наша история».
 export const historyCopy: Record<ActionsLocale, HistoryCopy> = {
   ru: {
     title: "Наша история",
@@ -1369,6 +1433,7 @@ type QuickContactFormCopy = {
   subject: string;
 };
 
+// Тексты и подсказки для формы быстрого обращения.
 export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> = {
   fr: {
     title: "Écrire à l’association",
@@ -1378,7 +1443,7 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
     emailLabel: "E-mail *",
     phoneLabel: "Téléphone",
     topicLabel: "Sujet *",
-    messageLabel: "Message *",
+    messageLabel: "Décrivez votre situation *",
     namePlaceholder: "Votre nom et prénom",
     emailPlaceholder: "Votre e-mail",
     phonePlaceholder: "Numéro de téléphone (optionnel)",
@@ -1414,7 +1479,7 @@ export const quickContactFormCopy: Record<ActionsLocale, QuickContactFormCopy> =
     emailLabel: "E-mail *",
     phoneLabel: "Телефон",
     topicLabel: "Тема *",
-    messageLabel: "Сообщение *",
+    messageLabel: "Опишите ситуацию *",
     namePlaceholder: "Имя и фамилия",
     emailPlaceholder: "Ваш e-mail",
     phonePlaceholder: "Номер телефона (необязательно)",
@@ -1450,6 +1515,7 @@ type ContactEmailBoxCopy = {
   helperText: string;
 };
 
+// Тексты для блока с e-mail и кнопкой копирования.
 export const contactEmailBoxCopy: Record<ActionsLocale, ContactEmailBoxCopy> = {
   fr: {
     emailLabel: "E-mail ",
@@ -1479,6 +1545,7 @@ type BankTransferCopy = {
   hint: string;
 };
 
+// Тексты для карточки банковских реквизитов.
 export const bankTransferCopy: Record<ActionsLocale, BankTransferCopy> = {
   fr: {
     copyAllLabel: "Copier (IBAN + BIC)",
@@ -1508,6 +1575,7 @@ type ActionsPageCopy = {
   catalogAriaLabel: string;
 };
 
+// Подписи для страницы действий, которые используются в доступности.
 export const actionsPageCopy: Record<ActionsLocale, ActionsPageCopy> = {
   fr: { catalogAriaLabel: "Catalogue des actions" },
   ru: { catalogAriaLabel: "Каталог направлений" },
@@ -1518,6 +1586,7 @@ type InstagramBadgeCopy = {
   description: string;
 };
 
+// Тексты для бейджа Instagram.
 export const instagramBadgeCopy: Record<ActionsLocale, InstagramBadgeCopy> = {
   fr: {
     label: "Instagram",
@@ -1529,6 +1598,7 @@ export const instagramBadgeCopy: Record<ActionsLocale, InstagramBadgeCopy> = {
   },
 };
 
+// Базовые метаданные сайта.
 export const siteMetadata = {
   title: "Association IES",
   description: "Association IES",
