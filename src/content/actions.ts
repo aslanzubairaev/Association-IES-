@@ -288,7 +288,7 @@ const aideTopicLabels: Record<string, { ru: string; fr: string }> = {
   cpam_health: { ru: "CPAM / здоровье (письма, CARTE VITALE)", fr: "CPAM / santé (courriers, CARTE VITALE)" },
   france_travail: { ru: "France Travail / поиск работы", fr: "France Travail / recherche d’emploi" },
   housing_school_everyday: { ru: "Жильё / школа / повседневные вопросы", fr: "Logement / école / questions du quotidien" },
-  not_sure: { ru: "Не знаете куда?", fr: "Vous ne savez pas où ?" },
+  not_sure: { ru: "Не знаете, с чего начать?", fr: "Vous ne savez pas par où commencer ?" },
 };
 
 // Темы для поддержки ассоциации.
@@ -451,6 +451,7 @@ type AideTopic = {
   title: string;
   examples: string[];
   prepareLine: string;
+  preparePrefix?: string;
 };
 
 type AideCopy = {
@@ -556,7 +557,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         {
           topicKey: "not_sure",
           intentId: "aide_dont_know",
-          title: "Не знаете куда?",
+          title: "Не знаете, с чего начать?",
           examples: [
             "Опишите ситуацию простыми словами",
             "Покажите письмо, которое вас тревожит",
@@ -661,13 +662,14 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         {
           topicKey: "not_sure",
           intentId: "aide_dont_know",
-          title: "Vous ne savez pas où ?",
+          title: "Vous ne savez pas par où commencer ?",
           examples: [
             "Décrivez la situation simplement",
             "Montrez le courrier qui vous inquiète",
             "Dites ce que vous avez déjà essayé",
-            "On vous orientera",
+            "Nous vous orienterons",
           ],
+          preparePrefix: "À préparer\u00A0:",
           prepareLine: "1–2 phrases sur la situation + photo/scan du courrier (si possible)",
         },
       ],

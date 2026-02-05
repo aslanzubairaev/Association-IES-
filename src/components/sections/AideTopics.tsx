@@ -31,7 +31,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
             className="aide-card aide-card--topic"
             title={topic.title}
             listItems={topic.examples}
-            footerText={`${copy.preparePrefix} ${topic.prepareLine}`}
+            footerText={`${topic.preparePrefix ?? copy.preparePrefix} ${topic.prepareLine}`}
             actionsNode={
               <ContactIntentButton
                 locale={locale}
