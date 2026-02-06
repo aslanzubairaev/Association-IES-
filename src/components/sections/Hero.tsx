@@ -46,8 +46,6 @@ export function Hero({ locale }: HeroProps) {
             ))}
           </h1>
 
-          {/* Описание: уточняет, какие темы мы закрываем и что человек получит дальше. */}
-          <p className="lead hero-lead">{copy.lead}</p>
 
           {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
           <div className="actions hero-actions">

@@ -1,3 +1,9 @@
+.quickNavScope {
+  margin-top: -300px;
+  position: relative;
+  z-index: 20;
+}
+
 :where(.quickNavScope) :global(.quickNav-grid) {
   display: grid;
   grid-template-columns: 1fr;
