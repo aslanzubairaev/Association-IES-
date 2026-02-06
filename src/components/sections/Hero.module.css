@@ -23,9 +23,11 @@
 /* Background Images */
 .heroBg {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 .heroBgDesktop {
@@ -130,6 +132,7 @@
 
   :where(.heroScope):global(.hero-section) :global(.h1) {
     margin-top: 0;
+    font-weight: 700;
   }
 
   :where(.heroScope) :global(.hero-left .hero-lead) {

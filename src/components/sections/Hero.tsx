@@ -17,9 +17,8 @@ export function Hero({ locale }: HeroProps) {
   return (
     <section className={`hero-section ${styles.heroScope}`}>
       <div className={styles.heroGridWrapper}>
-        {/* Desktop Image */}
         <Image
-          src="/bgimg_desktop.png"
+          src="/desktop_bg.png"
           alt=""
           width={1920}
           height={1080}
@@ -28,7 +27,7 @@ export function Hero({ locale }: HeroProps) {
         />
         {/* Mobile Image */}
         <Image
-          src="/bgimg_mobile.jpg"
+          src="/bgimg_mobile.png"
           alt=""
           width={800}
           height={1200}
@@ -47,8 +46,6 @@ export function Hero({ locale }: HeroProps) {
             ))}
           </h1>
 
-          {/* Описание: уточняет, какие темы мы закрываем и что человек получит дальше. */}
-          <p className="lead hero-lead">{copy.lead}</p>
 
           {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
           <div className="actions hero-actions">
