@@ -42,11 +42,14 @@ export function Hero({ locale }: HeroProps) {
           <h1 className="h1">
             {shouldUseRuMobileTitleLayout ? (
               <>
-                <span className={styles.heroTitleFirstLine}>
-                  {titleParts[0]}, {titleParts[1]}
+                <span className={styles.heroTitleDesktopOnly}>{copy.title}</span>
+                <span className={styles.heroTitleMobileOnly}>
+                  <span className={styles.heroTitleFirstLine}>
+                    {titleParts[0]}, {titleParts[1]}
+                  </span>
+                  <br className={styles.heroTitleMobileBreak} />
+                  <span>{titleParts[2]}</span>
                 </span>
-                <br className={styles.heroTitleMobileBreak} />
-                <span>{titleParts[2]}</span>
               </>
             ) : (
               copy.title

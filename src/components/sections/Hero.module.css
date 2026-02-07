@@ -128,6 +128,14 @@
   display: none;
 }
 
+.heroTitleDesktopOnly {
+  display: inline;
+}
+
+.heroTitleMobileOnly {
+  display: none;
+}
+
 @media (max-width: 520px) {
   :where(.heroScope) :global(.hero-left .hero-actions) {
     flex-wrap: nowrap;
@@ -161,6 +169,14 @@
     font-size: 10px;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .heroTitleDesktopOnly {
+    display: none;
+  }
+
+  .heroTitleMobileOnly {
+    display: inline;
   }
 
   .heroTitleFirstLine {
