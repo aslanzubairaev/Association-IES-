@@ -61,7 +61,7 @@
 /* Left Content Styling */
 :where(.heroScope) :global(.hero-left) {
   text-align: center;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
   color: #fff;
   z-index: 10;
   /* Ensure text is above image */
