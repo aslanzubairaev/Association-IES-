@@ -528,7 +528,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         {
           topicKey: "not_sure",
           intentId: "aide_dont_know",
-          title: "Не знаете, с чего начать?",
+          title: "Другая тема",
           examples: [
             "Опишите ситуацию в 1–2 предложениях",
             "Пришлите/вставьте письмо, которое беспокоит (если есть)",
@@ -617,7 +617,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         {
           topicKey: "not_sure",
           intentId: "aide_dont_know",
-          title: "Vous ne savez pas par où commencer ?",
+          title: "Autre sujet",
           examples: [
             "Décrivez la situation en 1–2 phrases",
             "Copiez/joignez le courrier qui vous inquiète (si possible)",
