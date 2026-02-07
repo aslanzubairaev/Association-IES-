@@ -40,10 +40,6 @@ type ActionsCopy = {
     steps: string[];
     ctaToContacts: string;
   };
-  important: {
-    title: string;
-    items: string[];
-  };
   finalCta: {
     text: string;
     button: string;
@@ -82,14 +78,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
         "Время и место зависят от проекта — уточняются при записи.",
       ],
       ctaToContacts: "Перейти к контактам",
-    },
-    important: {
-      title: "ВАЖНО ЗНАТЬ",
-      items: [
-        "Участие и помощь — по записи и по конкретному проекту (без общего расписания).",
-        "Время и место уточняются при записи — мы не публикуем единый адрес/график.",
-        "Запись и вопросы — через форму и e-mail на странице «Контакты».",
-      ],
     },
     finalCta: {
       text: "Есть вопрос по проектам ассоциации? Напишите — подскажем, с чего начать.",
@@ -182,15 +170,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
         "Lieu et horaire dépendent du projet — précisés lors de l’inscription.",
       ],
       ctaToContacts: "Aller à la page Contact",
-    },
-    important: {
-      title: "À SAVOIR",
-      items: [
-        "Participation et accompagnement : sur inscription et selon le projet (pas d’horaires généraux).",
-        "Le lieu et l’horaire dépendent du projet — précisés lors de l’inscription.",
-        "Questions et inscription : via le formulaire et par e-mail (page « Contact »).",
-        "Les numéros personnels/WhatsApp des responsables ne sont pas publiés.",
-      ],
     },
     finalCta: {
       text: "Une question sur nos actions ? Écrivez‑nous — on vous oriente.",
