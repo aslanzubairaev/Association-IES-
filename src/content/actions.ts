@@ -920,7 +920,6 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
 
 type FooterCopy = {
   copyright: string;
-  aboutLabel: string;
   contactLabel: string;
   privacyLabel: string;
   socialLabels: {
@@ -936,7 +935,6 @@ type FooterCopy = {
 export const footerCopy: Record<ActionsLocale, FooterCopy> = {
   ru: {
     copyright: "© 2025 Association IES",
-    aboutLabel: "о нас",
     contactLabel: "контакты",
     privacyLabel: "Политика конфиденциальности",
     socialLabels: {
@@ -949,7 +947,6 @@ export const footerCopy: Record<ActionsLocale, FooterCopy> = {
   },
   fr: {
     copyright: "© 2025 Association IES",
-    aboutLabel: "À propos",
     contactLabel: "Contact",
     privacyLabel: "Politique de confidentialité",
     socialLabels: {
@@ -967,7 +964,6 @@ type HeaderCopy = {
   brandName: string;
   navAriaLabel: string;
   navLabels: {
-    about: string;
     aide: string;
     actions: string;
     soutenir: string;
@@ -991,7 +987,6 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
     brandName: "Association",
     navAriaLabel: "Меню сайта",
     navLabels: {
-      about: "О нас",
       aide: "Чем помогаем",
       actions: "Действия",
       soutenir: "Поддержать",
@@ -1015,7 +1010,6 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
     brandName: "Association",
     navAriaLabel: "Menu du site",
     navLabels: {
-      about: "À propos",
       aide: "Aide",
       actions: "Activité",
       soutenir: "Soutenir",
@@ -1033,84 +1027,6 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
       { locale: "fr", code: "FR", name: "Français" },
       { locale: "ru", code: "RU", name: "Русский" },
     ],
-  },
-};
-
-type AboutPageCopy = {
-  title: string;
-  heroLines: string[];
-  mainParagraphs: string[];
-  goalsTitle: string;
-  goals: string[];
-  strengthTitle: string;
-  strengthItems: string[];
-  contactLabel: string;
-  supportLabel: string;
-  ctaTitle: string;
-  ctaList: string[];
-};
-
-// Тексты для страницы «О нас».
-export const aboutPageCopy: Record<ActionsLocale, AboutPageCopy> = {
-  ru: {
-    title: "О нас",
-    heroLines: [
-      "Больше, чем помощь — человеческое участие.",
-      "IES — это Intégration, Éducation, Synergie.",
-      "Светская некоммерческая ассоциация в Страсбурге. Основана 19 февраля 2019 года.",
-    ],
-    mainParagraphs: [
-      "IES — ассоциация в Страсбурге, которая помогает людям, семьям и молодёжи, недавно приехавшим во Францию, адаптироваться и почувствовать опору.",
-      "Мы соединяем людей с возможностями: помогаем сориентироваться и создаём пространство для встреч, обучения и взаимопомощи.",
-      "Наша работа строится вокруг двух направлений: социальная интеграция и социально-профессиональная адаптация. Мы поддерживаем уважение культур, солидарность и умение жить вместе.",
-    ],
-    goalsTitle: "Наши цели",
-    goals: [
-      "Помогать людям, которые недавно приехали, становиться самостоятельнее и чувствовать себя частью города",
-      "Поддерживать социально-профессиональную интеграцию взрослых и молодёжи",
-      "Организовывать образовательные, спортивные и культурные активности",
-    ],
-    strengthTitle: "ЧТО ДЕЛАЕТ IES СИЛЬНОЙ",
-    strengthItems: [
-      "Человеческий подход и работа рядом с реальными запросами",
-      "Активная сеть волонтёров и экспертов",
-      "Партнёрства с городскими и местными структурами (Ville/Eurométropole, CeA, État, CSC…)",
-      "Сильная вовлечённость в приоритетных районах Страсбурга",
-    ],
-    contactLabel: "НАПИСАТЬ НАМ",
-    supportLabel: "Поддержать",
-    ctaTitle: "ХОТИТЕ ДЕЙСТВОВАТЬ ВМЕСТЕ С НАМИ?",
-    ctaList: ["Участвовать в мероприятиях", "Стать волонтёром", "Поддержать наши проекты"],
-  },
-  fr: {
-    title: "À propos",
-    heroLines: [
-      "Plus qu’une aide, un lien humain.",
-      "IES signifie Intégration, Éducation, Synergie.",
-      "Association laïque à but non lucratif à Strasbourg. Créée le 19 février 2019.",
-    ],
-    mainParagraphs: [
-      "IES est une association strasbourgeoise qui accompagne les personnes, les familles et les jeunes qui viennent d’arriver en France, afin de faciliter l’intégration et l’insertion socio-professionnelle.",
-      "Au plus près du terrain, nous créons des passerelles entre habitants, cultures et générations, à travers des actions et des activités collectives.",
-      "Notre engagement s’articule autour de deux axes : l’intégration sociale et l’insertion socio-professionnelle. Nous défendons le vivre-ensemble, le respect des cultures et la solidarité.",
-    ],
-    goalsTitle: "Nos objectifs",
-    goals: [
-      "Favoriser l’autonomie et l’inclusion des personnes nouvellement arrivées",
-      "Soutenir l’insertion sociale et professionnelle des adultes et des jeunes",
-      "Proposer des activités éducatives, sportives et culturelles",
-    ],
-    strengthTitle: "Ce qui fait la force d’IES",
-    strengthItems: [
-      "Une approche humaine et de terrain, au plus près des besoins réels",
-      "Un réseau actif de bénévoles et d’experts engagés",
-      "Des partenariats solides (Ville/Eurométropole, CeA, État, CSC…)",
-      "Une forte implication dans les quartiers prioritaires",
-    ],
-    contactLabel: "NOUS CONTACTER",
-    supportLabel: "Soutenir",
-    ctaTitle: "Envie d’agir avec nous ?",
-    ctaList: ["Participer à nos actions", "Devenir bénévole", "Soutenir nos projets"],
   },
 };
 
@@ -1346,49 +1262,6 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     volunteerCta: "ХОЧУ ПОМОЧЬ",
     howToHelpTitle: "КАК МОЖНО ПОМОЧЬ",
     howToHelpItems: ["Помощь на встречах", "Перевод и тексты", "Организация и логистика", "Фото/видео и медиа"],
-  },
-};
-
-type AboutIntroCopy = {
-  title: string;
-  paragraph1: string;
-  paragraph2: string;
-  goalsTitle: string;
-  goals: string[];
-  ctaLabel: string;
-};
-
-// Короткое вступление для блока «О нас».
-export const aboutIntroCopy: Record<ActionsLocale, AboutIntroCopy> = {
-  ru: {
-    title: "О нас",
-    paragraph1:
-      "Association IES помогает людям, которые недавно приехали в Страсбург, разобраться в первых шагах и административных вопросах.",
-    paragraph2:
-      "Мы отвечаем по email и принимаем по предварительной записи. Наша цель — дать понятные ориентиры и поддержать вас в процессе адаптации.",
-    goalsTitle: "Наши цели",
-    goals: [
-      "Сделать информацию понятной и доступной",
-      "Помогать с ориентацией в административных процедурах",
-      "Поддерживать интеграцию через встречи и активности",
-      "Соединять людей с полезными ресурсами и инициативами",
-    ],
-    ctaLabel: "Написать",
-  },
-  fr: {
-    title: "À propos",
-    paragraph1:
-      "L’association IES aide les personnes récemment arrivées à Strasbourg à s’orienter dans les premières démarches.",
-    paragraph2:
-      "Nous répondons par e-mail et proposons un accueil sur rendez-vous. Notre objectif est de donner des repères clairs et un soutien dans le parcours d’intégration.",
-    goalsTitle: "Nos objectifs",
-    goals: [
-      "Rendre l’information plus claire et accessible",
-      "Aider à s’orienter dans les démarches administratives",
-      "Favoriser l’intégration via des rencontres et activités",
-      "Mettre en lien avec des ressources et initiatives utiles",
-    ],
-    ctaLabel: "Nous écrire",
   },
 };
 

@@ -110,9 +110,6 @@ export default function Footer({ locale }: FooterProps) {
             ))}
           </div>
           <div className={styles["footer-links"]}>
-            <Link href={`/${locale}/about`}>
-              {copy.aboutLabel}
-            </Link>
             <Link href={`/${locale}/contact`}>
               {copy.contactLabel}
             </Link>

@@ -174,12 +174,6 @@ export function Header({ locale }: HeaderProps) {
             aria-label={copy.navAriaLabel}
           >
             <Link
-              href={`/${locale}/about`}
-              aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
-            >
-              {copy.navLabels.about}
-            </Link>
-            <Link
               href={`/${locale}/aide`}
               aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}
             >
@@ -348,13 +342,6 @@ export function Header({ locale }: HeaderProps) {
               className={styles.mobileMenuLinks}
               aria-label={copy.mobileNavAriaLabel}
             >
-              <Link
-                href={`/${locale}/about`}
-                aria-current={isActive(`/${locale}/about`) ? "page" : undefined}
-                onClick={closeMobileMenu}
-              >
-                {copy.navLabels.about}
-              </Link>
               <Link
                 href={`/${locale}/aide`}
                 aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}

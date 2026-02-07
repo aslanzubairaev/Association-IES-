@@ -179,17 +179,6 @@ a {
 }
 
 
-/* Карточки на странице “О нас”: такие же полу-прозрачные поверхности, как у quickNav. */
-.about-card.card--paper {
-  background: var(--surface);
-  border-color: var(--surface-border);
-  color: var(--text-primary);
-}
-
-.about-card.card--paper.card--highlight {
-  border-color: var(--surface-border);
-}
-
 /* Карточки на странице “Aide / Чем помогаем”: такие же цвета, как у quickNav. */
 .aide-card.card--paper {
   background: var(--surface);
