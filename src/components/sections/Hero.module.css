@@ -124,6 +124,10 @@
   font-weight: 600;
 }
 
+.heroTitleMobileBreak {
+  display: none;
+}
+
 @media (max-width: 520px) {
   :where(.heroScope) :global(.hero-left .hero-actions) {
     flex-wrap: nowrap;
@@ -157,5 +161,26 @@
     font-size: 10px;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .heroTitleFirstLine {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.8em;
+    letter-spacing: 0;
+  }
+
+  .heroTitleMobileBreak {
+    display: block;
+  }
+
+  .heroActionsRu {
+    gap: 8px;
+  }
+
+  .heroActionsRu :global(.hero-button) {
+    padding: 10px 8px;
+    font-size: 10px;
+    letter-spacing: 0.01em;
   }
 }
