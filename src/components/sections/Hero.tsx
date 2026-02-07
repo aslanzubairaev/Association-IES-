@@ -13,6 +13,8 @@ type HeroProps = {
 // Верхний блок: тексты и кнопки зависят от выбранного языка.
 export function Hero({ locale }: HeroProps) {
   const copy = heroCopy[locale];
+  const titleParts = copy.title.split(",").map((part) => part.trim()).filter(Boolean);
+  const shouldUseRuMobileTitleLayout = locale === "ru" && titleParts.length === 3;
 
   return (
     <section className={`hero-section ${styles.heroScope}`}>
@@ -38,17 +40,27 @@ export function Hero({ locale }: HeroProps) {
         <div className={`hero-left hero-left--mobile-plain ${styles.heroContent}`}>
           {/* Крупный заголовок: кратко объясняет, что ассоциация помогает адаптироваться именно в Страсбурге. */}
           <h1 className="h1">
-            {copy.title.split("\n").map((line, idx) => (
-              <span key={idx}>
-                {line}
-                {idx === 0 ? <br /> : null}
-              </span>
-            ))}
+            {shouldUseRuMobileTitleLayout ? (
+              <>
+                <span className={styles.heroTitleDesktopOnly}>{copy.title}</span>
+                <span className={styles.heroTitleMobileOnly}>
+                  <span className={styles.heroTitleFirstLine}>
+                    {titleParts[0]}, {titleParts[1]}
+                  </span>
+                  <br className={styles.heroTitleMobileBreak} />
+                  <span>{titleParts[2]}</span>
+                </span>
+              </>
+            ) : (
+              copy.title
+            )}
           </h1>
 
 
           {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
-          <div className="actions hero-actions">
+          <div
+            className={`actions hero-actions ${locale === "ru" ? styles.heroActionsRu : ""}`}
+          >
             <Button className="hero-button" variant="accent" href={`/${locale}/aide`}>
               {copy.ctaPrimary}
             </Button>

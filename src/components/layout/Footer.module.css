@@ -1,8 +1,10 @@
 .site-footer{
-  background: var(--blue);
+  background: var(--site-flat-bg);
   color: rgba(255,255,255,.88);
   padding: 26px 0;
   font-size: 14px;
+  border: none;
+  box-shadow: none;
 }
 
 .footer-inner{

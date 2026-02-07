@@ -7,6 +7,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { Button } from "@/components/ui/Button/Button";
 
 type CopyToClipboardButtonProps = {
   value: string;
@@ -72,26 +73,28 @@ export function CopyToClipboardButton({
 
   if (!showStatus) {
     return (
-      <button
+      <Button
         type="button"
-        className={className ?? "btn btn--pill btn--outline-blue"}
+        variant="pill"
+        className={className ?? "cta-pill"}
         onClick={copyValue}
       >
         {label}
-      </button>
+      </Button>
     );
   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-      <button
+      <Button
         type="button"
-        className={className ?? "btn btn--pill btn--outline-blue"}
+        variant="pill"
+        className={className ?? "cta-pill"}
         onClick={copyValue}
         aria-describedby={statusId}
       >
         {label}
-      </button>
+      </Button>
 
       {/* Строка подтверждения: делаем её заметной на любом фоне, но сохраняем высоту, чтобы интерфейс не прыгал. */}
       <div

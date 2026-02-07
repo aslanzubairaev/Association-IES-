@@ -1,9 +1,6 @@
-/* Этот файл задаёт страницу “Aide / Чем помогаем” (RU/FR) и показывает секции помощи в логичном порядке. */
+/* Этот файл задаёт страницу “Aide / Чем помогаем” (RU/FR) и показывает темы помощи. */
 
-import { AideHowItWorks } from "@/components/sections/AideHowItWorks";
 import { AideTopics } from "@/components/sections/AideTopics";
-import { AideBeforeYouWrite } from "@/components/sections/AideBeforeYouWrite";
-import { AideImportant } from "@/components/sections/AideImportant";
 import styles from "./page.module.css";
 
 export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -14,15 +11,6 @@ export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }
       <main className="page--purple aide-page">
         {/* “С чем помогаем”: темы в карточках, чтобы быстро найти нужное. */}
         <AideTopics locale={locale} />
-
-        {/* “Как это работает”: 3 шага без лишней бюрократии. */}
-        <AideHowItWorks locale={locale} />
-
-        {/* “Перед тем как написать”: чеклист, который помогает подготовить сообщение. */}
-        <AideBeforeYouWrite locale={locale} />
-
-        {/* “Важно знать”: задаёт ожидания (ответ по e-mail, запись, без “единых адресов/графиков”). */}
-        <AideImportant locale={locale} />
       </main>
     </div>
   );

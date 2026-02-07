@@ -61,7 +61,7 @@
 /* Left Content Styling */
 :where(.heroScope) :global(.hero-left) {
   text-align: center;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
   color: #fff;
   z-index: 10;
   /* Ensure text is above image */
@@ -124,6 +124,18 @@
   font-weight: 600;
 }
 
+.heroTitleMobileBreak {
+  display: none;
+}
+
+.heroTitleDesktopOnly {
+  display: inline;
+}
+
+.heroTitleMobileOnly {
+  display: none;
+}
+
 @media (max-width: 520px) {
   :where(.heroScope) :global(.hero-left .hero-actions) {
     flex-wrap: nowrap;
@@ -157,5 +169,34 @@
     font-size: 10px;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .heroTitleDesktopOnly {
+    display: none;
+  }
+
+  .heroTitleMobileOnly {
+    display: inline;
+  }
+
+  .heroTitleFirstLine {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.8em;
+    letter-spacing: 0;
+  }
+
+  .heroTitleMobileBreak {
+    display: block;
+  }
+
+  .heroActionsRu {
+    gap: 8px;
+  }
+
+  .heroActionsRu :global(.hero-button) {
+    padding: 10px 8px;
+    font-size: 10px;
+    letter-spacing: 0.01em;
   }
 }

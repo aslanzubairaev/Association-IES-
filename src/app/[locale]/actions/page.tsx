@@ -67,16 +67,6 @@ export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" 
               );
             })}
           </div>
-
-          {/* ИНФО‑БЛОК: “Важно знать / À savoir” отдельной широкой карточкой под сеткой. */}
-          <div className={styles.actionsImportantBlock}>
-            <ContentCard
-              title={copy.important.title}
-              listItems={copy.important.items}
-              hoverable={false}
-              className="actions-important-card"
-            />
-          </div>
         </Container>
       </main>
     </div>

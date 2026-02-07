@@ -40,16 +40,17 @@ type ActionsCopy = {
     steps: string[];
     ctaToContacts: string;
   };
-  important: {
-    title: string;
-    items: string[];
-  };
   finalCta: {
     text: string;
     button: string;
   };
   items: ActionDirection[];
 };
+
+const sharedCtaLabel = {
+  ru: "Записаться",
+  fr: "S’INSCRIRE",
+} as const;
 
 // Тексты и данные для страницы “Действия” на двух языках.
 export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
@@ -71,7 +72,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       frequencyLabel: "Формат / частота",
       whenWhereLabel: "Когда / где:",
       whenWhereText: "Уточняется при записи",
-      cta: "ЗАПИСАТЬСЯ",
+      cta: sharedCtaLabel.ru,
     },
     participate: {
       title: "Как участвовать",
@@ -82,14 +83,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
         "Время и место зависят от проекта — уточняются при записи.",
       ],
       ctaToContacts: "Перейти к контактам",
-    },
-    important: {
-      title: "ВАЖНО ЗНАТЬ",
-      items: [
-        "Участие и помощь — по записи и по конкретному проекту (без общего расписания).",
-        "Время и место уточняются при записи — мы не публикуем единый адрес/график.",
-        "Запись и вопросы — через форму и e-mail на странице «Контакты».",
-      ],
     },
     finalCta: {
       text: "Есть вопрос по проектам ассоциации? Напишите — подскажем, с чего начать.",
@@ -171,7 +164,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       frequencyLabel: "Format / fréquence",
       whenWhereLabel: "Quand / où :",
       whenWhereText: "Précisé lors de l’inscription",
-      cta: "S’INSCRIRE",
+      cta: sharedCtaLabel.fr,
     },
     participate: {
       title: "Comment participer",
@@ -182,15 +175,6 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
         "Lieu et horaire dépendent du projet — précisés lors de l’inscription.",
       ],
       ctaToContacts: "Aller à la page Contact",
-    },
-    important: {
-      title: "À SAVOIR",
-      items: [
-        "Participation et accompagnement : sur inscription et selon le projet (pas d’horaires généraux).",
-        "Le lieu et l’horaire dépendent du projet — précisés lors de l’inscription.",
-        "Questions et inscription : via le formulaire et par e-mail (page « Contact »).",
-        "Les numéros personnels/WhatsApp des responsables ne sont pas publiés.",
-      ],
     },
     finalCta: {
       text: "Une question sur nos actions ? Écrivez‑nous — on vous oriente.",
@@ -284,10 +268,10 @@ const baseContactTopicLabels: Record<(typeof baseContactTopicKeys)[number], { ru
 
 // Темы для блока помощи с короткими названиями.
 const aideTopicLabels: Record<string, { ru: string; fr: string }> = {
-  caf_support: { ru: "CAF (пособия, письма, личный кабинет)", fr: "CAF (allocations, courriers, compte)" },
-  cpam_health: { ru: "CPAM / здоровье (письма, CARTE VITALE)", fr: "CPAM / santé (courriers, CARTE VITALE)" },
+  caf_support: { ru: "CAF (пособия, письма, личный кабинет)", fr: "CAF (allocations, courriers, espace perso)" },
+  cpam_health: { ru: "CPAM / здоровье (письма, Carte Vitale)", fr: "CPAM / santé (courriers, Carte Vitale)" },
   france_travail: { ru: "France Travail / поиск работы", fr: "France Travail / recherche d’emploi" },
-  housing_school_everyday: { ru: "Жильё / школа / повседневные вопросы", fr: "Logement / école / questions du quotidien" },
+  housing_school_everyday: { ru: "Жильё / школа / повседневные вопросы", fr: "Logement / école / quotidien" },
   not_sure: { ru: "Не знаете, с чего начать?", fr: "Vous ne savez pas par où commencer ?" },
 };
 
@@ -438,12 +422,6 @@ export const homeNavCards: HomeNavCard[] = [
 // Язык для данных раздела помощи.
 export type AideLocale = ActionsLocale;
 
-type AideHowItWorksStep = {
-  title: string;
-  text: string;
-  icon?: string;
-};
-
 // Описание одной темы помощи: ключ, заголовок и примеры.
 type AideTopic = {
   topicKey: string;
@@ -462,11 +440,6 @@ type AideCopy = {
     badge: string;
     ctaScroll: string;
   };
-  howItWorks: {
-    title: string;
-    subtitle: string;
-    steps: AideHowItWorksStep[];
-  };
   topics: {
     title: string;
     subtitle: string;
@@ -474,226 +447,186 @@ type AideCopy = {
     chooseLabel: string;
     items: AideTopic[];
   };
-  beforeYouWrite: {
-    title: string;
-    subtitle: string;
-    items: string[];
-  };
-  important: {
-    title: string;
-    items: string[];
-  };
 };
 
 // Тексты и данные для страницы помощи.
 export const aideCopy: Record<AideLocale, AideCopy> = {
   ru: {
     hero: {
-      title: "ЧЕМ ПОМОГАЕМ",
-      line1: "Бесплатная административная помощь для новоприбывших и семей.",
-      line2: "Напишите через форму — мы ответим по e-mail. Если нужна встреча, предложим запись.",
+      title: "Чем можем помочь?",
+      line1: "Выберите тему — так мы быстрее поймём запрос.",
+      line2: "Заполните форму, и мы ответим по email.",
       badge: "Бесплатно • По записи • Ответ по e-mail",
       ctaScroll: "Выбрать тему",
     },
-    howItWorks: {
-      title: "Как это работает",
-      subtitle: "Понятно и по шагам — чтобы вы знали, что будет дальше.",
-      steps: [
-        {
-          title: "ШАГ 1 — ВЫ ОТПРАВЛЯЕТЕ ЗАПРОС",
-          text: "Заполните форму на сайте — сообщение приходит нам на e-mail. Если есть письма/документы, кратко опишите их.",
-        },
-        {
-          title: "Шаг 2 — Уточняем детали и предлагаем запись",
-          text: "Задаём 2–3 вопроса и предлагаем следующий шаг. Место и время зависят от проекта — подтвердим по e-mail.",
-        },
-        {
-          title: "ШАГ 3 — РАЗБИРАЕМ СИТУАЦИЮ И ДАЁМ ПЛАН",
-          text: "По e-mail или на встрече объясняем, что делать: куда подать, что приложить, как ответить и какие сроки учесть.",
-        },
-      ],
-    },
     topics: {
-      title: "чем вам помочь?",
-      subtitle: "Выберите тему — так мы быстрее поймём запрос.",
+      title: "Чем можем помочь?",
+      subtitle: "Выберите тему — так мы быстрее поймём запрос. Заполните форму, и мы ответим по email.",
       preparePrefix: "Что подготовить:",
-      chooseLabel: "ЗАПИСАТЬСЯ",
+      chooseLabel: sharedCtaLabel.ru,
       items: [
         {
           topicKey: "prefecture_vnj",
           intentId: "aide_prefecture_vnj",
           title: "Префектура / ВНЖ",
-          examples: ["Список документов", "Запись/загрузка документов", "Письма из префектуры", "Сроки и что делать дальше"],
+          examples: [
+            "Список документов: что именно нужно в вашем случае",
+            "Запись и подача документов: как и куда подать",
+            "Письма из префектуры: что означает и что отвечать",
+            "Сроки, статусы, следующий шаг",
+          ],
           prepareLine: "письма/уведомления, документы, номер досье (если есть)",
         },
         {
           topicKey: "caf_support",
           intentId: "aide_caf",
           title: "CAF (пособия, письма, личный кабинет)",
-          examples: ["Создать/войти в аккаунт", "Письмо «document manquant»", "Отправить документы", "Понять статус заявки"],
-          prepareLine: "номер allocataire (если есть), письма CAF, список отправленных документов",
+          examples: [
+            "Создать аккаунт / войти в личный кабинет",
+            "Письмо «document manquant»: что не хватает и что отправить",
+            "Отправка документов: что важно приложить и сохранить",
+            "Статус заявки: как читать и что делать дальше",
+          ],
+          prepareLine: "номер allocataire (если есть), письма CAF, список уже отправленных документов",
         },
         {
           topicKey: "cpam_health",
           intentId: "aide_cpam_sante",
-          title: "CPAM / здоровье (письма, CARTE VITALE)",
-          examples: ["Открыть права (droits)", "Письма/запрос документов", "Carte Vitale / attestation", "Куда обратиться по ситуации"],
+          title: "CPAM / здоровье (письма, Carte Vitale)",
+          examples: [
+            "Открыть права в CPAM: с чего начать",
+            "Письма и запросы документов: что отвечать",
+            "Carte Vitale и attestation: как получить",
+            "Куда обратиться по вашей ситуации",
+          ],
           prepareLine: "письма CPAM, документы, номер sécurité sociale (если есть)",
         },
         {
           topicKey: "france_travail",
           intentId: "aide_france_travail",
           title: "France Travail / поиск работы",
-          examples: ["Регистрация/аккаунт", "Письма и требования", "Какие шаги сейчас важны", "Куда идти дальше"],
+          examples: [
+            "Регистрация и доступ в аккаунт",
+            "Письма, требования, приглашения: что это значит",
+            "Какие шаги важны сейчас",
+            "Куда обращаться дальше",
+          ],
           prepareLine: "письма France Travail, ваш статус/документы, что уже сделали",
         },
         {
           topicKey: "housing_school_everyday",
           intentId: "aide_logement_ecole_quotidien",
           title: "Жильё / школа / повседневные вопросы",
-          examples: ["Куда обращаться (город/службы)", "Школа/сад: что нужно", "Медицина: базовая ориентация", "Письма и формальности"],
+          examples: [
+            "Куда обращаться (город, службы, учреждения)",
+            "Школа/сад: что подготовить и какие шаги",
+            "Медицина: базовые ориентиры и действия",
+            "Письма и формальности: как разобраться",
+          ],
           prepareLine: "город/район, письма/документы, кратко цель (что хотите получить)",
         },
         {
           topicKey: "not_sure",
           intentId: "aide_dont_know",
-          title: "Не знаете, с чего начать?",
+          title: "Другая тема",
           examples: [
-            "Опишите ситуацию простыми словами",
-            "Покажите письмо, которое вас тревожит",
-            "Скажете, что уже пробовали",
-            "Мы подскажем направление",
+            "Опишите ситуацию в 1–2 предложениях",
+            "Пришлите/вставьте письмо, которое беспокоит (если есть)",
+            "Напишите, что уже пробовали",
+            "Подскажем понятный следующий шаг",
           ],
           prepareLine: "1–2 предложения о ситуации + краткое описание письма (если есть)",
         },
       ],
     },
-    beforeYouWrite: {
-      title: "Перед тем как написать",
-      subtitle: "Если можете — добавьте это в сообщение. Так мы быстрее поможем.",
-      items: [
-        "Имя и фамилия",
-        "Язык, на котором удобно общаться",
-        "Ваша ситуация (кратко)",
-        "Что уже сделали",
-        "Сроки/дедлайны (если есть)",
-        "Ваш город/район (Страсбург/окрестности)",
-        "Краткое описание писем и документов (если есть)",
-        "Ваш вопрос одним предложением",
-      ],
-    },
-    important: {
-      title: "Важно знать",
-      items: [
-        "Отвечаем по e-mail. Встречи — только по предварительной записи.",
-        "Место и время зависят от проекта — сообщим при записи.",
-        "Мы помогаем понять письма и шаги, но не заменяем администрацию и не оказываем юридические услуги.",
-      ],
-    },
   },
   fr: {
     hero: {
-      title: "AIDE — CE QUE NOUS FAISONS",
-      line1: "Aide administrative gratuite pour les nouveaux arrivants et les familles.",
-      line2:
-        "Écrivez via le formulaire — nous recevons votre message par e-mail. Nous répondons par e-mail et, si besoin, proposons un rendez-vous.",
+      title: "Comment vous aider ?",
+      line1: "Choisissez un thème — nous comprendrons plus vite votre demande.",
+      line2: "Remplissez le formulaire : nous vous répondrons par e-mail.",
       badge: "Gratuit • Sur rendez-vous • Réponse par e-mail",
       ctaScroll: "Choisir le thème",
     },
-    howItWorks: {
-      title: "Comment ça marche",
-      subtitle: "Clair et simple — pour savoir à quoi vous attendre.",
-      steps: [
-        {
-          title: "ÉTAPE 1 — VOUS ENVOYEZ VOTRE DEMANDE",
-          text: "Remplissez le formulaire — nous recevons votre message par e-mail. S’il y a des courriers/documents, décrivez‑les brièvement.",
-        },
-        {
-          title: "Étape 2 — Nous précisons et proposons un rendez-vous",
-          text: "On pose 2–3 questions et on propose la suite. Lieu et horaire dépendent du projet — confirmés par e-mail.",
-        },
-        {
-          title: "ÉTAPE 3 — ON ANALYSE LA SITUATION ET ON DONNE UN PLAN",
-          text: "Par e-mail ou en rendez-vous, on explique quoi faire : où déposer, quoi joindre, comment répondre et quels délais prendre en compte.",
-        },
-      ],
-    },
     topics: {
       title: "Comment vous aider ?",
-      subtitle: "Choisissez un thème — nous comprendrons plus vite votre demande.",
+      subtitle: "Choisissez un thème — nous comprendrons plus vite votre demande. Remplissez le formulaire : nous vous répondrons par e-mail.",
       preparePrefix: "À préparer :",
-      chooseLabel: "S’INSCRIRE",
+      chooseLabel: sharedCtaLabel.fr,
       items: [
         {
           topicKey: "prefecture_vnj",
           intentId: "aide_prefecture_vnj",
           title: "Préfecture / titre de séjour",
-          examples: ["Liste de documents", "Prise de rendez-vous / dépôt", "Courriers de la préfecture", "Délais et suite"],
+          examples: [
+            "Liste des pièces : quoi fournir dans votre cas",
+            "Rendez-vous et dépôt : comment et où déposer",
+            "Courriers de la préfecture : quoi comprendre et quoi répondre",
+            "Délais, statut, prochaine étape",
+          ],
           prepareLine: "courriers/notifications, documents, numéro de dossier (si disponible)",
         },
         {
           topicKey: "caf_support",
           intentId: "aide_caf",
           title: "CAF (allocations, courriers, espace perso)",
-          examples: ["Créer/se connecter au compte", "Courrier « document manquant »", "Envoyer des pièces", "Comprendre le statut"],
-          prepareLine: "numéro allocataire (si disponible), courriers CAF, liste des documents envoyés",
+          examples: [
+            "Créer / se connecter à votre espace",
+            "Courrier « document manquant » : quoi envoyer",
+            "Envoi des pièces : points clés + preuves à garder",
+            "Statut du dossier : comprendre et savoir quoi faire ensuite",
+          ],
+          prepareLine: "numéro allocataire (si disponible), courriers CAF, liste des documents déjà envoyés",
         },
         {
           topicKey: "cpam_health",
           intentId: "aide_cpam_sante",
-          title: "CPAM / santé (courriers, CARTE VITALE)",
-          examples: ["Ouvrir des droits", "Courriers / demandes", "Carte Vitale / attestation", "Où s’adresser"],
+          title: "CPAM / santé (courriers, Carte Vitale)",
+          examples: [
+            "Ouvrir vos droits CPAM : par où commencer",
+            "Courriers / demandes de pièces : quoi répondre",
+            "Carte Vitale et attestation : comment les obtenir",
+            "Où s’adresser selon votre situation",
+          ],
           prepareLine: "courriers CPAM, documents, numéro de sécurité sociale (si disponible)",
         },
         {
           topicKey: "france_travail",
           intentId: "aide_france_travail",
           title: "France Travail / recherche d’emploi",
-          examples: ["Inscription/compte", "Courriers et exigences", "Quelles étapes maintenant", "Où aller ensuite"],
+          examples: [
+            "Inscription et accès au compte",
+            "Courriers, convocations, exigences : comprendre le contenu",
+            "Les étapes prioritaires maintenant",
+            "Vers qui se tourner ensuite",
+          ],
           prepareLine: "courriers France Travail, votre statut/documents, ce que vous avez déjà fait",
         },
         {
           topicKey: "housing_school_everyday",
           intentId: "aide_logement_ecole_quotidien",
           title: "Logement / école / quotidien",
-          examples: ["Où s’adresser (ville/services)", "École/crèche : quoi préparer", "Santé : orientation de base", "Courriers et formalités"],
+          examples: [
+            "Où s’adresser (ville, services, organismes)",
+            "École/crèche : quoi préparer et quelles démarches",
+            "Santé : repères de base et premières étapes",
+            "Courriers et formalités : comment s’y retrouver",
+          ],
           prepareLine: "ville/quartier, courriers/documents, objectif en bref (ce que vous voulez obtenir)",
         },
         {
           topicKey: "not_sure",
           intentId: "aide_dont_know",
-          title: "Vous ne savez pas par où commencer ?",
+          title: "Autre sujet",
           examples: [
-            "Décrivez la situation simplement",
-            "Montrez le courrier qui vous inquiète",
+            "Décrivez la situation en 1–2 phrases",
+            "Copiez/joignez le courrier qui vous inquiète (si possible)",
             "Dites ce que vous avez déjà essayé",
-            "Nous vous orienterons",
+            "Nous indiquons une prochaine étape claire",
           ],
           preparePrefix: "À préparer\u00A0:",
           prepareLine: "1–2 phrases sur la situation + bref descriptif du courrier (si possible)",
         },
-      ],
-    },
-    beforeYouWrite: {
-      title: "Avant d’écrire",
-      subtitle: "Si possible, ajoutez ces infos à votre message. Cela nous aidera à répondre plus vite.",
-      items: [
-        "Nom et prénom",
-        "Langue de communication",
-        "Votre situation (bref)",
-        "Ce que vous avez déjà fait",
-        "Délais / échéances (si disponibles)",
-        "Votre ville/quartier (Strasbourg/alentours)",
-        "Bref descriptif des courriers et documents (si possible)",
-        "Votre question en une phrase",
-      ],
-    },
-    important: {
-      title: "À savoir",
-      items: [
-        "Nous répondons par e-mail. Rendez-vous uniquement sur inscription.",
-        "Lieu et horaire dépendent du projet — précisés lors de l’inscription.",
-        "Nous aidons à comprendre les courriers et les démarches, sans remplacer l’administration ni fournir de services juridiques.",
       ],
     },
   },
@@ -920,7 +853,6 @@ export const actionsPreviewCopy: Record<ActionsLocale, ActionsPreviewCopy> = {
 
 type FooterCopy = {
   copyright: string;
-  aboutLabel: string;
   contactLabel: string;
   privacyLabel: string;
   socialLabels: {
@@ -936,7 +868,6 @@ type FooterCopy = {
 export const footerCopy: Record<ActionsLocale, FooterCopy> = {
   ru: {
     copyright: "© 2025 Association IES",
-    aboutLabel: "о нас",
     contactLabel: "контакты",
     privacyLabel: "Политика конфиденциальности",
     socialLabels: {
@@ -949,7 +880,6 @@ export const footerCopy: Record<ActionsLocale, FooterCopy> = {
   },
   fr: {
     copyright: "© 2025 Association IES",
-    aboutLabel: "À propos",
     contactLabel: "Contact",
     privacyLabel: "Politique de confidentialité",
     socialLabels: {
@@ -967,7 +897,6 @@ type HeaderCopy = {
   brandName: string;
   navAriaLabel: string;
   navLabels: {
-    about: string;
     aide: string;
     actions: string;
     soutenir: string;
@@ -991,7 +920,6 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
     brandName: "Association",
     navAriaLabel: "Меню сайта",
     navLabels: {
-      about: "О нас",
       aide: "Чем помогаем",
       actions: "Действия",
       soutenir: "Поддержать",
@@ -1015,7 +943,6 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
     brandName: "Association",
     navAriaLabel: "Menu du site",
     navLabels: {
-      about: "À propos",
       aide: "Aide",
       actions: "Activité",
       soutenir: "Soutenir",
@@ -1033,84 +960,6 @@ export const headerCopy: Record<ActionsLocale, HeaderCopy> = {
       { locale: "fr", code: "FR", name: "Français" },
       { locale: "ru", code: "RU", name: "Русский" },
     ],
-  },
-};
-
-type AboutPageCopy = {
-  title: string;
-  heroLines: string[];
-  mainParagraphs: string[];
-  goalsTitle: string;
-  goals: string[];
-  strengthTitle: string;
-  strengthItems: string[];
-  contactLabel: string;
-  supportLabel: string;
-  ctaTitle: string;
-  ctaList: string[];
-};
-
-// Тексты для страницы «О нас».
-export const aboutPageCopy: Record<ActionsLocale, AboutPageCopy> = {
-  ru: {
-    title: "О нас",
-    heroLines: [
-      "Больше, чем помощь — человеческое участие.",
-      "IES — это Intégration, Éducation, Synergie.",
-      "Светская некоммерческая ассоциация в Страсбурге. Основана 19 февраля 2019 года.",
-    ],
-    mainParagraphs: [
-      "IES — ассоциация в Страсбурге, которая помогает людям, семьям и молодёжи, недавно приехавшим во Францию, адаптироваться и почувствовать опору.",
-      "Мы соединяем людей с возможностями: помогаем сориентироваться и создаём пространство для встреч, обучения и взаимопомощи.",
-      "Наша работа строится вокруг двух направлений: социальная интеграция и социально-профессиональная адаптация. Мы поддерживаем уважение культур, солидарность и умение жить вместе.",
-    ],
-    goalsTitle: "Наши цели",
-    goals: [
-      "Помогать людям, которые недавно приехали, становиться самостоятельнее и чувствовать себя частью города",
-      "Поддерживать социально-профессиональную интеграцию взрослых и молодёжи",
-      "Организовывать образовательные, спортивные и культурные активности",
-    ],
-    strengthTitle: "ЧТО ДЕЛАЕТ IES СИЛЬНОЙ",
-    strengthItems: [
-      "Человеческий подход и работа рядом с реальными запросами",
-      "Активная сеть волонтёров и экспертов",
-      "Партнёрства с городскими и местными структурами (Ville/Eurométropole, CeA, État, CSC…)",
-      "Сильная вовлечённость в приоритетных районах Страсбурга",
-    ],
-    contactLabel: "НАПИСАТЬ НАМ",
-    supportLabel: "Поддержать",
-    ctaTitle: "ХОТИТЕ ДЕЙСТВОВАТЬ ВМЕСТЕ С НАМИ?",
-    ctaList: ["Участвовать в мероприятиях", "Стать волонтёром", "Поддержать наши проекты"],
-  },
-  fr: {
-    title: "À propos",
-    heroLines: [
-      "Plus qu’une aide, un lien humain.",
-      "IES signifie Intégration, Éducation, Synergie.",
-      "Association laïque à but non lucratif à Strasbourg. Créée le 19 février 2019.",
-    ],
-    mainParagraphs: [
-      "IES est une association strasbourgeoise qui accompagne les personnes, les familles et les jeunes qui viennent d’arriver en France, afin de faciliter l’intégration et l’insertion socio-professionnelle.",
-      "Au plus près du terrain, nous créons des passerelles entre habitants, cultures et générations, à travers des actions et des activités collectives.",
-      "Notre engagement s’articule autour de deux axes : l’intégration sociale et l’insertion socio-professionnelle. Nous défendons le vivre-ensemble, le respect des cultures et la solidarité.",
-    ],
-    goalsTitle: "Nos objectifs",
-    goals: [
-      "Favoriser l’autonomie et l’inclusion des personnes nouvellement arrivées",
-      "Soutenir l’insertion sociale et professionnelle des adultes et des jeunes",
-      "Proposer des activités éducatives, sportives et culturelles",
-    ],
-    strengthTitle: "Ce qui fait la force d’IES",
-    strengthItems: [
-      "Une approche humaine et de terrain, au plus près des besoins réels",
-      "Un réseau actif de bénévoles et d’experts engagés",
-      "Des partenariats solides (Ville/Eurométropole, CeA, État, CSC…)",
-      "Une forte implication dans les quartiers prioritaires",
-    ],
-    contactLabel: "NOUS CONTACTER",
-    supportLabel: "Soutenir",
-    ctaTitle: "Envie d’agir avec nous ?",
-    ctaList: ["Participer à nos actions", "Devenir bénévole", "Soutenir nos projets"],
   },
 };
 
@@ -1346,49 +1195,6 @@ export const soutenirCopy: Record<ActionsLocale, SoutenirCopy> = {
     volunteerCta: "ХОЧУ ПОМОЧЬ",
     howToHelpTitle: "КАК МОЖНО ПОМОЧЬ",
     howToHelpItems: ["Помощь на встречах", "Перевод и тексты", "Организация и логистика", "Фото/видео и медиа"],
-  },
-};
-
-type AboutIntroCopy = {
-  title: string;
-  paragraph1: string;
-  paragraph2: string;
-  goalsTitle: string;
-  goals: string[];
-  ctaLabel: string;
-};
-
-// Короткое вступление для блока «О нас».
-export const aboutIntroCopy: Record<ActionsLocale, AboutIntroCopy> = {
-  ru: {
-    title: "О нас",
-    paragraph1:
-      "Association IES помогает людям, которые недавно приехали в Страсбург, разобраться в первых шагах и административных вопросах.",
-    paragraph2:
-      "Мы отвечаем по email и принимаем по предварительной записи. Наша цель — дать понятные ориентиры и поддержать вас в процессе адаптации.",
-    goalsTitle: "Наши цели",
-    goals: [
-      "Сделать информацию понятной и доступной",
-      "Помогать с ориентацией в административных процедурах",
-      "Поддерживать интеграцию через встречи и активности",
-      "Соединять людей с полезными ресурсами и инициативами",
-    ],
-    ctaLabel: "Написать",
-  },
-  fr: {
-    title: "À propos",
-    paragraph1:
-      "L’association IES aide les personnes récemment arrivées à Strasbourg à s’orienter dans les premières démarches.",
-    paragraph2:
-      "Nous répondons par e-mail et proposons un accueil sur rendez-vous. Notre objectif est de donner des repères clairs et un soutien dans le parcours d’intégration.",
-    goalsTitle: "Nos objectifs",
-    goals: [
-      "Rendre l’information plus claire et accessible",
-      "Aider à s’orienter dans les démarches administratives",
-      "Favoriser l’intégration via des rencontres et activités",
-      "Mettre en lien avec des ressources et initiatives utiles",
-    ],
-    ctaLabel: "Nous écrire",
   },
 };
 
