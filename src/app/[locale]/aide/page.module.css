@@ -97,20 +97,6 @@
   outline-offset: 3px;
 }
 
-.aideScope :global(.aide-page .aide-card--wide) {
-  padding: 34px;
-}
-
-.aideScope :global(.aide-page .aide-card--wide .list) {
-  margin-top: 0;
-  line-height: 1.65;
-}
-
-.aideScope :global(.aide-page .aide-card--wide .list li) {
-  margin: 12px 0;
-  line-height: 1.65;
-}
-
 @media (max-width: 520px) {
   .aideScope :global(.aide-page .aide-cta) {
     width: 100%;

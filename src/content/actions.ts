@@ -438,12 +438,6 @@ export const homeNavCards: HomeNavCard[] = [
 // Язык для данных раздела помощи.
 export type AideLocale = ActionsLocale;
 
-type AideHowItWorksStep = {
-  title: string;
-  text: string;
-  icon?: string;
-};
-
 // Описание одной темы помощи: ключ, заголовок и примеры.
 type AideTopic = {
   topicKey: string;
@@ -462,26 +456,12 @@ type AideCopy = {
     badge: string;
     ctaScroll: string;
   };
-  howItWorks: {
-    title: string;
-    subtitle: string;
-    steps: AideHowItWorksStep[];
-  };
   topics: {
     title: string;
     subtitle: string;
     preparePrefix: string;
     chooseLabel: string;
     items: AideTopic[];
-  };
-  beforeYouWrite: {
-    title: string;
-    subtitle: string;
-    items: string[];
-  };
-  important: {
-    title: string;
-    items: string[];
   };
 };
 
@@ -494,24 +474,6 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       line2: "Напишите через форму — мы ответим по e-mail. Если нужна встреча, предложим запись.",
       badge: "Бесплатно • По записи • Ответ по e-mail",
       ctaScroll: "Выбрать тему",
-    },
-    howItWorks: {
-      title: "Как это работает",
-      subtitle: "Понятно и по шагам — чтобы вы знали, что будет дальше.",
-      steps: [
-        {
-          title: "ШАГ 1 — ВЫ ОТПРАВЛЯЕТЕ ЗАПРОС",
-          text: "Заполните форму на сайте — сообщение приходит нам на e-mail. Если есть письма/документы, кратко опишите их.",
-        },
-        {
-          title: "Шаг 2 — Уточняем детали и предлагаем запись",
-          text: "Задаём 2–3 вопроса и предлагаем следующий шаг. Место и время зависят от проекта — подтвердим по e-mail.",
-        },
-        {
-          title: "ШАГ 3 — РАЗБИРАЕМ СИТУАЦИЮ И ДАЁМ ПЛАН",
-          text: "По e-mail или на встрече объясняем, что делать: куда подать, что приложить, как ответить и какие сроки учесть.",
-        },
-      ],
     },
     topics: {
       title: "чем вам помочь?",
@@ -568,28 +530,6 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         },
       ],
     },
-    beforeYouWrite: {
-      title: "Перед тем как написать",
-      subtitle: "Если можете — добавьте это в сообщение. Так мы быстрее поможем.",
-      items: [
-        "Имя и фамилия",
-        "Язык, на котором удобно общаться",
-        "Ваша ситуация (кратко)",
-        "Что уже сделали",
-        "Сроки/дедлайны (если есть)",
-        "Ваш город/район (Страсбург/окрестности)",
-        "Краткое описание писем и документов (если есть)",
-        "Ваш вопрос одним предложением",
-      ],
-    },
-    important: {
-      title: "Важно знать",
-      items: [
-        "Отвечаем по e-mail. Встречи — только по предварительной записи.",
-        "Место и время зависят от проекта — сообщим при записи.",
-        "Мы помогаем понять письма и шаги, но не заменяем администрацию и не оказываем юридические услуги.",
-      ],
-    },
   },
   fr: {
     hero: {
@@ -599,24 +539,6 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
         "Écrivez via le formulaire — nous recevons votre message par e-mail. Nous répondons par e-mail et, si besoin, proposons un rendez-vous.",
       badge: "Gratuit • Sur rendez-vous • Réponse par e-mail",
       ctaScroll: "Choisir le thème",
-    },
-    howItWorks: {
-      title: "Comment ça marche",
-      subtitle: "Clair et simple — pour savoir à quoi vous attendre.",
-      steps: [
-        {
-          title: "ÉTAPE 1 — VOUS ENVOYEZ VOTRE DEMANDE",
-          text: "Remplissez le formulaire — nous recevons votre message par e-mail. S’il y a des courriers/documents, décrivez‑les brièvement.",
-        },
-        {
-          title: "Étape 2 — Nous précisons et proposons un rendez-vous",
-          text: "On pose 2–3 questions et on propose la suite. Lieu et horaire dépendent du projet — confirmés par e-mail.",
-        },
-        {
-          title: "ÉTAPE 3 — ON ANALYSE LA SITUATION ET ON DONNE UN PLAN",
-          text: "Par e-mail ou en rendez-vous, on explique quoi faire : où déposer, quoi joindre, comment répondre et quels délais prendre en compte.",
-        },
-      ],
     },
     topics: {
       title: "Comment vous aider ?",
@@ -672,28 +594,6 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
           preparePrefix: "À préparer\u00A0:",
           prepareLine: "1–2 phrases sur la situation + bref descriptif du courrier (si possible)",
         },
-      ],
-    },
-    beforeYouWrite: {
-      title: "Avant d’écrire",
-      subtitle: "Si possible, ajoutez ces infos à votre message. Cela nous aidera à répondre plus vite.",
-      items: [
-        "Nom et prénom",
-        "Langue de communication",
-        "Votre situation (bref)",
-        "Ce que vous avez déjà fait",
-        "Délais / échéances (si disponibles)",
-        "Votre ville/quartier (Strasbourg/alentours)",
-        "Bref descriptif des courriers et documents (si possible)",
-        "Votre question en une phrase",
-      ],
-    },
-    important: {
-      title: "À savoir",
-      items: [
-        "Nous répondons par e-mail. Rendez-vous uniquement sur inscription.",
-        "Lieu et horaire dépendent du projet — précisés lors de l’inscription.",
-        "Nous aidons à comprendre les courriers et les démarches, sans remplacer l’administration ni fournir de services juridiques.",
       ],
     },
   },
