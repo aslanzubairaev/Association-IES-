@@ -4,8 +4,8 @@
   left: 0;
   z-index: 1000;
   width: 100%;
-  background: var(--color-primary);
-  box-shadow: 0 8px 22px rgba(11, 27, 51, 0.08);
+  background: var(--site-flat-bg);
+  box-shadow: none;
   height: calc(var(--site-header-height) + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
 }
