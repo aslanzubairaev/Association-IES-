@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/Button/Button";
 import { contactEmailBoxCopy } from "@/content/actions";
 
 type ContactEmailBoxProps = {
@@ -36,13 +37,14 @@ export function ContactEmailBox({ locale, email }: ContactEmailBoxProps) {
         </div>
 
         {/* Запасной вариант: можно просто скопировать адрес и вставить его в любую почту. */}
-        <button
+        <Button
           type="button"
-          className="btn btn--pill contact-cta-button contact-cta-button--compact"
+          variant="pill"
+          className="contact-cta-button contact-cta-button--compact"
           onClick={handleCopy}
         >
           {copy.copyLabel}
-        </button>
+        </Button>
       </div>
 
       {/* Короткий статус: подтверждаем копирование или показываем ошибку. */}

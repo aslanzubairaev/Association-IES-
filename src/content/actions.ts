@@ -47,6 +47,11 @@ type ActionsCopy = {
   items: ActionDirection[];
 };
 
+const sharedCtaLabel = {
+  ru: "Записаться",
+  fr: "S’INSCRIRE",
+} as const;
+
 // Тексты и данные для страницы “Действия” на двух языках.
 export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
   ru: {
@@ -67,7 +72,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       frequencyLabel: "Формат / частота",
       whenWhereLabel: "Когда / где:",
       whenWhereText: "Уточняется при записи",
-      cta: "ЗАПИСАТЬСЯ",
+      cta: sharedCtaLabel.ru,
     },
     participate: {
       title: "Как участвовать",
@@ -159,7 +164,7 @@ export const actionsCopy: Record<ActionsLocale, ActionsCopy> = {
       frequencyLabel: "Format / fréquence",
       whenWhereLabel: "Quand / où :",
       whenWhereText: "Précisé lors de l’inscription",
-      cta: "S’INSCRIRE",
+      cta: sharedCtaLabel.fr,
     },
     participate: {
       title: "Comment participer",
@@ -458,7 +463,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       title: "Чем можем помочь?",
       subtitle: "Выберите тему — так мы быстрее поймём запрос. Заполните форму, и мы ответим по email.",
       preparePrefix: "Что подготовить:",
-      chooseLabel: "Записаться",
+      chooseLabel: sharedCtaLabel.ru,
       items: [
         {
           topicKey: "prefecture_vnj",
@@ -547,7 +552,7 @@ export const aideCopy: Record<AideLocale, AideCopy> = {
       title: "Comment vous aider ?",
       subtitle: "Choisissez un thème — nous comprendrons plus vite votre demande. Remplissez le formulaire : nous vous répondrons par e-mail.",
       preparePrefix: "À préparer :",
-      chooseLabel: "Prendre rendez-vous",
+      chooseLabel: sharedCtaLabel.fr,
       items: [
         {
           topicKey: "prefecture_vnj",

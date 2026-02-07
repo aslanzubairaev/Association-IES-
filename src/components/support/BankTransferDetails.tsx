@@ -127,7 +127,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
             value={iban}
             label={copy.copyIbanLabel}
             copiedLabel={copy.copiedIbanStatus}
-            className="btn btn--pill cta-pill"
+            className="cta-pill"
             showStatus={false}
             onCopied={(text) => showToast("iban", text)}
           />
@@ -146,7 +146,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
             value={bic}
             label={copy.copyBicLabel}
             copiedLabel={copy.copiedBicStatus}
-            className="btn btn--pill cta-pill"
+            className="cta-pill"
             showStatus={false}
             onCopied={(text) => showToast("bic", text)}
           />
