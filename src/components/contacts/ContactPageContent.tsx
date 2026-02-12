@@ -14,7 +14,7 @@ import { ContactContextBlock } from "@/components/contacts/ContactContextBlock";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { contactCopy, resolveContactTopicKey } from "@/content/actions";
 import { contactIntents, type ContactIntent } from "@/content/contactIntents";
-import styles from "@/app/[locale]/contact/page.module.css";
+import styles from "./ContactPageContent.module.css";
 
 type ContactPageContentProps = {
   locale: "ru" | "fr";

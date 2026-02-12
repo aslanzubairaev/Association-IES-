@@ -13,6 +13,7 @@
 .contactScope {
 }
 
+/* TODO: Стили этого блока перенесены в ContactPageContent.module.css. Проверить и удалить после финальной проверки. */
 /* Правая карточка с формой: золотой фон как у .card--yellow. */
 .contactScope :global(.contact-card.contact-card--yellow.card--paper) {
   background: var(--yellow);
