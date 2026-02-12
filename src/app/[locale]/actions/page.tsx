@@ -1,76 +1,12 @@
-/* Этот файл задаёт страницу “Actions / Действия” и показывает каталог направлений с карточками (RU/FR). */
+/* Этот файл задаёт маршрут страницы “Actions / Действия” и подключает основной контент через отдельный компонент. */
 
-import { Container } from "@/components/ui/Container";
-import { ContentCard } from "@/components/ui/Card/ContentCard";
-import { IesList, IesListItem } from "@/components/ui/IesList";
-import { actionsCopy, actionsPageCopy } from "@/content/actions";
-import styles from "./page.module.css";
+import ActionsPage from "@/components/sections/actions/ActionsPage";
 
-export default function ActionsPage({ params }: { params: { locale: "ru" | "fr" } }) {
+export default function ActionsRoutePage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
 
-  // Тексты страницы и список направлений: единый источник, чтобы RU/FR были синхронны.
-  const copy = actionsCopy[locale];
-
-  return (
-    <div className={styles.actionsScope}>
-      <main className="section page--purple">
-        <Container>
-          {/* НАПРАВЛЕНИЯ: каталог карточек, чтобы за 30 секунд понять варианты. */}
-          <div
-            id="directions"
-            className={`section-head ${styles.actionsDirectionsHead}`}
-            style={{ scrollMarginTop: "calc(var(--site-header-height) + 18px)" }}
-          >
-            <h2 className="h2">
-              {copy.directions.title}
-            </h2>
-            <p className="muted-on-dark">
-              {copy.directions.subtitle}
-            </p>
-          </div>
-
-          <div
-            className={styles.actionsCardsGrid}
-            aria-label={actionsPageCopy[locale].catalogAriaLabel}
-          >
-            {copy.items.map((it) => {
-              return (
-                <ContentCard
-                  key={it.slug}
-                  title={it.title}
-                  hoverable={false}
-                  actions={[{
-                    label: copy.directions.cta,
-                    href: `/${locale}/contact?intent=${encodeURIComponent(it.intentId)}`,
-                    variant: "pill",
-                    className: "cta-pill"
-                  }]}
-                >
-                  <IesList className="list">
-                    <IesListItem>
-                      <strong>{copy.directions.forWhoLabel}:</strong> {it.forWho}
-                    </IesListItem>
-                  <IesListItem>
-                    <strong>{copy.directions.benefitLabel}:</strong> {it.benefit}
-                  </IesListItem>
-                  {it.frequency?.trim() && (
-                    <IesListItem>
-                      <strong>{copy.directions.frequencyLabel}:</strong> {it.frequency}
-                    </IesListItem>
-                  )}
-                  </IesList>
-                  <p className="fineprint muted" style={{ marginTop: 14 }}>
-                    <strong>{copy.directions.whenWhereLabel}</strong> {copy.directions.whenWhereText}
-                  </p>
-                </ContentCard>
-              );
-            })}
-          </div>
-        </Container>
-      </main>
-    </div>
-  );
+  // Передаём выбранный язык в отдельный компонент страницы, чтобы маршрут оставался простым.
+  return <ActionsPage locale={locale} />;
 }
 
 
