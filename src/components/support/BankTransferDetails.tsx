@@ -83,7 +83,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     <div className={styles.bankTransferDetails}>
       {/* Блок реквизитов: контрастный и кликабельный, чтобы быстро скопировать данные. */}
       <div
-        className={`contact-box support-info-panel ${styles.bankTransferBox}`}
+        className={`contact-box support-info-panel ${styles.supportInfoPanel} ${styles.bankTransferBox}`}
         role="button"
         tabIndex={0}
         onClick={copyAll}
@@ -95,11 +95,11 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         }}
         aria-label={copy.copyAllLabel}
       >
-        <div className="support-info-title">
+        <div className={`support-info-title ${styles.supportInfoTitle}`}>
           {copy.cardTitle}
         </div>
 
-        <IesList className="bank-transfer-lines support-info-list">
+        <IesList className={`bank-transfer-lines support-info-list ${styles.supportInfoList}`}>
           <IesListItem>
             <span className="bank-transfer-label">IBAN:</span>{" "}
             <span className="bank-transfer-value bank-transfer-value--mono">
