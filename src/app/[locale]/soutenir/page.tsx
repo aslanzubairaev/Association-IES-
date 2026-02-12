@@ -7,6 +7,7 @@ import { soutenirCopy } from "@/content/actions";
 import styles from "./page.module.css";
 import { Section } from "@/components/ui/Section/Section";
 
+// Иконка для карточки HelloAsso.
 const helloAssoIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
     <path
@@ -19,6 +20,7 @@ const helloAssoIcon = (
   </svg>
 );
 
+// Иконка для карточки CotizUp.
 const cotizUpIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
     <path
@@ -52,6 +54,7 @@ const cotizUpIcon = (
   </svg>
 );
 
+// Иконка для карточки банковского перевода.
 const bankIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
     <path
@@ -88,6 +91,7 @@ export default function SoutenirPage({ params }: { params: { locale: "ru" | "fr"
   // Все тексты страницы зависят от языка, который выбран в адресе (/ru или /fr).
   const text = soutenirCopy[locale];
 
+  // Ссылки для основных действий в карточках поддержки.
   const helloAssoHref =
     "https://www.helloasso.com/associations/association-pour-l-education-et-l-insertion-sociale-integration-education-synergie";
   const cotizUpHref = "https://www.cotizup.com/soutien-ies";

@@ -9,6 +9,7 @@ import { buildGmailComposeUrl } from "@/lib/emailCompose";
 import { privacyPageCopy } from "@/content/actions";
 import styles from "./page.module.css";
 
+// Заголовок и описание вкладки берём из словаря выбранного языка.
 export function generateMetadata({
   params,
 }: {
@@ -24,6 +25,7 @@ export function generateMetadata({
 
 export default function PrivacyPage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
+  // Основные данные страницы: тексты разделов и ссылки для связи.
   const copy = privacyPageCopy[locale];
   const contactHref = `/${locale}/contact`;
   const email = copy.contactEmail;

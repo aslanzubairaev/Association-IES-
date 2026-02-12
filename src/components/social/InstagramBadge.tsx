@@ -23,6 +23,8 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
   const outlineRef = useRef<SVGPathElement | null>(null);
   const badgeRef = useRef<HTMLAnchorElement | null>(null);
 
+  // После загрузки следим за видимостью блока и прокруткой, чтобы перезапускать обводку при движении вверх.
+  // Если человек просит меньше анимации в системе, этот запуск пропускаем.
   useEffect(() => {
     const outline = outlineRef.current;
     const badge = badgeRef.current;
@@ -76,6 +78,7 @@ export function InstagramBadge({ locale, href, handle }: InstagramBadgeProps) {
     observer.observe(badge);
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // При уходе со страницы отключаем наблюдение и прокрутку, чтобы не оставлять лишние обработчики.
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);

@@ -46,6 +46,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     copyToClipboard(`IBAN: ${iban}\nBIC: ${bic}`, `${copy.copiedLabel}: ${copy.copyAllLabel}`);
   }
 
+  // Короткое подтверждение после копирования IBAN или BIC: сначала очищаем старые таймеры, затем запускаем новые.
   function showToast(owner: "iban" | "bic", text: string) {
     if (toastTimeoutRef.current) {
       window.clearTimeout(toastTimeoutRef.current);
@@ -66,6 +67,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     }, 1800);
   }
 
+  // При уходе со страницы очищаем таймеры, чтобы не было отложенных обновлений для уже закрытого блока.
   useEffect(() => {
     return () => {
       if (toastTimeoutRef.current) {
