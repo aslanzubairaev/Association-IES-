@@ -14,7 +14,6 @@ import { ContactContextBlock } from "@/components/contacts/ContactContextBlock";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { contactCopy, resolveContactTopicKey } from "@/content/actions";
 import { contactIntents, type ContactIntent } from "@/content/contactIntents";
-import styles from "./ContactPageContent.module.css";
 
 type ContactPageContentProps = {
   locale: "ru" | "fr";
@@ -62,9 +61,9 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId }: Co
   const intentMessagePlaceholder = selectedIntent?.messagePlaceholder?.[locale];
 
   return (
-    <main className={`section page--purple contact-page ${styles.contactScope}`}>
+    <main className="section page--purple contact-page">
       <Container>
-        <div className={styles.contactContent}>
+        <div className="contact-content">
           {/* Заголовок и подзаголовок страницы меняются вместе с выбранной темой. */}
           <div className="section-head">
             <h1 className="h2">
@@ -78,7 +77,7 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId }: Co
           {/* Блок с выбранной темой показываем, когда есть данные для темы. */}
           {selectedIntent ? (
             <ContactContextBlock
-              className={styles.contactContext}
+              className="contact-context"
               bullets={selectedIntent.bullets?.[locale]}
               fineprint={selectedIntent.fineprint?.[locale]}
               extraInfo={selectedIntent.extraInfo?.[locale]}

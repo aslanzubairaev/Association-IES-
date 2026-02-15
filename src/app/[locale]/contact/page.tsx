@@ -5,6 +5,7 @@
 */
 
 import { ContactPageContent } from "@/components/contacts/ContactPageContent";
+import styles from "./page.module.css";
 
 export default function ContactPage({
   params,
@@ -14,13 +15,13 @@ export default function ContactPage({
   searchParams?: { topic?: string; intent?: string };
 }) {
   return (
-    <>
+    <div className={styles.contactScope}>
       {/* Контент страницы контактов — клиентский, чтобы реагировать на выбор темы в списке. */}
       <ContactPageContent
         locale={params.locale}
         initialTopic={searchParams?.topic}
         initialIntentId={searchParams?.intent}
       />
-    </>
+    </div>
   );
 }

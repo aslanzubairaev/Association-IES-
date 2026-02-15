@@ -1,7 +1,3 @@
-.contactScope {
-}
-
-/* Правая карточка с формой: золотой фон как у .card--yellow. */
 .contactScope :global(.contact-card.contact-card--yellow.card--paper) {
   background: var(--yellow);
   border: var(--border) solid rgba(11, 27, 51, 0.14);
@@ -26,22 +22,22 @@
   width: 100%;
 }
 
-.contactContent {
+.contactScope :global(.contact-content) {
   max-width: 880px;
   margin: 0 auto;
   width: 100%;
 }
 
-.contactContext {
+.contactScope :global(.contact-context) {
   margin: 16px 0 28px;
   color: rgba(255, 255, 255, 0.96);
 }
 
-.contactContext :global(.ies-list-item) {
+.contactScope :global(.contact-context .ies-list-item) {
   color: inherit;
 }
 
-.contactContext :global(.ies-list) {
+.contactScope :global(.contact-context .ies-list) {
   color: inherit;
 }
 
