@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { privacyPageCopy } from "@/content/actions";
 import PrivacyPage from "@/components/sections/privacy/PrivacyPage";
+import styles from "./page.module.css";
 
 // Заголовок и описание вкладки берём из словаря выбранного языка.
 export function generateMetadata({
@@ -22,5 +23,9 @@ export default function PrivacyRoutePage({ params }: { params: { locale: "ru" | 
   const locale = params.locale;
 
   // Передаём выбранный язык в основной компонент, чтобы маршрутный файл оставался простым.
-  return <PrivacyPage locale={locale} />;
+  return (
+    <div className={styles.privacyScope}>
+      <PrivacyPage locale={locale} />
+    </div>
+  );
 }

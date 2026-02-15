@@ -6,7 +6,6 @@ import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import { buildGmailComposeUrl } from "@/lib/emailCompose";
 import { privacyPageCopy } from "@/content/actions";
-import styles from "./PrivacyPage.module.css";
 
 type PrivacyPageProps = {
   locale: "ru" | "fr";
@@ -24,7 +23,7 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
   });
 
   return (
-    <div className={styles.privacyScope}>
+    <>
       {/* Верхний блок страницы с заголовком и кратким пояснением о политике. */}
       <Section
         as="main"
@@ -38,7 +37,7 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
           footerText={`${copy.updatedLabel} ${copy.updatedDate}`}
           hoverable={false}
         >
-          <div className={styles.privacyContent}>
+          <div className="privacy-content">
             {/* Блок о том, кто отвечает за обработку данных. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.whoTitle}</h2>
@@ -91,7 +90,7 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
                 <Link href={contactHref}>{copy.contactLinkLabel}</Link>
                 {copy.contactTextAfter}
                 <a
-                  className={styles.privacyEmailLink}
+                  className="privacy-email-link"
                   href={emailComposeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -109,6 +108,6 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
           </div>
         </ContentCard>
       </Section>
-    </div>
+    </>
   );
 }
