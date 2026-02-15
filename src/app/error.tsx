@@ -18,7 +18,10 @@ export default function Error({
       <h2>Something went wrong</h2>
       <p>{error?.message}</p>
       {/* По нажатию запускаем повторную попытку загрузить текущий экран после ошибки. */}
-      <button type="button" onClick={() => reset()}>
+      <button
+        onClick={() => reset()}
+        type="button"
+      >
         Try again
       </button>
     </div>

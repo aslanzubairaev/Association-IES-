@@ -138,6 +138,7 @@ export function QuickContactForm({
     }
   }
 
+  // Отправка формы собирает данные и открывает подготовленное письмо в выбранном почтовом сценарии.
   return (
     <form className={cn("form quickForm", styles.root)} onSubmit={handleSubmit} noValidate>
       {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}

@@ -19,7 +19,10 @@ export default function GlobalError({
         <h2>Application error</h2>
         <p>{error?.message}</p>
         {/* По нажатию снова запускаем отрисовку приложения после критической ошибки. */}
-        <button type="button" onClick={() => reset()}>
+        <button
+          onClick={() => reset()}
+          type="button"
+        >
           Try again
         </button>
       </body>

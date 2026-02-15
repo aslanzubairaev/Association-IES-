@@ -82,11 +82,12 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
   return (
     <div className={styles.bankTransferDetails}>
       {/* Блок реквизитов: контрастный и кликабельный, чтобы быстро скопировать данные. */}
+      {/* Клик по карточке копирует все реквизиты и показывает подтверждение. */}
       <div
+        onClick={copyAll}
         className={`contact-box support-info-panel ${styles.supportInfoPanel} ${styles.bankTransferBox}`}
         role="button"
         tabIndex={0}
-        onClick={copyAll}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
