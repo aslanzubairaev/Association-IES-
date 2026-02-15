@@ -16,6 +16,7 @@ type FooterProps = {
 // Низ сайта: минимальная версия, без сложной логики.
 export default function Footer({ locale }: FooterProps) {
   const copy = footerCopy[locale];
+  // Единый список соцсетей для подвала: ссылка, подпись и иконка рендерятся из одного массива без дублирования.
   const socialLinks = [
     {
       id: "instagram",

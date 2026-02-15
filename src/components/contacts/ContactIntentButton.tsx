@@ -26,10 +26,11 @@ export function ContactIntentButton({ locale, intentId, label, className, varian
   }
 
   return (
+    // Кнопка передаёт выбранное намерение в URL и ведёт пользователя сразу к нужной теме формы.
     <Button
+      onClick={handleClick}
       variant={variant}
       className={className}
-      onClick={handleClick}
     >
       {label}
     </Button>

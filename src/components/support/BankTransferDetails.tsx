@@ -46,6 +46,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     copyToClipboard(`IBAN: ${iban}\nBIC: ${bic}`, `${copy.copiedLabel}: ${copy.copyAllLabel}`);
   }
 
+  // Короткое подтверждение после копирования IBAN или BIC: сначала очищаем старые таймеры, затем запускаем новые.
   function showToast(owner: "iban" | "bic", text: string) {
     if (toastTimeoutRef.current) {
       window.clearTimeout(toastTimeoutRef.current);
@@ -66,6 +67,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     }, 1800);
   }
 
+  // При уходе со страницы очищаем таймеры, чтобы не было отложенных обновлений для уже закрытого блока.
   useEffect(() => {
     return () => {
       if (toastTimeoutRef.current) {
@@ -80,11 +82,12 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
   return (
     <div className={styles.bankTransferDetails}>
       {/* Блок реквизитов: контрастный и кликабельный, чтобы быстро скопировать данные. */}
+      {/* Клик по карточке копирует все реквизиты и показывает подтверждение. */}
       <div
-        className={`contact-box support-info-panel ${styles.bankTransferBox}`}
+        onClick={copyAll}
+        className={`contact-box support-info-panel ${styles.supportInfoPanel} ${styles.bankTransferBox}`}
         role="button"
         tabIndex={0}
-        onClick={copyAll}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
@@ -93,11 +96,11 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
         }}
         aria-label={copy.copyAllLabel}
       >
-        <div className="support-info-title">
+        <div className={`support-info-title ${styles.supportInfoTitle}`}>
           {copy.cardTitle}
         </div>
 
-        <IesList className="bank-transfer-lines support-info-list">
+        <IesList className={`bank-transfer-lines support-info-list ${styles.supportInfoList}`}>
           <IesListItem>
             <span className="bank-transfer-label">IBAN:</span>{" "}
             <span className="bank-transfer-value bank-transfer-value--mono">

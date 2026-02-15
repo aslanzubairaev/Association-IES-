@@ -8,7 +8,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { headerCopy } from "@/content/actions";
 import styles from "./Header.module.css";
@@ -207,12 +207,13 @@ export function Header({ locale }: HeaderProps) {
             aria-label={copy.langSwitcherAriaLabel}
             ref={langDesktopRef}
           >
+            {/* Кнопка открывает и закрывает меню языков на десктопе. */}
             <button
+              onClick={toggleLangMenu}
               type="button"
               className={`btn btn--pill btn--outline-white ${styles.langToggle}`}
               aria-expanded={isLangMenuOpen}
               aria-controls={langMenuDesktopId}
-              onClick={toggleLangMenu}
             >
               {locale.toUpperCase()}
             </button>
@@ -224,18 +225,20 @@ export function Header({ locale }: HeaderProps) {
                 role="menu"
               >
                 {copy.langMenuItems.map((item) => (
-                  <Link
-                    key={item.locale}
-                    className={styles.langMenuItem}
-                    href={resolveLocalePath(item.locale)}
-                    role="menuitem"
-                    aria-current={locale === item.locale ? "page" : undefined}
-                    scroll={false}
-                    onClick={() => setIsLangMenuOpen(false)}
-                  >
-                    <span className={styles.langMenuCode}>{item.code}</span>
-                    <span className={styles.langMenuName}>{item.name}</span>
-                  </Link>
+                  <Fragment key={item.locale}>
+                    {/* Выбор языка закрывает список на десктопе. */}
+                    <Link
+                      onClick={() => setIsLangMenuOpen(false)}
+                      className={styles.langMenuItem}
+                      href={resolveLocalePath(item.locale)}
+                      role="menuitem"
+                      aria-current={locale === item.locale ? "page" : undefined}
+                      scroll={false}
+                    >
+                      <span className={styles.langMenuCode}>{item.code}</span>
+                      <span className={styles.langMenuName}>{item.name}</span>
+                    </Link>
+                  </Fragment>
                 ))}
               </div>
             ) : null}
@@ -248,6 +251,7 @@ export function Header({ locale }: HeaderProps) {
           >
             {/* Кнопка “бургер”: открывает и закрывает список страниц. */}
             <button
+              onClick={toggleMobileMenu}
               type="button"
               className={styles.burgerButton}
               aria-label={
@@ -255,7 +259,6 @@ export function Header({ locale }: HeaderProps) {
               }
               aria-expanded={isMobileMenuOpen}
               aria-controls={mobileMenuId}
-              onClick={toggleMobileMenu}
             >
               <span className={styles.burgerLines} aria-hidden="true">
                 <span />
@@ -270,12 +273,13 @@ export function Header({ locale }: HeaderProps) {
               aria-label={copy.langSwitcherAriaLabel}
               ref={langMobileRef}
             >
+              {/* Кнопка открывает и закрывает список языков рядом с бургером. */}
               <button
+                onClick={toggleLangMenu}
                 type="button"
                 className={`${styles.langPill} ${styles.langPillActive} ${styles.langToggle}`}
                 aria-expanded={isLangMenuOpen}
                 aria-controls={langMenuMobileId}
-                onClick={toggleLangMenu}
                 aria-label={copy.langToggleAriaLabel}
               >
                 {locale.toUpperCase()}
@@ -288,18 +292,20 @@ export function Header({ locale }: HeaderProps) {
                   role="menu"
                 >
                   {copy.langMenuItems.map((item) => (
-                    <Link
-                      key={item.locale}
-                      className={styles.langMenuItem}
-                      href={resolveLocalePath(item.locale)}
-                      role="menuitem"
-                      aria-current={locale === item.locale ? "page" : undefined}
-                      scroll={false}
-                      onClick={() => setIsLangMenuOpen(false)}
-                    >
-                      <span className={styles.langMenuCode}>{item.code}</span>
-                      <span className={styles.langMenuName}>{item.name}</span>
-                    </Link>
+                    <Fragment key={item.locale}>
+                      {/* Выбор языка закрывает список в мобильном меню. */}
+                      <Link
+                        onClick={() => setIsLangMenuOpen(false)}
+                        className={styles.langMenuItem}
+                        href={resolveLocalePath(item.locale)}
+                        role="menuitem"
+                        aria-current={locale === item.locale ? "page" : undefined}
+                        scroll={false}
+                      >
+                        <span className={styles.langMenuCode}>{item.code}</span>
+                        <span className={styles.langMenuName}>{item.name}</span>
+                      </Link>
+                    </Fragment>
                   ))}
                 </div>
               ) : null}
@@ -310,13 +316,12 @@ export function Header({ locale }: HeaderProps) {
 
       {/* Мобильное меню: появляется поверх страницы, когда человек нажимает бургер. */}
       {isMobileMenuOpen ? (
-        <div
+        <div onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            closeMobileMenu();
+          }
+        }}
           className={styles.mobileMenuOverlay}
-          onClick={(event) => {
-            if (event.target === event.currentTarget) {
-              closeMobileMenu();
-            }
-          }}
         >
           <div
             className={styles.mobileMenuPanel}
@@ -328,11 +333,12 @@ export function Header({ locale }: HeaderProps) {
               <div className={styles.mobileMenuTitle}>
                 {copy.mobileMenuTitle}
               </div>
+              {/* Кнопка закрывает мобильное меню без перехода по ссылкам. */}
               <button
+                onClick={closeMobileMenu}
                 type="button"
                 className={styles.mobileMenuClose}
                 aria-label={copy.mobileMenuCloseLabel}
-                onClick={closeMobileMenu}
               >
                 ×
               </button>
@@ -342,37 +348,41 @@ export function Header({ locale }: HeaderProps) {
               className={styles.mobileMenuLinks}
               aria-label={copy.mobileNavAriaLabel}
             >
+              {/* Ссылка закрывает меню и ведёт в раздел aide. */}
               <Link
+                onClick={closeMobileMenu}
                 href={`/${locale}/aide`}
                 aria-current={isActive(`/${locale}/aide`) ? "page" : undefined}
-                onClick={closeMobileMenu}
               >
                 {copy.navLabels.aide}
               </Link>
+              {/* Ссылка закрывает меню и ведёт в раздел actions. */}
               <Link
+                onClick={closeMobileMenu}
                 href={`/${locale}/actions`}
                 aria-current={
                   isActive(`/${locale}/actions`) ? "page" : undefined
                 }
-                onClick={closeMobileMenu}
               >
                 {copy.navLabels.actions}
               </Link>
+              {/* Ссылка закрывает меню и ведёт в раздел soutenir. */}
               <Link
+                onClick={closeMobileMenu}
                 href={`/${locale}/soutenir`}
                 aria-current={
                   isActive(`/${locale}/soutenir`) ? "page" : undefined
                 }
-                onClick={closeMobileMenu}
               >
                 {copy.navLabels.soutenir}
               </Link>
+              {/* Ссылка закрывает меню и ведёт в раздел contact. */}
               <Link
+                onClick={closeMobileMenu}
                 href={`/${locale}/contact`}
                 aria-current={
                   isActive(`/${locale}/contact`) ? "page" : undefined
                 }
-                onClick={closeMobileMenu}
               >
                 {copy.navLabels.contact}
               </Link>

@@ -138,15 +138,6 @@ a {
   background: transparent;
 }
 
-.section--soft + .trust-block {
-  padding-top: 72px;
-}
-
-.trust-block + .section--pink-2 {
-  /* После “Доверие” заголовок следующей секции должен появляться быстрее (без “пустого экрана”). */
-  padding-top: 48px;
-}
-
 /* “Что вам нужно?”: чуть меньше воздуха снизу, чтобы следующий блок начинался быстрее. */
 .section--soft {
   padding-bottom: 72px;
@@ -158,14 +149,6 @@ a {
 }
 
 @media (max-width: 520px) {
-  .section--soft + .trust-block {
-    padding-top: 56px;
-  }
-
-  .trust-block + .section--pink-2 {
-    padding-top: 40px;
-  }
-
   .section--soft {
     padding-bottom: 56px;
   }
@@ -176,21 +159,11 @@ a {
 }
 
 
-/* Карточки на странице “Aide / Чем помогаем”: такие же цвета, как у quickNav. */
-.aide-card.card--paper {
-  background: var(--surface);
-  border-color: var(--surface-border);
-  color: var(--text-primary);
-}
-
-.aide-card .fineprint {
-  color: rgba(255, 255, 255, 0.82) !important;
-}
-
 .support-donate-section {
   --support-footer-gap: 14px;
 }
 
+/* TODO: Эти стили перенесены в BankTransferDetails.module.css. Проверить и удалить после финальной проверки. */
 .support-info-panel {
   padding: 16px;
   border-radius: 16px;
@@ -237,15 +210,6 @@ a {
   }
 }
 
-
-/* Кнопки “Скопировать” в банковской карточке: делаем компактнее, чтобы две кнопки помещались рядом. */
-.btn.btn--sm {
-  padding: 10px 14px;
-  font-size: 12px;
-}
-
-@media (max-width: 520px) {
-}
 
 /* (анимация волонтёрской кнопки удалена: теперь используются обычные hover/active для .btn) */
 

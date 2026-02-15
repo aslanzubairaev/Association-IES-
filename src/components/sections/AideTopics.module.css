@@ -2,6 +2,16 @@
   align-items: stretch;
 }
 
+:where(.topicsScope) :global(.aide-card.card--paper) {
+  background: var(--surface);
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+}
+
+:where(.topicsScope) :global(.aide-card .fineprint) {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
 :where(.topicsScope) :global(.aide-topics-grid > *) {
   height: 100%;
 }

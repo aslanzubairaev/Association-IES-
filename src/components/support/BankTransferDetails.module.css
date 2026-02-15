@@ -5,8 +5,35 @@
   flex: 1 1 auto;
 }
 
+.supportInfoPanel {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 14px 30px rgba(7, 12, 40, 0.16);
+  width: 100%;
+  min-height: 190px;
+}
+
 .bankTransferDetails :global(.support-info-panel) {
   margin-bottom: var(--support-footer-gap, 14px);
+}
+
+.supportInfoTitle {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 10px;
+}
+
+.supportInfoList {
+  --ies-list-marker-width: 6px;
+  --ies-list-marker-height: 18.75px;
+  --ies-list-marker-color: currentColor;
+  --ies-list-marker-opacity: 0.6;
+  --ies-list-gap: 12px;
 }
 
 .footer {

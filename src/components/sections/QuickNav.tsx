@@ -1,10 +1,10 @@
-"use client";
-
 /* 
  Этот файл содержит блок “Что вам нужно?” на главной странице.
  Он показывает набор карточек-навигации, которые ведут на основные разделы сайта.
  Здесь можно поменять список карточек и их тексты через файл с данными, не трогая верстку.
 */
+
+"use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
 import { Section } from "@/components/ui/Section/Section";
@@ -22,6 +22,7 @@ export function QuickNav({ locale }: QuickNavProps) {
   const copy = quickNavCopy[locale];
   const gridRef = useRef<HTMLDivElement | null>(null);
 
+  // После загрузки отслеживаем карточки в зоне видимости и включаем мягкую подсветку, чтобы направить внимание.
   useEffect(() => {
     const grid = gridRef.current;
     if (!grid || typeof window === "undefined" || !("IntersectionObserver" in window)) {
@@ -73,8 +74,7 @@ export function QuickNav({ locale }: QuickNavProps) {
               style={hintDelay}
             >
               <CardContent>
-                {/* Use manual h3 or CardHeader? Original: h3 inside card. */}
-                {/* Visuals might depend on padding. CardContent has padding. */}
+                {/* Заголовок и текст карточки объясняют, куда ведёт этот пункт навигации. */}
                 <h3 className="h3 h3--blue">{card.title[locale]}</h3>
 
                 <p className="p">{card.description[locale]}</p>

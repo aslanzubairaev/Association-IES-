@@ -1,3 +1,9 @@
+/*
+ Этот файл определяет переиспользуемый выпадающий список.
+ Он показывает поле выбора и список вариантов в всплывающем окне.
+ Человек может открыть список, выбрать пункт и увидеть отметку выбранного значения.
+*/
+
 "use client";
 
 import * as React from "react";
@@ -36,6 +42,7 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+// Базовый контейнер выпадающего списка.
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
 const SelectValue = React.forwardRef<
@@ -50,6 +57,7 @@ const SelectValue = React.forwardRef<
 ));
 SelectValue.displayName = SelectPrimitive.Value.displayName;
 
+// Кнопка открытия списка с текущим выбранным значением.
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -67,6 +75,7 @@ const SelectTrigger = React.forwardRef<
 ));
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 
+// Всплывающее окно со списком вариантов.
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
@@ -87,6 +96,7 @@ const SelectContent = React.forwardRef<
 ));
 SelectContent.displayName = SelectPrimitive.Content.displayName;
 
+// Один вариант в списке, который можно выбрать.
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
@@ -96,6 +106,7 @@ const SelectItem = React.forwardRef<
     <SelectPrimitive.ItemIndicator
       className={cn(styles.selectItemIndicator, "ies-select-item-indicator")}
     >
+      {/* Галочка показывает, какой вариант выбран сейчас. */}
       <CheckIcon />
     </SelectPrimitive.ItemIndicator>
   </SelectPrimitive.Item>

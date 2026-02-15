@@ -72,25 +72,31 @@ export function CopyToClipboardButton({
   }
 
   if (!showStatus) {
+    // Упрощённый вариант: по нажатию только копируем значение без вывода строки статуса.
     return (
-      <Button
-        type="button"
-        variant="pill"
-        className={className ?? "cta-pill"}
-        onClick={copyValue}
-      >
-        {label}
-      </Button>
+      <>
+        {/* Кнопка запускает копирование без показа отдельного статуса. */}
+        <Button
+          onClick={copyValue}
+          type="button"
+          variant="pill"
+          className={className ?? "cta-pill"}
+        >
+          {label}
+        </Button>
+      </>
     );
   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+      {/* Основная кнопка запускает копирование, а статус ниже подтверждает действие для пользователя. */}
+      {/* Кнопка копирует значение, а строка ниже сообщает о результате действия. */}
       <Button
+        onClick={copyValue}
         type="button"
         variant="pill"
         className={className ?? "cta-pill"}
-        onClick={copyValue}
         aria-describedby={statusId}
       >
         {label}
