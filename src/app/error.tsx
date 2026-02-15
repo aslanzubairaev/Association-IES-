@@ -13,10 +13,27 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const isProd = process.env.NODE_ENV === "production";
+  const message = isProd
+    ? "Произошла ошибка. Попробуйте ещё раз."
+    : error?.message;
+
   return (
-    <div style={{ padding: 24 }}>
-      <h2>Something went wrong</h2>
-      <p>{error?.message}</p>
+    <div
+      style={{
+        maxWidth: 640,
+        margin: "40px auto",
+        padding: 24,
+        border: "1px solid #e5e7eb",
+        borderRadius: 12,
+        background: "#ffffff",
+        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+      }}
+    >
+      <h2 style={{ marginTop: 0 }}>Something went wrong</h2>
+      <p role="alert" aria-live="polite">
+        {message}
+      </p>
       {/* По нажатию запускаем повторную попытку загрузить текущий экран после ошибки. */}
       <button
         onClick={() => reset()}
