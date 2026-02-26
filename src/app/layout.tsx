@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [{ url: "/ies-logo.png" }],
-    shortcut: [{ url: "/ies-logo.png" }],
-    apple: [{ url: "/ies-logo.png" }],
+    icon: [{ url: "/icon.png" }],
+    shortcut: [{ url: "/icon.png" }],
+    apple: [{ url: "/apple-icon.png" }],
   },
   openGraph: {
     title: siteMetadata.title,
