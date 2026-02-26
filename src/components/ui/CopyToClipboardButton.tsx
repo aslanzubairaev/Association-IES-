@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button/Button";
 
 type CopyToClipboardButtonProps = {
@@ -29,6 +29,15 @@ export function CopyToClipboardButton({
 }: CopyToClipboardButtonProps) {
   const [statusText, setStatusText] = useState<string | null>(null);
   const statusId = useId();
+  const statusTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (statusTimeoutRef.current) {
+        window.clearTimeout(statusTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Действие: копируем значение в буфер обмена (с запасным вариантом для браузеров без Clipboard API).
   async function copyValue() {
@@ -64,8 +73,11 @@ export function CopyToClipboardButton({
 
     if (isCopied) {
       if (showStatus) {
+        if (statusTimeoutRef.current) {
+          window.clearTimeout(statusTimeoutRef.current);
+        }
         setStatusText(copiedLabel);
-        window.setTimeout(() => setStatusText(null), 1600);
+        statusTimeoutRef.current = window.setTimeout(() => setStatusText(null), 1600);
       }
       onCopied?.(copiedLabel);
     }

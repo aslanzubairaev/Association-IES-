@@ -23,29 +23,18 @@
 /* Background Images */
 .heroBg {
   width: 100%;
+  display: block;
+}
+
+.heroBgPicture {
+  display: block;
+}
+
+.heroBgImage {
+  width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
-  display: block;
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-}
-
-.heroBgDesktop {
-  display: block;
-}
-
-.heroBgMobile {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .heroBgDesktop {
-    display: none;
-  }
-
-  .heroBgMobile {
-    display: block;
-  }
 }
 
 :where(.heroScope):global(.hero-section)+ :global(.section--soft) {

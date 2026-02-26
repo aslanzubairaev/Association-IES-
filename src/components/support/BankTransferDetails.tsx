@@ -24,6 +24,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
   const [toastText, setToastText] = useState<string | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastOwner, setToastOwner] = useState<"iban" | "bic" | null>(null);
+  const statusTimeoutRef = useRef<number | null>(null);
   const toastTimeoutRef = useRef<number | null>(null);
   const toastHideRef = useRef<number | null>(null);
 
@@ -31,13 +32,17 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
 
   // Действие: копируем текст в буфер обмена, чтобы человек мог быстро вставить его в приложении банка.
   async function copyToClipboard(textToCopy: string, okMessage: string) {
+    if (statusTimeoutRef.current) {
+      window.clearTimeout(statusTimeoutRef.current);
+    }
+
     try {
       await navigator.clipboard.writeText(textToCopy);
       setStatus(okMessage);
-      window.setTimeout(() => setStatus(null), 1600);
+      statusTimeoutRef.current = window.setTimeout(() => setStatus(null), 1600);
     } catch {
       setStatus(copy.copyFailedLabel);
-      window.setTimeout(() => setStatus(null), 2200);
+      statusTimeoutRef.current = window.setTimeout(() => setStatus(null), 2200);
     }
   }
 
@@ -70,6 +75,9 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
   // При уходе со страницы очищаем таймеры, чтобы не было отложенных обновлений для уже закрытого блока.
   useEffect(() => {
     return () => {
+      if (statusTimeoutRef.current) {
+        window.clearTimeout(statusTimeoutRef.current);
+      }
       if (toastTimeoutRef.current) {
         window.clearTimeout(toastTimeoutRef.current);
       }
