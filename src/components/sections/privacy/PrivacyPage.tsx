@@ -21,6 +21,8 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
     subject: copy.contactSubject,
     body: copy.contactBody,
   });
+  const cnilUrl = "https://www.cnil.fr";
+  const cnilTextParts = copy.rightsCnilText.split(cnilUrl);
 
   return (
     <>
@@ -72,6 +74,12 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
               <p className="p">{copy.shareText}</p>
             </section>
 
+            {/* Блок со сроком хранения данных. */}
+            <section className="privacy-section">
+              <h2 className="h3 h3--blue">{copy.retentionTitle}</h2>
+              <p className="p">{copy.retentionText}</p>
+            </section>
+
             {/* Блок с правами человека в отношении его данных. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.rightsTitle}</h2>
@@ -80,6 +88,13 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
                   <IesListItem key={item}>{item}</IesListItem>
                 ))}
               </IesList>
+              <p className="p">
+                {cnilTextParts[0]}
+                <a href={cnilUrl} target="_blank" rel="noopener noreferrer">
+                  {cnilUrl}
+                </a>
+                {cnilTextParts[1] ?? ""}
+              </p>
             </section>
 
             {/* Блок со способами связи: страница контактов и кнопка написания письма. */}

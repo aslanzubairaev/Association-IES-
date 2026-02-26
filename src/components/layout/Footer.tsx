@@ -114,6 +114,7 @@ export default function Footer({ locale }: FooterProps) {
             <Link href={`/${locale}/contact`}>
               {copy.contactLabel}
             </Link>
+            <Link href={`/${locale}/legal`}>{copy.legalLabel}</Link>
             <Link href={`/${locale}/privacy`}>
               {copy.privacyLabel}
             </Link>

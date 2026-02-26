@@ -10,7 +10,41 @@ import "./globals.css";
 import { siteMetadata } from "@/content/actions";
 
 // Информация, которую браузер и поисковики видят как название и описание сайта.
-export const metadata: Metadata = siteMetadata;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export const metadata: Metadata = {
+  ...siteMetadata,
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: [{ url: "/ies-logo.png" }],
+    shortcut: [{ url: "/ies-logo.png" }],
+    apple: [{ url: "/ies-logo.png" }],
+  },
+  openGraph: {
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    siteName: "Association IES",
+    type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1587,
+        height: 995,
+        alt: "Association IES",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: ["/og-image.jpg"],
+  },
+};
 
 // Общая оболочка для всех страниц: сюда подставляется содержимое текущей страницы.
 export default function RootLayout({

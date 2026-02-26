@@ -855,6 +855,7 @@ type FooterCopy = {
   copyright: string;
   contactLabel: string;
   privacyLabel: string;
+  legalLabel: string;
   socialLabels: {
     instagram: string;
     facebook: string;
@@ -870,6 +871,7 @@ export const footerCopy: Record<ActionsLocale, FooterCopy> = {
     copyright: "© 2025 Association IES",
     contactLabel: "контакты",
     privacyLabel: "Политика конфиденциальности",
+    legalLabel: "Правовая информация",
     socialLabels: {
       instagram: "Instagram",
       facebook: "Facebook",
@@ -882,6 +884,7 @@ export const footerCopy: Record<ActionsLocale, FooterCopy> = {
     copyright: "© 2025 Association IES",
     contactLabel: "Contact",
     privacyLabel: "Politique de confidentialité",
+    legalLabel: "Mentions légales",
     socialLabels: {
       instagram: "Instagram",
       facebook: "Facebook",
@@ -982,6 +985,7 @@ type PrivacyPageCopy = {
   retentionText: string;
   rightsTitle: string;
   rightsItems: string[];
+  rightsCnilText: string;
   contactTitle: string;
   contactTextBefore: string;
   contactLinkLabel: string;
@@ -1017,7 +1021,8 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
     shareText:
       "Мы не продаём персональные данные. Передаём их только если это требуется законом или для работы почты/хостинга.",
     retentionTitle: "Срок хранения",
-    retentionText: "Сообщения храним до 12 месяцев или на разумный срок для обработки обращений.",
+    retentionText:
+      "Мы храним данные только на срок, необходимый для обработки вашего обращения, либо дольше, если этого требует закон.",
     rightsTitle: "Ваши права",
     rightsItems: [
       "Доступ к данным",
@@ -1027,6 +1032,8 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Ограничение обработки",
       "Переносимость данных",
     ],
+    rightsCnilText:
+      "Если вы считаете, что ваши права нарушены, вы можете подать жалобу в CNIL: https://www.cnil.fr.",
     contactTitle: "Связаться с нами",
     contactTextBefore: "По вопросам конфиденциальности напишите через ",
     contactLinkLabel: "страницу контактов",
@@ -1061,7 +1068,7 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Nous ne vendons pas les données. Elles peuvent être transmises uniquement si la loi l’exige ou pour le fonctionnement de la messagerie/l’hébergement.",
     retentionTitle: "Durée de conservation",
     retentionText:
-      "Nous conservons les messages jusqu’à 12 mois ou pour une durée raisonnable liée au traitement des demandes.",
+      "Nous conservons les données uniquement pendant la durée nécessaire au traitement de votre demande, ou plus longtemps si la loi l’exige.",
     rightsTitle: "Vos droits",
     rightsItems: [
       "Accès",
@@ -1071,6 +1078,8 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Limitation du traitement",
       "Portabilité",
     ],
+    rightsCnilText:
+      "Si vous estimez que vos droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la CNIL : https://www.cnil.fr.",
     contactTitle: "Nous contacter",
     contactTextBefore: "Pour toute question, contactez-nous via la ",
     contactLinkLabel: "page Contact",
@@ -1083,6 +1092,143 @@ export const privacyPageCopy: Record<ActionsLocale, PrivacyPageCopy> = {
       "Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site et aucun suivi publicitaire.",
     updatedLabel: "Dernière mise à jour :",
     updatedDate: "31 janvier 2026",
+  },
+};
+
+type LegalSection = {
+  title: string;
+  lines: string[];
+};
+
+type LegalPageCopy = {
+  title: string;
+  lead: string;
+  metadataTitle: string;
+  metadataDescription: string;
+  sections: LegalSection[];
+  updatedLabel: string;
+  updatedDate: string;
+};
+
+// Тексты для страницы "Mentions légales / Правовая информация".
+export const legalPageCopy: Record<ActionsLocale, LegalPageCopy> = {
+  ru: {
+    title: "ПРАВОВАЯ ИНФОРМАЦИЯ",
+    lead: "Обязательные юридические сведения о сайте Association IES.",
+    metadataTitle: "Правовая информация | Association IES",
+    metadataDescription:
+      "Юридические реквизиты Association IES, информация о публикации, хостинге и правах на контент.",
+    sections: [
+      {
+        title: "Издатель сайта",
+        lines: [
+          "Association pour l'Éducation et l'Insertion Sociale Intégration, Éducation, Synergie (ASSOCIATION I.E.S.)",
+          "Адрес: 117 Route de Schirmeck, 67200 Strasbourg, France",
+          "SIREN: 879 060 283",
+          "SIRET (siège): 879 060 283 00014",
+          "Code APE/NAF: 94.99Z",
+          "Форма: Association de droit local (Bas-Rhin, Haut-Rhin et Moselle)",
+          "Дата создания: 19/02/2019",
+          "Статус / Label: ESS - Économie Sociale et Solidaire",
+        ],
+      },
+      {
+        title: "Ответственный за публикацию",
+        lines: ["Association I.E.S. - Représentant légal : [À compléter]"],
+      },
+      {
+        title: "Хостинг",
+        lines: [
+          "Провайдер хостинга: [укажите название провайдера]",
+          "Юридическое наименование: [укажите юридическое лицо]",
+          "Адрес хостинга: [укажите адрес]",
+          "Контакт хостинга: [укажите e-mail/телефон]",
+        ],
+      },
+      {
+        title: "Интеллектуальная собственность",
+        lines: [
+          "Весь контент сайта (тексты, изображения, графика, логотипы, видео и др.) защищён правами интеллектуальной собственности.",
+          "Любое полное или частичное воспроизведение, публикация, изменение или адаптация запрещены без предварительного разрешения.",
+        ],
+      },
+      {
+        title: "Персональные данные",
+        lines: [
+          "Данные, переданные через формы сайта, используются только для ответа на запросы.",
+          "Мы храним данные только на срок, необходимый для обработки вашего обращения, либо дольше, если этого требует закон.",
+          "Данные не передаются третьим лицам, кроме случаев, предусмотренных законом или технической необходимостью хостинга/почты.",
+          "Для доступа, исправления или удаления данных свяжитесь с нами по e-mail: contact@associationies.fr.",
+        ],
+      },
+      {
+        title: "ФАЙЛЫ COOKIE",
+        lines: [
+          "Мы используем только технические cookies, необходимые для работы сайта, и не используем рекламный трекинг.",
+        ],
+      },
+    ],
+    updatedLabel: "Последнее обновление:",
+    updatedDate: "26 февраля 2026",
+  },
+  fr: {
+    title: "Mentions légales",
+    lead: "Informations juridiques obligatoires du site de l'Association IES.",
+    metadataTitle: "Mentions légales | Association IES",
+    metadataDescription:
+      "Informations légales de l'Association IES: éditeur, direction de publication, hébergement et droits sur les contenus.",
+    sections: [
+      {
+        title: "Éditeur du site",
+        lines: [
+          "Association pour l'Éducation et l'Insertion Sociale Intégration, Éducation, Synergie (ASSOCIATION I.E.S.)",
+          "Adresse : 117 Route de Schirmeck, 67200 Strasbourg, France",
+          "SIREN : 879 060 283",
+          "SIRET (siège) : 879 060 283 00014",
+          "Code APE/NAF : 94.99Z",
+          "Forme juridique : Association de droit local (Bas-Rhin, Haut-Rhin et Moselle)",
+          "Date de création : 19/02/2019",
+          "Qualité / Label : ESS - Économie Sociale et Solidaire",
+        ],
+      },
+      {
+        title: "Directeur / Directrice de la publication",
+        lines: ["Association I.E.S. - Représentant légal : [À compléter]"],
+      },
+      {
+        title: "Hébergement",
+        lines: [
+          "Hébergeur : [indiquer le nom du prestataire]",
+          "Raison sociale : [indiquer l'entité juridique]",
+          "Adresse : [indiquer l'adresse]",
+          "Contact : [indiquer e-mail/téléphone]",
+        ],
+      },
+      {
+        title: "Propriété intellectuelle",
+        lines: [
+          "L'ensemble des contenus du site (textes, images, graphismes, logos, vidéos, etc.) est protégé par le droit de la propriété intellectuelle.",
+          "Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, est interdite sans autorisation préalable.",
+        ],
+      },
+      {
+        title: "Données personnelles",
+        lines: [
+          "Les informations transmises via les formulaires du site sont utilisées uniquement pour répondre à votre demande.",
+          "Nous conservons les données uniquement pendant la durée nécessaire au traitement de votre demande, ou plus longtemps si la loi l’exige.",
+          "Elles ne sont pas cédées à des tiers, sauf obligation légale ou nécessité technique liée à l'hébergement/à la messagerie.",
+          "Pour demander l'accès, la rectification ou la suppression de vos données, contactez-nous par e-mail : contact@associationies.fr.",
+        ],
+      },
+      {
+        title: "Cookies",
+        lines: [
+          "Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site et aucun suivi publicitaire.",
+        ],
+      },
+    ],
+    updatedLabel: "Dernière mise à jour :",
+    updatedDate: "26 février 2026",
   },
 };
 
@@ -1421,5 +1567,6 @@ export const instagramBadgeCopy: Record<ActionsLocale, InstagramBadgeCopy> = {
 // Базовые метаданные сайта.
 export const siteMetadata = {
   title: "Association IES",
-  description: "Association IES",
+  description:
+    "Association IES: accompagnement social, actions educatives, sport, culture et integration pour les familles.",
 };
