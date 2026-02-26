@@ -1567,5 +1567,6 @@ export const instagramBadgeCopy: Record<ActionsLocale, InstagramBadgeCopy> = {
 // Базовые метаданные сайта.
 export const siteMetadata = {
   title: "Association IES",
-  description: "Association IES",
+  description:
+    "Association IES: accompagnement social, actions educatives, sport, culture et integration pour les familles.",
 };
