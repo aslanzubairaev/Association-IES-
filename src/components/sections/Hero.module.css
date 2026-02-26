@@ -35,6 +35,8 @@
   height: 100%;
   display: block;
   object-fit: cover;
+  mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
 }
 
 :where(.heroScope):global(.hero-section)+ :global(.section--soft) {
@@ -113,16 +115,16 @@
   font-weight: 600;
 }
 
-.heroTitleMobileBreak {
-  display: none;
-}
-
-.heroTitleDesktopOnly {
+.heroTitleMainLine {
   display: inline;
 }
 
-.heroTitleMobileOnly {
-  display: none;
+.heroTitleCityBreak {
+  display: block;
+}
+
+.heroTitleCityLine {
+  display: inline-block;
 }
 
 @media (max-width: 520px) {
@@ -160,23 +162,11 @@
     white-space: nowrap;
   }
 
-  .heroTitleDesktopOnly {
-    display: none;
-  }
-
-  .heroTitleMobileOnly {
-    display: inline;
-  }
-
-  .heroTitleFirstLine {
+  .heroTitleMainLine {
     display: inline-block;
     white-space: nowrap;
-    font-size: 0.8em;
+    font-size: 0.82em;
     letter-spacing: 0;
-  }
-
-  .heroTitleMobileBreak {
-    display: block;
   }
 
   .heroActionsRu {

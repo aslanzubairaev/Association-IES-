@@ -12,7 +12,9 @@ type HeroProps = {
 export function Hero({ locale }: HeroProps) {
   const copy = heroCopy[locale];
   const titleParts = copy.title.split(",").map((part) => part.trim()).filter(Boolean);
-  const shouldUseRuMobileTitleLayout = locale === "ru" && titleParts.length === 3;
+  const shouldSplitCityLine = titleParts.length === 3;
+  const titleMain = shouldSplitCityLine ? `${titleParts[0]}, ${titleParts[1]}` : copy.title;
+  const titleCity = shouldSplitCityLine ? titleParts[2] : null;
 
   return (
     <section className={`hero-section ${styles.heroScope}`}>
@@ -34,16 +36,11 @@ export function Hero({ locale }: HeroProps) {
         <div className={`hero-left hero-left--mobile-plain ${styles.heroContent}`}>
           {/* Крупный заголовок: кратко объясняет, что ассоциация помогает адаптироваться именно в Страсбурге. */}
           <h1 className="h1">
-            {shouldUseRuMobileTitleLayout ? (
+            {titleCity ? (
               <>
-                <span className={styles.heroTitleDesktopOnly}>{copy.title}</span>
-                <span className={styles.heroTitleMobileOnly}>
-                  <span className={styles.heroTitleFirstLine}>
-                    {titleParts[0]}, {titleParts[1]}
-                  </span>
-                  <br className={styles.heroTitleMobileBreak} />
-                  <span>{titleParts[2]}</span>
-                </span>
+                <span className={styles.heroTitleMainLine}>{titleMain}</span>
+                <br className={styles.heroTitleCityBreak} />
+                <span className={styles.heroTitleCityLine}>{titleCity}</span>
               </>
             ) : (
               copy.title
