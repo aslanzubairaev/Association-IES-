@@ -1,43 +1,97 @@
 .aideScope :global(.aide-page .aide-card) {
-  padding: 30px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(24px, 2.4vw, 32px);
+  border-radius: calc(var(--radius-card) + 2px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background:
+    radial-gradient(120% 95% at -10% -20%, rgba(247, 207, 74, 0.18), transparent 56%),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+  box-shadow: 0 22px 54px rgba(7, 10, 32, 0.22);
+  backdrop-filter: blur(8px);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
-.aideScope :global(.aide-page .aide-card[class*="Card_surface__"]:hover) {
-  transform: none;
-  box-shadow: var(--shadow-soft);
-  border-color: var(--surface-border);
-  background: var(--surface);
+.aideScope :global(.aide-page .aide-card)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(247, 207, 74, 0.96), rgba(255, 255, 255, 0.52));
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.aideScope :global(.aide-page .aide-topics-grid > :nth-child(3n + 2))::before {
+  background: linear-gradient(90deg, rgba(142, 200, 255, 0.94), rgba(255, 255, 255, 0.58));
+}
+
+.aideScope :global(.aide-page .aide-topics-grid > :nth-child(3n + 3))::before {
+  background: linear-gradient(90deg, rgba(197, 183, 255, 0.94), rgba(247, 207, 74, 0.68));
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .aideScope :global(.aide-page .aide-card:hover) {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.36);
+    background:
+      radial-gradient(120% 95% at -10% -20%, rgba(247, 207, 74, 0.24), transparent 58%),
+      linear-gradient(150deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
+    box-shadow: 0 30px 64px rgba(7, 10, 32, 0.3);
+  }
+}
+
+.aideScope :global(.aide-page .aide-card:focus-within) {
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25), 0 24px 58px rgba(7, 10, 32, 0.26);
 }
 
 .aideScope :global(.aide-page .aide-card .h3),
 .aideScope :global(.aide-page .aide-card .h3--blue) {
   color: var(--card-title-color);
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.3;
   font-weight: 800;
-  letter-spacing: 0.02em;
-  text-shadow: var(--card-text-shadow);
-}
-
-.aideScope :global(.aide-page .aide-card .p) {
-  margin: 10px 0 0;
-  color: var(--card-body-color);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.6;
+  letter-spacing: 0.015em;
   text-shadow: var(--card-text-shadow);
 }
 
 .aideScope :global(.aide-page .aide-card .list) {
-  margin-top: 12px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(8, 17, 60, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--card-body-color);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.55;
   text-shadow: var(--card-text-shadow);
 }
 
 .aideScope :global(.aide-page .aide-card .list li) {
-  margin: 10px 0;
+  margin: 0;
+  padding: 7px 0;
   color: var(--card-body-color);
   text-shadow: var(--card-text-shadow);
+}
+
+.aideScope :global(.aide-page .aide-card .ies-list-item) {
+  padding-left: 0;
+}
+
+.aideScope :global(.aide-page .aide-card .ies-list-item::before) {
+  content: none;
+}
+
+.aideScope :global(.aide-page .aide-card .list li + li) {
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
 .aideScope :global(.aide-page .aide-card .list li::marker) {
@@ -46,7 +100,9 @@
 
 .aideScope :global(.aide-page .aide-card .fineprint),
 .aideScope :global(.aide-page .aide-card .aide-fineprint) {
-  margin-top: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.24);
   color: var(--card-muted-color) !important;
   font-weight: 600;
   font-size: 13px;
@@ -66,43 +122,39 @@
 
 .aideScope :global(.aide-page .aide-card--topic .card-footer) {
   margin-top: auto !important;
+  padding-top: 16px;
 }
 
-.aideScope :global(.aide-page .aide-cta) {
-  margin-top: auto;
-  padding-top: 12px;
-  display: flex;
-  justify-content: center;
+.aideScope :global(.aide-page .aide-card .btn-row) {
+  margin-top: 18px;
+  margin-bottom: 0;
+  width: 100%;
+  justify-content: flex-start;
 }
 
-.aideScope :global(.aide-page .aide-cta .btn) {
-  padding: 12px 18px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+.aideScope :global(.aide-page .aide-card .btn-row > a),
+.aideScope :global(.aide-page .aide-card .btn-row > button) {
+  flex: 1 1 100%;
+  max-width: none;
 }
 
-.aideScope :global(.aide-page .aide-cta .btn:hover) {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(7, 12, 40, 0.25);
-}
-
-.aideScope :global(.aide-page .aide-cta .btn:active) {
-  transform: translateY(1px) scale(0.98);
-}
-
-.aideScope :global(.aide-page .aide-cta .btn:focus-visible) {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
-  outline-offset: 3px;
+.aideScope :global(.aide-page .aide-card .cta-pill) {
+  width: 100%;
+  max-width: none;
+  min-height: 46px;
 }
 
 @media (max-width: 520px) {
-  .aideScope :global(.aide-page .aide-cta) {
-    width: 100%;
+  .aideScope :global(.aide-page .aide-card) {
+    padding: 22px;
   }
 
-  .aideScope :global(.aide-page .aide-cta .btn) {
-    width: 100%;
+  .aideScope :global(.aide-page .aide-card .list) {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .aideScope :global(.aide-page .aide-card .cta-pill) {
+    min-height: 42px;
   }
 }
