@@ -4,9 +4,6 @@
  Нажатие помогает быстрее заполнить форму с нужной подсказкой.
 */
 
-"use client";
-
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
 
 type ContactIntentButtonProps = {
@@ -18,17 +15,11 @@ type ContactIntentButtonProps = {
 };
 
 export function ContactIntentButton({ locale, intentId, label, className, variant = "pill" }: ContactIntentButtonProps) {
-  const router = useRouter();
-
-  // По нажатию открываем страницу контактов с выбранной темой.
-  function handleClick() {
-    router.push(`/${locale}/contact?intent=${encodeURIComponent(intentId)}`);
-  }
+  const href = `/${locale}/contact?intent=${encodeURIComponent(intentId)}`;
 
   return (
-    // Кнопка передаёт выбранное намерение в URL и ведёт пользователя сразу к нужной теме формы.
     <Button
-      onClick={handleClick}
+      href={href}
       variant={variant}
       className={className}
     >

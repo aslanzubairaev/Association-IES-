@@ -15,8 +15,7 @@
   text-decoration: none;
   cursor: pointer;
   user-select: none;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease,
-    color 180ms ease;
+  transition: box-shadow 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .button:hover,
@@ -24,17 +23,9 @@
   text-decoration: none;
 }
 
-.button:hover {
-  transform: translateY(-2px);
-}
-
 .button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px var(--btn-focus-ring);
-}
-
-.button:active {
-  transform: translateY(1px);
 }
 
 .primary {
