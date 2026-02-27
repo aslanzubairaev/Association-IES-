@@ -13,7 +13,7 @@ import { QuickContactForm } from "@/components/forms/QuickContactForm";
 import { ContactContextBlock } from "@/components/contacts/ContactContextBlock";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { contactCopy, resolveContactTopicKey } from "@/content/actions";
-import { contactIntents, type ContactIntent } from "@/content/contactIntents";
+import { contactIntents, resolveContactIntentId, type ContactIntent } from "@/content/contactIntents";
 
 type ContactPageContentProps = {
   locale: "ru" | "fr";
@@ -31,8 +31,9 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId }: Co
   // Список всех известных тем, чтобы быстро находить совпадение по ключу.
   const allIntents = useMemo(() => Object.values(contactIntents), []);
   const intentFromUrl = searchParams?.get("intent") ?? initialIntentId ?? undefined;
+  const normalizedIntentId = resolveContactIntentId(intentFromUrl);
   const topicFromUrl = searchParams?.get("topic") ?? initialTopic ?? undefined;
-  const intentFromId = intentFromUrl ? contactIntents[intentFromUrl] : undefined;
+  const intentFromId = normalizedIntentId ? contactIntents[normalizedIntentId] : undefined;
   const normalizedInitialTopic = resolveContactTopicKey(topicFromUrl);
   const initialResolvedIntent = intentFromId ?? findIntentByTopic(allIntents, normalizedInitialTopic);
   const initialTopicValue = intentFromId?.topicValue ?? normalizedInitialTopic ?? "";

@@ -3,6 +3,8 @@
  Он также содержит справочные данные для форм и навигации.
 */
 
+import { activityTopicAliases, activityTopicEntries, activityTopicKeys } from "@/content/activitiesCatalog";
+
 // Доступные языки для текстов на сайте.
 export type ActionsLocale = "ru" | "fr";
 
@@ -285,31 +287,30 @@ const supportTopicLabels: Record<string, { ru: string; fr: string }> = {
 // Универсальная метка для прочих вопросов.
 const otherTopicLabels = { ru: "Другое", fr: "Autre" };
 
-// Темы, которые берём из списка действий, чтобы они совпадали с карточками.
-const actionTopicLabels: Record<string, { ru: string; fr: string }> = Object.fromEntries(
-  actionsCopy.ru.items.map((ruItem) => {
-    const frItem = actionsCopy.fr.items.find((x) => x.slug === ruItem.slug);
-    return [
-      ruItem.topicKey,
-      {
-        ru: ruItem.title,
-        fr: frItem?.title ?? ruItem.title,
-      },
-    ];
-  }),
+// Темы, которые берём из каталога активностей, чтобы форма всегда совпадала с актуальными карточками.
+const activityTopicLabels: Record<string, { ru: string; fr: string }> = Object.fromEntries(
+  activityTopicEntries.map((entry) => [
+    entry.topicKey,
+    {
+      ru: entry.title.ru,
+      fr: entry.title.fr,
+    },
+  ]),
 );
 
 // Общий справочник тем для формы контактов.
 export const contactTopicLabels: Record<string, { ru: string; fr: string }> = {
   ...baseContactTopicLabels,
   ...aideTopicLabels,
-  ...actionTopicLabels,
+  ...activityTopicLabels,
   ...supportTopicLabels,
   other: otherTopicLabels,
 };
 
-// Ключи тем, связанных с действиями.
-export const actionContactTopicKeys = actionsCopy.ru.items.map((item) => item.topicKey);
+// Ключи тем, связанных с активностями.
+export const activityContactTopicKeys = [...activityTopicKeys];
+// Сохраняем старое имя экспорта для совместимости с существующим кодом.
+export const actionContactTopicKeys = activityContactTopicKeys;
 // Ключи тем, связанных с поддержкой (используем только волонтёрство).
 export const supportContactTopicKeys = ["volunteer"];
 
@@ -334,9 +335,9 @@ export const contactCopy: Record<ActionsLocale, ContactCopy> = {
   },
 };
 
-const actionTopicAliases: Record<string, string> = Object.fromEntries(
-  actionsCopy.ru.items.map((item) => [`actions_${item.slug}`, item.topicKey]),
-);
+const actionTopicAliases: Record<string, string> = {
+  ...activityTopicAliases,
+};
 
 // Альтернативные названия тем, которые встречаются в старых ссылках или внешних источниках.
 const topicKeyAliases: Record<string, string> = {
@@ -404,7 +405,7 @@ export const homeNavCards: HomeNavCard[] = [
       fr: "Programmes, activités et accompagnement.",
       ru: "Программы, активности и сопровождение.",
     },
-    path: "/actions",
+    path: "/activites",
     icon: "/03.png",
   },
   {

@@ -60,7 +60,7 @@ export function Header({ locale, copy }: HeaderProps) {
 
   const navItems = [
     { id: "aide", href: `/${locale}/aide`, label: copy.navLabels.aide },
-    { id: "actions", href: `/${locale}/actions`, label: copy.navLabels.actions },
+    { id: "actions", href: `/${locale}/activites`, label: copy.navLabels.actions },
     { id: "soutenir", href: `/${locale}/soutenir`, label: copy.navLabels.soutenir },
     { id: "contact", href: `/${locale}/contact`, label: copy.navLabels.contact },
   ] as const;

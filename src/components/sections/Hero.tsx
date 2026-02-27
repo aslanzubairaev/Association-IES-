@@ -55,7 +55,7 @@ export function Hero({ locale }: HeroProps) {
             <Button className="hero-button" variant="accent" href={`/${locale}/aide`}>
               {copy.ctaPrimary}
             </Button>
-            <Button className="hero-button" variant="secondary" href={`/${locale}/actions`}>
+            <Button className="hero-button" variant="secondary" href={`/${locale}/activites`}>
               {copy.ctaSecondary}
             </Button>
           </div>

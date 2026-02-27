@@ -1,0 +1,119 @@
+.scope {
+  padding-top: 24px;
+}
+
+.scope :global(.section-head) {
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(146, 174, 210, 0.34);
+  background: linear-gradient(165deg, rgba(12, 27, 52, 0.96) 0%, rgba(21, 50, 89, 0.96) 100%);
+  box-shadow: 0 18px 42px rgba(5, 10, 28, 0.34);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(247, 207, 74, 0.95), rgba(247, 207, 74, 0.32));
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(247, 207, 74, 0.54);
+    box-shadow: 0 24px 52px rgba(5, 10, 28, 0.4);
+    text-decoration: none;
+  }
+
+  .card:hover .image {
+    transform: scale(1.025);
+  }
+}
+
+.card:focus-visible,
+.card:focus-within {
+  outline: none;
+  border-color: rgba(247, 207, 74, 0.58);
+  box-shadow: 0 0 0 3px rgba(247, 207, 74, 0.28), 0 24px 52px rgba(5, 10, 28, 0.4);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+}
+
+.imageWrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(169, 194, 225, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  aspect-ratio: 4 / 3;
+}
+
+.imageWrap::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 36%;
+  background: linear-gradient(180deg, rgba(6, 10, 24, 0) 0%, rgba(6, 10, 24, 0.5) 100%);
+  pointer-events: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.cardContent :global(.h3) {
+  font-size: clamp(18px, 1.35vw, 22px);
+  line-height: 1.28;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.cardContent :global(.p) {
+  color: rgba(226, 237, 251, 0.9);
+  line-height: 1.58;
+}
+
+.location {
+  margin-top: auto;
+  color: rgba(190, 210, 236, 0.84);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.ctaRow {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.ctaButton {
+  width: min(340px, 100%);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

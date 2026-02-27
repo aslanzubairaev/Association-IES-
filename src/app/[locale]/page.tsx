@@ -6,6 +6,7 @@
 
 import { Hero } from "@/components/sections/Hero";
 import { QuickNav } from "@/components/sections/QuickNav";
+import { ActivitiesHomeSection } from "@/components/sections/activities/ActivitiesHomeSection";
 import { TrustBlock } from "@/components/sections/TrustBlock";
 import { HistorySection } from "@/components/sections/HistorySection";
 
@@ -20,6 +21,7 @@ export default function LocalePage({ params }: { params: { locale: "ru" | "fr" }
         {/* Основной набор секций главной страницы для выбранного языка. */}
         <Hero locale={locale} />
         <QuickNav locale={locale} />
+        <ActivitiesHomeSection locale={locale} />
         <TrustBlock locale={locale} />
         <HistorySection locale={locale} />
       </div>
