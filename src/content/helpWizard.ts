@@ -12,6 +12,7 @@ type HelpWizardLocaleCopy = {
   pageTitle: string;
   pageSubtitle: string;
   stepLabel: (current: number, total: number) => string;
+  followUpProgressLabel: (current: number, total: number) => string;
   continueLabel: string;
   backLabel: string;
   sendLabel: string;
@@ -48,9 +49,11 @@ type HelpWizardLocaleCopy = {
   noChoiceText: string;
   submitErrorText: string;
   classifyErrorText: string;
+  nextQuestionErrorText: string;
   summaryTitle: string;
   summaryPrimary: string;
   summaryDetail: string;
+  summaryFollowUps: string;
 };
 
 export const helpWizardCopy: Record<HelpLocale, HelpWizardLocaleCopy> = {
@@ -59,6 +62,7 @@ export const helpWizardCopy: Record<HelpLocale, HelpWizardLocaleCopy> = {
     pageSubtitle:
       "On avance ensemble, question par question. Choisissez une bulle ou écrivez simplement votre situation.",
     stepLabel: (current, total) => `Étape ${current} sur ${total}`,
+    followUpProgressLabel: (current, total) => `Question ${current} sur ${total}`,
     continueLabel: "Continuer",
     backLabel: "Retour",
     sendLabel: "Envoyer ma demande",
@@ -95,15 +99,18 @@ export const helpWizardCopy: Record<HelpLocale, HelpWizardLocaleCopy> = {
     noChoiceText: "Choisissez une bulle ou écrivez votre situation.",
     submitErrorText: "Impossible d'envoyer pour le moment. Réessayez.",
     classifyErrorText: "Impossible de proposer une bulle automatiquement. Continuez avec votre texte.",
+    nextQuestionErrorText: "Impossible de charger la question suivante. Nous gardons votre réponse.",
     summaryTitle: "Résumé avant envoi",
     summaryPrimary: "Sujet principal",
     summaryDetail: "Précision",
+    summaryFollowUps: "Réponses de suivi",
   },
   ru: {
     pageTitle: "Помощь шаг за шагом",
     pageSubtitle:
       "Двигаемся вместе, по одному вопросу. Выберите пузырь или просто опишите ситуацию.",
     stepLabel: (current, total) => `Шаг ${current} из ${total}`,
+    followUpProgressLabel: (current, total) => `Вопрос ${current} из ${total}`,
     continueLabel: "Продолжить",
     backLabel: "Назад",
     sendLabel: "Отправить запрос",
@@ -140,9 +147,11 @@ export const helpWizardCopy: Record<HelpLocale, HelpWizardLocaleCopy> = {
     noChoiceText: "Выберите тему или опишите ситуацию текстом.",
     submitErrorText: "Сейчас не удалось отправить. Попробуйте ещё раз.",
     classifyErrorText: "Не удалось автоматически предложить тему. Продолжайте с вашим текстом.",
+    nextQuestionErrorText: "Не удалось загрузить следующий вопрос. Ответ сохранён.",
     summaryTitle: "Проверка перед отправкой",
     summaryPrimary: "Основная тема",
     summaryDetail: "Уточнение",
+    summaryFollowUps: "Уточняющие ответы",
   },
 };
 
@@ -154,4 +163,3 @@ export function getHelpPrimaryOptions(locale: HelpLocale): HelpPrimaryOption[] {
     prepareLine: item.prepareLine,
   }));
 }
-

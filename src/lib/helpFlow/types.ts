@@ -27,6 +27,30 @@ export type HelpClassifyResponse = {
   followUp: string;
 };
 
+export type HelpFollowUpAnswer = {
+  question: string;
+  answerLabel: string;
+  answerText: string;
+  source: "bubble" | "manual";
+};
+
+export type HelpNextQuestionRequest = {
+  locale: HelpLocale;
+  primary: HelpSelection;
+  answers: HelpFollowUpAnswer[];
+  candidateOptions: HelpBubbleOption[];
+};
+
+export type HelpNextQuestionResponse = {
+  ok: true;
+  source: "openai" | "fallback";
+  done: boolean;
+  question: string;
+  options: HelpBubbleOption[];
+  summaryLabel: string;
+  guidance: string;
+};
+
 export type HelpSelection = {
   id: string | null;
   label: string;
@@ -40,6 +64,7 @@ export type HelpSubmissionPayload = {
   submittedAt: string;
   primary: HelpSelection;
   detail: HelpSelection;
+  followUps: HelpFollowUpAnswer[];
   message: string;
   contact: {
     fullName: string;
@@ -47,4 +72,3 @@ export type HelpSubmissionPayload = {
     phone: string;
   };
 };
-

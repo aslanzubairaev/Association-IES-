@@ -5,7 +5,9 @@ import { getHelpPrimaryOptions, helpWizardCopy } from "@/content/helpWizard";
 import type {
   HelpBubbleOption,
   HelpClassifyResponse,
+  HelpFollowUpAnswer,
   HelpLocale,
+  HelpNextQuestionResponse,
   HelpSelection,
   HelpSubmissionPayload,
 } from "@/lib/helpFlow/types";
@@ -16,6 +18,7 @@ type HelpWizardProps = {
 };
 
 const TOTAL_STEPS = 4;
+const MAX_FOLLOW_UPS = 3;
 
 function toDetailOptionId(label: string, index: number) {
   const slug = label
@@ -45,6 +48,22 @@ function asHelpSelection({
     source,
     confidence,
   };
+}
+
+function summarizeFollowUps(answers: HelpFollowUpAnswer[]) {
+  return answers
+    .map((answer, index) => `${index + 1}. ${answer.question} -> ${answer.answerText || answer.answerLabel}`)
+    .join(" | ")
+    .slice(0, 500);
+}
+
+function ButtonLabel({ loading, label }: { loading: boolean; label: string }) {
+  return (
+    <span className={styles.buttonLabel}>
+      {loading ? <span className={styles.buttonSpinner} aria-hidden="true" /> : null}
+      <span>{label}</span>
+    </span>
+  );
 }
 
 export function HelpWizard({ locale }: HelpWizardProps) {
@@ -82,13 +101,15 @@ export function HelpWizard({ locale }: HelpWizardProps) {
   const [primaryError, setPrimaryError] = useState("");
   const [primaryBusy, setPrimaryBusy] = useState(false);
 
-  const [detailSelectedId, setDetailSelectedId] = useState("");
-  const [detailText, setDetailText] = useState("");
+  const [followUpQuestion, setFollowUpQuestion] = useState("");
+  const [followUpOptions, setFollowUpOptions] = useState<HelpBubbleOption[]>([]);
+  const [followUpSelectedId, setFollowUpSelectedId] = useState("");
+  const [followUpText, setFollowUpText] = useState("");
+  const [followUpAnswers, setFollowUpAnswers] = useState<HelpFollowUpAnswer[]>([]);
+  const [followUpGuidance, setFollowUpGuidance] = useState("");
   const [detailSelection, setDetailSelection] = useState<HelpSelection | null>(null);
-  const [detailSuggestion, setDetailSuggestion] = useState<HelpClassifyResponse["suggestion"] | null>(null);
-  const [detailAlternatives, setDetailAlternatives] = useState<HelpBubbleOption[]>([]);
-  const [detailError, setDetailError] = useState("");
-  const [detailBusy, setDetailBusy] = useState(false);
+  const [followUpError, setFollowUpError] = useState("");
+  const [followUpBusy, setFollowUpBusy] = useState(false);
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -99,38 +120,54 @@ export function HelpWizard({ locale }: HelpWizardProps) {
   const [documents, setDocuments] = useState<File[]>([]);
   const [submitError, setSubmitError] = useState("");
   const [submitBusy, setSubmitBusy] = useState(false);
-
-  const currentPrimaryOption = primarySelection?.id ? primaryOptionById.get(primarySelection.id) : undefined;
-  const detailOptions = useMemo<HelpBubbleOption[]>(() => {
-    if (!currentPrimaryOption) {
-      return fallbackDetailOptions;
-    }
-    return currentPrimaryOption.examples.map((example, index) => ({
-      id: toDetailOptionId(example, index),
-      label: example,
-    }));
-  }, [currentPrimaryOption, fallbackDetailOptions]);
+  const stepOneBusy = primaryBusy || followUpBusy;
 
   const detailOptionById = useMemo(
-    () => new Map(detailOptions.map((option) => [option.id, option])),
-    [detailOptions],
+    () => new Map(followUpOptions.map((option) => [option.id, option])),
+    [followUpOptions],
   );
 
-  async function classifyText({
-    stepType,
-    text,
-    options,
-  }: {
-    stepType: "primary" | "detail";
-    text: string;
-    options: HelpBubbleOption[];
-  }) {
+  function getCandidateOptionsForPrimary(selection: HelpSelection) {
+    if (selection.id) {
+      const option = primaryOptionById.get(selection.id);
+      if (option) {
+        return option.examples.map((example, index) => ({
+          id: toDetailOptionId(example, index),
+          label: example,
+        }));
+      }
+    }
+    return fallbackDetailOptions;
+  }
+
+  function clearFollowUpState() {
+    setFollowUpQuestion("");
+    setFollowUpOptions([]);
+    setFollowUpSelectedId("");
+    setFollowUpText("");
+    setFollowUpAnswers([]);
+    setFollowUpGuidance("");
+    setFollowUpError("");
+    setDetailSelection(null);
+  }
+
+  function buildDetailSelection(summaryLabel: string, answers: HelpFollowUpAnswer[]) {
+    const safeLabel = summaryLabel.trim() || answers[answers.length - 1]?.answerLabel || copy.customFallbackLabel;
+    return asHelpSelection({
+      id: null,
+      label: safeLabel,
+      userText: summarizeFollowUps(answers),
+      source: "ai",
+    });
+  }
+
+  async function classifyPrimaryText(text: string, options: HelpBubbleOption[]) {
     const response = await fetch("/api/help/classify", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         locale,
-        step: stepType,
+        step: "primary",
         text,
         options,
       }),
@@ -143,166 +180,224 @@ export function HelpWizard({ locale }: HelpWizardProps) {
     return (await response.json()) as HelpClassifyResponse;
   }
 
-  async function continuePrimary() {
-    setPrimaryError("");
+  async function requestNextQuestion({
+    primary,
+    answers,
+    candidateOptions,
+  }: {
+    primary: HelpSelection;
+    answers: HelpFollowUpAnswer[];
+    candidateOptions: HelpBubbleOption[];
+  }) {
+    const response = await fetch("/api/help/next-question", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        locale,
+        primary,
+        answers,
+        candidateOptions,
+      }),
+    });
 
-    if (primarySelectedId) {
-      const option = primaryOptionById.get(primarySelectedId);
-      if (!option) {
-        setPrimaryError(copy.noChoiceText);
+    if (!response.ok) {
+      throw new Error("next_question_failed");
+    }
+
+    return (await response.json()) as HelpNextQuestionResponse;
+  }
+
+  async function initializeFollowUpFlow(selection: HelpSelection) {
+    const candidateOptions = getCandidateOptionsForPrimary(selection);
+    clearFollowUpState();
+    setFollowUpBusy(true);
+
+    try {
+      const result = await requestNextQuestion({
+        primary: selection,
+        answers: [],
+        candidateOptions,
+      });
+      setFollowUpGuidance(result.guidance);
+
+      if (result.done) {
+        setDetailSelection(buildDetailSelection(result.summaryLabel, []));
+        setStep(3);
         return;
       }
 
-      setPrimarySelection(
-        asHelpSelection({
+      setFollowUpQuestion(result.question || copy.chooseDetail);
+      setFollowUpOptions(result.options.length > 0 ? result.options : candidateOptions);
+      setStep(2);
+    } catch {
+      setFollowUpQuestion(copy.chooseDetail);
+      setFollowUpOptions(candidateOptions);
+      setFollowUpError(copy.nextQuestionErrorText);
+      setStep(2);
+    } finally {
+      setFollowUpBusy(false);
+    }
+  }
+
+  async function continuePrimary() {
+    setPrimaryError("");
+    setPrimaryBusy(true);
+
+    try {
+      if (primarySelectedId) {
+        const option = primaryOptionById.get(primarySelectedId);
+        if (!option) {
+          setPrimaryError(copy.noChoiceText);
+          return;
+        }
+
+        const selection = asHelpSelection({
           id: option.id,
           label: option.label,
           userText: primaryText,
           source: "bubble",
-        }),
+        });
+        setPrimarySelection(selection);
+        await initializeFollowUpFlow(selection);
+        return;
+      }
+
+      const typed = primaryText.trim();
+      if (typed.length < 3) {
+        setPrimaryError(copy.noChoiceText);
+        return;
+      }
+
+      const result = await classifyPrimaryText(
+        typed,
+        primaryOptions.map((option) => ({ id: option.id, label: option.label })),
       );
-      setStep(2);
-      return;
-    }
-
-    const typed = primaryText.trim();
-    if (typed.length < 3) {
-      setPrimaryError(copy.noChoiceText);
-      return;
-    }
-
-    setPrimaryBusy(true);
-    try {
-      const result = await classifyText({
-        stepType: "primary",
-        text: typed,
-        options: primaryOptions.map((option) => ({ id: option.id, label: option.label })),
-      });
       setPrimarySuggestion(result.suggestion);
       setPrimaryAlternatives(result.alternatives);
     } catch {
-      setPrimarySelection(
-        asHelpSelection({
-          id: null,
-          label: typed.slice(0, 80) || copy.customFallbackLabel,
-          userText: typed,
-          source: "manual",
-        }),
-      );
+      const typed = primaryText.trim();
+      const selection = asHelpSelection({
+        id: null,
+        label: typed.slice(0, 80) || copy.customFallbackLabel,
+        userText: typed,
+        source: "manual",
+      });
+      setPrimarySelection(selection);
       setPrimaryError(copy.classifyErrorText);
-      setStep(2);
+      await initializeFollowUpFlow(selection);
     } finally {
       setPrimaryBusy(false);
     }
   }
 
-  function confirmPrimarySuggestion(accept: boolean) {
+  async function confirmPrimarySuggestion(accept: boolean) {
     const typed = primaryText.trim();
+    setPrimaryBusy(true);
 
-    if (accept && primarySuggestion) {
-      setPrimarySelection(
-        asHelpSelection({
+    try {
+      if (accept && primarySuggestion) {
+        const selection = asHelpSelection({
           id: primarySuggestion.id,
           label: primarySuggestion.label,
           userText: typed,
           source: "ai",
           confidence: primarySuggestion.confidence,
-        }),
-      );
-      setStep(2);
-      return;
-    }
-
-    setPrimarySelection(
-      asHelpSelection({
-        id: null,
-        label: typed.slice(0, 80) || copy.customFallbackLabel,
-        userText: typed,
-        source: "manual",
-      }),
-    );
-    setStep(2);
-  }
-
-  async function continueDetail() {
-    setDetailError("");
-
-    if (detailSelectedId) {
-      const option = detailOptionById.get(detailSelectedId);
-      if (!option) {
-        setDetailError(copy.noChoiceText);
+        });
+        setPrimarySelection(selection);
+        await initializeFollowUpFlow(selection);
         return;
       }
 
-      setDetailSelection(
-        asHelpSelection({
-          id: option.id,
-          label: option.label,
-          userText: detailText,
-          source: "bubble",
-        }),
-      );
-      setStep(3);
-      return;
-    }
-
-    const typed = detailText.trim();
-    if (typed.length < 3) {
-      setDetailError(copy.noChoiceText);
-      return;
-    }
-
-    setDetailBusy(true);
-    try {
-      const result = await classifyText({
-        stepType: "detail",
-        text: typed,
-        options: detailOptions,
-      });
-      setDetailSuggestion(result.suggestion);
-      setDetailAlternatives(result.alternatives);
-    } catch {
-      setDetailSelection(
-        asHelpSelection({
-          id: null,
-          label: typed.slice(0, 80) || copy.customFallbackLabel,
-          userText: typed,
-          source: "manual",
-        }),
-      );
-      setDetailError(copy.classifyErrorText);
-      setStep(3);
-    } finally {
-      setDetailBusy(false);
-    }
-  }
-
-  function confirmDetailSuggestion(accept: boolean) {
-    const typed = detailText.trim();
-
-    if (accept && detailSuggestion) {
-      setDetailSelection(
-        asHelpSelection({
-          id: detailSuggestion.id,
-          label: detailSuggestion.label,
-          userText: typed,
-          source: "ai",
-          confidence: detailSuggestion.confidence,
-        }),
-      );
-      setStep(3);
-      return;
-    }
-
-    setDetailSelection(
-      asHelpSelection({
+      const selection = asHelpSelection({
         id: null,
         label: typed.slice(0, 80) || copy.customFallbackLabel,
         userText: typed,
         source: "manual",
-      }),
-    );
-    setStep(3);
+      });
+      setPrimarySelection(selection);
+      await initializeFollowUpFlow(selection);
+    } finally {
+      setPrimaryBusy(false);
+    }
+  }
+
+  async function continueFollowUp() {
+    if (!primarySelection) {
+      setFollowUpError(copy.submitErrorText);
+      return;
+    }
+
+    setFollowUpError("");
+
+    const typed = followUpText.trim();
+    const question = followUpQuestion || copy.chooseDetail;
+
+    let answer: HelpFollowUpAnswer | null = null;
+    if (followUpSelectedId) {
+      const option = detailOptionById.get(followUpSelectedId);
+      if (!option) {
+        setFollowUpError(copy.noChoiceText);
+        return;
+      }
+
+      answer = {
+        question,
+        answerLabel: option.label,
+        answerText: option.label,
+        source: "bubble",
+      };
+    } else {
+      if (typed.length < 3) {
+        setFollowUpError(copy.noChoiceText);
+        return;
+      }
+
+      answer = {
+        question,
+        answerLabel: typed.slice(0, 90),
+        answerText: typed,
+        source: "manual",
+      };
+    }
+
+    const nextAnswers = [...followUpAnswers, answer];
+    const candidateOptions = getCandidateOptionsForPrimary(primarySelection);
+
+    setFollowUpBusy(true);
+    try {
+      const result = await requestNextQuestion({
+        primary: primarySelection,
+        answers: nextAnswers,
+        candidateOptions,
+      });
+      setFollowUpAnswers(nextAnswers);
+      setFollowUpGuidance(result.guidance);
+
+      if (result.done || nextAnswers.length >= MAX_FOLLOW_UPS) {
+        setDetailSelection(buildDetailSelection(result.summaryLabel, nextAnswers));
+        setStep(3);
+        return;
+      }
+
+      setFollowUpQuestion(result.question || copy.chooseDetail);
+      setFollowUpOptions(result.options.length > 0 ? result.options : candidateOptions);
+      setFollowUpSelectedId("");
+      setFollowUpText("");
+    } catch {
+      setFollowUpAnswers(nextAnswers);
+      setDetailSelection(
+        asHelpSelection({
+          id: null,
+          label: answer.answerLabel || primarySelection.label,
+          userText: summarizeFollowUps(nextAnswers),
+          source: answer.source,
+        }),
+      );
+      setFollowUpError(copy.nextQuestionErrorText);
+      setStep(3);
+    } finally {
+      setFollowUpBusy(false);
+    }
   }
 
   function continueContact() {
@@ -330,6 +425,12 @@ export function HelpWizard({ locale }: HelpWizardProps) {
 
   function backStep() {
     if (step <= 1) return;
+    if (step === 3) {
+      setDetailSelection(null);
+    }
+    if (step === 2) {
+      clearFollowUpState();
+    }
     setStep((current) => current - 1);
   }
 
@@ -353,6 +454,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
       submittedAt: new Date().toISOString(),
       primary: primarySelection,
       detail: detailSelection,
+      followUps: followUpAnswers,
       message: message.trim(),
       contact: {
         fullName: fullName.trim(),
@@ -424,8 +526,11 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                     key={option.id}
                     type="button"
                     className={`${styles.bubble} ${isActive ? styles.bubbleActive : ""}`}
+                    disabled={stepOneBusy}
                     onClick={() => {
                       setPrimarySelectedId(option.id);
+                      setPrimaryText("");
+                      setPrimaryError("");
                       setPrimarySuggestion(null);
                     }}
                   >
@@ -440,8 +545,10 @@ export function HelpWizard({ locale }: HelpWizardProps) {
               <textarea
                 className={styles.textarea}
                 value={primaryText}
+                disabled={stepOneBusy}
                 onChange={(event) => {
                   setPrimaryText(event.target.value);
+                  setPrimarySelectedId("");
                   setPrimarySuggestion(null);
                 }}
                 placeholder={copy.freeTextPlaceholderPrimary}
@@ -461,15 +568,21 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                   </p>
                 ) : null}
                 <div className={styles.actionRow}>
-                  <button type="button" className={styles.primaryButton} onClick={() => confirmPrimarySuggestion(true)}>
-                    {copy.aiConfirmYes}
+                  <button
+                    type="button"
+                    className={styles.primaryButton}
+                    disabled={stepOneBusy}
+                    onClick={() => void confirmPrimarySuggestion(true)}
+                  >
+                    <ButtonLabel loading={stepOneBusy} label={copy.aiConfirmYes} />
                   </button>
                   <button
                     type="button"
                     className={styles.secondaryButton}
-                    onClick={() => confirmPrimarySuggestion(false)}
+                    disabled={stepOneBusy}
+                    onClick={() => void confirmPrimarySuggestion(false)}
                   >
-                    {copy.aiConfirmNo}
+                    <ButtonLabel loading={stepOneBusy} label={copy.aiConfirmNo} />
                   </button>
                 </div>
               </div>
@@ -478,8 +591,13 @@ export function HelpWizard({ locale }: HelpWizardProps) {
             {primaryError ? <p className={styles.error}>{primaryError}</p> : null}
 
             <div className={styles.actionRow}>
-              <button type="button" className={styles.primaryButton} onClick={continuePrimary} disabled={primaryBusy}>
-                {primaryBusy ? copy.sendingLabel : copy.continueLabel}
+              <button
+                type="button"
+                className={styles.primaryButton}
+                onClick={continuePrimary}
+                disabled={stepOneBusy}
+              >
+                <ButtonLabel loading={stepOneBusy} label={primaryBusy ? copy.sendingLabel : copy.continueLabel} />
               </button>
             </div>
           </div>
@@ -487,18 +605,24 @@ export function HelpWizard({ locale }: HelpWizardProps) {
 
         {!done && step === 2 ? (
           <div className={styles.stepBlock}>
-            <h3 className={styles.question}>{copy.chooseDetail}</h3>
+            <h3 className={styles.question}>{followUpQuestion || copy.chooseDetail}</h3>
+            {followUpGuidance ? <p className={styles.hint}>{followUpGuidance}</p> : null}
+            <p className={styles.hint}>
+              {copy.followUpProgressLabel(Math.min(followUpAnswers.length + 1, MAX_FOLLOW_UPS), MAX_FOLLOW_UPS)}
+            </p>
             <div className={styles.bubbleGrid}>
-              {detailOptions.map((option) => {
-                const isActive = detailSelectedId === option.id;
+              {followUpOptions.map((option) => {
+                const isActive = followUpSelectedId === option.id;
                 return (
                   <button
                     key={option.id}
                     type="button"
                     className={`${styles.bubble} ${isActive ? styles.bubbleActive : ""}`}
+                    disabled={followUpBusy}
                     onClick={() => {
-                      setDetailSelectedId(option.id);
-                      setDetailSuggestion(null);
+                      setFollowUpSelectedId(option.id);
+                      setFollowUpText("");
+                      setFollowUpError("");
                     }}
                   >
                     {option.label}
@@ -511,49 +635,43 @@ export function HelpWizard({ locale }: HelpWizardProps) {
               {copy.cantFindLabel}
               <textarea
                 className={styles.textarea}
-                value={detailText}
+                value={followUpText}
+                disabled={followUpBusy}
                 onChange={(event) => {
-                  setDetailText(event.target.value);
-                  setDetailSuggestion(null);
+                  setFollowUpText(event.target.value);
+                  setFollowUpSelectedId("");
+                  setFollowUpError("");
                 }}
                 placeholder={copy.freeTextPlaceholderDetail}
                 rows={3}
               />
             </label>
 
-            {detailSuggestion ? (
-              <div className={styles.aiCard}>
-                <p className={styles.aiTitle}>{copy.aiProposedLabel}</p>
-                <p className={styles.aiValue}>{detailSuggestion.label}</p>
-                <p className={styles.aiQuestion}>{copy.aiConfirmQuestion}</p>
-                {detailAlternatives.length > 0 ? (
-                  <p className={styles.aiAlt}>
-                    {detailAlternatives.map((option) => option.label).join(" • ")}
+            {followUpAnswers.length > 0 ? (
+              <div className={styles.summaryBox}>
+                <p className={styles.summaryTitle}>{copy.summaryFollowUps}</p>
+                {followUpAnswers.map((answer, index) => (
+                  <p key={`${answer.question}-${index}`}>
+                    <strong>{index + 1}. </strong>
+                    {answer.answerLabel}
                   </p>
-                ) : null}
-                <div className={styles.actionRow}>
-                  <button type="button" className={styles.primaryButton} onClick={() => confirmDetailSuggestion(true)}>
-                    {copy.aiConfirmYes}
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.secondaryButton}
-                    onClick={() => confirmDetailSuggestion(false)}
-                  >
-                    {copy.aiConfirmNo}
-                  </button>
-                </div>
+                ))}
               </div>
             ) : null}
 
-            {detailError ? <p className={styles.error}>{detailError}</p> : null}
+            {followUpError ? <p className={styles.error}>{followUpError}</p> : null}
 
             <div className={styles.actionRow}>
-              <button type="button" className={styles.secondaryButton} onClick={backStep}>
+              <button type="button" className={styles.secondaryButton} onClick={backStep} disabled={followUpBusy}>
                 {copy.backLabel}
               </button>
-              <button type="button" className={styles.primaryButton} onClick={continueDetail} disabled={detailBusy}>
-                {detailBusy ? copy.sendingLabel : copy.continueLabel}
+              <button
+                type="button"
+                className={styles.primaryButton}
+                onClick={continueFollowUp}
+                disabled={followUpBusy}
+              >
+                <ButtonLabel loading={followUpBusy} label={followUpBusy ? copy.sendingLabel : copy.continueLabel} />
               </button>
             </div>
           </div>
@@ -637,15 +755,24 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                 <strong>{copy.summaryDetail}: </strong>
                 {detailSelection?.label}
               </p>
+              {followUpAnswers.length > 0 ? (
+                <p>
+                  <strong>{copy.summaryFollowUps}: </strong>
+                  {followUpAnswers.length}
+                </p>
+              ) : null}
             </div>
 
             <label className={styles.uploadBox}>
-              <span className={styles.uploadLabel}>{copy.docsUploadLabel}</span>
+              <span className={`${styles.uploadLabel} ${submitBusy ? styles.uploadLabelDisabled : ""}`}>
+                {copy.docsUploadLabel}
+              </span>
               <input
                 className={styles.fileInput}
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.heif"
                 multiple
+                disabled={submitBusy}
                 onChange={(event) => handleFilesChange(event.target.files)}
               />
             </label>
@@ -658,7 +785,13 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                 {documents.map((file, index) => (
                   <li key={`${file.name}-${index}`} className={styles.fileRow}>
                     <span>{file.name}</span>
-                    <button type="button" className={styles.removeFileButton} onClick={() => removeFile(index)}>
+                    <button
+                      type="button"
+                      className={styles.removeFileButton}
+                      aria-label={locale === "fr" ? "Supprimer ce fichier" : "Удалить этот файл"}
+                      disabled={submitBusy}
+                      onClick={() => removeFile(index)}
+                    >
                       ×
                     </button>
                   </li>
@@ -673,7 +806,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                 {copy.backLabel}
               </button>
               <button type="button" className={styles.primaryButton} onClick={submitWizard} disabled={submitBusy}>
-                {submitBusy ? copy.sendingLabel : copy.sendLabel}
+                <ButtonLabel loading={submitBusy} label={submitBusy ? copy.sendingLabel : copy.sendLabel} />
               </button>
             </div>
           </div>

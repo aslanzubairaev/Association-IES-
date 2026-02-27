@@ -107,6 +107,11 @@
   background: rgba(255, 255, 255, 0.16);
 }
 
+.bubble:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .bubbleActive {
   border-color: rgba(247, 207, 74, 0.9);
   background: rgba(247, 207, 74, 0.26);
@@ -211,6 +216,22 @@
   flex-wrap: wrap;
 }
 
+.buttonLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.buttonSpinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: wizardSpin 0.7s linear infinite;
+}
+
 .primaryButton,
 .secondaryButton {
   min-height: 44px;
@@ -243,7 +264,8 @@
 }
 
 .primaryButton:disabled,
-.secondaryButton:disabled {
+.secondaryButton:disabled,
+.removeFileButton:disabled {
   opacity: 0.64;
   cursor: not-allowed;
 }
@@ -275,6 +297,11 @@
   background: rgba(255, 255, 255, 0.12);
   font-weight: 800;
   cursor: pointer;
+}
+
+.uploadLabelDisabled {
+  opacity: 0.64;
+  cursor: not-allowed;
 }
 
 .fileInput {
@@ -351,6 +378,12 @@
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.55;
+}
+
+@keyframes wizardSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 860px) {

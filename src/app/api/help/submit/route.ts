@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { helpFlowConfig, isHelpSmtpConfigured } from "@/lib/helpFlow/config";
 import { checkRateLimit, getClientIp } from "@/lib/helpFlow/rateLimit";
-import type { HelpSubmissionPayload } from "@/lib/helpFlow/types";
+import type { HelpFollowUpAnswer, HelpSelection, HelpSubmissionPayload } from "@/lib/helpFlow/types";
 
 export const runtime = "nodejs";
 
@@ -10,6 +10,126 @@ type FileValidationResult = {
   ok: boolean;
   error?: string;
 };
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function toSafeString(value: unknown, maxLength: number, fallback = "") {
+  if (typeof value !== "string") return fallback;
+  return value.replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
+function parseIsoDate(value: unknown) {
+  if (typeof value !== "string") return new Date().toISOString();
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return new Date().toISOString();
+  return date.toISOString();
+}
+
+function parseSelection(value: unknown): HelpSelection | null {
+  if (!isRecord(value)) return null;
+
+  const label = toSafeString(value.label, 100);
+  if (!label) return null;
+
+  const sourceRaw = value.source;
+  const source: HelpSelection["source"] =
+    sourceRaw === "bubble" || sourceRaw === "ai" || sourceRaw === "manual" ? sourceRaw : "manual";
+
+  const idRaw = toSafeString(value.id, 80);
+  const confidenceRaw = value.confidence;
+  const confidence =
+    typeof confidenceRaw === "number" && Number.isFinite(confidenceRaw)
+      ? Math.max(0, Math.min(1, confidenceRaw))
+      : undefined;
+
+  return {
+    id: idRaw || null,
+    label,
+    userText: toSafeString(value.userText, 1200),
+    source,
+    confidence,
+  };
+}
+
+function parseFollowUps(value: unknown): HelpFollowUpAnswer[] | null {
+  if (!Array.isArray(value)) return null;
+
+  const parsed: HelpFollowUpAnswer[] = [];
+  for (const item of value.slice(0, 8)) {
+    if (!isRecord(item)) return null;
+
+    const source = item.source;
+    if (source !== "bubble" && source !== "manual") return null;
+
+    const question = toSafeString(item.question, 160);
+    const answerLabel = toSafeString(item.answerLabel, 100);
+    const answerText = toSafeString(item.answerText, 1000);
+
+    if (!question || !answerLabel) return null;
+
+    parsed.push({
+      question,
+      answerLabel,
+      answerText,
+      source,
+    });
+  }
+
+  return parsed;
+}
+
+function parseContact(value: unknown): HelpSubmissionPayload["contact"] | null {
+  if (!isRecord(value)) return null;
+
+  const fullName = toSafeString(value.fullName, 120);
+  const email = toSafeString(value.email, 180);
+  const phone = toSafeString(value.phone, 80);
+
+  if (!fullName || !email) return null;
+  return { fullName, email, phone };
+}
+
+function parsePayload(rawPayload: string): { payload?: HelpSubmissionPayload; error?: string } {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawPayload);
+  } catch {
+    return { error: "Invalid payload JSON." };
+  }
+
+  if (!isRecord(parsed)) {
+    return { error: "Invalid payload JSON." };
+  }
+
+  const locale = parsed.locale === "fr" || parsed.locale === "ru" ? parsed.locale : null;
+  const primary = parseSelection(parsed.primary);
+  const detail = parseSelection(parsed.detail);
+  const followUps = parseFollowUps(parsed.followUps);
+  const contact = parseContact(parsed.contact);
+
+  if (!locale || !primary || !detail || !followUps || !contact) {
+    return { error: "Missing or invalid payload fields." };
+  }
+
+  return {
+    payload: {
+      locale,
+      submittedAt: parseIsoDate(parsed.submittedAt),
+      primary,
+      detail,
+      followUps,
+      message: toSafeString(parsed.message, 2500),
+      contact,
+    },
+  };
+}
+
+function normalizeLine(value: string | undefined | null, fallback = "(vide)") {
+  const cleaned = (value ?? "").replace(/\s+/g, " ").trim();
+  return cleaned || fallback;
+}
 
 function sanitizeFilename(name: string) {
   const cleaned = name.replace(/[^\p{L}\p{N}._-]+/gu, "_").replace(/_+/g, "_").trim();
@@ -42,7 +162,29 @@ function validatePayload(payload: HelpSubmissionPayload) {
     errors.push("Contact email is invalid.");
   }
 
+  if (!Array.isArray(payload.followUps)) {
+    errors.push("Follow-up answers are invalid.");
+  }
+
   return errors;
+}
+
+function formatFollowUps(answers: HelpFollowUpAnswer[]) {
+  if (!answers.length) return [];
+
+  const seen = new Set<string>();
+  const lines: string[] = [];
+
+  for (const answer of answers) {
+    const question = normalizeLine(answer.question, "(question non fournie)");
+    const response = normalizeLine(answer.answerText || answer.answerLabel);
+    const key = `${question.toLowerCase()}::${response.toLowerCase()}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    lines.push(`${lines.length + 1}. ${question}: ${response}`);
+  }
+
+  return lines;
 }
 
 function validateFiles(files: File[]) {
@@ -87,34 +229,37 @@ function validateFiles(files: File[]) {
 
 function buildEmailText(payload: HelpSubmissionPayload, fileCount: number) {
   const submittedDate = new Date(payload.submittedAt || Date.now()).toISOString();
+  const primaryLabel = normalizeLine(payload.primary.label);
+  const detailLabel = normalizeLine(payload.detail.label);
+  const freeMessage = normalizeLine(payload.message, "");
+  const contactName = normalizeLine(payload.contact.fullName);
+  const contactEmail = normalizeLine(payload.contact.email);
+  const contactPhone = normalizeLine(payload.contact.phone, "Non renseigné");
+  const followUpLines = formatFollowUps(payload.followUps);
 
   return [
-    "Nouvelle demande d'aide (wizard)",
+    "DEMANDE D'AIDE",
     "",
     `Date: ${submittedDate}`,
-    `Locale: ${payload.locale}`,
+    `Langue: ${payload.locale.toUpperCase()}`,
     "",
-    "1) Sujet principal",
-    `- Label: ${payload.primary.label}`,
-    payload.primary.userText ? `- Texte utilisateur: ${payload.primary.userText}` : "- Texte utilisateur: (vide)",
-    `- Source: ${payload.primary.source}`,
-    payload.primary.confidence != null ? `- Confiance IA: ${payload.primary.confidence}` : "",
+    "CONTACT",
+    `Nom : ${contactName}`,
+    `Email : ${contactEmail}`,
+    `Téléphone : ${contactPhone}`,
     "",
-    "2) Précision",
-    `- Label: ${payload.detail.label}`,
-    payload.detail.userText ? `- Texte utilisateur: ${payload.detail.userText}` : "- Texte utilisateur: (vide)",
-    `- Source: ${payload.detail.source}`,
-    payload.detail.confidence != null ? `- Confiance IA: ${payload.detail.confidence}` : "",
+    "DEMANDE",
+    `Sujet : ${primaryLabel}`,
+    `Besoin principal : ${detailLabel}`,
     "",
-    "3) Message libre",
-    payload.message?.trim() ? payload.message.trim() : "(vide)",
-    "",
-    "4) Coordonnées",
-    `- Nom: ${payload.contact.fullName}`,
-    `- Email: ${payload.contact.email}`,
-    `- Téléphone: ${payload.contact.phone || "(vide)"}`,
-    "",
-    `Pièces jointes: ${fileCount}`,
+    followUpLines.length > 0 ? "INFORMATIONS CLÉS" : "",
+    ...followUpLines,
+    followUpLines.length > 0 ? "" : "",
+    freeMessage ? "MESSAGE COMPLÉMENTAIRE" : "",
+    freeMessage || "",
+    freeMessage ? "" : "",
+    `Pièces jointes : ${fileCount}`,
+    "Fin.",
   ]
     .filter(Boolean)
     .join("\n");
@@ -156,6 +301,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Expected multipart/form-data." }, { status: 400 });
   }
 
+  const contentLengthRaw = request.headers.get("content-length");
+  const contentLength = contentLengthRaw ? Number.parseInt(contentLengthRaw, 10) : Number.NaN;
+  const maxExpectedBodyBytes = helpFlowConfig.limits.maxTotalFilesBytes + 2 * 1024 * 1024;
+  if (Number.isFinite(contentLength) && contentLength > maxExpectedBodyBytes) {
+    return NextResponse.json({ error: "Uploaded payload is too large." }, { status: 413 });
+  }
+
   const formData = await request.formData();
   const honeypot = formData.get("website");
   if (typeof honeypot === "string" && honeypot.trim()) {
@@ -167,12 +319,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing payload JSON." }, { status: 400 });
   }
 
-  let payload: HelpSubmissionPayload;
-  try {
-    payload = JSON.parse(rawPayload) as HelpSubmissionPayload;
-  } catch {
-    return NextResponse.json({ error: "Invalid payload JSON." }, { status: 400 });
+  const parsedPayload = parsePayload(rawPayload);
+  if (!parsedPayload.payload) {
+    return NextResponse.json({ error: parsedPayload.error || "Invalid payload JSON." }, { status: 400 });
   }
+  const payload = parsedPayload.payload;
 
   const errors = validatePayload(payload);
   if (errors.length > 0) {
@@ -229,4 +380,3 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ ok: true });
 }
-
