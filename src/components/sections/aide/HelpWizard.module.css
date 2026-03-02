@@ -16,14 +16,14 @@
   margin: 0;
   font-size: clamp(30px, 4vw, 48px);
   line-height: 1.05;
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(11, 27, 51, 0.98);
   text-transform: none;
   letter-spacing: 0;
 }
 
 .subtitle {
   margin: 0;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(11, 27, 51, 0.74);
   line-height: 1.6;
   font-size: clamp(15px, 1.3vw, 17px);
 }
@@ -48,21 +48,21 @@
   margin: 0;
   font-size: 13px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.84);
+  color: rgba(11, 27, 51, 0.72);
 }
 
 .progressTrack {
   width: 100%;
   height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 82, 166, 0.16);
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(247, 207, 74, 0.96), rgba(255, 255, 255, 0.92));
+  background: linear-gradient(90deg, rgba(15, 82, 166, 0.96), rgba(247, 207, 74, 0.92));
   transition: width 180ms ease;
 }
 
@@ -74,7 +74,7 @@
 .question {
   margin: 0;
   font-size: clamp(20px, 2.2vw, 30px);
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(11, 27, 51, 0.98);
   text-transform: none;
   letter-spacing: 0;
 }
@@ -86,9 +86,9 @@
 }
 
 .bubble {
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(11, 27, 51, 0.18);
+  background: #ffffff;
+  color: rgba(11, 27, 51, 0.94);
   border-radius: 999px;
   min-height: 86px;
   padding: 16px 24px;
@@ -103,8 +103,8 @@
 }
 
 .bubble:hover {
-  border-color: rgba(255, 255, 255, 0.48);
-  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(15, 82, 166, 0.36);
+  background: rgba(15, 82, 166, 0.07);
 }
 
 .bubble:disabled {
@@ -113,15 +113,15 @@
 }
 
 .bubbleActive {
-  border-color: rgba(247, 207, 74, 0.9);
-  background: rgba(247, 207, 74, 0.26);
-  box-shadow: 0 0 0 3px rgba(247, 207, 74, 0.32);
+  border-color: rgba(15, 82, 166, 0.58);
+  background: rgba(15, 82, 166, 0.12);
+  box-shadow: 0 0 0 3px rgba(15, 82, 166, 0.2);
 }
 
 .fieldLabel {
   display: grid;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.94);
+  color: rgba(11, 27, 51, 0.9);
   font-size: 14px;
   font-weight: 700;
 }
@@ -130,9 +130,9 @@
 .textarea {
   width: 100%;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: rgba(6, 12, 50, 0.24);
-  color: #fff;
+  border: 1px solid rgba(11, 27, 51, 0.2);
+  background: #ffffff;
+  color: rgba(11, 27, 51, 0.96);
   font-size: 15px;
   line-height: 1.5;
   padding: 12px 14px;
@@ -140,7 +140,7 @@
 
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(255, 255, 255, 0.64);
+  color: rgba(11, 27, 51, 0.56);
 }
 
 .input:focus-visible,
@@ -149,7 +149,7 @@
 .primaryButton:focus-visible,
 .secondaryButton:focus-visible,
 .removeFileButton:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.54);
+  outline: 3px solid rgba(15, 82, 166, 0.3);
   outline-offset: 2px;
 }
 
@@ -162,20 +162,20 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(11, 27, 51, 0.7);
 }
 
 .error {
   margin: 0;
   font-size: 13px;
-  color: #ffd4d4;
+  color: #b42318;
   font-weight: 700;
 }
 
 .aiCard {
-  border: 1px solid rgba(247, 207, 74, 0.44);
+  border: 1px solid rgba(15, 82, 166, 0.24);
   border-radius: 14px;
-  background: rgba(247, 207, 74, 0.12);
+  background: rgba(15, 82, 166, 0.06);
   padding: 14px;
   display: grid;
   gap: 8px;
@@ -187,26 +187,26 @@
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(11, 27, 51, 0.68);
 }
 
 .aiValue {
   margin: 0;
   font-size: 17px;
   font-weight: 800;
-  color: #fff;
+  color: rgba(11, 27, 51, 0.96);
 }
 
 .aiQuestion {
   margin: 0;
-  color: rgba(255, 255, 255, 0.94);
+  color: rgba(11, 27, 51, 0.86);
   font-size: 14px;
 }
 
 .aiAlt {
   margin: 0;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(11, 27, 51, 0.68);
 }
 
 .actionRow {
@@ -244,23 +244,23 @@
 }
 
 .primaryButton {
-  background: rgba(247, 207, 74, 0.96);
-  color: rgba(11, 27, 51, 0.96);
-  border-color: rgba(11, 27, 51, 0.2);
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: rgba(11, 27, 51, 0.12);
 }
 
 .primaryButton:hover {
-  background: #f3d56b;
+  background: var(--color-primary-dark);
 }
 
 .secondaryButton {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.98);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(15, 82, 166, 0.08);
+  color: rgba(11, 27, 51, 0.94);
+  border-color: rgba(15, 82, 166, 0.24);
 }
 
 .secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(15, 82, 166, 0.14);
 }
 
 .primaryButton:disabled,
@@ -293,8 +293,9 @@
   min-height: 42px;
   border-radius: 999px;
   padding: 0 16px;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(11, 27, 51, 0.2);
+  background: rgba(15, 82, 166, 0.08);
+  color: rgba(11, 27, 51, 0.9);
   font-weight: 800;
   cursor: pointer;
 }
@@ -305,7 +306,7 @@
 }
 
 .fileInput {
-  color: rgba(255, 255, 255, 0.94);
+  color: rgba(11, 27, 51, 0.92);
 }
 
 .fileList {
@@ -322,19 +323,19 @@
   justify-content: space-between;
   gap: 10px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(11, 27, 51, 0.14);
+  background: rgba(15, 82, 166, 0.05);
   padding: 8px 12px;
-  color: rgba(255, 255, 255, 0.94);
+  color: rgba(11, 27, 51, 0.9);
 }
 
 .removeFileButton {
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.36);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  border: 1px solid rgba(11, 27, 51, 0.24);
+  background: rgba(15, 82, 166, 0.08);
+  color: rgba(11, 27, 51, 0.92);
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
@@ -342,12 +343,12 @@
 
 .summaryBox {
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(6, 12, 48, 0.2);
+  border: 1px solid rgba(11, 27, 51, 0.14);
+  background: rgba(15, 82, 166, 0.06);
   padding: 14px;
   display: grid;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.94);
+  color: rgba(11, 27, 51, 0.9);
 }
 
 .summaryTitle {
@@ -356,13 +357,13 @@
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(11, 27, 51, 0.72);
 }
 
 .successBox {
   border-radius: 14px;
-  border: 1px solid rgba(247, 207, 74, 0.48);
-  background: rgba(247, 207, 74, 0.14);
+  border: 1px solid rgba(15, 82, 166, 0.22);
+  background: rgba(15, 82, 166, 0.08);
   padding: 18px;
   display: grid;
   gap: 10px;
@@ -371,12 +372,12 @@
 .successTitle {
   margin: 0;
   font-size: 22px;
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(11, 27, 51, 0.98);
 }
 
 .successText {
   margin: 0;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(11, 27, 51, 0.82);
   line-height: 1.55;
 }
 

@@ -51,9 +51,11 @@
 
 /* Left Content Styling */
 :where(.heroScope) :global(.hero-left) {
+  position: relative;
+  isolation: isolate;
   text-align: center;
   text-shadow: none;
-  color: #fff;
+  color: rgba(11, 27, 51, 0.96);
   z-index: 10;
   /* Ensure text is above image */
   padding: 8vw 20px 40px;
@@ -63,14 +65,21 @@
   /* Constraint content width */
 }
 
+:where(.heroScope) :global(.hero-left .h1) {
+  color: rgba(11, 27, 51, 0.98);
+  font-size: clamp(46px, 6.8vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+
 :where(.heroScope) :global(.hero-left .hero-lead) {
   margin-top: 34px;
   line-height: 1.6;
   font-weight: 500;
-  color: #fff;
+  color: rgba(11, 27, 51, 0.78);
   margin-left: auto;
   margin-right: auto;
-  max-width: 38rem;
+  max-width: 42rem;
 }
 
 :where(.heroScope) :global(.hero-left .hero-actions) {
@@ -80,6 +89,35 @@
 
 :where(.heroScope) :global(.hero-left .hero-actions .hero-button) {
   text-decoration: none;
+  min-height: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border-width: 1.5px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.heroButtonPrimary {
+  background: #0b3e86;
+  color: #ffffff;
+  border-color: rgba(11, 27, 51, 0.12);
+  box-shadow: 0 12px 24px rgba(11, 27, 51, 0.18);
+}
+
+.heroButtonPrimary:hover {
+  background: #0a3572;
+}
+
+.heroButtonSecondary {
+  background: rgba(255, 255, 255, 0.86);
+  color: rgba(11, 27, 51, 0.94);
+  border-color: rgba(11, 27, 51, 0.22);
+  box-shadow: 0 8px 18px rgba(11, 27, 51, 0.12);
+}
+
+.heroButtonSecondary:hover {
+  background: #ffffff;
+  border-color: rgba(15, 82, 166, 0.42);
 }
 
 :where(.heroScope) :global(.hero-left .hero-actions .hero-button:hover) {
@@ -91,12 +129,12 @@
 }
 
 :where(.heroScope) :global(.hero-left .hero-actions .btn.btn--outline-white:hover) {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.45);
+  background: #ffffff;
+  border-color: rgba(15, 82, 166, 0.4);
 }
 
 :where(.heroScope) :global(.hero-left .hero-actions .btn.btn--outline-white:focus-visible) {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline: 3px solid rgba(15, 82, 166, 0.28);
   outline-offset: 3px;
 }
 
@@ -109,9 +147,9 @@
 }
 
 :where(.heroScope) :global(.hero-left .hero-pillRow .pill) {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(11, 27, 51, 0.14);
+  color: rgba(11, 27, 51, 0.9);
   font-weight: 600;
 }
 
@@ -135,7 +173,9 @@
 
   :where(.heroScope):global(.hero-section) :global(.h1) {
     margin-top: 0;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: clamp(34px, 10.2vw, 54px);
+    line-height: 0.98;
   }
 
   :where(.heroScope) :global(.hero-left .hero-lead) {
@@ -144,7 +184,7 @@
 
   :where(.heroScope) :global(.hero-left .hero-actions .hero-button) {
     padding: 10px 12px;
-    font-size: 11px;
+    font-size: 12px;
     white-space: nowrap;
     flex: 1 1 0;
     min-width: 0;
@@ -175,7 +215,7 @@
 
   .heroActionsRu :global(.hero-button) {
     padding: 10px 8px;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.01em;
   }
 }

@@ -52,10 +52,10 @@ export function Hero({ locale }: HeroProps) {
           <div
             className={`actions hero-actions ${locale === "ru" ? styles.heroActionsRu : ""}`}
           >
-            <Button className="hero-button" variant="accent" href={`/${locale}/aide`}>
+            <Button className={`hero-button ${styles.heroButtonPrimary}`} variant="accent" href={`/${locale}/aide`}>
               {copy.ctaPrimary}
             </Button>
-            <Button className="hero-button" variant="secondary" href={`/${locale}/activites`}>
+            <Button className={`hero-button ${styles.heroButtonSecondary}`} variant="secondary" href={`/${locale}/activites`}>
               {copy.ctaSecondary}
             </Button>
           </div>

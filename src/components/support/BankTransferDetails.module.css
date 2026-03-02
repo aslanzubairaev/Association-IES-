@@ -8,9 +8,9 @@
 .supportInfoPanel {
   padding: 16px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 14px 30px rgba(7, 12, 40, 0.16);
+  background: #ffffff;
+  border: 1px solid rgba(11, 27, 51, 0.14);
+  box-shadow: 0 10px 22px rgba(7, 12, 40, 0.1);
   width: 100%;
   min-height: 190px;
 }
@@ -24,7 +24,7 @@
   letter-spacing: 0.01em;
   text-transform: none;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(11, 27, 51, 0.9);
   margin-bottom: 10px;
 }
 
@@ -75,13 +75,13 @@
 }
 
 .bankTransferBox:global(.contact-box) {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(15, 82, 166, 0.05);
+  border-color: rgba(11, 27, 51, 0.14);
   border-radius: 16px;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(11, 27, 51, 0.92);
   cursor: pointer;
   user-select: text;
-  text-shadow: var(--card-text-shadow);
+  text-shadow: none;
   position: relative;
   padding-bottom: 14px;
 }
@@ -102,14 +102,14 @@
   opacity: 0;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.92);
+  background: rgba(11, 27, 51, 0.92);
+  border: 1px solid rgba(11, 27, 51, 0.22);
+  color: rgba(255, 255, 255, 0.98);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  text-shadow: var(--card-text-shadow);
-  box-shadow: 0 8px 18px rgba(7, 12, 40, 0.18);
+  text-shadow: none;
+  box-shadow: 0 8px 18px rgba(7, 12, 40, 0.22);
   white-space: nowrap;
   max-width: calc(100% - 8px);
   text-align: center;

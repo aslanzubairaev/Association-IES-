@@ -86,13 +86,11 @@ li {
 
 /* Page Backgrounds */
 .page--purple {
-  background: radial-gradient(900px 420px at 15% 15%, rgba(255, 255, 255, .10), transparent 60%),
-    radial-gradient(800px 380px at 85% 40%, rgba(0, 0, 0, .18), transparent 55%),
-    linear-gradient(135deg, var(--blue-2) 0%, var(--purple) 55%, var(--purple-2) 100%);
-  color: #fff;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
-/* Ensure headings and text are white on purple pages */
+/* Ensure headings and text stay readable on light pages */
 .page--purple h1,
 .page--purple h2,
 .page--purple h3,
@@ -102,13 +100,12 @@ li {
 .page--purple p,
 .page--purple .p,
 .page--purple .muted {
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .page--purple .h2--blue,
 .page--purple .h3--blue {
-  color: #ffffff;
-  /* Override blue headers on dark pages */
+  color: var(--color-primary-dark);
 }
 
 /* Utility for negative margin notes (Subtitle expansion) */
@@ -203,7 +200,7 @@ li {
 .note {
   margin-top: 12px;
   font-size: 13px;
-  color: rgba(255, 255, 255, .72);
+  color: rgba(11, 27, 51, .68);
 }
 
 /* CARDS */
@@ -224,22 +221,22 @@ li {
 }
 
 .card--glass {
-  background: rgba(255, 255, 255, .10);
-  border: var(--border) solid rgba(255, 255, 255, .18);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, .22);
+  background: rgba(255, 255, 255, .94);
+  border: var(--border) solid rgba(11, 27, 51, .12);
+  box-shadow: 0 14px 36px rgba(7, 12, 40, .12);
 }
 
 .section--soft,
 .section--pink-2 {
-  --card-text: #f6f6f6;
+  --card-text: var(--color-text);
 }
 
 .section--soft .card--paper,
 .section--pink-2 .card--paper,
 .section--pink-2 .card--highlight {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-soft);
   color: var(--card-text);
   transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
@@ -247,9 +244,9 @@ li {
 .section--soft .card--paper:hover,
 .section--pink-2 .card--paper:hover,
 .section--pink-2 .card--highlight:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 38px rgba(7, 12, 40, 0.16);
+  background: #ffffff;
+  border-color: rgba(15, 82, 166, 0.24);
 }
 
 .section--soft .btn--outline-blue:hover,
@@ -270,12 +267,12 @@ li {
 
 .section--soft .section-head .h2--blue,
 .section--pink-2 .section-head .h2--blue {
-  color: var(--text-primary);
+  color: var(--color-primary-dark);
 }
 
 .section--soft .h3--blue,
 .section--pink-2 .h3--blue {
-  color: var(--text-primary);
+  color: var(--color-primary-dark);
 }
 
 .section--soft .muted,
@@ -291,10 +288,9 @@ li {
   line-height: 1.6;
 }
 
-/* --- Text contrast only for needs + trust + actions-short cards --- */
+/* --- Text contrast only for needs + actions-short cards --- */
 .needs-block .card,
 .needs-block .link-card,
-.trust-block .card,
 .actions-short-block .card,
 .actions-short-block .link-card {
   color: var(--card-body-color);
@@ -304,8 +300,6 @@ li {
 .needs-block .card .h3,
 .needs-block .link-card h3,
 .needs-block .link-card .h3,
-.trust-block .card h3,
-.trust-block .card .h3,
 .actions-short-block .card h3,
 .actions-short-block .link-card h3 {
   color: var(--card-title-color);
@@ -317,8 +311,6 @@ li {
 .needs-block .card li,
 .needs-block .link-card p,
 .needs-block .link-card li,
-.trust-block .card p,
-.trust-block .card li,
 .actions-short-block .card p,
 .actions-short-block .card li,
 .actions-short-block .link-card p,
@@ -331,7 +323,6 @@ li {
 
 .needs-block .card .muted,
 .needs-block .link-card .muted,
-.trust-block .card .muted,
 .actions-short-block .card .muted,
 .actions-short-block .link-card .muted {
   color: var(--card-muted-color);
@@ -340,14 +331,14 @@ li {
 
 .needs-block .btn,
 .actions-short-block .btn {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
 }
 
 .needs-block .btn:hover,
 .actions-short-block .btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-border);
 }
 
 .needs-block .card,
@@ -365,14 +356,14 @@ li {
 }
 
 .needs-block .btn {
-  color: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
   transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
 .needs-block .btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-border);
 }
 
 .actions-short-block .card-list {
@@ -389,7 +380,7 @@ li {
 }
 
 .actions-short-block .card-list .bullet-list li::before {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(15, 82, 166, 0.9);
 }
 
 .actions-short-block .card-summary {
@@ -412,7 +403,7 @@ li {
 }
 
 .actions-short-block .card-summary .btn:hover {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 0 3px rgba(15, 82, 166, 0.2);
 }
 
 .card--yellow {
@@ -511,9 +502,9 @@ li {
 .chip {
   border-radius: 999px;
   padding: 7px 12px;
-  border: 1px solid rgba(255, 255, 255, .22);
-  background: rgba(0, 0, 0, .10);
-  color: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(15, 82, 166, .22);
+  background: rgba(15, 82, 166, .08);
+  color: rgba(11, 27, 51, .92);
   font-size: 13px;
   font-weight: 600;
 }
@@ -545,15 +536,15 @@ li {
 /* Базовые варианты кнопок (единый радиус/высота/бордер/hover). */
 .btnPrimary,
 .btn--blue {
-  background: rgba(255, 255, 255, .10);
-  color: #fff;
-  border-color: rgba(255, 255, 255, .32);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
 }
 
 .btnPrimary:hover,
 .btn--blue:hover {
-  background: rgba(255, 255, 255, .16);
-  border-color: rgba(255, 255, 255, .45);
+  background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-border);
 }
 
 .btnSecondary,
@@ -591,19 +582,19 @@ li {
 }
 
 .btn--outline {
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255, 255, 255, .30);
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
 }
 
 .btn--outline-white {
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255, 255, 255, .30);
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
 }
 
 .btn:hover {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 0 3px rgba(15, 82, 166, 0.16);
 }
 
 /* LAYOUTS */
@@ -675,9 +666,9 @@ li {
 
 
 .pill {
-  background: rgba(0, 0, 0, .12);
-  border: 1px solid rgba(255, 255, 255, .20);
-  color: rgba(255, 255, 255, .92);
+  background: rgba(15, 82, 166, .08);
+  border: 1px solid rgba(15, 82, 166, .22);
+  color: rgba(11, 27, 51, .9);
   padding: 8px 14px;
   border-radius: 999px;
   font-weight: 800;
@@ -719,23 +710,13 @@ li {
 
 .page--purple .list,
 .page--purple .card--paper .list {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.trust-block .list {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.trust-block .list li {
-  margin: 10px 0;
-  line-height: 1.6;
+  color: rgba(11, 27, 51, 0.84);
 }
 
 .focus {
   margin-top: 14px;
-  background: rgba(255, 255, 255, .10);
-  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(15, 82, 166, .06);
+  border: 1px solid rgba(15, 82, 166, .18);
   border-radius: var(--radius-sm);
   padding: 14px;
 }
@@ -749,7 +730,7 @@ li {
 }
 
 .focus-text {
-  color: rgba(255, 255, 255, .86);
+  color: rgba(11, 27, 51, .84);
   line-height: 1.5;
 }
 

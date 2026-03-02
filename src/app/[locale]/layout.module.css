@@ -6,6 +6,6 @@
 
 :where(.localeScope) :global(.locale-content) {
   padding-top: calc(var(--site-header-height) + env(safe-area-inset-top));
-  background: var(--site-flat-bg);
+  background: var(--color-bg);
   flex: 1 0 auto;
 }
