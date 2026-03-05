@@ -38,6 +38,7 @@ export type Activity = {
   isFeatured: boolean;
   displayOrder: number;
   location: LocaleText;
+  periodLabel: LocaleText;
   cardTitle: LocaleText;
   cardPitch: LocaleText;
   coverImage: ActivityImage;
@@ -73,6 +74,7 @@ export type LocalizedActivity = {
   isFeatured: boolean;
   displayOrder: number;
   location: string;
+  periodLabel: string;
   cardTitle: string;
   cardPitch: string;
   coverImage: LocalizedActivityImage;

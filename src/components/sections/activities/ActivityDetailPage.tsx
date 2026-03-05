@@ -7,8 +7,9 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button/Button";
-import { IesList, IesListItem } from "@/components/ui/IesList";
+import { MinimalList } from "@/components/ui/MinimalList";
 import type { LocalizedActivity } from "@/lib/activities/types";
+import { activitiesPageCopy } from "@/content/activitiesCatalog";
 import styles from "./ActivityDetailPage.module.css";
 
 type ActivityDetailPageProps = {
@@ -31,6 +32,7 @@ function resolveLocaleHref(locale: "ru" | "fr", href: string) {
 // Детальная страница: все тексты уже локализованы и готовы к отображению.
 export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps) {
   const supportHref = activity.ctaSupportHref ? resolveLocaleHref(locale, activity.ctaSupportHref) : undefined;
+  const pageCopy = activitiesPageCopy[locale];
 
   return (
     <main className={`section page--purple ${styles.scope}`}>
@@ -62,7 +64,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
             variant="pill"
             className={styles.ctaButton}
           >
-            {activity.ctaParticipateLabel}
+            {pageCopy.participateCtaLabel}
           </Button>
           {activity.ctaSupportLabel && supportHref ? (
             <Button href={supportHref} variant="secondary" className={styles.ctaButton}>
@@ -84,11 +86,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
         <section className={styles.sectionBlock}>
           <h2 className="h3 h3--blue">{activity.offerTitle}</h2>
           <p className="p">{activity.offerLead}</p>
-          <IesList className={styles.list}>
-            {activity.offerItems.map((item) => (
-              <IesListItem key={item}>{item}</IesListItem>
-            ))}
-          </IesList>
+          <MinimalList items={activity.offerItems} />
         </section>
 
         {/* Галерея показывает живые примеры и атмосферу активности. */}
@@ -108,11 +106,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
         {/* Для кого и в каком формате: это помогает быстро понять доступность участия. */}
         <section className={styles.sectionBlock}>
           <h2 className="h3 h3--blue">{activity.audienceTitle}</h2>
-          <IesList className={styles.list}>
-            {activity.audienceItems.map((item) => (
-              <IesListItem key={item}>{item}</IesListItem>
-            ))}
-          </IesList>
+          <MinimalList items={activity.audienceItems} />
           <div className={styles.badges}>
             {activity.practicalBadges.map((badge) => (
               <span key={badge} className={styles.badge}>

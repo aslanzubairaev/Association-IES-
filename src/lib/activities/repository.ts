@@ -55,6 +55,7 @@ function localizeActivity(activity: Activity, locale: ActivitiesLocale): Localiz
     isFeatured: activity.isFeatured,
     displayOrder: activity.displayOrder,
     location: localizeText(activity.location, locale),
+    periodLabel: localizeText(activity.periodLabel, locale),
     cardTitle: localizeText(activity.cardTitle, locale),
     cardPitch: localizeText(activity.cardPitch, locale),
     coverImage: localizeImage(activity.coverImage, locale),

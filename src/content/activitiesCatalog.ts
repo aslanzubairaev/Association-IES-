@@ -9,8 +9,8 @@ type ActivitiesPageLocaleCopy = {
   title: string;
   subtitle: string;
   detailsCtaLabel: string;
+  participateCtaLabel: string;
   listAriaLabel: string;
-  locationLabel: string;
 };
 
 type ActivitiesHomeLocaleCopy = {
@@ -26,16 +26,16 @@ export const activitiesPageCopy: Record<ActivitiesLocale, ActivitiesPageLocaleCo
     subtitle:
       "Découvrez les activités de l'association, choisissez ce qui vous convient et inscrivez-vous en quelques clics.",
     detailsCtaLabel: "Voir les détails",
+    participateCtaLabel: "Participer",
     listAriaLabel: "Liste complète des activités",
-    locationLabel: "Lieu :",
   },
   ru: {
     title: "Все активности",
     subtitle:
       "Посмотрите направления ассоциации, выберите подходящий формат и запишитесь через форму контактов.",
     detailsCtaLabel: "Подробнее",
+    participateCtaLabel: "Участвовать",
     listAriaLabel: "Полный список активностей",
-    locationLabel: "Место:",
   },
 };
 
@@ -75,6 +75,10 @@ export const activitiesCatalog: Activity[] = [
     location: {
       fr: "Robertsau, Strasbourg",
       ru: "Робертсо, Страсбург",
+    },
+    periodLabel: {
+      fr: "Toute l'année",
+      ru: "Круглый год",
     },
     cardTitle: {
       fr: "Jardin Mélanie",
@@ -253,6 +257,10 @@ export const activitiesCatalog: Activity[] = [
       fr: "Strasbourg (selon groupe)",
       ru: "Страсбург (по группе)",
     },
+    periodLabel: {
+      fr: "Sur rendez-vous",
+      ru: "По записи",
+    },
     cardTitle: {
       fr: "Langues et développement",
       ru: "Языки и развитие",
@@ -386,6 +394,10 @@ export const activitiesCatalog: Activity[] = [
       fr: "Centres sportifs de Strasbourg",
       ru: "Спортивные центры Страсбурга",
     },
+    periodLabel: {
+      fr: "Toute l'année",
+      ru: "Круглый год",
+    },
     cardTitle: {
       fr: "Sport et activité régulière",
       ru: "Спорт и регулярная активность",
@@ -511,6 +523,10 @@ export const activitiesCatalog: Activity[] = [
       fr: "Strasbourg et région",
       ru: "Страсбург и регион",
     },
+    periodLabel: {
+      fr: "Sur rendez-vous",
+      ru: "По записи",
+    },
     cardTitle: {
       fr: "Sorties culturelles et excursions",
       ru: "Культурные выходы и поездки",
@@ -632,6 +648,10 @@ export const activitiesCatalog: Activity[] = [
       fr: "Strasbourg et partenaires",
       ru: "Страсбург и площадки партнёров",
     },
+    periodLabel: {
+      fr: "Sur rendez-vous",
+      ru: "По записи",
+    },
     cardTitle: {
       fr: "Forums jeunesse et entrepreneuriat",
       ru: "Форумы молодёжи и предпринимательства",
@@ -752,6 +772,10 @@ export const activitiesCatalog: Activity[] = [
     location: {
       fr: "Strasbourg (selon rencontre)",
       ru: "Страсбург (по формату встречи)",
+    },
+    periodLabel: {
+      fr: "Sur rendez-vous",
+      ru: "По записи",
     },
     cardTitle: {
       fr: "Rencontres et cohésion du lien social",

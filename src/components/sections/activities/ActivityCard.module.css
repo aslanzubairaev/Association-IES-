@@ -1,0 +1,218 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 500px;
+  border-radius: 18px;
+  border: 1px solid rgba(11, 27, 51, 0.12);
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(7, 12, 40, 0.08);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  text-decoration: none;
+}
+
+.card[data-has-footer="true"] {
+  min-height: 530px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(15, 82, 166, 0.24);
+    box-shadow: 0 12px 28px rgba(7, 12, 40, 0.11);
+    text-decoration: none;
+  }
+
+  .card:hover .image {
+    transform: scale(1.025);
+  }
+}
+
+.card:focus-visible,
+.card:focus-within {
+  outline: none;
+  border-color: rgba(15, 82, 166, 0.34);
+  box-shadow: 0 0 0 3px rgba(15, 82, 166, 0.16), 0 12px 28px rgba(7, 12, 40, 0.11);
+}
+
+.mainLink {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.mainLink:hover,
+.mainLink:focus-visible {
+  text-decoration: none;
+}
+
+.imageWrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 320px;
+  overflow: hidden;
+  border: 0;
+  background: rgba(15, 82, 166, 0.04);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.copyBlock {
+  padding: 18px;
+  border-top: 1px solid rgba(11, 27, 51, 0.08);
+}
+
+.title {
+  margin: 0;
+  font-family: "Fira Sans", Inter, system-ui, sans-serif;
+  font-size: clamp(20px, 1.5vw, 24px);
+  line-height: 1.2;
+  font-weight: 760;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  color: rgba(11, 27, 51, 0.96);
+}
+
+.metaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: rgba(11, 27, 51, 0.62);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.metaLine span {
+  overflow-wrap: anywhere;
+}
+
+.metaLine span + span::before {
+  content: "•";
+  margin-right: 6px;
+  color: rgba(11, 27, 51, 0.44);
+}
+
+.pitch {
+  margin: 12px 0 0;
+  font-size: clamp(15px, 1.02vw, 16px);
+  color: rgba(11, 27, 51, 0.74);
+  line-height: 1.62;
+  max-width: 52ch;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 12px 18px 16px;
+  border-top: 1px solid rgba(11, 27, 51, 0.08);
+  background: #ffffff;
+}
+
+.footerActions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.actionButton {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid rgba(15, 82, 166, 0.22);
+  background: rgba(15, 82, 166, 0.08);
+  color: rgba(15, 82, 166, 0.98);
+  box-shadow: none;
+  font-weight: 700;
+}
+
+.actionButton:hover,
+.actionButton:focus-visible {
+  background: rgba(15, 82, 166, 0.12);
+  border-color: rgba(15, 82, 166, 0.3);
+  box-shadow: none;
+}
+
+.detailsButton {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 4px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: rgba(15, 82, 166, 0.96);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.detailsButton:hover,
+.detailsButton:focus-visible {
+  text-decoration: underline;
+  background: rgba(15, 82, 166, 0.06);
+}
+
+@media (max-width: 760px) {
+  .card {
+    min-height: 430px;
+  }
+
+  .card[data-has-footer="true"] {
+    min-height: 470px;
+  }
+
+  .imageWrap {
+    min-height: 260px;
+  }
+
+  .copyBlock {
+    padding: 18px;
+  }
+
+  .footer {
+    padding: 12px 14px 14px;
+  }
+
+  .footerActions {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .detailsButton {
+    width: 100%;
+    justify-self: stretch;
+    justify-content: center;
+    border: 1px solid rgba(15, 82, 166, 0.2);
+    background: rgba(15, 82, 166, 0.06);
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .detailsButton:hover,
+  .detailsButton:focus-visible {
+    text-decoration: none;
+    background: rgba(15, 82, 166, 0.1);
+  }
+
+  .actionButton {
+    width: 100%;
+    min-width: 0;
+  }
+}

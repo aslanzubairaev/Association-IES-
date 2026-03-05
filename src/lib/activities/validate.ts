@@ -71,6 +71,7 @@ export function validateActivitiesCatalog(activities: Activity[]) {
     displayOrderSet.add(activity.displayOrder);
 
     validateLocaleText(`${path}.location`, activity.location);
+    validateLocaleText(`${path}.periodLabel`, activity.periodLabel);
     validateLocaleText(`${path}.cardTitle`, activity.cardTitle);
     validateLocaleText(`${path}.cardPitch`, activity.cardPitch);
     validateImage(`${path}.coverImage`, activity.coverImage);

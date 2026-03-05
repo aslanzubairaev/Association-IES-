@@ -1,109 +1,45 @@
 .scope {
-  padding-top: 24px;
+  padding-top: 28px;
 }
 
 .scope :global(.section-head) {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.scope :global(.section-head .h2),
+.scope :global(.section-head .h2--blue) {
+  font-family: "Fira Sans", Inter, system-ui, sans-serif;
+  font-size: clamp(30px, 3.9vw, 46px);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  text-wrap: pretty;
+}
+
+.scope :global(.section-head .muted) {
+  font-size: clamp(16px, 1.18vw, 19px);
+  line-height: 1.72;
+  color: rgba(11, 27, 51, 0.72);
+  max-width: 64ch;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 22px;
 }
 
-.card {
-  position: relative;
-  overflow: hidden;
-  min-height: 100%;
-  border-radius: 20px;
-  border: 1px solid rgba(15, 82, 166, 0.2);
-  background: linear-gradient(164deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 250, 255, 0.98) 100%);
-  box-shadow: 0 16px 36px rgba(7, 12, 40, 0.12);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  background: linear-gradient(90deg, rgba(247, 207, 74, 0.95), rgba(247, 207, 74, 0.32));
-}
-
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(15, 82, 166, 0.32);
-    box-shadow: 0 20px 44px rgba(7, 12, 40, 0.16);
-    text-decoration: none;
-  }
-
-  .card:hover .image {
-    transform: scale(1.025);
-  }
-}
-
-.card:focus-visible,
-.card:focus-within {
-  outline: none;
-  border-color: rgba(15, 82, 166, 0.4);
-  box-shadow: 0 0 0 3px rgba(15, 82, 166, 0.2), 0 20px 44px rgba(7, 12, 40, 0.16);
-}
-
-.cardContent {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-height: 100%;
-}
-
-.imageWrap {
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid rgba(15, 82, 166, 0.16);
-  background: rgba(15, 82, 166, 0.03);
-  aspect-ratio: 4 / 3;
-}
-
-.imageWrap::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 36%;
-  background: linear-gradient(180deg, rgba(11, 27, 51, 0) 0%, rgba(11, 27, 51, 0.22) 100%);
-  pointer-events: none;
-}
-
-.image {
-  width: 100%;
+.grid > * {
   height: 100%;
-  object-fit: cover;
-  transition: transform 220ms ease;
 }
 
-.cardContent :global(.h3) {
-  font-size: clamp(18px, 1.35vw, 22px);
-  line-height: 1.28;
-  text-transform: none;
-  color: rgba(11, 27, 51, 0.96);
-}
-
-.cardContent :global(.p) {
-  color: rgba(11, 27, 51, 0.82);
-  line-height: 1.58;
-}
-
-.location {
-  margin-top: auto;
-  color: rgba(11, 27, 51, 0.66);
-  font-size: 12px;
-  line-height: 1.35;
+.cardItem {
+  height: 100%;
 }
 
 .ctaRow {
-  margin-top: 18px;
+  margin-top: 22px;
   display: flex;
   justify-content: center;
 }
@@ -115,5 +51,16 @@
 @media (max-width: 760px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .scope :global(.section-head .h2),
+  .scope :global(.section-head .h2--blue) {
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1.1;
+  }
+
+  .scope :global(.section-head .muted) {
+    font-size: 15.5px;
+    line-height: 1.7;
   }
 }

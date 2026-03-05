@@ -60,13 +60,26 @@ export function Header({ locale, copy }: HeaderProps) {
 
   const navItems = [
     { id: "aide", href: `/${locale}/aide`, label: copy.navLabels.aide },
-    { id: "actions", href: `/${locale}/activites`, label: copy.navLabels.actions },
-    { id: "soutenir", href: `/${locale}/soutenir`, label: copy.navLabels.soutenir },
-    { id: "contact", href: `/${locale}/contact`, label: copy.navLabels.contact },
+    {
+      id: "actions",
+      href: `/${locale}/activites`,
+      label: copy.navLabels.actions,
+    },
+    {
+      id: "soutenir",
+      href: `/${locale}/soutenir`,
+      label: copy.navLabels.soutenir,
+    },
+    {
+      id: "contact",
+      href: `/${locale}/contact`,
+      label: copy.navLabels.contact,
+    },
   ] as const;
 
   // Проверяем, относится ли ссылка к текущей странице или вложенному разделу.
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
   // Собираем путь для переключения языка так, чтобы сохранить параметры и якорь.
   function resolveLocalePath(targetLocale: "ru" | "fr") {
@@ -74,7 +87,8 @@ export function Header({ locale, copy }: HeaderProps) {
     const basePath = pathname
       ? pathname.replace(/^\/(ru|fr)(?=\/|$)/, `/${targetLocale}`)
       : `/${targetLocale}`;
-    const normalizedPath = basePath === pathname ? `/${targetLocale}` : basePath;
+    const normalizedPath =
+      basePath === pathname ? `/${targetLocale}` : basePath;
     return `${normalizedPath}${querySuffix}`;
   }
 
@@ -113,7 +127,10 @@ export function Header({ locale, copy }: HeaderProps) {
         return;
       }
 
-      if (langDesktopRef.current?.contains(target) || langMobileRef.current?.contains(target)) {
+      if (
+        langDesktopRef.current?.contains(target) ||
+        langMobileRef.current?.contains(target)
+      ) {
         return;
       }
 
@@ -195,14 +212,21 @@ export function Header({ locale, copy }: HeaderProps) {
     >
       <Container>
         <div className={styles.headerInner}>
-          <Link className={styles.brand} href={`/${locale}`} aria-label={copy.brandLabel}>
+          <Link
+            className={styles.brand}
+            href={`/${locale}`}
+            aria-label={copy.brandLabel}
+          >
             <span className={styles.brandWordmark}>IES</span>
             <span className={styles.brandDivider} aria-hidden="true" />
             <span className={styles.brandName}>{copy.brandName}</span>
           </Link>
 
           {/* Меню для больших экранов: на мобильных оно скрыто, вместо него показывается бургер. */}
-          <nav className={styles.headerNavDesktop} aria-label={copy.navAriaLabel}>
+          <nav
+            className={styles.headerNavDesktop}
+            aria-label={copy.navAriaLabel}
+          >
             {navItems.map((item) => (
               <Link
                 key={item.id}
@@ -250,13 +274,18 @@ export function Header({ locale, copy }: HeaderProps) {
           </div>
 
           {/* Блок управления для мобильных: бургер и переключатель языка. */}
-          <div className={styles.headerMobileControls} aria-label={copy.mobileControlsAriaLabel}>
+          <div
+            className={styles.headerMobileControls}
+            aria-label={copy.mobileControlsAriaLabel}
+          >
             <button
               ref={burgerButtonRef}
               onClick={toggleMobileMenu}
               type="button"
               className={styles.burgerButton}
-              aria-label={isMobileMenuOpen ? copy.burgerCloseLabel : copy.burgerOpenLabel}
+              aria-label={
+                isMobileMenuOpen ? copy.burgerCloseLabel : copy.burgerOpenLabel
+              }
               aria-expanded={isMobileMenuOpen}
               aria-controls={mobileMenuId}
             >
@@ -315,9 +344,16 @@ export function Header({ locale, copy }: HeaderProps) {
           }}
           className={styles.mobileMenuOverlay}
         >
-          <div className={styles.mobileMenuPanel} id={mobileMenuId} role="dialog" aria-modal="true">
+          <div
+            className={styles.mobileMenuPanel}
+            id={mobileMenuId}
+            role="dialog"
+            aria-modal="true"
+          >
             <div className={styles.mobileMenuHead}>
-              <div className={styles.mobileMenuTitle}>{copy.mobileMenuTitle}</div>
+              <div className={styles.mobileMenuTitle}>
+                {copy.mobileMenuTitle}
+              </div>
               <button
                 ref={mobileCloseButtonRef}
                 onClick={closeMobileMenu}
@@ -329,7 +365,10 @@ export function Header({ locale, copy }: HeaderProps) {
               </button>
             </div>
 
-            <nav className={styles.mobileMenuLinks} aria-label={copy.mobileNavAriaLabel}>
+            <nav
+              className={styles.mobileMenuLinks}
+              aria-label={copy.mobileNavAriaLabel}
+            >
               {navItems.map((item) => (
                 <Link
                   key={item.id}

@@ -2,17 +2,36 @@
 .heroBlock {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
   align-items: start;
 }
 
 .heroText {
   display: grid;
-  gap: 10px;
+  gap: 12px;
+}
+
+.heroText :global(.h2) {
+  font-family: "Fira Sans", Inter, system-ui, sans-serif;
+  font-size: clamp(32px, 4.1vw, 52px);
+  line-height: 1.06;
+  font-weight: 820;
+  letter-spacing: -0.012em;
+  text-transform: none;
+  text-wrap: pretty;
+}
+
+.heroText :global(.muted-on-dark) {
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.74;
+  color: rgba(11, 27, 51, 0.72);
+  max-width: 64ch;
 }
 
 .location {
   color: rgba(11, 27, 51, 0.72);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .heroImageWrap {
@@ -30,38 +49,51 @@
 }
 
 .ctaRow {
-  margin-top: 18px;
+  margin-top: 22px;
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .ctaButton {
-  min-width: 220px;
+  min-width: 240px;
 }
 
 .sectionBlock {
-  margin-top: 24px;
-  padding: 20px;
+  margin-top: 26px;
+  padding: 24px;
   border-radius: 16px;
   border: 1px solid rgba(15, 82, 166, 0.16);
   background: linear-gradient(164deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 255, 0.96) 100%);
   box-shadow: 0 12px 26px rgba(7, 12, 40, 0.09);
 }
 
-.sectionBlock .p + .p {
-  margin-top: 12px;
+.sectionBlock :global(.h3) {
+  font-family: "Fira Sans", Inter, system-ui, sans-serif;
+  font-size: clamp(22px, 1.8vw, 28px);
+  line-height: 1.2;
+  font-weight: 760;
+  letter-spacing: -0.004em;
+  text-transform: none;
+  text-wrap: balance;
 }
 
-.list {
-  margin-top: 12px;
+.sectionBlock :global(.p) {
+  font-size: clamp(15.5px, 1.06vw, 17.5px);
+  line-height: 1.72;
+  color: rgba(11, 27, 51, 0.8);
+  max-width: 68ch;
+}
+
+.sectionBlock .p + .p {
+  margin-top: 14px;
 }
 
 .galleryGrid {
-  margin-top: 12px;
+  margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
 .galleryItem {
@@ -81,28 +113,29 @@
 }
 
 .caption {
-  padding: 8px 10px;
-  font-size: 13px;
-  line-height: 1.45;
-  color: rgba(11, 27, 51, 0.74);
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.58;
+  color: rgba(11, 27, 51, 0.72);
 }
 
 .badges {
-  margin-top: 14px;
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  padding: 6px 12px;
+  min-height: 34px;
+  padding: 7px 13px;
   border-radius: 999px;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 650;
+  letter-spacing: 0.01em;
   background: rgba(15, 82, 166, 0.08);
   border: 1px solid rgba(15, 82, 166, 0.2);
   color: rgba(11, 27, 51, 0.92);
@@ -116,6 +149,20 @@
 }
 
 @media (max-width: 680px) {
+  .sectionBlock {
+    padding: 20px;
+  }
+
+  .heroText :global(.h2) {
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 1.08;
+  }
+
+  .heroText :global(.muted-on-dark) {
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+
   .galleryGrid {
     grid-template-columns: 1fr;
   }

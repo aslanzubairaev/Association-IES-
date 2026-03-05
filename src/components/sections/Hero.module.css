@@ -20,6 +20,10 @@
   /* Occupy the same cell */
 }
 
+.heroContent {
+  min-width: 0;
+}
+
 /* Background Images */
 .heroBg {
   width: 100%;
@@ -185,7 +189,12 @@
   :where(.heroScope) :global(.hero-left .hero-actions .hero-button) {
     padding: 10px 12px;
     font-size: 12px;
-    white-space: nowrap;
+    white-space: normal;
+    line-height: 1.15;
+    text-align: center;
+    text-wrap: balance;
+    height: auto;
+    min-height: 46px;
     flex: 1 1 0;
     min-width: 0;
   }
@@ -203,19 +212,22 @@
   }
 
   .heroTitleMainLine {
-    display: inline-block;
-    white-space: nowrap;
+    display: inline;
     font-size: 0.82em;
     letter-spacing: 0;
   }
 
-  .heroActionsRu {
+  :where(.heroScope) :global(.hero-left .hero-actions).heroActionsRu {
+    flex-wrap: wrap;
     gap: 8px;
   }
 
-  .heroActionsRu :global(.hero-button) {
-    padding: 10px 8px;
+  :where(.heroScope) :global(.hero-left .hero-actions).heroActionsRu :global(.hero-button) {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 10px 12px;
     font-size: 11px;
     letter-spacing: 0.01em;
+    overflow-wrap: anywhere;
   }
 }

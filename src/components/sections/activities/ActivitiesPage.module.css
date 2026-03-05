@@ -2,127 +2,33 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 22px;
 }
 
-.scope .card,
-.card {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 100%;
-  border-radius: 20px;
-  border: 1px solid rgba(15, 82, 166, 0.2);
-  background: linear-gradient(164deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 250, 255, 0.98) 100%);
-  box-shadow: 0 16px 36px rgba(7, 12, 40, 0.12);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-}
-
-.scope .card::before,
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  background: linear-gradient(90deg, rgba(247, 207, 74, 0.95), rgba(247, 207, 74, 0.32));
-}
-
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .scope .card:hover,
-  .card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(15, 82, 166, 0.32);
-    box-shadow: 0 20px 44px rgba(7, 12, 40, 0.16);
-  }
-
-  .scope .card:hover .coverImage,
-  .card:hover .coverImage {
-    transform: scale(1.025);
-  }
-}
-
-.scope .card:focus-within,
-.card:focus-within {
-  border-color: rgba(15, 82, 166, 0.4);
-  box-shadow: 0 0 0 3px rgba(15, 82, 166, 0.2), 0 20px 44px rgba(7, 12, 40, 0.16);
-}
-
-.scope .card :global(.card-header),
-.card :global(.card-header),
-.scope .card :global(.card-content),
-.card :global(.card-content),
-.scope .card :global(.card-footer),
-.card :global(.card-footer) {
-  position: relative;
-  z-index: 1;
-}
-
-.coverWrap {
-  position: relative;
-  overflow: hidden;
-  border-radius: 14px;
-  margin-bottom: 10px;
-  aspect-ratio: 4 / 3;
-  border: 1px solid rgba(15, 82, 166, 0.16);
-  background: rgba(15, 82, 166, 0.03);
-}
-
-.coverWrap::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 36%;
-  background: linear-gradient(180deg, rgba(11, 27, 51, 0) 0%, rgba(11, 27, 51, 0.22) 100%);
-  pointer-events: none;
-}
-
-.coverImage {
-  width: 100%;
+.scope .grid > *,
+.grid > * {
   height: 100%;
-  object-fit: cover;
-  transition: transform 220ms ease;
 }
 
-.scope .card :global(.h3),
-.scope .card :global(.h3--blue),
-.card :global(.h3),
-.card :global(.h3--blue) {
-  font-size: clamp(18px, 1.35vw, 22px);
-  line-height: 1.28;
+.cardItem {
+  height: 100%;
+}
+
+.scope :global(.section-head .h2) {
+  font-family: "Fira Sans", Inter, system-ui, sans-serif;
+  font-size: clamp(30px, 3.9vw, 46px);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   text-transform: none;
-  color: rgba(11, 27, 51, 0.96);
+  text-wrap: pretty;
 }
 
-.scope .card :global(.p),
-.card :global(.p) {
-  color: rgba(11, 27, 51, 0.82);
-  line-height: 1.58;
-}
-
-.location {
-  margin-top: auto;
-  color: rgba(11, 27, 51, 0.66);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.scope .card :global(.btn-row),
-.card :global(.btn-row) {
-  display: flex;
-  gap: 10px;
-}
-
-.scope .card :global(.btn-row > a),
-.scope .card :global(.btn-row > button),
-.card :global(.btn-row > a),
-.card :global(.btn-row > button) {
-  flex: 1 1 auto;
-}
-
-.cardAction {
-  width: 100%;
+.scope :global(.section-head .muted-on-dark) {
+  font-size: clamp(16px, 1.18vw, 19px);
+  line-height: 1.72;
+  color: rgba(11, 27, 51, 0.72);
+  max-width: 64ch;
 }
 
 @media (max-width: 760px) {
@@ -131,8 +37,13 @@
     grid-template-columns: 1fr;
   }
 
-  .scope .card :global(.btn-row),
-  .card :global(.btn-row) {
-    flex-direction: column;
+  .scope :global(.section-head .h2) {
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1.1;
+  }
+
+  .scope :global(.section-head .muted-on-dark) {
+    font-size: 15.5px;
+    line-height: 1.7;
   }
 }
