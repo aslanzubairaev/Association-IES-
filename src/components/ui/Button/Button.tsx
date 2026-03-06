@@ -1,4 +1,4 @@
-/* Этот файл содержит универсальную кнопку для ссылок и действий. */
+/* This file contains a universal button for links and actions. */
 
 import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
@@ -15,7 +15,7 @@ type ButtonProps = {
 } & AnchorHTMLAttributes<HTMLAnchorElement> &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-// Кнопка: если есть href, рендерим ссылку; иначе обычную кнопку.
+// Button: renders as a Link if href is provided; otherwise as a plain button.
 export function Button({
   children,
   className,

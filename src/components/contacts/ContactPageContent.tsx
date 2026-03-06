@@ -1,7 +1,7 @@
 /*
- Этот файл описывает клиентский контент страницы контактов.
- Он показывает заголовок, блок выбранной темы и форму.
- Он обновляет тексты при выборе темы в списке.
+ This file defines the client-side content of the contact page.
+ It displays a heading, the selected topic block, and the form.
+ It updates texts when a topic is selected from the list.
 */
 
 "use client";
@@ -56,7 +56,7 @@ function resolveIntentIdFromRegistry(rawIntent: string | undefined, intentsById:
 
 export function ContactPageContent({ locale, initialTopic, initialIntentId, sanityIntents }: ContactPageContentProps) {
   const searchParams = useSearchParams();
-  // Список всех известных тем, чтобы быстро находить совпадение по ключу.
+  // List of all known topics for quick lookup by key.
   const allIntents = useMemo(() => {
     const enabledSources = new Set((sanityIntents ?? []).map((intent) => intent.source));
     const merged = new Map<string, ContactIntent>();
@@ -78,11 +78,11 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId, sani
   const initialResolvedIntent = intentFromId ?? findIntentByTopic(allIntents, normalizedInitialTopic);
   const initialTopicValue = intentFromId?.topicValue ?? normalizedInitialTopic ?? "";
 
-  // Текущая выбранная тема нужна, чтобы обновлять заголовок и подсказки при выборе.
+  // The currently selected topic is needed to update the heading and hints on selection.
   const [selectedTopic, setSelectedTopic] = useState(initialTopicValue);
   const [selectedIntent, setSelectedIntent] = useState<ContactIntent | undefined>(initialResolvedIntent);
 
-  // Когда меняется адресная строка, обновляем выбранную тему и её контент.
+  // When the URL changes, update the selected topic and its content.
   useEffect(() => {
     const nextIntent = intentFromId ?? findIntentByTopic(allIntents, normalizedInitialTopic);
     const nextTopic = intentFromId?.topicValue ?? normalizedInitialTopic ?? "";
@@ -90,13 +90,13 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId, sani
     setSelectedIntent(nextIntent);
   }, [allIntents, intentFromId, normalizedInitialTopic]);
 
-  // Обновляем выбранную тему при изменении списка в форме.
+  // Update the selected topic when the form dropdown changes.
   function handleTopicChange(value: string) {
     setSelectedTopic(value);
     setSelectedIntent(findIntentByTopic(allIntents, value));
   }
 
-  // Заголовок страницы зависит от выбранной темы, если она есть.
+  // Page title depends on the selected topic, if one exists.
   const pageTitle = selectedIntent?.title[locale] ?? contactCopy[locale].pageTitle;
   const pageLead = contactCopy[locale].pageLead;
   const intentMessagePlaceholder = selectedIntent?.messagePlaceholder?.[locale];
@@ -127,7 +127,7 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId, sani
     <main className="section page--purple contact-page">
       <Container>
         <div className="contact-content">
-          {/* Заголовок и подзаголовок страницы меняются вместе с выбранной темой. */}
+          {/* Page title and subtitle update together with the selected topic. */}
           <div className="section-head">
             <h1 className="h2">
               {pageTitle}
@@ -137,7 +137,7 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId, sani
             </p>
           </div>
 
-          {/* Блок с выбранной темой показываем, когда есть данные для темы. */}
+          {/* Show the selected topic block when topic data is available. */}
           {selectedIntent ? (
             <ContactContextBlock
               className="contact-context"
@@ -147,9 +147,9 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId, sani
             />
           ) : null}
 
-          {/* Карточка контактов: внутри только форма. */}
+          {/* Contact card: contains only the form. */}
           <ContentCard className="contact-card contact-card--yellow contact-card--form" hoverable={false}>
-            {/* Форма обращения: подстраиваем тему и подсказку под выбор пользователя. */}
+            {/* Contact form: topic and placeholder adapt to the user's selection. */}
             <div className="contact-form-wrap">
               <QuickContactForm
                 locale={locale}

@@ -1,7 +1,7 @@
 /*
- Этот компонент — универсальная секция для страницы.
- Он задаёт правильные отступы и выравнивает контент по центру.
- Фон задаётся на уровне страницы (в app layout или css модуля страницы).
+ This component is a universal page section.
+ It applies proper spacing and centers the content.
+ The background is set at the page level (in the app layout or page CSS module).
 */
 
 import { type CSSProperties, type ReactNode, type ElementType } from "react";
@@ -11,19 +11,19 @@ type SectionProps = {
     className?: string;
     children: ReactNode;
 
-    // Заголовок и подзаголовок секции (опционально)
+    // Section title and subtitle (optional)
     title?: string;
     subtitle?: ReactNode;
-    // Тег для заголовка (по умолчанию h2, но может быть h1 для Hero)
+    // HTML tag for the title (defaults to h2, but can be h1 for Hero)
     titleAs?: ElementType;
 
-    // ID для якорных ссылок
+    // ID for anchor links
     id?: string;
 
-    // Семантический тег самой секции (например, main)
+    // Semantic tag for the section itself (e.g., main)
     as?: ElementType;
 
-    // Дополнительные стили
+    // Additional styles
     style?: CSSProperties;
 };
 

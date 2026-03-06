@@ -1,6 +1,6 @@
 /*
- Этот файл описывает типы для каталога активностей.
- Он задаёт единый контракт данных для списка, страницы деталей и будущей базы данных.
+ This file defines the types for the activities catalog.
+ It establishes a unified data contract for the list, detail page, and future database.
 */
 
 export type ActivitiesLocale = "ru" | "fr";

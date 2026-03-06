@@ -1,7 +1,7 @@
 /*
- Этот файл задаёт маршрут страницы всех активностей.
- Он подключает основной компонент каталога и передаёт выбранный язык.
- Человек видит полный список активностей и может перейти в детали.
+ This file defines the route for the activities listing page.
+ It renders the main catalog component and passes the selected locale.
+ Users see the full list of activities and can navigate to detail pages.
 */
 
 import { ActivitiesPage } from "@/components/sections/activities/ActivitiesPage";

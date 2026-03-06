@@ -1,13 +1,13 @@
 /*
- Этот файл описывает блок с выбранной темой обращения.
- Он показывает заголовок, список примеров и короткое пояснение.
- Блок помогает человеку понять, что именно написать в сообщении.
+ This file defines the selected contact topic block.
+ It displays a heading, a list of examples, and a short note.
+ The block helps the user understand what to include in their message.
 */
 
 import { IesList, IesListItem } from "@/components/ui/IesList";
 import styles from "./ContactContextBlock.module.css";
 
-// Данные для блока с темой: заголовок, примеры и пояснение.
+// Props for the topic block: heading, examples, and note.
 type ContactContextBlockProps = {
   bullets?: string[];
   fineprint?: string;
@@ -22,7 +22,7 @@ function cn(...classes: Array<string | undefined>) {
 export function ContactContextBlock({ bullets, fineprint, extraInfo, className }: ContactContextBlockProps) {
   return (
     <div className={cn(styles.root, className)}>
-      {/* Список примеров: показываем только если есть пункты. */}
+      {/* Example list: only shown when items are provided. */}
       {bullets && bullets.length > 0 ? (
         <IesList className={styles.list}>
           {bullets.map((item) => (
@@ -30,7 +30,7 @@ export function ContactContextBlock({ bullets, fineprint, extraInfo, className }
           ))}
         </IesList>
       ) : null}
-      {/* Короткая приписка под списком, если она задана. */}
+      {/* Short footnote below the list, if provided. */}
       {fineprint ? (
         fineprint.includes("Когда / где: Уточняется при записи") ? null : <p className={styles.fineprint}>{fineprint}</p>
       ) : null}

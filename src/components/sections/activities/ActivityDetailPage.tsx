@@ -1,7 +1,7 @@
 /*
- Этот файл показывает детальную страницу одной активности.
- Он выводит полное описание, формат участия, галерею, аудиторию и кнопки действий.
- Человек может сразу перейти к записи или к поддержке ассоциации.
+ This file renders the detail page for a single activity.
+ It displays the full description, participation format, gallery, audience, and action buttons.
+ The user can sign up directly or go to the support page.
 */
 
 import Image from "next/image";
@@ -29,7 +29,7 @@ function resolveLocaleHref(locale: "ru" | "fr", href: string) {
   return `/${locale}${href}`;
 }
 
-// Детальная страница: все тексты уже локализованы и готовы к отображению.
+// Detail page: all texts are already localized and ready to render.
 export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps) {
   const supportHref = activity.ctaSupportHref ? resolveLocaleHref(locale, activity.ctaSupportHref) : undefined;
   const pageCopy = activitiesPageCopy[locale];
@@ -37,7 +37,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
   return (
     <main className={`section page--purple ${styles.scope}`}>
       <Container>
-        {/* Верхний блок активности: название, короткое описание и главное изображение. */}
+        {/* Activity hero block: title, short description, and cover image. */}
         <div className={styles.heroBlock}>
           <div className={styles.heroText}>
             <h1 className="h2">{activity.detailTitle}</h1>
@@ -57,7 +57,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
           </div>
         </div>
 
-        {/* Кнопки сразу дают два сценария: записаться или поддержать проект. */}
+        {/* Buttons offer two paths: sign up or support the project. */}
         <div className={styles.ctaRow}>
           <Button
             href={`/${locale}/contact?intent=${encodeURIComponent(activity.intentId)}`}
@@ -73,7 +73,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
           ) : null}
         </div>
 
-        {/* Вступительные абзацы объясняют контекст и миссию активности. */}
+        {/* Intro paragraphs explain the context and mission of the activity. */}
         <section className={styles.sectionBlock}>
           {activity.introParagraphs.map((paragraph) => (
             <p key={paragraph} className="p">
@@ -82,20 +82,20 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
           ))}
         </section>
 
-        {/* Блок "Что мы предлагаем" показывает формат активности в пунктовом виде. */}
+        {/* "What we offer" block: shows the activity format as a bullet list. */}
         <section className={styles.sectionBlock}>
           <h2 className="h3 h3--blue">{activity.offerTitle}</h2>
           <p className="p">{activity.offerLead}</p>
           <MinimalList items={activity.offerItems} />
         </section>
 
-        {/* Галерея показывает живые примеры и атмосферу активности. */}
+        {/* Gallery showcases real examples and the atmosphere of the activity. */}
         <section className={styles.sectionBlock}>
           <h2 className="h3 h3--blue">{activity.galleryTitle}</h2>
           <p className="p">{activity.galleryLead}</p>
           <div className={styles.galleryGrid}>
-            {activity.gallery.map((image) => (
-              <figure key={`${image.src}-${image.alt}`} className={styles.galleryItem}>
+            {activity.gallery.map((image, index) => (
+              <figure key={`gallery-${index}`} className={styles.galleryItem}>
                 <Image className={styles.galleryImage} src={image.src} alt={image.alt} width={640} height={420} />
                 {image.caption ? <figcaption className={styles.caption}>{image.caption}</figcaption> : null}
               </figure>
@@ -103,7 +103,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
           </div>
         </section>
 
-        {/* Для кого и в каком формате: это помогает быстро понять доступность участия. */}
+        {/* Audience and format: helps quickly understand participation availability. */}
         <section className={styles.sectionBlock}>
           <h2 className="h3 h3--blue">{activity.audienceTitle}</h2>
           <MinimalList items={activity.audienceItems} />

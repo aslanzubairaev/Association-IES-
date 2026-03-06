@@ -1,7 +1,7 @@
 /*
- Этот файл задаёт страницу контактов.
- Он показывает заголовок, карточку с подсказками и форму для обращения.
- Здесь можно заполнить поля и отправить сообщение в ассоциацию.
+ This file defines the contact page.
+ It renders the heading, hint card, and the contact form.
+ Users can fill in the fields and send a message to the association.
 */
 
 import { ContactPageContent } from "@/components/contacts/ContactPageContent";
@@ -19,7 +19,7 @@ export default async function ContactPage({
 
   return (
     <div className={styles.contactScope}>
-      {/* Контент страницы контактов — клиентский, чтобы реагировать на выбор темы в списке. */}
+      {/* Contact page content is a client component to react to topic selection. */}
       <ContactPageContent
         locale={params.locale}
         initialTopic={searchParams?.topic}

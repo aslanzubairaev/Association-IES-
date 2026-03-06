@@ -1,7 +1,7 @@
-/* 
- Этот файл содержит шапку сайта.
- Он показывает название “Association IES”, меню основных разделов и переключатель языка FR | RU.
- Здесь можно поменять пункты меню и ссылки, когда появится финальная структура страниц.
+/*
+ This file contains the site header.
+ It displays the “Association IES” brand, the main navigation menu, and the FR | RU language switcher.
+ Menu items and links can be updated here once the final page structure is finalized.
 */
 
 "use client";
@@ -38,18 +38,18 @@ type HeaderProps = {
   copy: HeaderCopy;
 };
 
-// Шапка сайта: общая для всех страниц выбранного языка.
+// Site header: shared across all pages for the selected locale.
 export function Header({ locale, copy }: HeaderProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchParamsKey = searchParams.toString();
 
-  // Уникальные идентификаторы для доступности меню.
+  // Unique IDs for menu accessibility.
   const mobileMenuId = useId();
   const langMenuDesktopId = useId();
   const langMenuMobileId = useId();
 
-  // Локальные состояния меню.
+  // Local menu state.
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
@@ -77,11 +77,11 @@ export function Header({ locale, copy }: HeaderProps) {
     },
   ] as const;
 
-  // Проверяем, относится ли ссылка к текущей странице или вложенному разделу.
+  // Check whether the link matches the current page or a nested route.
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
 
-  // Собираем путь для переключения языка так, чтобы сохранить параметры и якорь.
+  // Build the locale-switch path while preserving query params and hash.
   function resolveLocalePath(targetLocale: "ru" | "fr") {
     const querySuffix = searchParamsKey ? `?${searchParamsKey}` : "";
     const basePath = pathname
@@ -92,7 +92,7 @@ export function Header({ locale, copy }: HeaderProps) {
     return `${normalizedPath}${querySuffix}`;
   }
 
-  // Когда открыто мобильное меню, блокируем прокрутку фона.
+  // Lock background scroll while the mobile menu is open.
   useEffect(() => {
     if (!isMobileMenuOpen) {
       return undefined;
@@ -109,13 +109,13 @@ export function Header({ locale, copy }: HeaderProps) {
     };
   }, [isMobileMenuOpen]);
 
-  // При смене маршрута закрываем любые открытые меню.
+  // Close any open menus on route change.
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsLangMenuOpen(false);
   }, [pathname, searchParamsKey]);
 
-  // Когда открыт список языков, закрываем его при клике мимо.
+  // Close the language dropdown when clicking outside of it.
   useEffect(() => {
     if (!isLangMenuOpen) {
       return undefined;
@@ -143,7 +143,7 @@ export function Header({ locale, copy }: HeaderProps) {
     };
   }, [isLangMenuOpen]);
 
-  // Escape должен закрывать открытые меню.
+  // Pressing Escape should close any open menus.
   useEffect(() => {
     if (!isMobileMenuOpen && !isLangMenuOpen) {
       return undefined;
@@ -161,7 +161,7 @@ export function Header({ locale, copy }: HeaderProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMobileMenuOpen, isLangMenuOpen]);
 
-  // При открытии мобильного меню переносим фокус на кнопку закрытия.
+  // Move focus to the close button when the mobile menu opens.
   useEffect(() => {
     if (!isMobileMenuOpen) {
       return undefined;
@@ -176,7 +176,7 @@ export function Header({ locale, copy }: HeaderProps) {
     };
   }, [isMobileMenuOpen]);
 
-  // Действие по нажатию на “бургер”: открыть или закрыть мобильное меню.
+  // Burger button handler: toggle the mobile menu.
   function toggleMobileMenu() {
     setIsMobileMenuOpen((current) => {
       const next = !current;
@@ -187,13 +187,13 @@ export function Header({ locale, copy }: HeaderProps) {
     });
   }
 
-  // Действие по нажатию на затемнение вокруг меню: закрыть меню.
+  // Overlay click handler: close the menu.
   function closeMobileMenu() {
     setIsMobileMenuOpen(false);
     burgerButtonRef.current?.focus();
   }
 
-  // Действие по нажатию на кнопку языка: раскрыть или скрыть список вариантов.
+  // Language button handler: toggle the language dropdown.
   function toggleLangMenu() {
     setIsLangMenuOpen((current) => {
       const next = !current;
@@ -222,7 +222,7 @@ export function Header({ locale, copy }: HeaderProps) {
             <span className={styles.brandName}>{copy.brandName}</span>
           </Link>
 
-          {/* Меню для больших экранов: на мобильных оно скрыто, вместо него показывается бургер. */}
+          {/* Desktop navigation: hidden on mobile, replaced by the burger menu. */}
           <nav
             className={styles.headerNavDesktop}
             aria-label={copy.navAriaLabel}
@@ -238,7 +238,7 @@ export function Header({ locale, copy }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Переключатель языка для больших экранов: одна кнопка с выпадающим меню. */}
+          {/* Desktop language switcher: a single button with a dropdown menu. */}
           <div
             className={`${styles.headerLang} ${styles.desktopLang}`}
             aria-label={copy.langSwitcherAriaLabel}
@@ -273,7 +273,7 @@ export function Header({ locale, copy }: HeaderProps) {
             ) : null}
           </div>
 
-          {/* Блок управления для мобильных: бургер и переключатель языка. */}
+          {/* Mobile controls: burger button and language switcher. */}
           <div
             className={styles.headerMobileControls}
             aria-label={copy.mobileControlsAriaLabel}
@@ -334,7 +334,7 @@ export function Header({ locale, copy }: HeaderProps) {
         </div>
       </Container>
 
-      {/* Мобильное меню: появляется поверх страницы, когда человек нажимает бургер. */}
+      {/* Mobile menu: appears as an overlay when the user taps the burger button. */}
       {isMobileMenuOpen ? (
         <div
           onClick={(event) => {

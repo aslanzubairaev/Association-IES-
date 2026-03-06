@@ -1,11 +1,11 @@
-/* Этот файл задаёт страницу “Политика конфиденциальности / Politique de confidentialité” (RU/FR). */
+/* This file defines the Privacy Policy page (RU/FR). */
 
 import type { Metadata } from "next";
 import { privacyPageCopy } from "@/content/actions";
 import PrivacyPage from "@/components/sections/privacy/PrivacyPage";
 import styles from "./page.module.css";
 
-// Заголовок и описание вкладки берём из словаря выбранного языка.
+// Tab title and description are taken from the copy dictionary for the selected locale.
 export function generateMetadata({
   params,
 }: {
@@ -22,7 +22,7 @@ export function generateMetadata({
 export default function PrivacyRoutePage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
 
-  // Передаём выбранный язык в основной компонент, чтобы маршрутный файл оставался простым.
+  // Pass the selected locale to the main component to keep the route file simple.
   return (
     <div className={styles.privacyScope}>
       <PrivacyPage locale={locale} />

@@ -1,6 +1,6 @@
 /*
- Этот файл содержит секцию “История / Notre histoire” для главной страницы.
- Он показывает заголовок и два абзаца текста без карточек.
+ This file contains the “Our history” section for the home page.
+ It displays a heading and two paragraphs of text without cards.
 */
 
 import { Section } from "@/components/ui/Section/Section";

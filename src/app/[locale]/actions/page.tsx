@@ -1,7 +1,7 @@
 /*
- Этот файл сохраняет совместимость со старым адресом /actions.
- Он делает постоянный редирект на новый каталог /activites и сохраняет query-параметры.
- Человек, пришедший по старой ссылке, попадает на актуальную страницу без потери контекста.
+ This file maintains backward compatibility with the legacy /actions route.
+ It performs a permanent redirect to the new /activites catalog while preserving query parameters.
+ Users following old links are sent to the current page without losing context.
 */
 
 import { permanentRedirect } from "next/navigation";
@@ -13,7 +13,7 @@ export default function ActionsLegacyRoutePage({
   params: { locale: "ru" | "fr" };
   searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  // Собираем query заново, чтобы не потерять intent/topic и другие параметры в старых ссылках.
+  // Rebuild the query string so intent/topic and other parameters from legacy links are preserved.
   const qp = new URLSearchParams();
 
   if (searchParams) {

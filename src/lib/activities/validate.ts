@@ -1,6 +1,6 @@
 /*
- Этот файл проверяет целостность каталога активностей при загрузке.
- Он предотвращает скрытые ошибки (дубликаты slug/intent/topic/order и пустые тексты).
+ This file validates the integrity of the activities catalog on load.
+ It prevents hidden errors (duplicate slug/intent/topic/order and empty texts).
 */
 
 import type { Activity, ActivityImage, LocaleText, LocalizedStringList } from "@/lib/activities/types";

@@ -1,7 +1,7 @@
-/* 
- Этот файл содержит переиспользуемую кнопку копирования.
- Она копирует переданную строку в буфер обмена и на 1–2 секунды показывает короткое подтверждение без всплывающих окон.
- Её можно использовать в любых местах сайта (например для IBAN/BIC), чтобы копирование выглядело аккуратно и одинаково.
+/*
+ This file contains a reusable copy-to-clipboard button.
+ It copies the given string to the clipboard and shows a brief confirmation for 1-2 seconds without any popups.
+ It can be used anywhere on the site (e.g., for IBAN/BIC) to keep the copy experience consistent.
 */
 
 "use client";
@@ -18,7 +18,7 @@ type CopyToClipboardButtonProps = {
   onCopied?: (text: string) => void;
 };
 
-// Кнопка копирования: по нажатию копирует value и на короткое время показывает подтверждение отдельной строкой.
+// Copy button: copies the value on click and briefly shows a confirmation message.
 export function CopyToClipboardButton({
   value,
   label,
@@ -39,7 +39,7 @@ export function CopyToClipboardButton({
     };
   }, []);
 
-  // Действие: копируем значение в буфер обмена (с запасным вариантом для браузеров без Clipboard API).
+  // Copies the value to the clipboard (with a fallback for browsers without the Clipboard API).
   async function copyValue() {
     let isCopied = false;
 
@@ -84,10 +84,10 @@ export function CopyToClipboardButton({
   }
 
   if (!showStatus) {
-    // Упрощённый вариант: по нажатию только копируем значение без вывода строки статуса.
+    // Simplified variant: copies the value on click without displaying a status line.
     return (
       <>
-        {/* Кнопка запускает копирование без показа отдельного статуса. */}
+        {/* Button triggers copying without showing a separate status. */}
         <Button
           onClick={copyValue}
           type="button"
@@ -102,8 +102,8 @@ export function CopyToClipboardButton({
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-      {/* Основная кнопка запускает копирование, а статус ниже подтверждает действие для пользователя. */}
-      {/* Кнопка копирует значение, а строка ниже сообщает о результате действия. */}
+      {/* Main button triggers copying; the status below confirms the action for the user. */}
+      {/* The button copies the value and the line below reports the result. */}
       <Button
         onClick={copyValue}
         type="button"
@@ -114,7 +114,7 @@ export function CopyToClipboardButton({
         {label}
       </Button>
 
-      {/* Строка подтверждения: делаем её заметной на любом фоне, но сохраняем высоту, чтобы интерфейс не прыгал. */}
+      {/* Confirmation line: made visible on any background while preserving height to prevent layout shifts. */}
       <div
         id={statusId}
         aria-live="polite"
@@ -124,7 +124,7 @@ export function CopyToClipboardButton({
           color: "rgba(11, 27, 51, 0.96)",
           fontWeight: 800,
           minHeight: 16,
-          // Лёгкая “обводка” через тень текста, чтобы надпись была читабельной на градиентах без белого фона.
+          // Subtle text shadow outline to keep the label readable on gradients without a white background.
           textShadow: statusText ? "0 1px 0 rgba(255, 255, 255, 0.55)" : "none",
         }}
       >

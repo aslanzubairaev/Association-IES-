@@ -1,4 +1,4 @@
-/* Этот файл показывает верхний блок главной страницы: заголовок, описание, кнопки и компактную форму связи. */
+/* This file renders the hero block of the home page: heading, description, buttons, and a compact contact form. */
 
 import { Button } from "@/components/ui/Button/Button";
 import { heroCopy } from "@/content/actions";
@@ -8,7 +8,7 @@ type HeroProps = {
   locale: "ru" | "fr";
 };
 
-// Верхний блок: тексты и кнопки зависят от выбранного языка.
+// Hero block: texts and buttons depend on the selected locale.
 export function Hero({ locale }: HeroProps) {
   const copy = heroCopy[locale];
   const titleParts = copy.title.split(",").map((part) => part.trim()).filter(Boolean);
@@ -34,7 +34,7 @@ export function Hero({ locale }: HeroProps) {
         </picture>
 
         <div className={`hero-left hero-left--mobile-plain ${styles.heroContent}`}>
-          {/* Крупный заголовок: кратко объясняет, что ассоциация помогает адаптироваться именно в Страсбурге. */}
+          {/* Main heading: briefly explains that the association helps with integration in Strasbourg. */}
           <h1 className="h1">
             {titleCity ? (
               <>
@@ -48,7 +48,7 @@ export function Hero({ locale }: HeroProps) {
           </h1>
 
 
-          {/* Основные кнопки: ведут в раздел помощи и в список действий ассоциации. */}
+          {/* Primary buttons: link to the help section and the association's activities list. */}
           <div
             className={`actions hero-actions ${locale === "ru" ? styles.heroActionsRu : ""}`}
           >
@@ -60,7 +60,7 @@ export function Hero({ locale }: HeroProps) {
             </Button>
           </div>
 
-          {/* Ключевые слова: помогают быстро понять, про что наши направления (без кликов). */}
+          {/* Keywords: help visitors quickly understand our focus areas without clicking. */}
           <div className="pill-row hero-pillRow" aria-label={copy.pillsAriaLabel}>
             {copy.pills.map((pill) => (
               <span key={pill} className="pill">

@@ -1,7 +1,7 @@
-/* 
- Этот файл содержит нижний блок сайта.
- Он показывает копирайт и простые ссылки, которые будут вести на юридические страницы и контакты.
- Здесь можно поменять тексты и список ссылок, когда появится финальная структура.
+/*
+ This file contains the site footer.
+ It displays the copyright notice and simple links to legal pages and contacts.
+ Texts and links can be updated here once the final structure is finalized.
 */
 
 import Link from "next/link";
@@ -13,10 +13,10 @@ type FooterProps = {
   locale: "ru" | "fr";
 };
 
-// Низ сайта: минимальная версия, без сложной логики.
+// Site footer: minimal version, no complex logic.
 export default function Footer({ locale }: FooterProps) {
   const copy = footerCopy[locale];
-  // Единый список соцсетей для подвала: ссылка, подпись и иконка рендерятся из одного массива без дублирования.
+  // Single list of social links for the footer: link, label, and icon are rendered from one array without duplication.
   const socialLinks = [
     {
       id: "instagram",

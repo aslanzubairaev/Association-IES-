@@ -1,7 +1,7 @@
-/* 
- Этот файл определяет страницу лендинга для выбранного языка (/ru или /fr).
- Он показывает блок приветствия, быстрые карточки перехода и блок истории ассоциации.
- Человек может познакомиться с ассоциацией и перейти в нужные разделы через карточки навигации.
+/*
+ This file defines the landing page for the selected locale (/ru or /fr).
+ It renders the hero section, quick navigation cards, and the association history section.
+ Users can learn about the association and navigate to other sections via the cards.
 */
 
 import { Hero } from "@/components/sections/Hero";
@@ -10,14 +10,14 @@ import { ActivitiesHomeSection } from "@/components/sections/activities/Activiti
 import { HistorySection } from "@/components/sections/HistorySection";
 
 
-// Главная страница языка: только новая структура, без legacy-лендинга.
+// Locale landing page: new structure only, no legacy landing.
 export default function LocalePage({ params }: { params: { locale: "ru" | "fr" } }) {
   const locale = params.locale;
 
   return (
     <main>
       <div className="page--purple">
-        {/* Основной набор секций главной страницы для выбранного языка. */}
+        {/* Main set of sections for the locale landing page. */}
         <Hero locale={locale} />
         <QuickNav locale={locale} />
         <ActivitiesHomeSection locale={locale} />

@@ -1,4 +1,4 @@
-/* Этот файл показывает форму контактов: проверяет поля и открывает webmail в новой вкладке без mailto и системных окон. */
+/* This file renders the contact form: validates fields and opens webmail in a new tab without mailto or system dialogs. */
 "use client";
 
 import { useState, type FormEvent, type CSSProperties } from "react";
@@ -10,9 +10,9 @@ import styles from "./QuickContactForm.module.css";
 
 type QuickContactFormProps = {
   locale: "ru" | "fr";
-  // Где используется форма: в Hero (компактный блок) или на отдельной странице контактов.
+  // Where the form is used: in the Hero (compact block) or on the dedicated contact page.
   variant?: "hero" | "page";
-  // Тема, которую можно заранее выбрать (например, если пользователь пришёл с другой страницы).
+  // Topic that can be pre-selected (e.g., when the user came from another page).
   initialTopic?: string;
   messagePlaceholderOverride?: string;
   messagePlaceholderTopic?: string;
@@ -28,7 +28,7 @@ function cn(...classes: Array<string | null | undefined | false>) {
   return classes.filter(Boolean).join(" ");
 }
 
-// Эта форма работает без сервера: она проверяет поля и подготавливает текст письма для копирования.
+// This form works without a server: it validates fields and prepares the email body for copying.
 export function QuickContactForm({
   locale,
   variant = "hero",
@@ -44,7 +44,7 @@ export function QuickContactForm({
   const buttonLabel = copy.buttonLabel[variant];
   const initialTopicValue = initialTopic?.trim() ?? "";
 
-  // Эти значения нужны, чтобы собрать текст письма и показать подсказки при ошибках.
+  // These values are used to compose the email body and display error hints.
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -96,7 +96,7 @@ export function QuickContactForm({
   const showTopicError = touched.topic && topicIsEmpty;
   const showMessageError = touched.message && messageIsEmpty;
 
-  // Эта функция срабатывает при отправке формы: она проверяет поля и подготавливает текст письма.
+  // Triggered on form submission: validates fields and prepares the email body.
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setTouched({ name: true, email: true, topic: true, message: true });
@@ -117,7 +117,7 @@ export function QuickContactForm({
 
     const subject = copy.subject;
 
-    // На странице контактов мы сразу открываем Gmail Web в новой вкладке.
+    // On the contact page, we directly open Gmail Web in a new tab.
     if (variant === "page") {
       openWebmailCompose({ to: EMAIL_TO, subject, body });
     }
@@ -130,7 +130,7 @@ export function QuickContactForm({
     setTouched({ name: false, email: false, topic: false, message: false });
   }
 
-  // Этот стиль резервирует место под строку ошибки, чтобы поля не “прыгали”, когда ошибка появляется.
+  // This style reserves space for the error message so fields don't jump when an error appears.
   const errorTextStyle: CSSProperties = {
     color: "rgba(185, 28, 28, 0.92)",
     marginTop: 2,
@@ -138,20 +138,20 @@ export function QuickContactForm({
     lineHeight: "16px",
   };
 
-  // Когда список тем закрывается, отмечаем поле, чтобы показать ошибку при пустом выборе.
+  // When the topic dropdown closes, mark the field as touched to show an error if empty.
   function handleTopicOpenChange(open: boolean) {
     if (!open) {
       setTouched((prev) => ({ ...prev, topic: true }));
     }
   }
 
-  // Отправка формы собирает данные и открывает подготовленное письмо в выбранном почтовом сценарии.
+  // Form submission collects data and opens a pre-filled email in the chosen mail scenario.
   return (
     <form className={cn("form quickForm", styles.root)} onSubmit={handleSubmit} noValidate>
-      {/* Заголовок формы показываем только в Hero, чтобы на странице /contact не было дублирования заголовков. */}
+      {/* Form title is shown only in Hero to avoid duplicate headings on the /contact page. */}
       {variant === "hero" ? <h3 className="h3">{copy.title}</h3> : null}
 
-      {/* Подсказка: помогает выбрать нужный раздел ниже на странице, чтобы мы быстрее ответили. */}
+      {/* Helper text: guides the user to pick the right section below so we can respond faster. */}
       {variant === "hero" ? <p className={cn("fineprint", styles.helper)}>{copy.helper}</p> : null}
 
       {variant === "page" && pageNoteClassName ? <p className={pageNoteClassName}>{pageNoteText}</p> : null}
@@ -248,17 +248,17 @@ export function QuickContactForm({
         </label>
       </div>
 
-      {/* Кнопка отправки: по нажатию проверяем поля и открываем письмо в почте (в зависимости от варианта формы). */}
+      {/* Submit button: validates fields on click and opens the email client (depending on form variant). */}
       <div className={styles.submitRow}>
         <Button variant="primary" type="submit" className="contact-cta-button">
           {buttonLabel}
         </Button>
       </div>
 
-      {/* Подсказка под формой: в Hero оставляем, а на странице /contact она уже есть в тексте страницы. */}
+      {/* Hint below the form: shown in Hero; on the /contact page it is already part of the page text. */}
       {variant === "hero" ? <p className="fineprint">{copy.hint}</p> : null}
 
-      {/* На странице контактов не показываем дополнительный статус после отправки. */}
+      {/* On the contact page, no additional status is shown after submission. */}
     </form>
   );
 }

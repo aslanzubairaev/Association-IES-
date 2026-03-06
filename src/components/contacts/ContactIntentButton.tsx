@@ -1,7 +1,7 @@
 /*
- Этот файл описывает кнопку выбора темы обращения.
- Она ведёт на страницу контактов и передаёт выбранную тему через адресную строку.
- Нажатие помогает быстрее заполнить форму с нужной подсказкой.
+ This file defines the contact intent button.
+ It links to the contact page and passes the selected topic via the URL.
+ Clicking it pre-fills the form with the relevant hint.
 */
 
 import { Button } from "@/components/ui/Button/Button";

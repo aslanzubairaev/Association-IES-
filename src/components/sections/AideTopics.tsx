@@ -1,4 +1,4 @@
-/* Этот файл содержит блок “Частые темы / Sujets fréquents” и показывает 6 карточек тем, чтобы быстро выбрать направление. */
+/* This file contains the “Frequent topics” block and displays 6 topic cards for quick selection. */
 
 import { Section } from "@/components/ui/Section/Section";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
@@ -10,9 +10,9 @@ type AideTopicsProps = {
   locale: "ru" | "fr";
 };
 
-// Блок с карточками тем: короткие формулировки, чтобы не перегружать новоприбывших.
+// Topic cards block: short descriptions to avoid overwhelming newcomers.
 export function AideTopics({ locale }: AideTopicsProps) {
-  // Тексты и список тем: чтобы RU/FR были синхронны и легко редактировались.
+  // Texts and topic list: kept in sync for RU/FR and easy to edit.
   const copy = aideCopy[locale].topics;
 
   return (
@@ -23,7 +23,7 @@ export function AideTopics({ locale }: AideTopicsProps) {
       title={copy.title}
       subtitle={copy.subtitle}
     >
-      {/* Карточки тем: на десктопе 3 колонки, на мобильных — 1 колонка (это уже в стилях). */}
+      {/* Topic cards: 3 columns on desktop, 1 column on mobile (handled in styles). */}
       <div className="cards-grid aide-topics-grid" aria-label={copy.title}>
         {copy.items.map((topic) => (
           <ContentCard

@@ -1,7 +1,7 @@
-/* 
- Этот файл задаёт общий каркас страниц для выбранного языка (/ru или /fr).
- Он показывает шапку сайта и оборачивает содержимое страницы в общий каркас.
- Человек может использовать меню и переключать язык в шапке.
+/*
+ This file defines the shared layout for the selected locale (/ru or /fr).
+ It renders the site header and wraps page content in a common shell.
+ Users can use the navigation menu and switch languages via the header.
 */
 
 import { notFound } from "next/navigation";
@@ -10,7 +10,7 @@ import Footer from "@/components/layout/Footer";
 import { headerCopy } from "@/content/actions";
 import styles from "./layout.module.css";
 
-// Общая оболочка для страниц /ru и /fr: проверяем язык и показываем переключатель.
+// Shared shell for /ru and /fr pages: validates the locale and renders the language switcher.
 export default function LocaleLayout({
   children,
   params,
@@ -18,10 +18,10 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // Язык, который пришёл из адреса страницы.
+  // Locale extracted from the page URL.
   const locale = params.locale;
 
-  // Если язык неизвестен — показываем страницу “не найдено”.
+  // If the locale is unknown, show a 404 page.
   if (locale !== "ru" && locale !== "fr") {
     notFound();
   }
@@ -29,9 +29,9 @@ export default function LocaleLayout({
   return (
     <div className={`${styles.localeScope} locale-shell`}>
       <div id="top" aria-hidden="true" />
-      {/* Верхняя шапка, которая остаётся видимой при прокрутке. */}
+      {/* Sticky header that stays visible on scroll. */}
       <Header locale={locale} copy={headerCopy[locale]} />
-      {/* Отступ под шапку, чтобы содержимое страницы не уходило под неё. */}
+      {/* Content wrapper with offset so page content doesn't slide under the header. */}
       <div className="locale-content">{children}</div>
       <Footer locale={locale} />
     </div>

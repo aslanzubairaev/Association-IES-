@@ -1,7 +1,7 @@
 /*
- Этот файл задаёт маршрут детальной страницы активности.
- Он получает slug из адреса, находит нужную активность и показывает полный контент.
- Если slug не найден или активность не опубликована, человек видит страницу 404.
+ This file defines the route for the activity detail page.
+ It extracts the slug from the URL, finds the matching activity, and renders its full content.
+ If the slug is not found or the activity is unpublished, the user sees a 404 page.
 */
 
 import type { Metadata } from "next";
@@ -17,7 +17,7 @@ type ActivityDetailRouteProps = {
   };
 };
 
-// Метаданные страницы строятся из SEO-полей выбранной активности.
+// Page metadata is built from the SEO fields of the selected activity.
 export async function generateMetadata({ params }: ActivityDetailRouteProps): Promise<Metadata> {
   const activity = await activityRepository.getBySlug(params.locale, params.slug);
 
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: ActivityDetailRouteProps): Pr
   };
 }
 
-// Роут деталей: если активность найдена, передаём её в компонент отображения.
+// Detail route: if the activity is found, pass it to the display component.
 export default async function ActivityDetailRoutePage({ params }: ActivityDetailRouteProps) {
   const activity = await activityRepository.getBySlug(params.locale, params.slug);
 

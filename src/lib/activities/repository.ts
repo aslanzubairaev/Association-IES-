@@ -1,6 +1,6 @@
 /*
- Этот файл содержит единый доступ к каталогу активностей.
- Сейчас данные читаются из локального TypeScript каталога, позже сюда можно подключить Supabase.
+ This file provides unified access to the activities catalog.
+ Currently data is read from a local TypeScript catalog; Supabase can be plugged in later.
 */
 
 import {
@@ -21,7 +21,7 @@ import type {
 import { validateActivitiesCatalog } from "@/lib/activities/validate";
 
 /*
- План SQL-структуры для будущего адаптера Supabase:
+ Planned SQL schema for the future Supabase adapter:
  - activities(id, slug, topic_key, intent_id, status, is_featured, display_order, cover_image_src, cta_support_href)
  - activity_translations(activity_id, locale, location, card_title, card_pitch, detail_title, detail_subtitle,
    offer_title, offer_lead, gallery_title, gallery_lead, audience_title, cta_participate_label,

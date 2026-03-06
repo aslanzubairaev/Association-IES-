@@ -1,7 +1,7 @@
-/* 
- Этот файл содержит блок с реквизитами для банковского перевода.
- Он показывает IBAN и BIC понятным, контрастным текстом и даёт кнопки “Скопировать”, чтобы быстро вставить данные в приложении банка.
- Человек может нажать на блок или на одну из кнопок, чтобы скопировать нужную строку.
+/*
+ This file contains the bank transfer details block.
+ It displays IBAN and BIC in clear, high-contrast text and provides “Copy” buttons for quick pasting into a banking app.
+ The user can click on the block or on individual buttons to copy the desired value.
 */
 
 "use client";
@@ -18,7 +18,7 @@ type BankTransferDetailsProps = {
   bic: string;
 };
 
-// Блок реквизитов: по клику копирует данные в буфер обмена и показывает короткую подсказку.
+// Transfer details block: copies data to clipboard on click and shows a brief toast.
 export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsProps) {
   const [status, setStatus] = useState<string | null>(null);
   const [toastText, setToastText] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
 
   const copy = bankTransferCopy[locale];
 
-  // Действие: копируем текст в буфер обмена, чтобы человек мог быстро вставить его в приложении банка.
+  // Copies text to clipboard so the user can quickly paste it into their banking app.
   async function copyToClipboard(textToCopy: string, okMessage: string) {
     if (statusTimeoutRef.current) {
       window.clearTimeout(statusTimeoutRef.current);
@@ -46,12 +46,12 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     }
   }
 
-  // Действие по нажатию на сам блок: копируем IBAN и BIC вместе одной строкой.
+  // Block click handler: copies IBAN and BIC together as a single string.
   function copyAll() {
     copyToClipboard(`IBAN: ${iban}\nBIC: ${bic}`, `${copy.copiedLabel}: ${copy.copyAllLabel}`);
   }
 
-  // Короткое подтверждение после копирования IBAN или BIC: сначала очищаем старые таймеры, затем запускаем новые.
+  // Brief confirmation after copying IBAN or BIC: clears old timers first, then starts new ones.
   function showToast(owner: "iban" | "bic", text: string) {
     if (toastTimeoutRef.current) {
       window.clearTimeout(toastTimeoutRef.current);
@@ -72,7 +72,7 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
     }, 1800);
   }
 
-  // При уходе со страницы очищаем таймеры, чтобы не было отложенных обновлений для уже закрытого блока.
+  // Clean up timers on unmount to prevent stale updates for a destroyed component.
   useEffect(() => {
     return () => {
       if (statusTimeoutRef.current) {
@@ -89,8 +89,8 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
 
   return (
     <div className={styles.bankTransferDetails}>
-      {/* Блок реквизитов: контрастный и кликабельный, чтобы быстро скопировать данные. */}
-      {/* Клик по карточке копирует все реквизиты и показывает подтверждение. */}
+      {/* Transfer details block: high-contrast and clickable for quick copying. */}
+      {/* Clicking the card copies all details and shows a confirmation. */}
       <div
         onClick={copyAll}
         className={`contact-box support-info-panel ${styles.supportInfoPanel} ${styles.bankTransferBox}`}
@@ -123,13 +123,13 @@ export function BankTransferDetails({ locale, iban, bic }: BankTransferDetailsPr
           </IesListItem>
         </IesList>
 
-        {/* Подсказка статуса: показывает, что данные скопированы. */}
+        {/* Status hint: indicates that the data has been copied. */}
         <div className="bank-transfer-status" aria-live="polite">
           {status ?? copy.hint}
         </div>
       </div>
 
-      {/* Кнопки копирования: делаем две компактные кнопки рядом, чтобы быстро скопировать IBAN или BIC. */}
+      {/* Copy buttons: two compact buttons side by side for quickly copying IBAN or BIC. */}
       <div
         className={`btn-row bank-transfer-actions ${styles.actionsRow} ${styles.footer}`}
       >

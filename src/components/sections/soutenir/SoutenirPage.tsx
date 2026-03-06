@@ -1,4 +1,4 @@
-/* Этот файл содержит основной контент страницы “Soutenir / Поддержать” и показывает способы поддержки: донат, банковский перевод и волонтёрство. */
+/* This file contains the main content of the “Support” page and displays ways to help: donation, bank transfer, and volunteering. */
 
 import { ContentCard } from "@/components/ui/Card/ContentCard";
 import { BankTransferDetails } from "@/components/support/BankTransferDetails";
@@ -10,7 +10,7 @@ type SoutenirPageProps = {
   locale: "ru" | "fr";
 };
 
-// Иконка для карточки HelloAsso.
+// Icon for the HelloAsso card.
 const helloAssoIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
     <path
@@ -23,7 +23,7 @@ const helloAssoIcon = (
   </svg>
 );
 
-// Иконка для карточки CotizUp.
+// Icon for the CotizUp card.
 const cotizUpIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
     <path
@@ -57,7 +57,7 @@ const cotizUpIcon = (
   </svg>
 );
 
-// Иконка для карточки банковского перевода.
+// Icon for the bank transfer card.
 const bankIcon = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
     <path
@@ -89,10 +89,10 @@ const bankIcon = (
 );
 
 export default function SoutenirPage({ locale }: SoutenirPageProps) {
-  // Все тексты страницы зависят от языка, который выбран в адресе (/ru или /fr).
+  // All page texts depend on the locale selected in the URL (/ru or /fr).
   const text = soutenirCopy[locale];
 
-  // Ссылки для основных действий в карточках поддержки.
+  // Links for the main actions in the support cards.
   const helloAssoHref =
     "https://www.helloasso.com/associations/association-pour-l-education-et-l-insertion-sociale-integration-education-synergie";
   const cotizUpHref = "https://www.cotizup.com/soutien-ies";
@@ -100,7 +100,7 @@ export default function SoutenirPage({ locale }: SoutenirPageProps) {
 
   return (
     <main className="page--purple support-page">
-      {/* Донат / Dons: три понятных способа, без выдуманных ссылок и реквизитов. */}
+      {/* Donations: three clear options with real links and details. */}
       <Section
         className="support-donate-section"
         title={text.donateTitle}
@@ -109,7 +109,7 @@ export default function SoutenirPage({ locale }: SoutenirPageProps) {
       >
         {text.donateNote && <p className="note-hero note-center">{text.donateNote}</p>}
 
-        {/* Сетка из трёх карточек: одинаковая структура помогает быстро сравнить варианты. */}
+        {/* Three-card grid: uniform structure helps quickly compare options. */}
         <div className="support-cards-grid">
           <ContentCard
             className="support-card support-card--pink"
@@ -154,7 +154,7 @@ export default function SoutenirPage({ locale }: SoutenirPageProps) {
             description={text.bankText}
             hoverable={false}
           >
-            {/* Реквизиты перевода: человек может нажать и быстро скопировать IBAN/BIC для приложения банка. */}
+            {/* Transfer details: the user can click to quickly copy the IBAN/BIC for their banking app. */}
             <BankTransferDetails
               locale={locale}
               iban="FR89 2004 1010 1509 6137 7K03 615"
@@ -163,7 +163,7 @@ export default function SoutenirPage({ locale }: SoutenirPageProps) {
           </ContentCard>
         </div>
 
-        {/* Важное сообщение: короткий блок как “Важно знать”, чтобы не терять эту деталь. */}
+        {/* Important notice: a short “Good to know” block so this detail is not missed. */}
         <ContentCard
           className="support-card support-important"
           title={text.importantTitle}
@@ -172,7 +172,7 @@ export default function SoutenirPage({ locale }: SoutenirPageProps) {
         />
       </Section>
 
-      {/* Волонтёрство / Bénévolat: отдельный блок с призывом написать нам. */}
+      {/* Volunteering: a separate block encouraging visitors to contact us. */}
       <Section title={text.volunteerTitle}>
         <div className="grid-2 support-volunteer-grid">
           <ContentCard

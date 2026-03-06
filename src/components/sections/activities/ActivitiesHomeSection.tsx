@@ -1,7 +1,7 @@
 /*
- Этот файл показывает блок активностей на главной странице.
- Он выводит максимум 6 карточек и кнопку перехода к полной странице каталога.
- Человек может сразу открыть интересную активность из главной страницы.
+ This file renders the activities block on the home page.
+ It displays up to 6 cards and a button linking to the full catalog page.
+ The user can open an activity of interest directly from the home page.
 */
 
 import { Section } from "@/components/ui/Section/Section";
@@ -15,7 +15,7 @@ type ActivitiesHomeSectionProps = {
   locale: "ru" | "fr";
 };
 
-// Блок на главной: показываем только ограниченный набор активностей для быстрого входа.
+// Home page block: shows only a limited set of activities for quick access.
 export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionProps) {
   const copy = activitiesHomeCopy[locale];
   const pageCopy = activitiesPageCopy[locale];
@@ -23,7 +23,7 @@ export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionPro
 
   return (
     <Section className={styles.scope} title={copy.title} subtitle={copy.subtitle}>
-      {/* Карточки можно открыть кликом по всей карточке, чтобы сразу попасть в детали. */}
+      {/* Cards are clickable in their entirety, leading directly to the detail page. */}
       <div className={styles.grid} aria-label={copy.listAriaLabel}>
         {activities.map((activity) => (
           <ActivityCard
@@ -38,7 +38,7 @@ export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionPro
         ))}
       </div>
 
-      {/* Отдельная кнопка ведет на полную страницу, где доступен весь каталог. */}
+      {/* Separate button links to the full page where the entire catalog is available. */}
       <div className={styles.ctaRow}>
         <Button href={`/${locale}/activites`} variant="pill" className={styles.ctaButton}>
           {copy.ctaAll}

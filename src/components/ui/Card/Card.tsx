@@ -1,4 +1,4 @@
-/* Этот файл содержит универсальную карточку для секций главной страницы. */
+/* This file contains a universal card component for homepage sections. */
 
 import type { ComponentPropsWithoutRef, ElementType, HTMLAttributes, ReactNode } from "react";
 import Link from "next/link";
@@ -23,12 +23,12 @@ type ElementCardProps<T extends ElementType> = CommonCardProps & {
 
 type CardProps<T extends ElementType = "div"> = LinkCardProps | ElementCardProps<T>;
 
-// Карточка: по умолчанию задаём общий surface-слой, но можно отключить для особых вариантов (hero/quote).
+// Card: applies a default surface layer, which can be disabled for special variants (hero/quote).
 export function Card<T extends ElementType = "div">(props: CardProps<T>) {
   const { children, className, surface = true, hoverable = true } = props;
   const classes = ["card", surface ? styles.surface : null, className].filter(Boolean).join(" ");
 
-  // Если передан href, используем Link.
+  // If href is provided, render as a Link.
   if ("href" in props && typeof props.href === "string") {
     const { href } = props as LinkCardProps;
     const linkRest = { ...(props as LinkCardProps) } as Record<string, unknown>;
@@ -50,7 +50,7 @@ export function Card<T extends ElementType = "div">(props: CardProps<T>) {
     );
   }
 
-  // Иначе используем as (div, article...)
+  // Otherwise use the `as` prop (div, article...)
   const Component = (props as ElementCardProps<T>).as ?? "div";
   const elementRest = { ...(props as ElementCardProps<T>) } as Record<string, unknown>;
   delete elementRest.className;
@@ -70,7 +70,7 @@ export function Card<T extends ElementType = "div">(props: CardProps<T>) {
   );
 }
 
-// Заголовок карточки: обычно содержит H3/H4
+// Card header: typically contains an H3/H4
 export function CardHeader({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`card-header ${className || ""}`} {...rest}>
@@ -79,7 +79,7 @@ export function CardHeader({ className, children, ...rest }: HTMLAttributes<HTML
   );
 }
 
-// Основной контент карточки
+// Main card content
 export function CardContent({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`card-content ${className || ""}`} {...rest}>
@@ -88,7 +88,7 @@ export function CardContent({ className, children, ...rest }: HTMLAttributes<HTM
   );
 }
 
-// Подвал карточки: для кнопок, подписей и мета-информации
+// Card footer: for buttons, captions, and meta information
 export function CardFooter({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`card-footer ${className || ""}`} {...rest}>
