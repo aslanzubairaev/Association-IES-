@@ -14,18 +14,18 @@ type QuickNavProps = {
   locale: "ru" | "fr";
 };
 
-function ArrowIcon({ className }: { className?: string }) {
+function ChevronIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
-      viewBox="0 0 20 20"
+      viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
     >
       <path
-        d="M4 10h12m0 0l-4-4m4 4l-4 4"
+        d="M9 6l6 6-6 6"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -60,15 +60,15 @@ export function QuickNav({ locale }: QuickNavProps) {
                     src={card.icon}
                     alt=""
                     aria-hidden="true"
-                    width={80}
-                    height={80}
+                    width={120}
+                    height={120}
                   />
                 )}
                 <div className={styles.cardText}>
                   <h3 className={styles.cardTitle}>{card.title[locale]}</h3>
                   <p className={styles.cardDesc}>{card.description[locale]}</p>
                 </div>
-                <ArrowIcon className={styles.cardArrow} />
+                <ChevronIcon className={styles.cardArrow} />
               </CardContent>
             </Card>
           );

@@ -4,12 +4,23 @@
   box-shadow: var(--shadow-soft);
   border-radius: var(--radius-card);
   color: var(--text-primary);
-  transition: box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .surface:not([data-hover="false"]):hover {
-    border-color: rgba(15, 82, 166, 0.22);
-    box-shadow: 0 18px 40px rgba(7, 10, 32, 0.14);
+    border-color: rgba(15, 82, 166, 0.18);
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-1px);
   }
+
+  .surface:not([data-hover="false"]):active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+.surface:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring), var(--shadow-soft);
 }
