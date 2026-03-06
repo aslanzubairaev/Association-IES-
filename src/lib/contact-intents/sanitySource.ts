@@ -96,6 +96,7 @@ function toContactIntent(doc: SanityContactIntentDocument): ContactIntent | null
 
   return {
     id,
+    sanityId: doc._id,
     source,
     topicValue,
     topicLabel: pickTextPair(doc.topicLabel) ?? title,

@@ -10,13 +10,11 @@ export const localeImage = defineType({
       title: "Image",
       type: "image",
       options: { hotspot: true },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "alt",
       title: "Alt text",
       type: "localeString",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "caption",

@@ -54,9 +54,8 @@ export const activityType = defineType({
         },
         maxLength: 96,
       },
-      description: "Auto-generated if empty",
-      hidden: true,
-      readOnly: true,
+      description: "Click 'Generate' to create a unique slug from the title.",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "contactIntent",

@@ -10,14 +10,12 @@ export const localeStringArray = defineType({
       title: "Russian (RU)",
       type: "array",
       of: [{ type: "string" }],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "fr",
       title: "French (FR)",
       type: "array",
       of: [{ type: "string" }],
-      validation: (rule) => rule.required().min(1),
     }),
   ],
 });

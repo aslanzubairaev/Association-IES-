@@ -81,7 +81,7 @@ export const soutenirCopy: Record<Locale, SoutenirCopy> = {
     benefitsTitle: "Преимущества",
     ctaWriteUs: "Запросить ссылку",
     helloAssoTitle: "HelloAsso",
-    helloAssoText: "Пожертвование через HelloAsso",
+    helloAssoText: "Пожертвование через HelloAsso. Прямая ссылка для оплаты.",
     helloAssoCta: "Перейти на HelloAsso",
     helloAssoBadge: "Официальная ссылка",
     helloAssoBenefits: [
@@ -90,7 +90,7 @@ export const soutenirCopy: Record<Locale, SoutenirCopy> = {
       "Безопасная платформа для ассоциаций",
     ],
     cotizUpTitle: "CotizUp",
-    cotizUpText: "Взнос/поддержка через CotizUp.",
+    cotizUpText: "Взнос/поддержка через CotizUp. Прямая ссылка для оплаты онлайн.",
     cotizUpCta: "Перейти на CotizUp",
     cotizUpBadge: "Официальная ссылка",
     cotizUpBenefits: [
@@ -143,7 +143,7 @@ export const bankTransferCopy: Record<Locale, BankTransferCopy> = {
     copiedIbanStatus: "Скопировано ✓",
     copiedBicStatus: "Скопировано ✓",
     copyFailedLabel: "Не удалось скопировать автоматически",
-    cardTitle: "Реквизиты",
+    cardTitle: "Банковские реквизиты",
     hint: "Нажмите, чтобы скопировать IBAN или BIC.",
   },
 };

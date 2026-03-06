@@ -70,6 +70,7 @@ export type LocalizedActivity = {
   slug: string;
   topicKey: string;
   intentId: string;
+  contactIntentRef?: string;
   status: ActivityStatus;
   isFeatured: boolean;
   displayOrder: number;

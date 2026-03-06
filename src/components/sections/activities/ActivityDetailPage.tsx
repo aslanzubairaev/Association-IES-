@@ -60,7 +60,7 @@ export function ActivityDetailPage({ locale, activity }: ActivityDetailPageProps
         {/* Buttons offer two paths: sign up or support the project. */}
         <div className={styles.ctaRow}>
           <Button
-            href={`/${locale}/contact?intent=${encodeURIComponent(activity.intentId)}`}
+            href={`/${locale}/contact?intent=${encodeURIComponent(activity.contactIntentRef ?? activity.intentId)}`}
             variant="pill"
             className={styles.ctaButton}
           >

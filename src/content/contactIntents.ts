@@ -4,6 +4,7 @@ import { aideCopy, soutenirCopy } from "@/content/actions";
 // Описывает один повод для обращения: идентификатор, заголовок, подсказки и текст темы.
 export type ContactIntent = {
   id: string;
+  sanityId?: string;
   source: "aide" | "actions" | "activities" | "support";
   title: { ru: string; fr: string };
   topicLabel?: { ru: string; fr: string };

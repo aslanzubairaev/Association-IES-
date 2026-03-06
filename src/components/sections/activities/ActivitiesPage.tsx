@@ -37,7 +37,7 @@ export async function ActivitiesPage({ locale }: ActivitiesPageProps) {
               activity={activity}
               detailsHref={`/${locale}/activites/${activity.slug}`}
               detailsLabel={copy.detailsCtaLabel}
-              participateHref={`/${locale}/contact?intent=${encodeURIComponent(activity.intentId)}`}
+              participateHref={`/${locale}/contact?intent=${encodeURIComponent(activity.contactIntentRef ?? activity.intentId)}`}
               participateLabel={copy.participateCtaLabel}
             />
           ))}

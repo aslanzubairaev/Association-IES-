@@ -9,13 +9,11 @@ export const localeString = defineType({
       name: "ru",
       title: "Russian (RU)",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "fr",
       title: "French (FR)",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
   ],
 });

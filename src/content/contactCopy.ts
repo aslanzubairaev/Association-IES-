@@ -363,9 +363,9 @@ type ContactEmailBoxCopy = {
 
 export const contactEmailBoxCopy: Record<Locale, ContactEmailBoxCopy> = {
   fr: {
-    emailLabel: "E-mail ",
+    emailLabel: "E-mail",
     copyLabel: "Copier l'e-mail",
-    copiedLabel: "E-mail copié ",
+    copiedLabel: "E-mail copié",
     failedLabel: "Impossible de copier. Copiez manuellement.",
     helperText: "",
   },

@@ -17,7 +17,7 @@ type FooterCopy = {
 export const footerCopy: Record<Locale, FooterCopy> = {
   ru: {
     copyright: "© 2025 Association IES",
-    contactLabel: "контакты",
+    contactLabel: "Контакты",
     privacyLabel: "Политика конфиденциальности",
     legalLabel: "Правовая информация",
     socialLabels: {
@@ -70,12 +70,12 @@ export const headerCopy: Record<Locale, HeaderCopy> = {
     brandName: "Association",
     navAriaLabel: "Меню сайта",
     navLabels: {
-      aide: "Чем помогаем",
-      actions: "Действия",
+      aide: "Помощь",
+      actions: "Активности",
       soutenir: "Поддержать",
       contact: "Контакты",
     },
-    langSwitcherAriaLabel: "Переключатель языка",
+    langSwitcherAriaLabel: "Сменить язык",
     mobileControlsAriaLabel: "Меню и язык для мобильной версии",
     burgerOpenLabel: "Открыть меню",
     burgerCloseLabel: "Закрыть меню",
@@ -94,7 +94,7 @@ export const headerCopy: Record<Locale, HeaderCopy> = {
     navAriaLabel: "Menu du site",
     navLabels: {
       aide: "Aide",
-      actions: "Activité",
+      actions: "Activités",
       soutenir: "Soutenir",
       contact: "Contact",
     },

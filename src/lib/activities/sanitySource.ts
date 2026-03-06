@@ -24,6 +24,7 @@ type SanityActivityDocument = {
   slug?: string;
   topicKey?: string;
   intentId?: string;
+  contactIntentRef?: string;
   contactIntentTitle?: LocalizedValue;
   status?: "draft" | "published";
   isFeatured?: boolean;
@@ -60,6 +61,7 @@ const activitiesQuery = groq`
     "slug": slug.current,
     "topicKey": coalesce(contactIntent->topicKey, topicKey),
     "intentId": coalesce(contactIntent->intentId, intentId),
+    "contactIntentRef": contactIntent->_id,
     "contactIntentTitle": contactIntent->title,
     status,
     isFeatured,
@@ -160,6 +162,7 @@ function localizeActivity(doc: SanityActivityDocument, locale: ActivitiesLocale)
     slug,
     topicKey,
     intentId,
+    contactIntentRef: doc.contactIntentRef,
     status: "published",
     isFeatured: Boolean(doc.isFeatured),
     displayOrder: Number.isFinite(doc.displayOrder) ? Number(doc.displayOrder) : 9999,

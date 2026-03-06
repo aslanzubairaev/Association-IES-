@@ -33,7 +33,7 @@ export const homeNavCards: HomeNavCard[] = [
   },
   {
     id: "actions",
-    title: { fr: "M'inscrire a une activité", ru: "Записаться на занятие" },
+    title: { fr: "M'inscrire à une activité", ru: "Записаться на активность" },
     description: {
       fr: "Programmes, activités et accompagnement.",
       ru: "Программы, активности и сопровождение.",
@@ -67,15 +67,15 @@ export const heroCopy: Record<Locale, HeroCopy> = {
     title: "ПОМОЩЬ, ИНТЕГРАЦИЯ, СТРАСБУРГ",
     lead: "Документы, работа, обучение и поддержка в Страсбурге — подскажем понятный следующий шаг без лишней бюрократии.",
     ctaPrimary: "Получить помощь",
-    ctaSecondary: "Наши действия",
+    ctaSecondary: "Наши активности",
     pills: ["Интеграция", "Образование", "Синергия"],
     pillsAriaLabel: "ключевые слова",
   },
   fr: {
     title: "AIDE, INTÉGRATION, STRASBOURG",
     lead: "Démarches, emploi, apprentissage et soutien à Strasbourg — on vous indique la prochaine étape, simplement.",
-    ctaPrimary: "Demande d'aide",
-    ctaSecondary: "Activités",
+    ctaPrimary: "Obtenir de l'aide",
+    ctaSecondary: "Nos activités",
     pills: ["Intégration", "Éducation", "Synergie"],
     pillsAriaLabel: "mots-clés",
   },
@@ -121,7 +121,7 @@ export const actionsPreviewCopy: Record<Locale, ActionsPreviewCopy> = {
       "Откройте страницу с программами и форматами.",
       "Там будут форматы, расписания, регистрация и адреса по активностям.",
     ],
-    ctaLabel: "Перейти к действиям",
+    ctaLabel: "Смотреть все активности",
     photos: [
       {
         src: "/3.JPG",
@@ -144,7 +144,7 @@ export const actionsPreviewCopy: Record<Locale, ActionsPreviewCopy> = {
       "Ouvrez la page avec les programmes et les formats.",
       "Vous y trouverez les formats, les horaires, l'inscription et les adresses.",
     ],
-    ctaLabel: "Aller à l'activité",
+    ctaLabel: "Voir toutes les activités",
     photos: [
       {
         src: "/3.JPG",

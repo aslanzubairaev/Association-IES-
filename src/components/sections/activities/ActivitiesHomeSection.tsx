@@ -32,7 +32,7 @@ export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionPro
             activity={activity}
             detailsHref={`/${locale}/activites/${activity.slug}`}
             detailsLabel={pageCopy.detailsCtaLabel}
-            participateHref={`/${locale}/contact?intent=${encodeURIComponent(activity.intentId)}`}
+            participateHref={`/${locale}/contact?intent=${encodeURIComponent(activity.contactIntentRef ?? activity.intentId)}`}
             participateLabel={pageCopy.participateCtaLabel}
           />
         ))}
