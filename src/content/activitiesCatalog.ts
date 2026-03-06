@@ -14,6 +14,7 @@ type ActivitiesPageLocaleCopy = {
 };
 
 type ActivitiesHomeLocaleCopy = {
+  eyebrow: string;
   title: string;
   subtitle: string;
   ctaAll: string;
@@ -41,14 +42,16 @@ export const activitiesPageCopy: Record<ActivitiesLocale, ActivitiesPageLocaleCo
 
 export const activitiesHomeCopy: Record<ActivitiesLocale, ActivitiesHomeLocaleCopy> = {
   fr: {
+    eyebrow: "Nos programmes",
     title: "Activités",
-    subtitle: "Un aperçu des programmes en cours. Ouvrez une fiche pour voir les détails et participer.",
+    subtitle: "Un aperçu des programmes en cours. Ouvrez une fiche pour voir les détails.",
     ctaAll: "Voir toutes les activités",
     listAriaLabel: "Aperçu des activités",
   },
   ru: {
+    eyebrow: "Наши программы",
     title: "Активности",
-    subtitle: "Краткий обзор текущих программ. Откройте карточку, чтобы посмотреть детали и записаться.",
+    subtitle: "Краткий обзор текущих программ. Откройте карточку, чтобы посмотреть детали.",
     ctaAll: "Смотреть все активности",
     listAriaLabel: "Превью активностей",
   },

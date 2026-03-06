@@ -1,5 +1,5 @@
 /*
- This file contains the “What do you need?” block on the home page.
+ This file contains the "What do you need?" block on the home page.
  It displays a set of navigation cards that link to the main sections of the site.
  The card list and texts can be changed via a data file without touching the layout.
 */
@@ -14,13 +14,32 @@ type QuickNavProps = {
   locale: "ru" | "fr";
 };
 
-// Navigation cards: texts are sourced from a shared data file.
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M4 10h12m0 0l-4-4m4 4l-4 4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function QuickNav({ locale }: QuickNavProps) {
   const copy = quickNavCopy[locale];
 
   return (
     <Section
       className={`${styles.quickNavScope} needs-block`}
+      eyebrow={copy.eyebrow}
       title={copy.title}
       subtitle={copy.subtitle}
     >
@@ -35,21 +54,21 @@ export function QuickNav({ locale }: QuickNavProps) {
               className="accent--blue quickNav-card"
             >
               <CardContent>
-                {/* Card title and text explain where this navigation item leads. */}
-                <h3 className="h3 h3--blue">{card.title[locale]}</h3>
-
-                <p className="p">{card.description[locale]}</p>
-
-                {card.icon ? (
+                {card.icon && (
                   <Image
-                    className="quickNav-icon"
+                    className={styles.cardIcon}
                     src={card.icon}
                     alt=""
                     aria-hidden="true"
-                    width={120}
-                    height={120}
+                    width={80}
+                    height={80}
                   />
-                ) : null}
+                )}
+                <div className={styles.cardText}>
+                  <h3 className={styles.cardTitle}>{card.title[locale]}</h3>
+                  <p className={styles.cardDesc}>{card.description[locale]}</p>
+                </div>
+                <ArrowIcon className={styles.cardArrow} />
               </CardContent>
             </Card>
           );
@@ -58,5 +77,3 @@ export function QuickNav({ locale }: QuickNavProps) {
     </Section>
   );
 }
-
-

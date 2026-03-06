@@ -15,7 +15,7 @@ export function HistorySection({ locale }: HistorySectionProps) {
   const copy = historyCopy[locale];
 
   return (
-    <Section className={styles.section} id="history" title={copy.title}>
+    <Section className={styles.section} id="history" eyebrow={copy.eyebrow} title={copy.title}>
       <div className={styles.text}>
         <p>{copy.paragraph1}</p>
         <p>{copy.paragraph2}</p>

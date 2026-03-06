@@ -15,35 +15,25 @@ export const homeNavCards: HomeNavCard[] = [
     id: "aide",
     title: { fr: "Obtenir de l'aide", ru: "Получить помощь" },
     description: {
-      fr: "Comprendre les démarches et avancer.",
-      ru: "Разобраться с шагами и получить поддержку.",
+      fr: "Un assistant vous guide étape par étape dans vos démarches.",
+      ru: "Помощник подскажет шаг за шагом, что делать дальше.",
     },
     path: "/aide",
-    icon: "/02.png",
-  },
-  {
-    id: "aide-step-by-step",
-    title: { fr: "Aide pas à pas (IA)", ru: "Помощь пошагово (ИИ)" },
-    description: {
-      fr: "Un assistant qui pose des questions et vous guide étape par étape.",
-      ru: "Помощник задаёт вопросы и подсказывает шаг за шагом.",
-    },
-    path: "/aide#wizard",
     icon: "/05.png",
   },
   {
     id: "actions",
-    title: { fr: "M'inscrire à une activité", ru: "Записаться на активность" },
+    title: { fr: "Activités", ru: "Активности" },
     description: {
-      fr: "Programmes, activités et accompagnement.",
-      ru: "Программы, активности и сопровождение.",
+      fr: "Programmes, ateliers et accompagnement.",
+      ru: "Программы, занятия и сопровождение.",
     },
     path: "/activites",
     icon: "/03.png",
   },
   {
     id: "soutenir",
-    title: { fr: "Soutenir l'association", ru: "Поддержать ассоциацию" },
+    title: { fr: "Soutenir", ru: "Поддержать" },
     description: {
       fr: "Bénévolat, dons et partenariats.",
       ru: "Волонтёрство, пожертвования и партнёрства.",
@@ -82,6 +72,7 @@ export const heroCopy: Record<Locale, HeroCopy> = {
 };
 
 type QuickNavCopy = {
+  eyebrow: string;
   title: string;
   subtitle: string;
   ctaLabel: string;
@@ -89,11 +80,13 @@ type QuickNavCopy = {
 
 export const quickNavCopy: Record<Locale, QuickNavCopy> = {
   ru: {
+    eyebrow: "Навигация",
     title: "Что вам нужно?",
-    subtitle: "Выберите тему — мы отправим вас в нужный раздел.",
+    subtitle: "Выберите тему — мы направим вас в нужный раздел.",
     ctaLabel: "Перейти",
   },
   fr: {
+    eyebrow: "Navigation",
     title: "De quoi avez-vous besoin ?",
     subtitle: "Choisissez un thème — on vous dirige vers la bonne page.",
     ctaLabel: "Aller",
@@ -163,6 +156,7 @@ export const actionsPreviewCopy: Record<Locale, ActionsPreviewCopy> = {
 };
 
 type HistoryCopy = {
+  eyebrow: string;
   title: string;
   paragraph1: string;
   paragraph2: string;
@@ -170,6 +164,7 @@ type HistoryCopy = {
 
 export const historyCopy: Record<Locale, HistoryCopy> = {
   ru: {
+    eyebrow: "О нас",
     title: "Наша история",
     paragraph1:
       "Association IES появилась в Strasbourg в 2019 году — из опыта людей, которые знают, что такое переезд и поиск своего места. Мы рядом, чтобы путь к интеграции был понятным и человеческим: шаг за шагом, с уважением к культурам и с настоящим «вместе».",
@@ -177,6 +172,7 @@ export const historyCopy: Record<Locale, HistoryCopy> = {
       "Мы поддерживаем семьи и молодёжь в социальной и профессиональной адаптации, помогаем выстраивать связи, находить опору и участие в жизни города. Потому что сильное сообщество рождается там, где есть гуманность, солидарность и синергия — и где люди встречаются не «по необходимости», а по-настоящему.",
   },
   fr: {
+    eyebrow: "À propos",
     title: "Notre histoire",
     paragraph1:
       "Association IES est née à Strasbourg en 2019, portée par celles et ceux qui connaissent l'expérience de l'exil. Notre mission : rendre l'intégration plus simple et plus humaine, étape par étape, dans le respect des cultures et du vivre-ensemble.",

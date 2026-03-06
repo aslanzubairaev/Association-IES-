@@ -2,48 +2,29 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.scope .grid > *,
-.grid > * {
-  height: 100%;
+  gap: 20px;
 }
 
 .cardItem {
   height: 100%;
 }
 
-.scope :global(.section-head .h2) {
-  font-family: "Fira Sans", Inter, system-ui, sans-serif;
-  font-size: clamp(30px, 3.9vw, 46px);
-  line-height: 1.08;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  text-transform: none;
-  text-wrap: pretty;
+.scope :global(.section-head .muted-on-dark) {
+  max-width: 56ch;
 }
 
-.scope :global(.section-head .muted-on-dark) {
-  font-size: clamp(16px, 1.18vw, 19px);
-  line-height: 1.72;
-  color: rgba(11, 27, 51, 0.72);
-  max-width: 64ch;
+@media (min-width: 1024px) {
+  .scope .grid,
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
 }
 
 @media (max-width: 760px) {
   .scope .grid,
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  .scope :global(.section-head .h2) {
-    font-size: clamp(28px, 8vw, 36px);
-    line-height: 1.1;
-  }
-
-  .scope :global(.section-head .muted-on-dark) {
-    font-size: 15.5px;
-    line-height: 1.7;
+    gap: 16px;
   }
 }

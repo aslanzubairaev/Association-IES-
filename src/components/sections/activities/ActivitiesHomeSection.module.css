@@ -3,35 +3,17 @@
 }
 
 .scope :global(.section-head) {
-  margin-bottom: 24px;
-}
-
-.scope :global(.section-head .h2),
-.scope :global(.section-head .h2--blue) {
-  font-family: "Fira Sans", Inter, system-ui, sans-serif;
-  font-size: clamp(30px, 3.9vw, 46px);
-  line-height: 1.08;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  text-transform: none;
-  text-wrap: pretty;
+  margin-bottom: 28px;
 }
 
 .scope :global(.section-head .muted) {
-  font-size: clamp(16px, 1.18vw, 19px);
-  line-height: 1.72;
-  color: rgba(11, 27, 51, 0.72);
-  max-width: 64ch;
+  max-width: 56ch;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.grid > * {
-  height: 100%;
+  gap: 20px;
 }
 
 .cardItem {
@@ -39,28 +21,25 @@
 }
 
 .ctaRow {
-  margin-top: 22px;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
 }
 
 .ctaButton {
-  width: min(340px, 100%);
+  width: min(320px, 100%);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
 }
 
 @media (max-width: 760px) {
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  .scope :global(.section-head .h2),
-  .scope :global(.section-head .h2--blue) {
-    font-size: clamp(28px, 8vw, 36px);
-    line-height: 1.1;
-  }
-
-  .scope :global(.section-head .muted) {
-    font-size: 15.5px;
-    line-height: 1.7;
+    gap: 16px;
   }
 }

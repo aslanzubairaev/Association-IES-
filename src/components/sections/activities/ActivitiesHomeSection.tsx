@@ -6,7 +6,7 @@
 
 import { Section } from "@/components/ui/Section/Section";
 import { Button } from "@/components/ui/Button/Button";
-import { activitiesHomeCopy, activitiesPageCopy } from "@/content/activitiesCatalog";
+import { activitiesHomeCopy } from "@/content/activitiesCatalog";
 import { activityRepository } from "@/lib/activities/repository";
 import { ActivityCard } from "./ActivityCard";
 import styles from "./ActivitiesHomeSection.module.css";
@@ -18,11 +18,10 @@ type ActivitiesHomeSectionProps = {
 // Home page block: shows only a limited set of activities for quick access.
 export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionProps) {
   const copy = activitiesHomeCopy[locale];
-  const pageCopy = activitiesPageCopy[locale];
   const activities = await activityRepository.listFeatured(locale, 6);
 
   return (
-    <Section className={styles.scope} title={copy.title} subtitle={copy.subtitle}>
+    <Section className={styles.scope} eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle}>
       {/* Cards are clickable in their entirety, leading directly to the detail page. */}
       <div className={styles.grid} aria-label={copy.listAriaLabel}>
         {activities.map((activity) => (
@@ -31,9 +30,6 @@ export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionPro
             className={styles.cardItem}
             activity={activity}
             detailsHref={`/${locale}/activites/${activity.slug}`}
-            detailsLabel={pageCopy.detailsCtaLabel}
-            participateHref={`/${locale}/contact?intent=${encodeURIComponent(activity.contactIntentRef ?? activity.intentId)}`}
-            participateLabel={pageCopy.participateCtaLabel}
           />
         ))}
       </div>

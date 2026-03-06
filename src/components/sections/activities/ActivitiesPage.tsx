@@ -36,9 +36,6 @@ export async function ActivitiesPage({ locale }: ActivitiesPageProps) {
               className={styles.cardItem}
               activity={activity}
               detailsHref={`/${locale}/activites/${activity.slug}`}
-              detailsLabel={copy.detailsCtaLabel}
-              participateHref={`/${locale}/contact?intent=${encodeURIComponent(activity.contactIntentRef ?? activity.intentId)}`}
-              participateLabel={copy.participateCtaLabel}
             />
           ))}
         </div>

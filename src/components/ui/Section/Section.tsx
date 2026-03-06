@@ -6,11 +6,14 @@
 
 import { type CSSProperties, type ReactNode, type ElementType } from "react";
 import { Container } from "@/components/ui/Container";
+import styles from "./Section.module.css";
 
 type SectionProps = {
     className?: string;
     children: ReactNode;
 
+    // Optional eyebrow label above the title (small caps tag)
+    eyebrow?: string;
     // Section title and subtitle (optional)
     title?: string;
     subtitle?: ReactNode;
@@ -30,6 +33,7 @@ type SectionProps = {
 export function Section({
     className,
     children,
+    eyebrow,
     title,
     subtitle,
     titleAs: TitleComponent = "h2",
@@ -46,8 +50,11 @@ export function Section({
     return (
         <Component className={combinedClasses} id={id} style={style}>
             <Container>
-                {(title || subtitle) && (
+                {(eyebrow || title || subtitle) && (
                     <div className="section-head">
+                        {eyebrow && (
+                            <span className={styles.eyebrow}>{eyebrow}</span>
+                        )}
                         {title && (
                             <TitleComponent className="h2 h2--blue">
                                 {title}

@@ -7,68 +7,78 @@
 :where(.quickNavScope) :global(.quickNav-grid) {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 14px;
   align-items: stretch;
 }
 
 :where(.quickNavScope) :global(.quickNav-card) {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   height: 100%;
   position: relative;
-  min-height: 280px;
   overflow: hidden;
-  justify-content: space-between;
   text-decoration: none;
+  padding: 22px 24px;
 }
 
 :where(.quickNavScope) :global(.quickNav-card:hover) {
   text-decoration: none;
 }
 
-/* Ensure text stays above image */
 :where(.quickNavScope) :global(.quickNav-card .card-content) {
   position: relative;
   z-index: 2;
-  height: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  /* Space out content */
-  padding: 12px 6px;
-  /* Slight internal padding for focus */
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
-:where(.quickNavScope) :global(.quickNav-card .h3) {
-  font-size: 26px;
-  line-height: 1.2;
-  margin-bottom: 0;
-  /* Handled by gap */
-}
-
-:where(.quickNavScope) :global(.quickNav-card .p) {
-  font-size: 18px;
-  line-height: 1.5;
-  color: rgba(11, 27, 51, 0.85);
-  /* Ensure readability */
-  max-width: 88%;
-  /* Slightly wider since image is smaller */
-}
-
-:where(.quickNavScope) :global(.quickNav-icon) {
-  position: absolute;
-  right: -20px;
-  bottom: -20px;
-  width: 150px;
-  height: auto;
-  opacity: 1;
+.cardIcon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
   pointer-events: none;
-  z-index: 1;
   transition: transform 0.3s ease;
 }
 
-:where(.quickNavScope) :global(.quickNav-card:hover .quickNav-icon) {
-  transform: scale(1.05) rotate(-2deg);
+:where(.quickNavScope) :global(.quickNav-card:hover) .cardIcon {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.cardText {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: rgba(11, 27, 51, 0.96);
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(11, 27, 51, 0.62);
+  margin: 4px 0 0;
+}
+
+.cardArrow {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: rgba(11, 27, 51, 0.28);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+:where(.quickNavScope) :global(.quickNav-card:hover) .cardArrow {
+  color: rgba(15, 82, 166, 0.7);
+  transform: translateX(3px);
 }
 
 @media (max-width: 639px) and (prefers-reduced-motion: no-preference) {
@@ -81,18 +91,66 @@
 
 @media (min-width: 640px) {
   :where(.quickNavScope) :global(.quickNav-grid) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  :where(.quickNavScope) :global(.quickNav-card) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px 28px;
+    gap: 0;
+  }
+
+  :where(.quickNavScope) :global(.quickNav-card .card-content) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .cardIcon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 18px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .cardDesc {
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  .cardArrow {
+    display: none;
   }
 }
 
 @media (min-width: 1024px) {
   :where(.quickNavScope) :global(.quickNav-grid) {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    align-items: stretch;
     gap: 24px;
   }
 
   :where(.quickNavScope) :global(.quickNav-card) {
-    grid-column: span 2;
+    padding: 36px 28px 32px;
+  }
+
+  .cardIcon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+
+  .cardTitle {
+    font-size: 19px;
+  }
+
+  .cardDesc {
+    font-size: 15px;
+    margin-top: 8px;
   }
 }
