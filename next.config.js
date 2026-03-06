@@ -6,7 +6,14 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Здесь можно добавлять параметры Next.js при необходимости.
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

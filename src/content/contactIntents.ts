@@ -6,6 +6,7 @@ export type ContactIntent = {
   id: string;
   source: "aide" | "actions" | "activities" | "support";
   title: { ru: string; fr: string };
+  topicLabel?: { ru: string; fr: string };
   bullets?: { ru: string[]; fr: string[] };
   fineprint?: { ru: string; fr: string };
   extraInfo?: { ru: string[]; fr: string[] };
@@ -100,6 +101,10 @@ const supportIntents: ContactIntent[] = [
       ru: soutenirCopy.ru.volunteerText,
       fr: soutenirCopy.fr.volunteerText,
     },
+    topicLabel: {
+      ru: "Волонтёрство",
+      fr: "Bénévolat",
+    },
     topicValue: "volunteer",
   },
 ];
@@ -121,6 +126,7 @@ const aideIntents: ContactIntent[] = aideCopy.ru.topics.items.flatMap((ruTopic) 
       id: ruTopic.intentId,
       source: "aide",
       title: { ru: ruTopic.title, fr: frTopic.title },
+      topicLabel: { ru: ruTopic.title, fr: frTopic.title },
       bullets,
       fineprint,
       topicValue: ruTopic.topicKey,
@@ -142,6 +148,10 @@ const activityIntents: ContactIntent[] = activitiesCatalog
       title: {
         ru: activity.detailTitle.ru,
         fr: activity.detailTitle.fr,
+      },
+      topicLabel: {
+        ru: activity.cardTitle.ru,
+        fr: activity.cardTitle.fr,
       },
       bullets: {
         ru: [

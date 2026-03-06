@@ -18,6 +18,8 @@ type QuickContactFormProps = {
   messagePlaceholderTopic?: string;
   onTopicChange?: (value: string) => void;
   pageNoteClassName?: string;
+  topicOptions?: Array<{ value: string; label: string }>;
+  resolveTopicLabel?: (topicKey: string) => string;
 };
 
 const EMAIL_TO = "contact@associationies.fr";
@@ -35,6 +37,8 @@ export function QuickContactForm({
   messagePlaceholderTopic,
   onTopicChange,
   pageNoteClassName,
+  topicOptions,
+  resolveTopicLabel,
 }: QuickContactFormProps) {
   const copy = quickContactFormCopy[locale];
   const buttonLabel = copy.buttonLabel[variant];
@@ -58,16 +62,19 @@ export function QuickContactForm({
   const topicIsEmpty = selectedTopic.trim().length === 0;
   const messageIsEmpty = message.trim().length === 0;
 
-  const standardTopicOptions = contactTopicSelectKeys.map((key) => ({
+  const defaultTopicOptions = contactTopicSelectKeys.map((key) => ({
     value: key,
     label: getContactTopicLabel(locale, key),
   }));
-  const isStandardTopic = contactTopicSelectKeys.includes(selectedTopic);
+  const standardTopicOptions = topicOptions?.length ? topicOptions : defaultTopicOptions;
+  const standardTopicKeys = standardTopicOptions.map((option) => option.value);
+  const resolveTopic = resolveTopicLabel ?? ((topicKey: string) => getContactTopicLabel(locale, topicKey));
+  const isStandardTopic = standardTopicKeys.includes(selectedTopic);
   const extraTopicOption =
     selectedTopic && !isStandardTopic
-      ? { value: selectedTopic, label: getContactTopicLabel(locale, selectedTopic) }
+      ? { value: selectedTopic, label: resolveTopic(selectedTopic) }
       : null;
-  const topicOptions = extraTopicOption ? [extraTopicOption, ...standardTopicOptions] : standardTopicOptions;
+  const topicOptionsList = extraTopicOption ? [extraTopicOption, ...standardTopicOptions] : standardTopicOptions;
   const intentPlaceholder = messagePlaceholderOverride?.trim();
   const shouldUseIntentPlaceholder = messagePlaceholderTopic
     ? Boolean(intentPlaceholder && intentPlaceholder.length > 0 && selectedTopic === messagePlaceholderTopic)
@@ -98,7 +105,7 @@ export function QuickContactForm({
     if (!emailLooksValid) return;
 
     const phoneValue = phone.trim();
-    const topicLabel = getContactTopicLabel(locale, selectedTopic);
+    const topicLabel = resolveTopic(selectedTopic);
     const headerLines = [
       `${copy.bodyLabels.name}: ${name}`,
       `${copy.bodyLabels.email}: ${email}`,
@@ -213,7 +220,7 @@ export function QuickContactForm({
               <SelectValue placeholder={copy.topicPlaceholder} />
             </SelectTrigger>
             <SelectContent position="popper" sideOffset={8}>
-              {topicOptions.map((option) => (
+              {topicOptionsList.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
@@ -255,5 +262,3 @@ export function QuickContactForm({
     </form>
   );
 }
-
-

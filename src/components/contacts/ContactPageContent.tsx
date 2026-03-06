@@ -12,13 +12,14 @@ import { Container } from "@/components/ui/Container";
 import { QuickContactForm } from "@/components/forms/QuickContactForm";
 import { ContactContextBlock } from "@/components/contacts/ContactContextBlock";
 import { ContentCard } from "@/components/ui/Card/ContentCard";
-import { contactCopy, resolveContactTopicKey } from "@/content/actions";
+import { contactCopy, getContactTopicLabel, resolveContactTopicKey } from "@/content/actions";
 import { contactIntents, resolveContactIntentId, type ContactIntent } from "@/content/contactIntents";
 
 type ContactPageContentProps = {
   locale: "ru" | "fr";
   initialTopic?: string;
   initialIntentId?: string;
+  sanityIntents?: ContactIntent[];
 };
 
 function findIntentByTopic(intents: ContactIntent[], topicKey?: string) {
@@ -26,14 +27,53 @@ function findIntentByTopic(intents: ContactIntent[], topicKey?: string) {
   return intents.find((intent) => intent.topicValue === topicKey);
 }
 
-export function ContactPageContent({ locale, initialTopic, initialIntentId }: ContactPageContentProps) {
+function resolveIntentIdFromRegistry(rawIntent: string | undefined, intentsById: Record<string, ContactIntent>) {
+  const canonicalId = resolveContactIntentId(rawIntent);
+  if (canonicalId && intentsById[canonicalId]) {
+    return canonicalId;
+  }
+
+  if (!rawIntent) {
+    return "";
+  }
+
+  const trimmed = rawIntent.trim();
+  if (!trimmed) {
+    return "";
+  }
+
+  const normalized = trimmed.toLowerCase();
+  if (intentsById[normalized]) {
+    return normalized;
+  }
+
+  if (intentsById[trimmed]) {
+    return trimmed;
+  }
+
+  return "";
+}
+
+export function ContactPageContent({ locale, initialTopic, initialIntentId, sanityIntents }: ContactPageContentProps) {
   const searchParams = useSearchParams();
   // Список всех известных тем, чтобы быстро находить совпадение по ключу.
-  const allIntents = useMemo(() => Object.values(contactIntents), []);
+  const allIntents = useMemo(() => {
+    const enabledSources = new Set((sanityIntents ?? []).map((intent) => intent.source));
+    const merged = new Map<string, ContactIntent>();
+    Object.values(contactIntents).forEach((intent) => {
+      if (enabledSources.has(intent.source)) {
+        return;
+      }
+      merged.set(intent.id, intent);
+    });
+    (sanityIntents ?? []).forEach((intent) => merged.set(intent.id, intent));
+    return [...merged.values()];
+  }, [sanityIntents]);
+  const intentsById = useMemo(() => Object.fromEntries(allIntents.map((intent) => [intent.id, intent])), [allIntents]);
   const intentFromUrl = searchParams?.get("intent") ?? initialIntentId ?? undefined;
-  const normalizedIntentId = resolveContactIntentId(intentFromUrl);
+  const normalizedIntentId = resolveIntentIdFromRegistry(intentFromUrl, intentsById);
   const topicFromUrl = searchParams?.get("topic") ?? initialTopic ?? undefined;
-  const intentFromId = normalizedIntentId ? contactIntents[normalizedIntentId] : undefined;
+  const intentFromId = normalizedIntentId ? intentsById[normalizedIntentId] : undefined;
   const normalizedInitialTopic = resolveContactTopicKey(topicFromUrl);
   const initialResolvedIntent = intentFromId ?? findIntentByTopic(allIntents, normalizedInitialTopic);
   const initialTopicValue = intentFromId?.topicValue ?? normalizedInitialTopic ?? "";
@@ -60,6 +100,28 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId }: Co
   const pageTitle = selectedIntent?.title[locale] ?? contactCopy[locale].pageTitle;
   const pageLead = contactCopy[locale].pageLead;
   const intentMessagePlaceholder = selectedIntent?.messagePlaceholder?.[locale];
+  const topicOptions = useMemo(() => {
+    const optionsMap = new Map<string, string>();
+    allIntents.forEach((intent) => {
+      const topicKey = intent.topicValue.trim();
+      if (!topicKey || optionsMap.has(topicKey)) {
+        return;
+      }
+
+      const label = intent.topicLabel?.[locale] ?? intent.title[locale];
+      optionsMap.set(topicKey, label);
+    });
+
+    if (!optionsMap.has("other")) {
+      optionsMap.set("other", getContactTopicLabel(locale, "other"));
+    }
+
+    return [...optionsMap.entries()].map(([value, label]) => ({ value, label }));
+  }, [allIntents, locale]);
+  const topicLabels = useMemo(
+    () => Object.fromEntries(topicOptions.map((option) => [option.value, option.label])),
+    [topicOptions],
+  );
 
   return (
     <main className="section page--purple contact-page">
@@ -96,6 +158,8 @@ export function ContactPageContent({ locale, initialTopic, initialIntentId }: Co
                 messagePlaceholderOverride={intentMessagePlaceholder}
                 messagePlaceholderTopic={selectedTopic}
                 onTopicChange={handleTopicChange}
+                topicOptions={topicOptions}
+                resolveTopicLabel={(topicKey) => topicLabels[topicKey] ?? getContactTopicLabel(locale, topicKey)}
               />
             </div>
           </ContentCard>

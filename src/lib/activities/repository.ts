@@ -8,6 +8,7 @@ import {
   activityLegacyIntentAliasMap,
   activityLegacySlugAliasMap,
 } from "@/content/activitiesCatalog";
+import { fetchSanityActivities } from "@/lib/activities/sanitySource";
 import type {
   Activity,
   ActivityRepository,
@@ -84,14 +85,26 @@ function toPublished(activities: Activity[]) {
 }
 
 const activityRepositoryImpl: ActivityRepository = {
-  listPublished(locale) {
+  async listPublished(locale) {
+    const sanityActivities = await fetchSanityActivities(locale);
+    if (sanityActivities) {
+      return sanityActivities;
+    }
+
     return toPublished(sortedCatalog).map((activity) => localizeActivity(activity, locale));
   },
 
-  listFeatured(locale, limit) {
+  async listFeatured(locale, limit) {
     const normalizedLimit = Number.isFinite(limit) ? Math.max(0, Math.floor(limit)) : 0;
     if (normalizedLimit === 0) {
       return [];
+    }
+
+    const sanityActivities = await fetchSanityActivities(locale);
+    if (sanityActivities) {
+      const featured = sanityActivities.filter((activity) => activity.isFeatured);
+      const rest = sanityActivities.filter((activity) => !activity.isFeatured);
+      return [...featured, ...rest].slice(0, normalizedLimit);
     }
 
     const published = toPublished(sortedCatalog);
@@ -102,8 +115,14 @@ const activityRepositoryImpl: ActivityRepository = {
     return result.map((activity) => localizeActivity(activity, locale));
   },
 
-  getBySlug(locale, slug) {
+  async getBySlug(locale, slug) {
     const normalizedSlug = slug.trim().toLowerCase();
+
+    const sanityActivities = await fetchSanityActivities(locale);
+    if (sanityActivities) {
+      return sanityActivities.find((activity) => activity.slug === normalizedSlug) ?? null;
+    }
+
     const match = toPublished(sortedCatalog).find((activity) => activity.slug === normalizedSlug);
     return match ? localizeActivity(match, locale) : null;
   },

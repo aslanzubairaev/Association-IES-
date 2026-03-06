@@ -7,7 +7,7 @@
 import { ActivitiesPage } from "@/components/sections/activities/ActivitiesPage";
 import styles from "./page.module.css";
 
-export default function ActivitesRoutePage({ params }: { params: { locale: "ru" | "fr" } }) {
+export default async function ActivitesRoutePage({ params }: { params: { locale: "ru" | "fr" } }) {
   return (
     <div className={styles.scope}>
       <ActivitiesPage locale={params.locale} />

@@ -16,10 +16,10 @@ type ActivitiesHomeSectionProps = {
 };
 
 // Блок на главной: показываем только ограниченный набор активностей для быстрого входа.
-export function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionProps) {
+export async function ActivitiesHomeSection({ locale }: ActivitiesHomeSectionProps) {
   const copy = activitiesHomeCopy[locale];
   const pageCopy = activitiesPageCopy[locale];
-  const activities = activityRepository.listFeatured(locale, 6);
+  const activities = await activityRepository.listFeatured(locale, 6);
 
   return (
     <Section className={styles.scope} title={copy.title} subtitle={copy.subtitle}>

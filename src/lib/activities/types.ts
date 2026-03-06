@@ -104,8 +104,8 @@ export type ActivityTopicEntry = {
 };
 
 export interface ActivityRepository {
-  listPublished(locale: ActivitiesLocale): LocalizedActivity[];
-  listFeatured(locale: ActivitiesLocale, limit: number): LocalizedActivity[];
-  getBySlug(locale: ActivitiesLocale, slug: string): LocalizedActivity | null;
+  listPublished(locale: ActivitiesLocale): Promise<LocalizedActivity[]>;
+  listFeatured(locale: ActivitiesLocale, limit: number): Promise<LocalizedActivity[]>;
+  getBySlug(locale: ActivitiesLocale, slug: string): Promise<LocalizedActivity | null>;
   getByIntentId(intentId: string): Activity | null;
 }

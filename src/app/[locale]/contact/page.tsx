@@ -5,15 +5,18 @@
 */
 
 import { ContactPageContent } from "@/components/contacts/ContactPageContent";
+import { fetchSanityContactIntents } from "@/lib/contact-intents/sanitySource";
 import styles from "./page.module.css";
 
-export default function ContactPage({
+export default async function ContactPage({
   params,
   searchParams,
 }: {
   params: { locale: "ru" | "fr" };
   searchParams?: { topic?: string; intent?: string };
 }) {
+  const sanityIntents = await fetchSanityContactIntents();
+
   return (
     <div className={styles.contactScope}>
       {/* Контент страницы контактов — клиентский, чтобы реагировать на выбор темы в списке. */}
@@ -21,6 +24,7 @@ export default function ContactPage({
         locale={params.locale}
         initialTopic={searchParams?.topic}
         initialIntentId={searchParams?.intent}
+        sanityIntents={sanityIntents ?? undefined}
       />
     </div>
   );

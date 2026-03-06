@@ -18,8 +18,8 @@ type ActivityDetailRouteProps = {
 };
 
 // Метаданные страницы строятся из SEO-полей выбранной активности.
-export function generateMetadata({ params }: ActivityDetailRouteProps): Metadata {
-  const activity = activityRepository.getBySlug(params.locale, params.slug);
+export async function generateMetadata({ params }: ActivityDetailRouteProps): Promise<Metadata> {
+  const activity = await activityRepository.getBySlug(params.locale, params.slug);
 
   if (!activity) {
     return {};
@@ -35,8 +35,8 @@ export function generateMetadata({ params }: ActivityDetailRouteProps): Metadata
 }
 
 // Роут деталей: если активность найдена, передаём её в компонент отображения.
-export default function ActivityDetailRoutePage({ params }: ActivityDetailRouteProps) {
-  const activity = activityRepository.getBySlug(params.locale, params.slug);
+export default async function ActivityDetailRoutePage({ params }: ActivityDetailRouteProps) {
+  const activity = await activityRepository.getBySlug(params.locale, params.slug);
 
   if (!activity) {
     notFound();

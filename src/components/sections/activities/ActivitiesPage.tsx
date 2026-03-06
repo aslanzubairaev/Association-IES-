@@ -15,9 +15,9 @@ type ActivitiesPageProps = {
 };
 
 // Страница каталога активностей: тексты и карточки зависят от выбранного языка.
-export function ActivitiesPage({ locale }: ActivitiesPageProps) {
+export async function ActivitiesPage({ locale }: ActivitiesPageProps) {
   const copy = activitiesPageCopy[locale];
-  const activities = activityRepository.listPublished(locale);
+  const activities = await activityRepository.listPublished(locale);
 
   return (
     <main className={`section page--purple ${styles.scope}`}>
