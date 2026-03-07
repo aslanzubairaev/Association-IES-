@@ -55,19 +55,24 @@ async function classifyWithOpenAi(payload: HelpClassifyRequest) {
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   const fallbackLabel = payload.locale === "fr" ? "Autre sujet" : "Другая тема";
+  const langLabel = payload.locale === "fr" ? "français" : "russe";
   const prompt = {
     locale: payload.locale,
     step: payload.step,
     text: payload.text,
     options: payload.options,
-    instructions: [
-      "Classify the user text into one existing option when possible.",
-      "If no option matches, set mode='custom' and return a short suggested_label (max 6 words).",
-      "Respond as strict JSON only, no markdown.",
-      "Confidence must be a number between 0 and 1.",
-      "Use alternative_ids for the 1-2 closest existing options.",
-    ],
   };
+
+  const systemPrompt = `You are a support classifier for an association helping immigrants in France.
+The user writes in ${langLabel}. Classify their request into one of the provided options.
+
+RULES:
+1. Output strict JSON: { mode, suggested_id, suggested_label, confidence, alternative_ids, follow_up }
+2. mode="existing" if an option matches well (confidence >= 0.6), mode="custom" otherwise
+3. follow_up: write a SHORT reassuring sentence in ${langLabel} confirming you understood
+4. confidence: 0-1, be honest — 0.9+ only for clear matches
+5. alternative_ids: 1-2 closest options if mode="custom"
+6. suggested_label (custom only): max 6 words in ${langLabel}, describing the actual need`;
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -83,8 +88,7 @@ async function classifyWithOpenAi(payload: HelpClassifyRequest) {
         messages: [
           {
             role: "system",
-            content:
-              "You classify user support requests. Output JSON with keys: mode, suggested_id, suggested_label, confidence, alternative_ids, follow_up.",
+            content: systemPrompt,
           },
           {
             role: "user",

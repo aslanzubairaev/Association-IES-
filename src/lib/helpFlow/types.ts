@@ -49,6 +49,8 @@ export type HelpNextQuestionResponse = {
   options: HelpBubbleOption[];
   summaryLabel: string;
   guidance: string;
+  immediateAdvice: string[];
+  urgencyLevel: "low" | "medium" | "high";
 };
 
 export type HelpSelection = {

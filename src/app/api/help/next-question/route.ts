@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { aideCopy } from "@/content/aideCopy";
 import { helpFlowConfig } from "@/lib/helpFlow/config";
 import { checkRateLimit, getClientIp } from "@/lib/helpFlow/rateLimit";
 import type {
@@ -12,12 +13,102 @@ export const runtime = "nodejs";
 
 const MAX_FOLLOW_UP_QUESTIONS = 3;
 
+const FALLBACK_ADVICE: Record<string, Record<"fr" | "ru", string[]>> = {
+  prefecture_vnj: {
+    fr: [
+      "Photographiez le courrier recto-verso d\u00e8s r\u00e9ception",
+      "Notez la date limite mentionn\u00e9e dans le courrier",
+      "Rassemblez passeport, justificatif de domicile et photos d'identit\u00e9",
+      "V\u00e9rifiez votre r\u00e9c\u00e9piss\u00e9 : est-il encore valide ?",
+    ],
+    ru: [
+      "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u043f\u0438\u0441\u044c\u043c\u043e \u0441 \u0434\u0432\u0443\u0445 \u0441\u0442\u043e\u0440\u043e\u043d",
+      "\u0417\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043a\u0440\u0430\u0439\u043d\u0438\u0439 \u0441\u0440\u043e\u043a \u0438\u0437 \u043f\u0438\u0441\u044c\u043c\u0430",
+      "\u041f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u044c\u0442\u0435 \u043f\u0430\u0441\u043f\u043e\u0440\u0442, \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0430\u0434\u0440\u0435\u0441\u0430 \u0438 \u0444\u043e\u0442\u043e",
+      "\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0441\u0440\u043e\u043a \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044f \u0440\u0435\u043a\u0430\u043f\u0438\u0441\u0441\u0435",
+    ],
+  },
+  caf_support: {
+    fr: [
+      "Notez votre num\u00e9ro allocataire avant de nous \u00e9crire",
+      "Photographiez le courrier CAF recto-verso",
+      "V\u00e9rifiez dans votre espace si des documents sont demand\u00e9s",
+      "Gardez une copie de chaque document envoy\u00e9",
+    ],
+    ru: [
+      "\u0417\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043d\u043e\u043c\u0435\u0440 allocataire",
+      "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u043f\u0438\u0441\u044c\u043c\u043e CAF \u0441 \u0434\u0432\u0443\u0445 \u0441\u0442\u043e\u0440\u043e\u043d",
+      "\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0432 \u043b\u0438\u0447\u043d\u043e\u043c \u043a\u0430\u0431\u0438\u043d\u0435\u0442\u0435, \u043a\u0430\u043a\u0438\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0437\u0430\u043f\u0440\u043e\u0448\u0435\u043d\u044b",
+      "\u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0439\u0442\u0435 \u043a\u043e\u043f\u0438\u044e \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u043e\u0433\u043e \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430",
+    ],
+  },
+  cpam_health: {
+    fr: [
+      "Notez votre num\u00e9ro de s\u00e9curit\u00e9 sociale",
+      "Photographiez le courrier CPAM recto-verso",
+      "V\u00e9rifiez votre attestation de droits sur ameli.fr",
+      "Rassemblez pi\u00e8ce d'identit\u00e9 et justificatif de domicile",
+    ],
+    ru: [
+      "\u0417\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043d\u043e\u043c\u0435\u0440 s\u00e9curit\u00e9 sociale",
+      "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u043f\u0438\u0441\u044c\u043c\u043e CPAM \u0441 \u0434\u0432\u0443\u0445 \u0441\u0442\u043e\u0440\u043e\u043d",
+      "\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0441\u0432\u043e\u0438 \u043f\u0440\u0430\u0432\u0430 \u043d\u0430 ameli.fr",
+      "\u041f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u044c\u0442\u0435 \u0443\u0434\u043e\u0441\u0442\u043e\u0432\u0435\u0440\u0435\u043d\u0438\u0435 \u043b\u0438\u0447\u043d\u043e\u0441\u0442\u0438 \u0438 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0430\u0434\u0440\u0435\u0441\u0430",
+    ],
+  },
+  france_travail: {
+    fr: [
+      "Photographiez le courrier ou la convocation",
+      "Notez la date et l'heure du rendez-vous (si mentionn\u00e9)",
+      "Pr\u00e9parez votre pi\u00e8ce d'identit\u00e9 et titre de s\u00e9jour",
+      "Connectez-vous \u00e0 votre espace France Travail",
+    ],
+    ru: [
+      "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u043f\u0438\u0441\u044c\u043c\u043e \u0438\u043b\u0438 \u043f\u043e\u0432\u0435\u0441\u0442\u043a\u0443",
+      "\u0417\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0438 \u0432\u0440\u0435\u043c\u044f \u0437\u0430\u043f\u0438\u0441\u0438 (\u0435\u0441\u043b\u0438 \u0443\u043a\u0430\u0437\u0430\u043d\u044b)",
+      "\u041f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u044c\u0442\u0435 \u0443\u0434\u043e\u0441\u0442\u043e\u0432\u0435\u0440\u0435\u043d\u0438\u0435 \u043b\u0438\u0447\u043d\u043e\u0441\u0442\u0438 \u0438 titre de s\u00e9jour",
+      "\u0412\u043e\u0439\u0434\u0438\u0442\u0435 \u0432 \u043b\u0438\u0447\u043d\u044b\u0439 \u043a\u0430\u0431\u0438\u043d\u0435\u0442 France Travail",
+    ],
+  },
+  housing_school_everyday: {
+    fr: [
+      "Rassemblez les courriers re\u00e7us li\u00e9s au sujet",
+      "Notez votre ville/quartier et le service concern\u00e9",
+      "Pr\u00e9parez un justificatif de domicile r\u00e9cent",
+    ],
+    ru: [
+      "\u0421\u043e\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0441\u0435 \u043f\u0438\u0441\u044c\u043c\u0430 \u043f\u043e \u0442\u0435\u043c\u0435",
+      "\u0417\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u0433\u043e\u0440\u043e\u0434/\u0440\u0430\u0439\u043e\u043d \u0438 \u043d\u0443\u0436\u043d\u0443\u044e \u0441\u043b\u0443\u0436\u0431\u0443",
+      "\u041f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u044c\u0442\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0430\u0434\u0440\u0435\u0441\u0430",
+    ],
+  },
+  not_sure: {
+    fr: [
+      "Photographiez le document qui vous inqui\u00e8te",
+      "Notez les dates cl\u00e9s mentionn\u00e9es",
+      "D\u00e9crivez votre situation en quelques phrases",
+    ],
+    ru: [
+      "\u0421\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0440\u0443\u0439\u0442\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0431\u0435\u0441\u043f\u043e\u043a\u043e\u0438\u0442",
+      "\u0417\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043a\u043b\u044e\u0447\u0435\u0432\u044b\u0435 \u0434\u0430\u0442\u044b",
+      "\u041e\u043f\u0438\u0448\u0438\u0442\u0435 \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044e \u0432 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u0438\u0445 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f\u0445",
+    ],
+  },
+};
+
+function getTopicData(primaryId: string | null, locale: "fr" | "ru") {
+  if (!primaryId) return null;
+  return aideCopy[locale].topics.items.find((t) => t.topicKey === primaryId) ?? null;
+}
+
 type OpenAiNextQuestionOutput = {
   done?: boolean;
   next_question?: string;
   next_options?: string[];
   summary_label?: string;
   guidance?: string;
+  immediate_advice?: string[];
+  urgency_level?: string;
 };
 
 type QuestionAxis = "blocking" | "deadline" | "documents" | "support" | "other";
@@ -298,6 +389,9 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
+  const topicData = getTopicData(payload.primary.id, payload.locale);
+  const langLabel = payload.locale === "fr" ? "français" : "russe";
+
   const prompt = {
     locale: payload.locale,
     primary: payload.primary,
@@ -311,6 +405,9 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
     },
     workerObjective:
       "Collect maximum actionable information so human case workers can understand the case faster, prioritize urgency, and avoid asking repeated questions later.",
+    topicContext: topicData
+      ? { title: topicData.title, examples: topicData.examples, prepareLine: topicData.prepareLine }
+      : null,
     intakeContext: {
       knownFacts: context.knownFacts,
       askedAxes: context.askedAxes,
@@ -326,6 +423,26 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
           : "Third follow-up: ask for one concrete operational detail that changes processing priority.",
   };
 
+  const systemPrompt = `Tu es un assistant d'accueil bienveillant pour une association qui aide les immigrés en France.
+Tu parles ${langLabel}.
+
+${topicData ? `CONTEXTE DU SUJET : "${topicData.title}" — exemples : ${topicData.examples.slice(0, 2).join(", ")}. À préparer : ${topicData.prepareLine}` : ""}
+
+RÈGLES :
+1. JSON strict : { done, next_question, next_options, summary_label, guidance, immediate_advice, urgency_level }
+2. Une seule question à la fois, < 120 caractères. Ton chaleureux et rassurant.
+3. 3-5 options cliquables, < 70 caractères chacune. Formulées comme des situations concrètes, pas des catégories abstraites.
+4. Ne JAMAIS répéter une question déjà posée ni un axe déjà couvert.
+5. Quand done=true :
+   - immediate_advice : 3-5 conseils CONCRETS et ACTIONNABLES que la personne peut faire MAINTENANT.
+     Exemples bons : "Photographiez le courrier recto-verso", "Notez la date limite mentionnée"
+     Exemples mauvais : "Restez positif", "N'hésitez pas à nous contacter"
+   - urgency_level : "high" si deadline < 15 jours ou convocation ou risque perte de droits ;
+     "medium" si courrier officiel ou délai à venir ; "low" sinon
+6. guidance : une phrase d'encouragement contextuelle en ${langLabel}, pas générique
+7. Utilise le contexte du sujet pour poser des questions PERTINENTES au domaine (pas des questions génériques)
+8. Tout le texte en ${langLabel}.`;
+
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
@@ -340,8 +457,7 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
         messages: [
           {
             role: "system",
-            content:
-              "You are a support intake assistant. Return strict JSON with keys: done (boolean), next_question (string), next_options (array of strings), summary_label (string), guidance (string). Ask one simple follow-up question at a time. Prefer clickable options. Stop when enough details are gathered to route the request. Never ask the same or semantically similar question twice. Each new question must cover a different axis than previous questions. Use all known context before generating the next question. Prioritize information that saves worker time: urgency/deadline, official notice, documents available, and what has already been tried.",
+            content: systemPrompt,
           },
           {
             role: "user",
@@ -378,6 +494,17 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
           ? "Merci, nous continuons."
           : "Спасибо, продолжаем.";
 
+    const immediateAdvice = Array.isArray(parsed.immediate_advice)
+      ? parsed.immediate_advice
+          .filter((item): item is string => typeof item === "string" && item.trim().length > 0)
+          .map((item) => item.trim().slice(0, 200))
+          .slice(0, 5)
+      : [];
+
+    const rawUrgency = typeof parsed.urgency_level === "string" ? parsed.urgency_level.trim() : "low";
+    const urgencyLevel: "low" | "medium" | "high" =
+      rawUrgency === "high" ? "high" : rawUrgency === "medium" ? "medium" : "low";
+
     const done = Boolean(parsed.done) || payload.answers.length >= MAX_FOLLOW_UP_QUESTIONS;
     if (done) {
       return {
@@ -387,6 +514,8 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
         options: [] as HelpBubbleOption[],
         summaryLabel,
         guidance,
+        immediateAdvice,
+        urgencyLevel,
       };
     }
 
@@ -414,6 +543,8 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
       options: filteredOptions,
       summaryLabel,
       guidance,
+      immediateAdvice: [],
+      urgencyLevel: "low" as const,
     };
   } catch {
     return null;
@@ -425,9 +556,22 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
 function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuestionResponse {
   const context = buildIntakeContext(payload);
   const locale = payload.locale;
-  const fallbackGuidance = locale === "fr" ? "Merci, on continue." : "Спасибо, продолжаем.";
+  const topicData = getTopicData(payload.primary.id, locale);
+  const fallbackGuidance = topicData
+    ? (locale === "fr"
+        ? `Pour \u00ab ${topicData.title} \u00bb, pr\u00e9parez : ${topicData.prepareLine}`
+        : `\u0414\u043b\u044f \u00ab${topicData.title}\u00bb \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u044c\u0442\u0435: ${topicData.prepareLine}`)
+    : (locale === "fr" ? "Merci, on continue." : "\u0421\u043f\u0430\u0441\u0438\u0431\u043e, \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u0435\u043c.");
   const lastAnswer = payload.answers[payload.answers.length - 1];
   const summaryLabel = lastAnswer?.answerLabel || payload.primary.label;
+
+  const topicKey = payload.primary.id ?? "not_sure";
+  const fallbackAdvice = FALLBACK_ADVICE[topicKey]?.[locale] ?? FALLBACK_ADVICE.not_sure[locale];
+  const urgencyLevel: "low" | "medium" | "high" = context.signals.hasUrgencyOrDeadline
+    ? "high"
+    : context.signals.hasOfficialNotice
+      ? "medium"
+      : "low";
 
   if (payload.answers.length >= MAX_FOLLOW_UP_QUESTIONS) {
     return {
@@ -438,8 +582,12 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
       options: [],
       summaryLabel,
       guidance: fallbackGuidance,
+      immediateAdvice: fallbackAdvice,
+      urgencyLevel,
     };
   }
+
+  const emptyAdvice: string[] = [];
 
   const nextAxis = pickNextAxisFromContext(context);
   if (nextAxis === "blocking") {
@@ -454,6 +602,8 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
       options: filterOptionsAgainstPreviousAnswers(payload.candidateOptions.slice(0, 5), payload.answers),
       summaryLabel,
       guidance: fallbackGuidance,
+      immediateAdvice: emptyAdvice,
+      urgencyLevel: "low",
     };
   }
 
@@ -482,6 +632,8 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
             ],
       summaryLabel,
       guidance: fallbackGuidance,
+      immediateAdvice: emptyAdvice,
+      urgencyLevel: "low",
     };
   }
 
@@ -510,6 +662,8 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
             ],
       summaryLabel,
       guidance: fallbackGuidance,
+      immediateAdvice: emptyAdvice,
+      urgencyLevel: "low",
     };
   }
 
@@ -538,6 +692,8 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
             ],
       summaryLabel,
       guidance: fallbackGuidance,
+      immediateAdvice: emptyAdvice,
+      urgencyLevel: "low",
     };
   }
 
@@ -549,6 +705,8 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
     options: [],
     summaryLabel,
     guidance: fallbackGuidance,
+    immediateAdvice: fallbackAdvice,
+    urgencyLevel,
   };
 }
 
@@ -628,6 +786,8 @@ export async function POST(request: Request) {
       options: aiResult.options,
       summaryLabel: aiResult.summaryLabel,
       guidance: aiResult.guidance,
+      immediateAdvice: aiResult.immediateAdvice,
+      urgencyLevel: aiResult.urgencyLevel,
     };
     return NextResponse.json(response);
   }
