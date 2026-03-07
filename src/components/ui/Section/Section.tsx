@@ -1,35 +1,39 @@
 /*
- Этот компонент — универсальная секция для страницы.
- Он задаёт правильные отступы и выравнивает контент по центру.
- Фон задаётся на уровне страницы (в app layout или css модуля страницы).
+ This component is a universal page section.
+ It applies proper spacing and centers the content.
+ The background is set at the page level (in the app layout or page CSS module).
 */
 
 import { type CSSProperties, type ReactNode, type ElementType } from "react";
 import { Container } from "@/components/ui/Container";
+import styles from "./Section.module.css";
 
 type SectionProps = {
     className?: string;
     children: ReactNode;
 
-    // Заголовок и подзаголовок секции (опционально)
+    // Optional eyebrow label above the title (small caps tag)
+    eyebrow?: string;
+    // Section title and subtitle (optional)
     title?: string;
     subtitle?: ReactNode;
-    // Тег для заголовка (по умолчанию h2, но может быть h1 для Hero)
+    // HTML tag for the title (defaults to h2, but can be h1 for Hero)
     titleAs?: ElementType;
 
-    // ID для якорных ссылок
+    // ID for anchor links
     id?: string;
 
-    // Семантический тег самой секции (например, main)
+    // Semantic tag for the section itself (e.g., main)
     as?: ElementType;
 
-    // Дополнительные стили
+    // Additional styles
     style?: CSSProperties;
 };
 
 export function Section({
     className,
     children,
+    eyebrow,
     title,
     subtitle,
     titleAs: TitleComponent = "h2",
@@ -46,8 +50,11 @@ export function Section({
     return (
         <Component className={combinedClasses} id={id} style={style}>
             <Container>
-                {(title || subtitle) && (
+                {(eyebrow || title || subtitle) && (
                     <div className="section-head">
+                        {eyebrow && (
+                            <span className={styles.eyebrow}>{eyebrow}</span>
+                        )}
                         {title && (
                             <TitleComponent className="h2 h2--blue">
                                 {title}

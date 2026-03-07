@@ -1,13 +1,13 @@
 .legalScope :global(.legal-page a) {
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(255, 255, 255, 0.45);
-  color: rgba(255, 255, 255, 0.92);
+  text-decoration-color: rgba(15, 82, 166, 0.35);
+  color: rgba(15, 82, 166, 0.94);
 }
 
 .legalScope :global(.legal-page a:hover) {
   text-decoration-thickness: 2px;
-  text-decoration-color: rgba(255, 255, 255, 0.8);
+  text-decoration-color: rgba(15, 82, 166, 0.78);
 }
 
 .legalScope :global(.legal-page .card--paper) {
@@ -16,9 +16,9 @@
 
 .legalScope :global(.legal-page .card--paper:hover) {
   transform: none;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 30px rgba(7, 12, 40, 0.12);
+  background: #ffffff;
+  border-color: rgba(15, 82, 166, 0.24);
 }
 
 .legalScope :global(.legal-page .legal-section) {
@@ -26,7 +26,7 @@
 }
 
 .legalScope :global(.legal-page .legal-section + .legal-section) {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(11, 27, 51, 0.12);
 }
 
 .legalScope :global(.legal-page .card--paper .h3--blue) {

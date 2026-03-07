@@ -1,4 +1,4 @@
-/* Этот файл содержит основной контент страницы “Политика конфиденциальности / Politique de confidentialité” и показывает все разделы политики (RU/FR). */
+/* This file contains the main content of the “Privacy Policy” page and displays all policy sections (RU/FR). */
 
 import Link from "next/link";
 import { Section } from "@/components/ui/Section/Section";
@@ -12,7 +12,7 @@ type PrivacyPageProps = {
 };
 
 export default function PrivacyPage({ locale }: PrivacyPageProps) {
-  // Основные данные страницы: тексты разделов и ссылки для связи.
+  // Main page data: section texts and contact links.
   const copy = privacyPageCopy[locale];
   const contactHref = `/${locale}/contact`;
   const email = copy.contactEmail;
@@ -26,27 +26,27 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
 
   return (
     <>
-      {/* Верхний блок страницы с заголовком и кратким пояснением о политике. */}
+      {/* Page header block with the title and a brief policy summary. */}
       <Section
         as="main"
         className="page--purple privacy-page"
         title={copy.title}
         subtitle={copy.lead}
       >
-        {/* Основная карточка с разделами политики и датой обновления. */}
+        {/* Main card with policy sections and the last-updated date. */}
         <ContentCard
           className="card--paper"
           footerText={`${copy.updatedLabel} ${copy.updatedDate}`}
           hoverable={false}
         >
           <div className="privacy-content">
-            {/* Блок о том, кто отвечает за обработку данных. */}
+            {/* Section about who is responsible for data processing. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.whoTitle}</h2>
               <p className="p">{copy.whoText}</p>
             </section>
 
-            {/* Блок со списком категорий данных, которые могут быть получены. */}
+            {/* Section listing the categories of data that may be collected. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.dataTitle}</h2>
               <IesList className="list">
@@ -56,31 +56,31 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
               </IesList>
             </section>
 
-            {/* Блок с целями обработки данных. */}
+            {/* Section on the purposes of data processing. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.purposeTitle}</h2>
               <p className="p">{copy.purposeText}</p>
             </section>
 
-            {/* Блок с правовым основанием обработки данных. */}
+            {/* Section on the legal basis for data processing. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.legalTitle}</h2>
               <p className="p">{copy.legalText}</p>
             </section>
 
-            {/* Блок о передаче данных третьим лицам. */}
+            {/* Section on sharing data with third parties. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.shareTitle}</h2>
               <p className="p">{copy.shareText}</p>
             </section>
 
-            {/* Блок со сроком хранения данных. */}
+            {/* Section on the data retention period. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.retentionTitle}</h2>
               <p className="p">{copy.retentionText}</p>
             </section>
 
-            {/* Блок с правами человека в отношении его данных. */}
+            {/* Section on the individual's rights regarding their data. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.rightsTitle}</h2>
               <IesList className="list">
@@ -97,7 +97,7 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
               </p>
             </section>
 
-            {/* Блок со способами связи: страница контактов и кнопка написания письма. */}
+            {/* Contact methods section: contact page link and compose-email button. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.contactTitle}</h2>
               <p className="p">
@@ -115,7 +115,7 @@ export default function PrivacyPage({ locale }: PrivacyPageProps) {
               </p>
             </section>
 
-            {/* Блок о cookies и технических данных сайта. */}
+            {/* Section on cookies and technical site data. */}
             <section className="privacy-section">
               <h2 className="h3 h3--blue">{copy.cookiesTitle}</h2>
               <p className="p">{copy.cookiesText}</p>

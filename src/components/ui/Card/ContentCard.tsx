@@ -1,7 +1,7 @@
 /*
-  Этот компонент — универсальная карточка контента.
-  Используется для стандартизации всех карточек на сайте (О нас, Поддержать, Контакты и т.д.).
-  Автоматически обрабатывает: иконку, заголовок, текст, списки и кнопки.
+  This component is a universal content card.
+  Used to standardize all cards across the site (About, Support, Contact, etc.).
+  Automatically handles: icon, title, text, lists, and buttons.
 */
 
 import type { ReactNode } from "react";
@@ -20,28 +20,28 @@ export type ContentCardAction = {
 };
 
 type ContentCardProps = {
-    // Внешний вид
+    // Appearance
     className?: string;
-    highlight?: boolean; // Добавляет желтую обводку/тень (акцент)
-    paper?: boolean; // Белый фон (по умолчанию true)
+    highlight?: boolean; // Adds a yellow border/shadow (accent)
+    paper?: boolean; // White background (default true)
     hoverable?: boolean;
     id?: string;
 
-    // Шапка
+    // Header
     icon?: ReactNode;
     title?: string;
     subtitle?: ReactNode;
     badges?: ReactNode;
 
-    // Контент
+    // Content
     description?: string | string[] | ReactNode;
-    listItems?: string[]; // Простой список строк
-    children?: ReactNode; // Дополнительный кастомный контент
+    listItems?: string[]; // Simple list of strings
+    children?: ReactNode; // Additional custom content
 
-    // Подвал / Действия
+    // Footer / Actions
     footerText?: string;
-    actions?: ContentCardAction[]; // Массив кнопок
-    actionsNode?: ReactNode; // Если нужна сложная верстка кнопок
+    actions?: ContentCardAction[]; // Array of buttons
+    actionsNode?: ReactNode; // For complex button layouts
 };
 
 export function ContentCard({
@@ -62,7 +62,7 @@ export function ContentCard({
     id,
 }: ContentCardProps) {
 
-    // Собираем классы
+    // Build class list
     const classes = [
         className,
         paper && "card--paper",
@@ -74,23 +74,23 @@ export function ContentCard({
             {(title || icon || badges) && (
                 <CardHeader className={icon ? "card-top" : ""}>
                     <div style={{ flex: 1 }}>
-                        {/* Иконка и Заголовок */}
+                        {/* Icon and Title */}
                         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
                             {icon && <span style={{ display: "flex" }}>{icon}</span>}
                             {title && <h3 className="h3 h3--blue">{title}</h3>}
                         </div>
 
-                        {/* Подзаголовок */}
+                        {/* Subtitle */}
                         {subtitle && <p className="muted">{subtitle}</p>}
                     </div>
 
-                    {/* Бейджи (справа сверху, если есть иконка layout) */}
+                    {/* Badges (top-right when icon layout is present) */}
                     {badges && <div className="tag-row">{badges}</div>}
                 </CardHeader>
             )}
 
             <CardContent>
-                {/* Описание (строка, массив строк или нода) */}
+                {/* Description (string, array of strings, or ReactNode) */}
                 {description && (
                     <div className="card-description">
                         {Array.isArray(description) ? (
@@ -107,7 +107,7 @@ export function ContentCard({
                     </div>
                 )}
 
-                {/* Список */}
+                {/* List */}
                 {listItems && listItems.length > 0 && (
                     <IesList className="list" style={{ marginTop: description ? 12 : 0 }}>
                         {listItems.map((item) => (
@@ -116,11 +116,11 @@ export function ContentCard({
                     </IesList>
                 )}
 
-                {/* Кастомный контент */}
+                {/* Custom content */}
                 {children}
             </CardContent>
 
-            {/* Футер: текст и кнопки */}
+            {/* Footer: text and buttons */}
             {(footerText || (actions && actions.length > 0) || actionsNode) && (
                 <CardFooter style={{ marginTop: 24 }}>
                     {footerText && (
@@ -129,7 +129,7 @@ export function ContentCard({
                         </p>
                     )}
 
-                    {/* Кнопки */}
+                    {/* Buttons */}
                     {(actions || actionsNode) && (
                         <div className="btn-row">
                             {actions?.map((action, i) => (

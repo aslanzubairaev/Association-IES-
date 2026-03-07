@@ -30,7 +30,7 @@
 
 .contactScope :global(.contact-context) {
   margin: 16px 0 28px;
-  color: rgba(255, 255, 255, 0.96);
+  color: rgba(11, 27, 51, 0.92);
 }
 
 .contactScope :global(.contact-context .ies-list-item) {
@@ -51,8 +51,8 @@
   margin-top: 18px;
   font-size: 15px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: var(--card-text-shadow);
+  color: rgba(11, 27, 51, 0.86);
+  text-shadow: none;
 }
 
 .contactScope :global(.contact-list li) {
@@ -60,13 +60,13 @@
 }
 
 .contactScope :global(.contact-list li::marker) {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(15, 82, 166, 0.72);
 }
 
 .contactScope :global(.contact-email-box) {
   margin-bottom: 16px;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: var(--card-text-shadow);
+  color: rgba(11, 27, 51, 0.92);
+  text-shadow: none;
 }
 
 .contactScope :global(.contact-email-row) {
@@ -79,12 +79,12 @@
 }
 
 .contactScope :global(.contact-email-label) {
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(11, 27, 51, 0.98);
   font-size: 19px;
 }
 
 .contactScope :global(.contact-email-value) {
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(11, 27, 51, 0.98);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -111,7 +111,7 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   background: var(--color-primary);
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(11, 27, 51, 0.12);
   color: #fff;
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -136,7 +136,7 @@
 }
 
 .contactScope :global(.contact-cta-button:focus-visible) {
-  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline: 3px solid rgba(15, 82, 166, 0.28);
   outline-offset: 3px;
 }
 

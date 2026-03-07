@@ -1,6 +1,6 @@
-/* Этот файл задаёт страницу “Aide / Чем помогаем” (RU/FR) и показывает темы помощи. */
+/* Этот файл задаёт страницу “Aide / Чем помогаем” (RU/FR) и показывает пошаговый мастер помощи. */
 
-import { AideTopics } from "@/components/sections/AideTopics";
+import { HelpWizard } from "@/components/sections/aide/HelpWizard";
 import styles from "./page.module.css";
 
 export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }) {
@@ -9,8 +9,8 @@ export default function AidePage({ params }: { params: { locale: "ru" | "fr" } }
   return (
     <div className={styles.aideScope}>
       <main className="page--purple aide-page">
-        {/* “С чем помогаем”: темы в карточках, чтобы быстро найти нужное. */}
-        <AideTopics locale={locale} />
+        {/* Пошаговая форма: один вопрос за раз + подтверждение темы + отправка по email. */}
+        <HelpWizard locale={locale} />
       </main>
     </div>
   );

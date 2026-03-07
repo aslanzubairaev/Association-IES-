@@ -1,0 +1,139 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--surface-border);
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(15, 82, 166, 0.18);
+    box-shadow: var(--shadow-elevated);
+    text-decoration: none;
+  }
+
+  .card:hover .image {
+    transform: scale(1.03);
+  }
+}
+
+.card:active {
+  transform: translateY(0);
+}
+
+.card:focus-visible {
+  outline: none;
+  border-color: rgba(15, 82, 166, 0.24);
+  box-shadow: 0 0 0 3px var(--focus-ring), var(--shadow-soft);
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: rgba(15, 82, 166, 0.03);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.copyBlock {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.metaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: rgba(11, 27, 51, 0.5);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.metaLine span {
+  overflow-wrap: anywhere;
+}
+
+.metaLine span + span::before {
+  content: "\b7";
+  margin-right: 6px;
+  color: rgba(11, 27, 51, 0.28);
+}
+
+.pitch {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .card {
+    border-radius: var(--radius-md);
+  }
+
+  .imageWrap {
+    aspect-ratio: 16 / 9;
+  }
+
+  .copyBlock {
+    padding: 14px 16px 16px;
+    gap: 4px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .pitch {
+    font-size: 13.5px;
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .copyBlock {
+    padding: 18px 20px 20px;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .pitch {
+    font-size: 15px;
+  }
+}

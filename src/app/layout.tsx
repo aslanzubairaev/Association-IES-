@@ -1,7 +1,7 @@
-/* 
- Этот файл задаёт общий каркас сайта.
- Он показывает базовую разметку страницы (HTML/Body) и подключает общие стили.
- Человек может переходить по страницам, а этот файл обеспечивает единый внешний вид.
+/*
+ This file defines the root layout of the site.
+ It renders the base HTML/Body markup and imports global styles.
+ It ensures a consistent look as the user navigates between pages.
 */
 
 import type { Metadata } from "next";
@@ -9,7 +9,7 @@ import "../legacy/styles.css";
 import "./globals.css";
 import { siteMetadata } from "@/content/actions";
 
-// Информация, которую браузер и поисковики видят как название и описание сайта.
+// Site title and description visible to browsers and search engines.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Общая оболочка для всех страниц: сюда подставляется содержимое текущей страницы.
+// Shared shell for all pages: the current page content is rendered inside.
 export default function RootLayout({
   children,
   params,
@@ -54,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
   params?: { locale?: string };
 }>) {
-  // Язык страницы для браузера: берём его из адреса (/ru или /fr), а если его нет — ставим французский.
+  // Page language for the browser: taken from the URL (/ru or /fr), defaults to French.
   const lang =
     params?.locale === "ru" || params?.locale === "fr" ? params.locale : "fr";
 

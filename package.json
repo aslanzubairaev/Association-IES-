@@ -3,19 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "clean": "rm -rf .next",
     "dev": "next dev",
+    "dev:fresh": "npm run clean && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sanity:dev": "sanity dev --host 0.0.0.0 --port 3333",
+    "sanity:deploy": "sanity deploy"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
+    "@sanity/vision": "^3.37.1",
     "next": "14.2.24",
+    "next-sanity": "^9.0.0",
+    "nodemailer": "^8.0.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sanity": "^3.37.1",
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
+    "@types/minimatch": "^5.1.2",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^8.57.0",

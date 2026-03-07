@@ -9,7 +9,7 @@
 }
 
 :where(.topicsScope) :global(.aide-card .fineprint) {
-  color: rgba(255, 255, 255, 0.82) !important;
+  color: rgba(11, 27, 51, 0.72) !important;
 }
 
 :where(.topicsScope) :global(.aide-topics-grid > *) {

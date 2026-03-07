@@ -1,7 +1,7 @@
-/* 
- Этот файл задаёт страницу-алиас “Contacts / Контакты”.
- Он нужен, чтобы ссылка /[язык]/contacts работала так же, как /[язык]/contact.
- Человек может перейти по ссылке и попасть на страницу контактов, сохранив выбранную тему из query.
+/*
+ This file defines the “Contacts” alias page.
+ It ensures that /[locale]/contacts works the same as /[locale]/contact.
+ Users following the link are redirected to the contact page while preserving query parameters.
 */
 
 import { redirect } from "next/navigation";
@@ -13,7 +13,7 @@ export default function ContactsAliasPage({
   params: { locale: "ru" | "fr" };
   searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  // Мы сохраняем query-параметры (например topic=...) и переадресуем на реальную страницу контактов.
+  // Preserve query parameters (e.g. topic=...) and redirect to the actual contact page.
   const qp = new URLSearchParams();
 
   if (searchParams) {
