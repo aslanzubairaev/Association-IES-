@@ -294,14 +294,18 @@ export function HelpWizard({ locale }: HelpWizardProps) {
     () =>
       locale === "fr"
         ? [
-            { id: "detail-documents", label: "Je ne comprends pas les documents demand\u00e9s" },
-            { id: "detail-urgent", label: "Ma situation est urgente" },
-            { id: "detail-rdv", label: "Je veux savoir la prochaine \u00e9tape" },
+            { id: "detail-no-response", label: "Je n'ai pas de r\u00e9ponse \u00e0 mon dossier" },
+            { id: "detail-refused", label: "Ma demande a \u00e9t\u00e9 refus\u00e9e" },
+            { id: "detail-dont-understand", label: "J'ai re\u00e7u un courrier que je ne comprends pas" },
+            { id: "detail-cant-reach", label: "Je n'arrive pas \u00e0 joindre le service" },
+            { id: "detail-other", label: "Autre situation" },
           ]
         : [
-            { id: "detail-documents", label: "\u041d\u0435 \u043f\u043e\u043d\u0438\u043c\u0430\u044e, \u043a\u0430\u043a\u0438\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u043d\u0443\u0436\u043d\u044b" },
-            { id: "detail-urgent", label: "\u0421\u0438\u0442\u0443\u0430\u0446\u0438\u044f \u0441\u0440\u043e\u0447\u043d\u0430\u044f" },
-            { id: "detail-rdv", label: "\u0425\u043e\u0447\u0443 \u043f\u043e\u043d\u044f\u0442\u044c \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u0448\u0430\u0433" },
+            { id: "detail-no-response", label: "\u041d\u0435\u0442 \u043e\u0442\u0432\u0435\u0442\u0430 \u043d\u0430 \u043c\u043e\u0451 \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435" },
+            { id: "detail-refused", label: "\u041c\u043d\u0435 \u043e\u0442\u043a\u0430\u0437\u0430\u043b\u0438" },
+            { id: "detail-dont-understand", label: "\u041f\u043e\u043b\u0443\u0447\u0438\u043b(\u0430) \u043f\u0438\u0441\u044c\u043c\u043e, \u043a\u043e\u0442\u043e\u0440\u043e\u0435 \u043d\u0435 \u043f\u043e\u043d\u0438\u043c\u0430\u044e" },
+            { id: "detail-cant-reach", label: "\u041d\u0435 \u043c\u043e\u0433\u0443 \u0434\u043e\u0437\u0432\u043e\u043d\u0438\u0442\u044c\u0441\u044f \u0434\u043e \u0441\u043b\u0443\u0436\u0431\u044b" },
+            { id: "detail-other", label: "\u0414\u0440\u0443\u0433\u0430\u044f \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044f" },
           ],
     [locale],
   );
@@ -354,8 +358,11 @@ export function HelpWizard({ locale }: HelpWizardProps) {
   const [previewUrls, setPreviewUrls] = useState<Record<number, string>>({});
   const [checkedDocs, setCheckedDocs] = useState<Set<number>>(new Set());
 
+  const [activeAction, setActiveAction] = useState<"continue" | "yes" | "no" | null>(null);
+
   const stepOneBusy = primaryBusy || followUpBusy;
   const stepTitleRef = useRef<HTMLHeadingElement>(null);
+  const aiCardRef = useRef<HTMLDivElement>(null);
   const dragCounterRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -437,6 +444,16 @@ export function HelpWizard({ locale }: HelpWizardProps) {
     const timer = setTimeout(() => stepTitleRef.current?.focus(), 120);
     return () => clearTimeout(timer);
   }, [step, done]);
+
+  /* ── Scroll AI card into view ── */
+  useEffect(() => {
+    if (primarySuggestion) {
+      const timer = setTimeout(() => {
+        aiCardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [primarySuggestion]);
 
   /* ── File preview URLs ── */
   useEffect(() => {
@@ -548,6 +565,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
   async function continuePrimary() {
     setPrimaryError("");
     setPrimaryBusy(true);
+    setActiveAction("continue");
     try {
       if (primarySelectedId) {
         const option = primaryOptionById.get(primarySelectedId);
@@ -589,12 +607,14 @@ export function HelpWizard({ locale }: HelpWizardProps) {
       await initializeFollowUpFlow(selection);
     } finally {
       setPrimaryBusy(false);
+      setActiveAction(null);
     }
   }
 
   async function confirmPrimarySuggestion(accept: boolean) {
     const typed = primaryText.trim();
     setPrimaryBusy(true);
+    setActiveAction(accept ? "yes" : "no");
     try {
       const selection = accept && primarySuggestion
         ? asHelpSelection({
@@ -614,6 +634,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
       await initializeFollowUpFlow(selection);
     } finally {
       setPrimaryBusy(false);
+      setActiveAction(null);
     }
   }
 
@@ -643,7 +664,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
     }
 
     const nextAnswers = [...followUpAnswers, answer];
-    const candidateOptions = getCandidateOptionsForPrimary(primarySelection);
+    const candidateOptions = followUpOptions.length > 0 ? followUpOptions : getCandidateOptionsForPrimary(primarySelection);
     setFollowUpBusy(true);
 
     try {
@@ -986,35 +1007,37 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                   {copy.choosePrimary}
                 </h3>
 
-                <div className={styles.bubbleGrid}>
-                  {primaryOptions.filter((o) => o.id !== "not_sure").map((option) => {
-                    const isActive = primarySelectedId === option.id;
-                    return (
-                      <button
-                        key={option.id}
-                        type="button"
-                        className={`${styles.bubble} ${isActive ? styles.bubbleActive : ""}`}
-                        disabled={stepOneBusy}
-                        onClick={() => {
-                          setPrimarySelectedId(option.id);
-                          setPrimaryText("");
-                          setPrimaryError("");
-                          setPrimarySuggestion(null);
-                        }}
-                      >
-                        <span className={styles.bubbleInner}>
-                          <CategoryIcon topicKey={option.id} className={styles.bubbleIcon} />
-                          <span className={styles.bubbleContent}>
-                            <span className={styles.bubbleLabel}>{option.label}</span>
-                            <span className={styles.bubbleExamples}>
-                              {option.examples.slice(0, 2).join(" \u00b7 ")}
+                {!primarySuggestion && (
+                  <div className={styles.bubbleGrid}>
+                    {primaryOptions.filter((o) => o.id !== "not_sure").map((option) => {
+                      const isActive = primarySelectedId === option.id;
+                      return (
+                        <button
+                          key={option.id}
+                          type="button"
+                          className={`${styles.bubble} ${isActive ? styles.bubbleActive : ""}`}
+                          disabled={stepOneBusy}
+                          onClick={() => {
+                            setPrimarySelectedId(option.id);
+                            setPrimaryText("");
+                            setPrimaryError("");
+                            setPrimarySuggestion(null);
+                          }}
+                        >
+                          <span className={styles.bubbleInner}>
+                            <CategoryIcon topicKey={option.id} className={styles.bubbleIcon} />
+                            <span className={styles.bubbleContent}>
+                              <span className={styles.bubbleLabel}>{option.label}</span>
+                              <span className={styles.bubbleExamples}>
+                                {option.examples.slice(0, 2).join(" \u00b7 ")}
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
 
                 {/* prepareLine card when a topic is selected */}
                 {primarySelectedId && primaryOptionById.get(primarySelectedId)?.prepareLine && (
@@ -1056,12 +1079,12 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                       placeholder={copy.freeTextPlaceholderPrimary}
                       rows={3}
                     />
-                    <p className={styles.hint}>{copy.freeTextHint}</p>
+                    {!primarySuggestion && <p className={styles.hint}>{copy.freeTextHint}</p>}
                   </>
                 )}
 
                 {primarySuggestion && (
-                  <div className={styles.aiCard}>
+                  <div className={styles.aiCard} ref={aiCardRef}>
                     <p className={styles.aiTitle}>{copy.aiProposedLabel}</p>
                     <p className={styles.aiValue}>{primarySuggestion.label}</p>
                     <p className={styles.aiQuestion}>{copy.aiConfirmQuestion}</p>
@@ -1075,7 +1098,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                         disabled={stepOneBusy}
                         onClick={() => void confirmPrimarySuggestion(true)}
                       >
-                        <ButtonLabel loading={stepOneBusy} label={copy.aiConfirmYes} />
+                        <ButtonLabel loading={activeAction === "yes"} label={copy.aiConfirmYes} />
                       </button>
                       <button
                         type="button"
@@ -1083,7 +1106,7 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                         disabled={stepOneBusy}
                         onClick={() => void confirmPrimarySuggestion(false)}
                       >
-                        <ButtonLabel loading={stepOneBusy} label={copy.aiConfirmNo} />
+                        <ButtonLabel loading={activeAction === "no"} label={copy.aiConfirmNo} />
                       </button>
                     </div>
                   </div>
@@ -1095,16 +1118,18 @@ export function HelpWizard({ locale }: HelpWizardProps) {
                   </p>
                 )}
 
-                <div className={styles.actionRow}>
-                  <button
-                    type="button"
-                    className={styles.primaryButton}
-                    onClick={() => void continuePrimary()}
-                    disabled={stepOneBusy}
-                  >
-                    <ButtonLabel loading={stepOneBusy} label={primaryBusy ? copy.sendingLabel : copy.continueLabel} />
-                  </button>
-                </div>
+                {!primarySuggestion && (
+                  <div className={styles.actionRow}>
+                    <button
+                      type="button"
+                      className={styles.primaryButton}
+                      onClick={() => void continuePrimary()}
+                      disabled={stepOneBusy}
+                    >
+                      <ButtonLabel loading={activeAction === "continue"} label={primaryBusy ? copy.sendingLabel : copy.continueLabel} />
+                    </button>
+                  </div>
+                )}
               </>
             )}
           </div>

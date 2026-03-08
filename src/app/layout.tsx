@@ -4,7 +4,7 @@
  It ensures a consistent look as the user navigates between pages.
 */
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../legacy/styles.css";
 import "./globals.css";
 import { siteMetadata } from "@/content/actions";
@@ -44,6 +44,12 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     images: ["/og-image.jpg"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 // Shared shell for all pages: the current page content is rendered inside.

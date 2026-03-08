@@ -1,263 +1,200 @@
-/*
- This file contains the site header.
- It displays the "Association IES" brand, the main navigation menu, and the FR | RU language switcher.
-*/
-
 "use client";
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import styles from "./Header.module.css";
 
-type HeaderCopy = {
-  brandLabel: string;
-  brandName: string;
-  navAriaLabel: string;
-  navLabels: {
-    aide: string;
-    actions: string;
-    soutenir: string;
-    contact: string;
-  };
-  langSwitcherAriaLabel: string;
-  mobileControlsAriaLabel: string;
-  burgerOpenLabel: string;
-  burgerCloseLabel: string;
-  langToggleAriaLabel: string;
-  mobileMenuTitle: string;
-  mobileMenuCloseLabel: string;
-  mobileNavAriaLabel: string;
-  langMenuItems: { locale: "ru" | "fr"; code: string; name: string }[];
-};
-
 type HeaderProps = {
   locale: "ru" | "fr";
-  copy: HeaderCopy;
+  copy: {
+    brandLabel: string;
+    brandName: string;
+    navAriaLabel: string;
+    navLabels: { aide: string; actions: string; soutenir: string; contact: string };
+    langSwitcherAriaLabel: string;
+    burgerOpenLabel: string;
+    burgerCloseLabel: string;
+    langToggleAriaLabel: string;
+    mobileNavAriaLabel: string;
+    langMenuItems: { locale: "ru" | "fr"; code: string; name: string }[];
+    [key: string]: unknown;
+  };
 };
-
-function ChevronRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path d="M7.5 5l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 export function Header({ locale, copy }: HeaderProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const searchParamsKey = searchParams.toString();
+  const sp = searchParams.toString();
 
-  const mobileMenuId = useId();
-  const langMenuDesktopId = useId();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-
-  const langDesktopRef = useRef<HTMLDivElement | null>(null);
-  const burgerButtonRef = useRef<HTMLButtonElement | null>(null);
+  const otherLocale: "ru" | "fr" = locale === "fr" ? "ru" : "fr";
 
   const navItems = [
-    { id: "aide", href: `/${locale}/aide`, label: copy.navLabels.aide },
-    { id: "actions", href: `/${locale}/activites`, label: copy.navLabels.actions },
-    { id: "soutenir", href: `/${locale}/soutenir`, label: copy.navLabels.soutenir },
-    { id: "contact", href: `/${locale}/contact`, label: copy.navLabels.contact },
-  ] as const;
+    { href: `/${locale}/aide`, label: copy.navLabels.aide },
+    { href: `/${locale}/activites`, label: copy.navLabels.actions },
+    { href: `/${locale}/soutenir`, label: copy.navLabels.soutenir },
+    { href: `/${locale}/contact`, label: copy.navLabels.contact },
+  ];
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
 
-  function resolveLocalePath(targetLocale: "ru" | "fr") {
-    const querySuffix = searchParamsKey ? `?${searchParamsKey}` : "";
-    const basePath = pathname
-      ? pathname.replace(/^\/(ru|fr)(?=\/|$)/, `/${targetLocale}`)
-      : `/${targetLocale}`;
-    const normalizedPath = basePath === pathname ? `/${targetLocale}` : basePath;
-    return `${normalizedPath}${querySuffix}`;
+  function localePath(target: "ru" | "fr") {
+    const qs = sp ? `?${sp}` : "";
+    const base = pathname
+      ? pathname.replace(/^\/(ru|fr)(?=\/|$)/, `/${target}`)
+      : `/${target}`;
+    return `${base === pathname ? `/${target}` : base}${qs}`;
   }
 
-  // Lock scroll when mobile menu open
-  useEffect(() => {
-    if (!isMobileMenuOpen) return undefined;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, [isMobileMenuOpen]);
+  const closeAll = useCallback(() => {
+    setMenuOpen(false);
+    setLangOpen(false);
+  }, []);
 
   // Close on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setIsLangMenuOpen(false);
-  }, [pathname, searchParamsKey]);
+  useEffect(() => { closeAll(); }, [pathname, sp, closeAll]);
 
-  // Close mobile menu when resizing past the breakpoint
+  // Close mobile menu on resize to desktop
   useEffect(() => {
-    if (!isMobileMenuOpen) return undefined;
     const mql = window.matchMedia("(min-width: 981px)");
-    function handleChange(e: MediaQueryListEvent) {
-      if (e.matches) setIsMobileMenuOpen(false);
-    }
-    mql.addEventListener("change", handleChange);
-    if (mql.matches) setIsMobileMenuOpen(false);
-    return () => mql.removeEventListener("change", handleChange);
-  }, [isMobileMenuOpen]);
+    const handler = () => { if (mql.matches) closeAll(); };
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, [closeAll]);
 
-  // Close lang menu on outside click
+  // Lock scroll
   useEffect(() => {
-    if (!isLangMenuOpen) return undefined;
-    function handlePointerDown(event: PointerEvent) {
-      const target = event.target as Node | null;
-      if (!target) return;
-      if (langDesktopRef.current?.contains(target)) return;
-      setIsLangMenuOpen(false);
-    }
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => document.removeEventListener("pointerdown", handlePointerDown);
-  }, [isLangMenuOpen]);
+    if (!menuOpen) return;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
-  // Escape closes menus
+  // Escape
   useEffect(() => {
-    if (!isMobileMenuOpen && !isLangMenuOpen) return undefined;
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key !== "Escape") return;
-      setIsMobileMenuOpen(false);
-      setIsLangMenuOpen(false);
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isMobileMenuOpen, isLangMenuOpen]);
+    if (!menuOpen && !langOpen) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") closeAll(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [menuOpen, langOpen, closeAll]);
 
-  function toggleMobileMenu() {
-    setIsMobileMenuOpen((c) => {
-      if (!c) setIsLangMenuOpen(false);
-      return !c;
-    });
-  }
-
-  function closeMobileMenu() {
-    setIsMobileMenuOpen(false);
-    burgerButtonRef.current?.focus();
-  }
-
-  const otherLocale = locale === "fr" ? "ru" : "fr";
-  const otherLocaleLabel = locale === "fr" ? "Русский" : "Français";
+  // Close desktop lang on outside click
+  useEffect(() => {
+    if (!langOpen) return;
+    const handler = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest(`.${styles.dLang}`)) return;
+      setLangOpen(false);
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, [langOpen]);
 
   return (
-    <header className={styles.siteHeader}>
+    <header className={styles.header}>
       <Container>
-        <div className={styles.headerInner}>
+        <div className={styles.bar}>
           {/* Brand */}
           <Link className={styles.brand} href={`/${locale}`} aria-label={copy.brandLabel}>
-            <span className={styles.brandWordmark}>IES</span>
-            <span className={styles.brandDivider} aria-hidden="true" />
+            <span className={styles.brandMark}>IES</span>
+            <span className={styles.brandSep} aria-hidden="true" />
             <span className={styles.brandName}>{copy.brandName}</span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className={styles.headerNavDesktop} aria-label={copy.navAriaLabel}>
-            {navItems.map((item) => (
-              <Link key={item.id} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
-                {item.label}
+          <nav className={styles.dNav} aria-label={copy.navAriaLabel}>
+            {navItems.map((it) => (
+              <Link key={it.href} href={it.href} className={styles.dNavLink} aria-current={isActive(it.href) ? "page" : undefined}>
+                {it.label}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop language switcher */}
-          <div className={`${styles.headerLang} ${styles.desktopLang}`} ref={langDesktopRef}>
+          {/* Desktop lang */}
+          <div className={styles.dLang}>
             <button
-              onClick={() => setIsLangMenuOpen((c) => !c)}
               type="button"
-              className={styles.langToggle}
-              aria-expanded={isLangMenuOpen}
-              aria-controls={langMenuDesktopId}
+              className={styles.langBtn}
+              onClick={() => setLangOpen((v) => !v)}
+              aria-expanded={langOpen}
               aria-label={copy.langSwitcherAriaLabel}
             >
               {locale.toUpperCase()}
             </button>
-            {isLangMenuOpen && (
-              <div className={styles.langMenu} id={langMenuDesktopId}>
-                {copy.langMenuItems.map((item) => (
+            {langOpen && (
+              <div className={styles.langDrop}>
+                {copy.langMenuItems.map((it) => (
                   <Link
-                    key={item.locale}
-                    onClick={() => setIsLangMenuOpen(false)}
-                    className={styles.langMenuItem}
-                    href={resolveLocalePath(item.locale)}
-                    aria-current={locale === item.locale ? "page" : undefined}
+                    key={it.locale}
+                    href={localePath(it.locale)}
+                    className={styles.langItem}
+                    aria-current={locale === it.locale ? "page" : undefined}
                     scroll={false}
                   >
-                    <span className={styles.langMenuCode}>{item.code}</span>
-                    <span className={styles.langMenuName}>{item.name}</span>
+                    <span className={styles.langCode}>{it.code}</span>
+                    <span className={styles.langName}>{it.name}</span>
                   </Link>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Mobile controls */}
-          <div className={styles.headerMobileControls}>
-            <button
-              ref={burgerButtonRef}
-              onClick={toggleMobileMenu}
-              type="button"
-              className={`${styles.burgerButton} ${isMobileMenuOpen ? styles.burgerOpen : ""}`}
-              aria-label={isMobileMenuOpen ? copy.burgerCloseLabel : copy.burgerOpenLabel}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls={mobileMenuId}
+          {/* Mobile: lang + burger */}
+          <div className={styles.mRight}>
+            <Link
+              href={localePath(otherLocale)}
+              className={styles.mLangBtn}
+              aria-label={copy.langToggleAriaLabel}
+              scroll={false}
             >
-              <span className={styles.burgerLines} aria-hidden="true">
-                <span />
-                <span />
-                <span />
+              {otherLocale.toUpperCase()}
+            </Link>
+            <button
+              type="button"
+              className={`${styles.burger} ${menuOpen ? styles.burgerActive : ""}`}
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? copy.burgerCloseLabel : copy.burgerOpenLabel}
+            >
+              <span className={styles.burgerIcon} aria-hidden="true">
+                <span /><span /><span />
               </span>
             </button>
           </div>
         </div>
       </Container>
 
-      {/* Mobile menu overlay */}
-      <div
-        className={`${styles.mobileOverlay} ${isMobileMenuOpen ? styles.mobileOverlayVisible : ""}`}
-        onClick={(event) => { if (event.target === event.currentTarget) closeMobileMenu(); }}
-        aria-hidden={!isMobileMenuOpen}
-      >
-        <div
-          className={`${styles.mobileSheet} ${isMobileMenuOpen ? styles.mobileSheetVisible : ""}`}
-          id={mobileMenuId}
-          role="dialog"
-          aria-modal="true"
-        >
-          {/* Nav links */}
-          <nav className={styles.mobileNav} aria-label={copy.mobileNavAriaLabel}>
-            {navItems.map((item) => (
+      {/* Mobile panel — rendered as direct child of <header>, NOT nested */}
+      {menuOpen && (
+        <div className={styles.mPanel}>
+          <nav aria-label={copy.mobileNavAriaLabel}>
+            {navItems.map((it) => (
               <Link
-                key={item.id}
-                onClick={closeMobileMenu}
-                href={item.href}
-                className={`${styles.mobileNavLink} ${isActive(item.href) ? styles.mobileNavLinkActive : ""}`}
-                aria-current={isActive(item.href) ? "page" : undefined}
+                key={it.href}
+                href={it.href}
+                className={`${styles.mLink} ${isActive(it.href) ? styles.mLinkActive : ""}`}
+                aria-current={isActive(it.href) ? "page" : undefined}
               >
-                <span className={styles.mobileNavLabel}>{item.label}</span>
-                <ChevronRight className={styles.mobileNavChevron} />
+                {it.label}
               </Link>
             ))}
           </nav>
-
-          {/* Language switch */}
-          <div className={styles.mobileLangRow}>
+          <div className={styles.mPanelLang}>
             <Link
-              href={resolveLocalePath(otherLocale)}
-              onClick={closeMobileMenu}
-              className={styles.mobileLangLink}
+              href={localePath(otherLocale)}
+              className={styles.mPanelLangLink}
               scroll={false}
             >
-              <span className={styles.mobileLangCode}>{otherLocale.toUpperCase()}</span>
-              <span className={styles.mobileLangName}>{otherLocaleLabel}</span>
+              <span className={styles.mPanelLangCode}>{otherLocale.toUpperCase()}</span>
+              <span>{locale === "fr" ? "Русский" : "Français"}</span>
             </Link>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

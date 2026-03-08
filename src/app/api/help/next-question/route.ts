@@ -363,23 +363,23 @@ function buildIntakeContext(payload: HelpNextQuestionRequest): IntakeContext {
   };
 }
 
-function pickNextAxisFromContext(context: IntakeContext): QuestionAxis {
-  if (context.missingGaps.includes("blocking") && !context.askedAxes.includes("blocking")) {
-    return "blocking";
+
+function buildStageHint(payload: HelpNextQuestionRequest, _context: IntakeContext): string {
+  const round = payload.answers.length;
+  const lastAnswer = payload.answers[round - 1];
+  const primaryLabel = payload.primary.label;
+
+  if (round === 0) {
+    return `ROUND 1/3 — NARROW DOWN: The user chose "${primaryLabel}". Ask ONE specific question to understand their EXACT situation within this topic. Options must be concrete sub-cases (e.g. "J'ai reçu un refus", "Mon dossier est en attente depuis 3 mois"), NOT abstract categories (e.g. "documents", "urgence", "prochaine étape").`;
   }
-  if (context.missingGaps.includes("deadline_or_official_notice") && !context.askedAxes.includes("deadline")) {
-    return "deadline";
+
+  if (round === 1) {
+    const prev = lastAnswer ? `${lastAnswer.question} → "${lastAnswer.answerText || lastAnswer.answerLabel}"` : "";
+    return `ROUND 2/3 — DEEPEN: Based on their specific answer (${prev}), ask a follow-up that goes DEEPER into THEIR situation. The question must directly reference what they said. Options must be specific to their case (e.g. dates, actions taken, document types), NOT generic triage questions.`;
   }
-  if (context.missingGaps.includes("documents") && !context.askedAxes.includes("documents")) {
-    return "documents";
-  }
-  if (context.missingGaps.includes("history") && !context.askedAxes.includes("support")) {
-    return "support";
-  }
-  if (!context.askedAxes.includes("support")) return "support";
-  if (!context.askedAxes.includes("documents")) return "documents";
-  if (!context.askedAxes.includes("deadline")) return "deadline";
-  return "other";
+
+  const prevSummary = payload.answers.map((a, i) => `Q${i + 1}: ${a.question} → "${a.answerText || a.answerLabel}"`).join("; ");
+  return `ROUND 3/3 — FINAL DETAIL: Previous exchanges: ${prevSummary}. Ask for ONE last concrete operational detail that will help the case worker act immediately (e.g. "Avez-vous le numéro de dossier ?", "Quelle est la date exacte du courrier ?"). Set done=true if you already have enough to act.`;
 }
 
 async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context: IntakeContext) {
@@ -392,19 +392,18 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
   const topicData = getTopicData(payload.primary.id, payload.locale);
   const langLabel = payload.locale === "fr" ? "français" : "russe";
 
+  const stageHint = buildStageHint(payload, context);
+
   const prompt = {
     locale: payload.locale,
     primary: payload.primary,
     answers: payload.answers,
-    candidateOptions: payload.candidateOptions,
     constraints: {
       maxFollowUps: MAX_FOLLOW_UP_QUESTIONS,
       maxOptions: 5,
       maxQuestionLength: 120,
       maxOptionLength: 70,
     },
-    workerObjective:
-      "Collect maximum actionable information so human case workers can understand the case faster, prioritize urgency, and avoid asking repeated questions later.",
     topicContext: topicData
       ? { title: topicData.title, examples: topicData.examples, prepareLine: topicData.prepareLine }
       : null,
@@ -413,14 +412,8 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
       askedAxes: context.askedAxes,
       detectedSignals: context.signals,
       missingGaps: context.missingGaps,
-      recommendedNextAxis: pickNextAxisFromContext(context),
     },
-    stageHint:
-      payload.answers.length === 0
-        ? "First follow-up: identify the main blocking point."
-        : payload.answers.length === 1
-          ? "Second follow-up: ask about urgency, deadline, letter, or official notice."
-          : "Third follow-up: ask for one concrete operational detail that changes processing priority.",
+    stageHint,
   };
 
   const systemPrompt = `Tu es un assistant d'accueil bienveillant pour une association qui aide les immigrés en France.
@@ -428,20 +421,28 @@ Tu parles ${langLabel}.
 
 ${topicData ? `CONTEXTE DU SUJET : "${topicData.title}" — exemples : ${topicData.examples.slice(0, 2).join(", ")}. À préparer : ${topicData.prepareLine}` : ""}
 
+LOGIQUE DE PROGRESSION (CRUCIAL) :
+Chaque question doit APPROFONDIR la réponse précédente, PAS changer de sujet.
+- Round 1 : Identifier la situation EXACTE dans le sujet choisi
+- Round 2 : Creuser DANS cette situation (dates, actions déjà faites, détails concrets)
+- Round 3 : Dernier détail opérationnel pour que le travailleur social puisse agir
+
+INTERDIT :
+- Options génériques type "Je ne comprends pas les documents", "Ma situation est urgente", "Prochaine étape"
+- Répéter un axe déjà couvert (blocking, deadline, documents, support)
+- Poser une question qui ne DÉCOULE PAS directement de la réponse précédente
+
 RÈGLES :
 1. JSON strict : { done, next_question, next_options, summary_label, guidance, immediate_advice, urgency_level }
 2. Une seule question à la fois, < 120 caractères. Ton chaleureux et rassurant.
-3. 3-5 options cliquables, < 70 caractères chacune. Formulées comme des situations concrètes, pas des catégories abstraites.
-4. Ne JAMAIS répéter une question déjà posée ni un axe déjà couvert.
-5. Quand done=true :
-   - immediate_advice : 3-5 conseils CONCRETS et ACTIONNABLES que la personne peut faire MAINTENANT.
-     Exemples bons : "Photographiez le courrier recto-verso", "Notez la date limite mentionnée"
-     Exemples mauvais : "Restez positif", "N'hésitez pas à nous contacter"
-   - urgency_level : "high" si deadline < 15 jours ou convocation ou risque perte de droits ;
-     "medium" si courrier officiel ou délai à venir ; "low" sinon
-6. guidance : une phrase d'encouragement contextuelle en ${langLabel}, pas générique
-7. Utilise le contexte du sujet pour poser des questions PERTINENTES au domaine (pas des questions génériques)
-8. Tout le texte en ${langLabel}.`;
+3. 3-5 options cliquables, < 70 caractères. Formulées comme des SITUATIONS VÉCUES spécifiques à LEUR cas.
+   Bon : "J'ai reçu un refus de la préfecture", "Mon récépissé expire dans 2 semaines"
+   Mauvais : "Ma situation est urgente", "Je veux comprendre la prochaine étape"
+4. Quand done=true :
+   - immediate_advice : 3-5 conseils CONCRETS (photographier, noter, rassembler...)
+   - urgency_level : "high" si deadline < 15j / convocation / perte de droits ; "medium" si courrier officiel ; "low" sinon
+5. guidance : une phrase d'encouragement contextuelle en ${langLabel}
+6. Tout le texte en ${langLabel}.`;
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -588,18 +589,35 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
   }
 
   const emptyAdvice: string[] = [];
+  const round = payload.answers.length;
 
-  const nextAxis = pickNextAxisFromContext(context);
-  if (nextAxis === "blocking") {
+  // Round 0: What is your specific situation?
+  if (round === 0) {
+    const blockingOptions =
+      locale === "fr"
+        ? [
+            { id: "block-no-response", label: "Je n'ai pas de réponse à mon courrier / dossier" },
+            { id: "block-refused", label: "Ma demande a été refusée" },
+            { id: "block-dont-understand", label: "Je ne comprends pas ce qu'on me demande" },
+            { id: "block-cant-reach", label: "Je n'arrive pas à joindre le service" },
+            { id: "block-other", label: "Autre situation" },
+          ]
+        : [
+            { id: "block-no-response", label: "Нет ответа на мое обращение / дело" },
+            { id: "block-refused", label: "Мне отказали" },
+            { id: "block-dont-understand", label: "Не понимаю, что от меня требуют" },
+            { id: "block-cant-reach", label: "Не могу дозвониться до службы" },
+            { id: "block-other", label: "Другая ситуация" },
+          ];
     return {
       ok: true,
       source: "fallback",
       done: false,
       question:
         locale === "fr"
-          ? "Qu'est-ce qui bloque le plus pour vous maintenant ?"
-          : "Что именно сейчас блокирует вас сильнее всего?",
-      options: filterOptionsAgainstPreviousAnswers(payload.candidateOptions.slice(0, 5), payload.answers),
+          ? "Pouvez-vous préciser votre situation ?"
+          : "Можете уточнить вашу ситуацию?",
+      options: filterOptionsAgainstPreviousAnswers(blockingOptions, payload.answers),
       summaryLabel,
       guidance: fallbackGuidance,
       immediateAdvice: emptyAdvice,
@@ -607,29 +625,101 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
     };
   }
 
-  if (nextAxis === "deadline") {
+  // Round 1: Deepen based on what they answered
+  if (round === 1) {
+    const lastText = normalizeText(lastAnswer?.answerText || lastAnswer?.answerLabel || "");
+
+    // They said they got a refusal or no response → ask about timing
+    if (/(refus|refuse|rejet|rejected|отказ)/.test(lastText) || /(reponse|response|ответ|attente|attend)/.test(lastText)) {
+      return {
+        ok: true,
+        source: "fallback",
+        done: false,
+        question:
+          locale === "fr"
+            ? "Depuis combien de temps attendez-vous ?"
+            : "Как давно вы ждёте?",
+        options: filterOptionsAgainstPreviousAnswers(
+          locale === "fr"
+            ? [
+                { id: "time-week", label: "Moins d'une semaine" },
+                { id: "time-month", label: "Entre 1 semaine et 1 mois" },
+                { id: "time-months", label: "Plus d'un mois" },
+                { id: "time-letter", label: "J'ai reçu un courrier avec une date limite" },
+              ]
+            : [
+                { id: "time-week", label: "Меньше недели" },
+                { id: "time-month", label: "От недели до месяца" },
+                { id: "time-months", label: "Больше месяца" },
+                { id: "time-letter", label: "Получил(а) письмо с крайним сроком" },
+              ],
+          payload.answers,
+        ),
+        summaryLabel,
+        guidance: fallbackGuidance,
+        immediateAdvice: emptyAdvice,
+        urgencyLevel: "low",
+      };
+    }
+
+    // They said they don't understand → ask what specifically
+    if (/(comprends|comprend|understand|понимаю|понять)/.test(lastText)) {
+      return {
+        ok: true,
+        source: "fallback",
+        done: false,
+        question:
+          locale === "fr"
+            ? "Qu'est-ce qui n'est pas clair pour vous ?"
+            : "Что именно непонятно?",
+        options: filterOptionsAgainstPreviousAnswers(
+          locale === "fr"
+            ? [
+                { id: "unclear-letter", label: "J'ai reçu un courrier que je ne comprends pas" },
+                { id: "unclear-docs", label: "Je ne sais pas quels documents fournir" },
+                { id: "unclear-steps", label: "Je ne connais pas les étapes à suivre" },
+                { id: "unclear-lang", label: "Le document n'est pas dans ma langue" },
+              ]
+            : [
+                { id: "unclear-letter", label: "Получил(а) письмо, которое не понимаю" },
+                { id: "unclear-docs", label: "Не знаю, какие документы нужны" },
+                { id: "unclear-steps", label: "Не знаю, что делать дальше" },
+                { id: "unclear-lang", label: "Документ не на моём языке" },
+              ],
+          payload.answers,
+        ),
+        summaryLabel,
+        guidance: fallbackGuidance,
+        immediateAdvice: emptyAdvice,
+        urgencyLevel: "low",
+      };
+    }
+
+    // Default deepening: ask what they've already tried
     return {
       ok: true,
       source: "fallback",
       done: false,
       question:
         locale === "fr"
-          ? "Avez-vous un courrier, une convocation ou une date limite ?"
-          : "Есть ли у вас письмо, повестка или крайний срок?",
-      options:
+          ? "Qu'avez-vous déjà fait pour cette situation ?"
+          : "Что вы уже предприняли?",
+      options: filterOptionsAgainstPreviousAnswers(
         locale === "fr"
           ? [
-              { id: "deadline-7", label: "Oui, sous 7 jours" },
-              { id: "deadline-30", label: "Oui, sous 30 jours" },
-              { id: "deadline-none", label: "Non, pas de date limite" },
-              { id: "deadline-unknown", label: "Je ne sais pas" },
+              { id: "tried-nothing", label: "Rien, je ne savais pas quoi faire" },
+              { id: "tried-called", label: "J'ai appelé mais pas de réponse" },
+              { id: "tried-wrote", label: "J'ai envoyé un email ou courrier" },
+              { id: "tried-rdv", label: "J'ai pris ou essayé de prendre un RDV" },
             ]
           : [
-              { id: "deadline-7", label: "Да, в течение 7 дней" },
-              { id: "deadline-30", label: "Да, в течение 30 дней" },
-              { id: "deadline-none", label: "Нет, срока нет" },
-              { id: "deadline-unknown", label: "Не знаю" },
+              { id: "tried-nothing", label: "Ничего, не знал(а) что делать" },
+              { id: "tried-called", label: "Звонил(а), но не ответили" },
+              { id: "tried-wrote", label: "Писал(а) письмо или email" },
+              { id: "tried-rdv", label: "Пытался(-ась) записаться на приём" },
             ],
+        payload.answers,
+      ),
       summaryLabel,
       guidance: fallbackGuidance,
       immediateAdvice: emptyAdvice,
@@ -637,66 +727,7 @@ function buildFallbackResponse(payload: HelpNextQuestionRequest): HelpNextQuesti
     };
   }
 
-  if (nextAxis === "documents") {
-    return {
-      ok: true,
-      source: "fallback",
-      done: false,
-      question:
-        locale === "fr"
-          ? "Avez-vous des documents à transmettre pour traiter votre demande ?"
-          : "Есть ли у вас документы, которые можно передать для обработки?",
-      options:
-        locale === "fr"
-          ? [
-              { id: "docs-ready", label: "Oui, documents prêts" },
-              { id: "docs-partial", label: "J'en ai une partie" },
-              { id: "docs-none", label: "Non, aucun document" },
-              { id: "docs-unknown", label: "Je ne sais pas lesquels fournir" },
-            ]
-          : [
-              { id: "docs-ready", label: "Да, документы готовы" },
-              { id: "docs-partial", label: "Есть только часть" },
-              { id: "docs-none", label: "Нет документов" },
-              { id: "docs-unknown", label: "Не знаю, какие нужны" },
-            ],
-      summaryLabel,
-      guidance: fallbackGuidance,
-      immediateAdvice: emptyAdvice,
-      urgencyLevel: "low",
-    };
-  }
-
-  if (nextAxis === "support") {
-    return {
-      ok: true,
-      source: "fallback",
-      done: false,
-      question:
-        locale === "fr"
-          ? "Qu'avez-vous déjà essayé pour résoudre ce problème ?"
-          : "Что вы уже пробовали сделать по этому вопросу?",
-      options:
-        locale === "fr"
-          ? [
-              { id: "history-nothing", label: "Rien pour l'instant" },
-              { id: "history-contacted", label: "J'ai appelé ou écrit" },
-              { id: "history-rdv", label: "J'ai déjà un rendez-vous" },
-              { id: "history-unknown", label: "Je ne sais pas quoi faire" },
-            ]
-          : [
-              { id: "history-nothing", label: "Пока ничего" },
-              { id: "history-contacted", label: "Уже звонил/писал" },
-              { id: "history-rdv", label: "У меня уже есть запись" },
-              { id: "history-unknown", label: "Не знаю, что делать" },
-            ],
-      summaryLabel,
-      guidance: fallbackGuidance,
-      immediateAdvice: emptyAdvice,
-      urgencyLevel: "low",
-    };
-  }
-
+  // Round 2+: We have enough info, finalize
   return {
     ok: true,
     source: "fallback",
