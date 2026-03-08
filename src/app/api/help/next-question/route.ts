@@ -364,7 +364,7 @@ function buildIntakeContext(payload: HelpNextQuestionRequest): IntakeContext {
 }
 
 
-function buildStageHint(payload: HelpNextQuestionRequest, _context: IntakeContext): string {
+function buildStageHint(payload: HelpNextQuestionRequest): string {
   const round = payload.answers.length;
   const lastAnswer = payload.answers[round - 1];
   const primaryLabel = payload.primary.label;
@@ -392,7 +392,7 @@ async function nextQuestionWithOpenAi(payload: HelpNextQuestionRequest, context:
   const topicData = getTopicData(payload.primary.id, payload.locale);
   const langLabel = payload.locale === "fr" ? "français" : "russe";
 
-  const stageHint = buildStageHint(payload, context);
+  const stageHint = buildStageHint(payload);
 
   const prompt = {
     locale: payload.locale,
