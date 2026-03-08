@@ -1,7 +1,7 @@
 .scope .heroBlock,
 .heroBlock {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -9,6 +9,8 @@
 .heroText {
   display: grid;
   gap: 12px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .heroText :global(.h2) {
@@ -25,7 +27,7 @@
   font-size: clamp(16px, 1.15vw, 19px);
   line-height: 1.74;
   color: rgba(11, 27, 51, 0.72);
-  max-width: 64ch;
+  max-width: 100%;
 }
 
 .location {
@@ -144,7 +146,7 @@
 @media (max-width: 980px) {
   .scope .heroBlock,
   .heroBlock {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
